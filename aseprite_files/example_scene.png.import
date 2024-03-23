@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://j8s5h2k2hyv1"
-path="res://.godot/imported/example_scene.png-ec938b5f111f4b155e1fe5b1f11d22bd.ctex"
+path="res://.godot/imported/example_scene.png-59ae9c80a2ddd14c11e9159859669870.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://aseprite_exports/example_scene.png"
-dest_files=["res://.godot/imported/example_scene.png-ec938b5f111f4b155e1fe5b1f11d22bd.ctex"]
+source_file="res://aseprite_files/example_scene.png"
+dest_files=["res://.godot/imported/example_scene.png-59ae9c80a2ddd14c11e9159859669870.ctex"]
 
 [params]
 

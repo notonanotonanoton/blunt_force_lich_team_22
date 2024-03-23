@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbpep6x04proy"]
+
+[ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_o0e10"]
+[ext_resource type="Texture2D" uid="uid://clagmcshdvub1" path="res://PlayerCharacter/character_lich.png" id="1_x272j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
+size = Vector2(8, 18)
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_o0e10")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("1_x272j")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_6uw8h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
