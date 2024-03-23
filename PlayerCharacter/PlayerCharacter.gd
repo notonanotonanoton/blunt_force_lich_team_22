@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #TODO has to be changed later to accomodate animations
-@onready var sprite_2d = $Sprite2D
+@onready var sprite_2d : Sprite2D = $Sprite2D
 
 @export var speed : float = 300.0
 @export var acceleration : float = 0.8
@@ -35,13 +35,15 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : float = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = lerpf(velocity.x, direction * speed, (10 * acceleration) * delta)
+	# Check to make sure player doesn't slide more when running opposite way
+	# There may be a better solution
+	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
+		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
 		if direction > 0:
 			sprite_2d.flip_h = false;
 		else:
 			sprite_2d.flip_h = true;
 	else:
-		velocity.x = lerpf(velocity.x, 0, (25 * friction) * delta)
+		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 
 	move_and_slide()
