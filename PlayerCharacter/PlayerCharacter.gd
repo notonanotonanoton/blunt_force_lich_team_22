@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 #TODO has to be changed later to accomodate animations
 @onready var sprite_2d : Sprite2D = $Sprite2D
+@onready var animation_player = $AnimationPlayer
 
-@export var speed : float = 300.0
-@export var acceleration : float = 0.8
-@export var jump_velocity : float = -430.0
-@export var friction : float = 0.8
+@export var speed : float = 165.0 #165
+@export var acceleration : float = 0.5
+@export var jump_velocity : float = -430.0 #-430
+@export var friction : float = 0.5
 @export var max_fall_speed : float = 400
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -19,7 +20,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		if velocity.y < 0:
-			velocity.y += default_gravity * delta
+			velocity.y += (default_gravity) * delta
 		elif velocity.y < max_fall_speed:
 			velocity.y += fast_fall_gravity * delta
 		# Ensure fall speed past max_fall_speed is consistent
@@ -39,6 +40,10 @@ func _physics_process(delta):
 	# There may be a better solution
 	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
 		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
+		if is_on_floor():
+			animation_player.play("walk")
+		else:
+			animation_player.stop()
 		if direction > 0:
 			sprite_2d.flip_h = false;
 		else:
