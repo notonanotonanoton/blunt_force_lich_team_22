@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=6 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_o0e10"]
 [ext_resource type="Texture2D" uid="uid://clagmcshdvub1" path="res://PlayerCharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Script" path="res://PlayerCharacter/BoxDetector.gd" id="3_djr33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5w6f"]
+size = Vector2(60, 26.5)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_o0e10")
@@ -19,3 +23,20 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_6uw8h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(41, -2)
+collision_layer = 0
+collision_mask = 4
+input_pickable = false
+script = ExtResource("3_djr33")
+
+[node name="BoxDetector" type="CollisionShape2D" parent="Area2D"]
+light_mask = 4
+visibility_layer = 4
+shape = SubResource("RectangleShape2D_n5w6f")
+
+[connection signal="request_box_status" from="." to="Area2D" method="_on_player_character_request_box_status"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="send_box_status" from="Area2D" to="." method="_on_area_2d_send_box_status"]
