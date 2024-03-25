@@ -16,3 +16,7 @@ layer_0/tile_data = PackedInt32Array(262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 2
 [node name="Slime" parent="." instance=ExtResource("3_km164")]
 position = Vector2(235, 48)
 collision_layer = 4
+
+[node name="Slime2" parent="." instance=ExtResource("3_km164")]
+position = Vector2(364, 48)
+collision_layer = 4

@@ -21,10 +21,12 @@ func _physics_process(delta):
 		if player_chase:
 			if (player.position.x - position.x) <= 0:
 				print (player.position.x - position.x)
+				velocity.x = speed*dirR
 				dirR =-1 
 			else:
 				dirR =1
 				print (player.position.x - position.x)
+				velocity.x = speed*dirR
 		else:
 			velocity.x = speed*dirR
 	
