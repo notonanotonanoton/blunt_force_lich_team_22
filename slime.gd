@@ -47,7 +47,7 @@ func _physics_process(delta):
 			dirU=1
 			checkone = true
 		if is_on_wall():
-			velocity.x = speed*dirR
+			velocity.x = speed*dirR+1
 
 
 
