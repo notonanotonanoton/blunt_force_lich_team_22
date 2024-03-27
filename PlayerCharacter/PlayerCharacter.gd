@@ -9,7 +9,6 @@ extends CharacterBody2D
 @export var jump_velocity : float = -430.0 #-430
 @export var friction : float = 0.5
 @export var max_fall_speed : float = 400
-var jump_released = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -61,3 +60,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 
 	move_and_slide()
+
+		
+
+	
