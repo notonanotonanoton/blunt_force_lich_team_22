@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbb1d8qrv2mol"]
+
+[ext_resource type="Texture2D" uid="uid://igf7jgkx3s7o" path="res://Enemy/slime.png" id="1_4mymv"]
+[ext_resource type="Script" path="res://slime.gd" id="1_ak0gr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_87n0k"]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1vks"]
+size = Vector2(32, 267)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
+size = Vector2(32, 31)
+
+[node name="Slime" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ak0gr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4mymv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="vision_detection" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_87n0k")
+
+[node name="wallMovement" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_t1vks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_fsb11")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
