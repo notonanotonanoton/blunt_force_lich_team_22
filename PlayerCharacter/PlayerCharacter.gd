@@ -65,7 +65,7 @@ func _physics_process(delta):
 
 	if direction > 0:
 		sprite_2d.flip_h = false;
-	else:
+	elif direction < 0:
 		sprite_2d.flip_h = true;
 
 	if direction != 0:
@@ -79,12 +79,6 @@ func _physics_process(delta):
 			animation_player.play("walk")
 		else:
 			animation_player.stop()
-		if direction > 0:
-			$Area2D.position.x = 41
-			sprite_2d.flip_h = false;
-		else:
-			sprite_2d.flip_h = true;
-			$Area2D.position.x = -41
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 

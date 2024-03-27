@@ -21,7 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if held:
-		self.global_transform.origin = ((first_sender.position)-Vector2(15, 25))
+		self.global_transform.origin = ((first_sender.position)-Vector2(0, 15))
 
 
 func pick_up(sender):

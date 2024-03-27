@@ -1,18 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://States/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_efwen"]
 [ext_resource type="Texture2D" uid="uid://clagmcshdvub1" path="res://PlayerCharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Script" path="res://PlayerCharacter/BoxDetector.gd" id="3_djr33"]
 [ext_resource type="Script" path="res://States/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://States/PlayerInAir.gd" id="4_5vqem"]
 [ext_resource type="Script" path="res://States/PlayerCarryingBox.gd" id="5_aj4i2"]
-[ext_resource type="Script" path="res://PlayerCharacter/BoxDetector.gd" id="3_djr33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5w6f"]
-size = Vector2(60, 26.5)
+size = Vector2(24, 28)
 
 [sub_resource type="Animation" id="Animation_gvftr"]
 resource_name = "walk"
@@ -71,7 +71,7 @@ script = ExtResource("3_wxpwy")
 script = ExtResource("5_aj4i2")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(41, -2)
+position = Vector2(0, 4)
 collision_layer = 0
 collision_mask = 4
 input_pickable = false
@@ -82,11 +82,6 @@ light_mask = 4
 visibility_layer = 4
 shape = SubResource("RectangleShape2D_n5w6f")
 
-[connection signal="request_box_status" from="." to="Area2D" method="_on_player_character_request_box_status"]
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
-[connection signal="send_box_status" from="Area2D" to="." method="_on_area_2d_send_box_status"]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_iygft")
@@ -96,3 +91,8 @@ libraries = {
 position = Vector2(0, 16)
 texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
+
+[connection signal="request_box_status" from="." to="Area2D" method="_on_player_character_request_box_status"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="send_box_status" from="Area2D" to="." method="_on_area_2d_send_box_status"]
