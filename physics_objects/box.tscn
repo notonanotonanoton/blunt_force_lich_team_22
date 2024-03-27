@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cupv7wvlaedxn"]
+
+[ext_resource type="Texture2D" uid="uid://dods0drhoxk2n" path="res://icon.svg" id="1_c1bqm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78kp0"]
+friction = 0.83
+rough = true
+absorbent = true
+
+[sub_resource type="GDScript" id="GDScript_ovx2o"]
+script/source = "extends RigidBody2D
+
+var held
+var first_sender
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	if held:
+		self.global_transform.origin = ((first_sender.position)-Vector2(15, 25))
+
+
+func pick_up(sender):
+	if first_sender == null:
+		first_sender = sender
+		self.freeze = true
+		held = true
+
+
+func throw(sender):
+	held = false;
+	self.freeze = false;
+	first_sender = null;
+	if sender.looking_direction == 1:
+		apply_central_impulse(sender.position+(Vector2(2250, -165)))
+	else:
+		apply_central_impulse(sender.position+(Vector2(-2250, -165)))
+	
+
+
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg1l1"]
+size = Vector2(16, 17)
+
+[node name="Box" type="Node2D"]
+position = Vector2(11, 25)
+
+[node name="pick_up_box" type="RigidBody2D" parent="."]
+position = Vector2(185, 132)
+collision_layer = 5
+mass = 4.16
+physics_material_override = SubResource("PhysicsMaterial_78kp0")
+freeze_mode = 1
+continuous_cd = 2
+max_contacts_reported = 5
+contact_monitor = true
+script = SubResource("GDScript_ovx2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pick_up_box"]
+shape = SubResource("RectangleShape2D_jg1l1")
+debug_color = Color(0.0627451, 0.572549, 0.819608, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="pick_up_box"]
+position = Vector2(0, 5.36442e-07)
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("1_c1bqm")
