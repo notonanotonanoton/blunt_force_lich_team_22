@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=10 format=3 uid="uid://cbpep6x04proy"]
 
-[ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_o0e10"]
+[ext_resource type="Script" path="res://States/StateMachine.gd" id="1_d0byc"]
+[ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_efwen"]
 [ext_resource type="Texture2D" uid="uid://clagmcshdvub1" path="res://PlayerCharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Script" path="res://States/PlayerOnGround.gd" id="3_wxpwy"]
+[ext_resource type="Script" path="res://States/PlayerInAir.gd" id="4_5vqem"]
+[ext_resource type="Script" path="res://States/PlayerCarryingBox.gd" id="5_aj4i2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 18)
@@ -40,12 +44,7 @@ _data = {
 }
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
-script = ExtResource("1_o0e10")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
-texture = ExtResource("1_x272j")
-offset = Vector2(0, -16)
+script = ExtResource("1_efwen")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -53,7 +52,25 @@ shape = SubResource("RectangleShape2D_6uw8h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("1_d0byc")
+inital_state = NodePath("PlayerOnGround")
+
+[node name="PlayerInAir" type="Node" parent="StateMachine"]
+script = ExtResource("4_5vqem")
+
+[node name="PlayerOnGround" type="Node" parent="StateMachine"]
+script = ExtResource("3_wxpwy")
+
+[node name="PlayerCarryingBox" type="Node" parent="StateMachine"]
+script = ExtResource("5_aj4i2")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_iygft")
 }
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("1_x272j")
+offset = Vector2(0, -16)

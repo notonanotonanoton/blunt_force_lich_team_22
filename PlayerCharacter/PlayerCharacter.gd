@@ -23,7 +23,6 @@ func jump_cut():
 
 #TODO break out into more funcs
 func _physics_process(delta):
-	
 	# Add the gravity.
 	if not is_on_floor():
 		if velocity.y < 0:
@@ -34,6 +33,7 @@ func _physics_process(delta):
 		else:
 			velocity.y = max_fall_speed
 			
+
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump()
@@ -44,6 +44,11 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : float = Input.get_axis("ui_left", "ui_right")
+	if direction > 0:
+		sprite_2d.flip_h = false;
+	else:
+		sprite_2d.flip_h = true;
+			
 	# Check to make sure player doesn't slide more when running opposite way
 	# There may be a better solution
 	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
@@ -52,10 +57,7 @@ func _physics_process(delta):
 			animation_player.play("walk")
 		else:
 			animation_player.stop()
-		if direction > 0:
-			sprite_2d.flip_h = false;
-		else:
-			sprite_2d.flip_h = true;
+	
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 
