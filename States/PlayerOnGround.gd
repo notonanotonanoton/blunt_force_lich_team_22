@@ -10,7 +10,6 @@ func exit():
 	pass
 
 func update(_delta: float):
-	print("hej")
+	if (!player_character.is_on_floor()):
+		state_transition.emit(self, "playerinair")
 	
-	
-	pass 

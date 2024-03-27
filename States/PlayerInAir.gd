@@ -1,13 +1,15 @@
 extends State
 class_name PlayerInAir
-@export var player_character : CharacterBody2D
+@onready var player_character = $"../.."
 
 func enter():
+	print("Entered PlayerInAir state")
 	pass # Replace with function body.
 
 func exit():
 	pass
 
 func update(_delta: float):
-	pass
+	if (player_character.is_on_floor()):
+		state_transition.emit(self, "playeronground")
 	

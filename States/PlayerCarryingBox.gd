@@ -1,7 +1,6 @@
 extends State
 class_name PlayerCarryingBox
-
-@export var player_character : CharacterBody2D
+@onready var player_character = $"../.."
 
 func enter():
 	pass # Replace with function body.
