@@ -4,10 +4,32 @@
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://DefaultTileMap.tscn" id="1_wy5ye"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://physics_objects/box.tscn" id="3_wvtrr"]
 
-[node name="Node2D" type="Node2D"]
+[gd_scene load_steps=7 format=3 uid="uid://dbn56ue5raca5"]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_ebfd7")]
+[ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://PlayerCharacter/PlayerCharacter.tscn" id="1_ebfd7"]
+[ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://DefaultTileMap.tscn" id="1_wy5ye"]
+[ext_resource type="Script" path="res://States/StateMachine.gd" id="2_fj8mf"]
+[ext_resource type="Script" path="res://States/PlayerCarryingBox.gd" id="3_olviw"]
+[ext_resource type="Script" path="res://States/PlayerInAir.gd" id="4_naghx"]
+[ext_resource type="Script" path="res://States/PlayerOnGround.gd" id="5_3e24s"]
+
+[node name="Scene_Root" type="Node2D"]
+
+[node name="PlayerCharacter" parent="." groups=["Player"] instance=ExtResource("1_ebfd7")]
 position = Vector2(43, 53)
+
+[node name="StateMachine" type="Node" parent="PlayerCharacter" node_paths=PackedStringArray("inital_state")]
+script = ExtResource("2_fj8mf")
+inital_state = NodePath("OnGround")
+
+[node name="CarryingBox" type="Node" parent="PlayerCharacter/StateMachine"]
+script = ExtResource("3_olviw")
+
+[node name="InAir" type="Node" parent="PlayerCharacter/StateMachine"]
+script = ExtResource("4_naghx")
+
+[node name="OnGround" type="Node" parent="PlayerCharacter/StateMachine"]
+script = ExtResource("5_3e24s")
 
 [node name="DefaultTileMap" parent="." instance=ExtResource("1_wy5ye")]
 light_mask = 0
