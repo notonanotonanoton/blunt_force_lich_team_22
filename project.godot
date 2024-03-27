@@ -39,6 +39,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="Blunt_Force_Lich"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/health/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false
