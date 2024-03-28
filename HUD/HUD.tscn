@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfhtp1jp0gogq"]
+
+[ext_resource type="Texture2D" uid="uid://begs6d8wgghkp" path="res://HUD/bar_accent.png" id="1_hoynb"]
+[ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://HUD/health_bar_texture.tres" id="2_qc45e"]
+[ext_resource type="Texture2D" uid="uid://dwerbiilyrikl" path="res://HUD/heart_container_full.png" id="3_ytumy"]
+[ext_resource type="Texture2D" uid="uid://ct1t2fs851fdo" path="res://HUD/heart_container_half.png" id="4_sqalw"]
+[ext_resource type="Texture2D" uid="uid://p5emdkfkfjla" path="res://HUD/heart_container_empty.png" id="5_qm1x7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_32p8h"]
+
+[node name="HUDCanvas" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HealthBarContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_32p8h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HealthBarContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_hoynb")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_qc45e")
+
+[node name="HeartContainers" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
+layout_mode = 2
+texture = ExtResource("3_ytumy")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
+layout_mode = 2
+texture = ExtResource("4_sqalw")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
+layout_mode = 2
+texture = ExtResource("5_qm1x7")

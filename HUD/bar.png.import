@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s10l5m5j2v5v"
-path="res://.godot/imported/heart_container_half.png-af21835d7559b083fe0bd7755eed78e2.ctex"
+uid="uid://cmk81txms8vnx"
+path="res://.godot/imported/bar.png-c914ec9f239cd6baf13141e179c97744.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://health/heart_container_half.png"
-dest_files=["res://.godot/imported/heart_container_half.png-af21835d7559b083fe0bd7755eed78e2.ctex"]
+source_file="res://HUD/bar.png"
+dest_files=["res://.godot/imported/bar.png-c914ec9f239cd6baf13141e179c97744.ctex"]
 
 [params]
 
