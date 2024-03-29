@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfhtp1jp0gogq"]
 
-[ext_resource type="Texture2D" uid="uid://begs6d8wgghkp" path="res://HUD/bar_accent.png" id="1_hoynb"]
+[ext_resource type="Texture2D" uid="uid://cw1ovxqg0w4vq" path="res://HUD/bar_accent.png" id="1_hoynb"]
 [ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://HUD/health_bar_texture.tres" id="2_qc45e"]
-[ext_resource type="Texture2D" uid="uid://dwerbiilyrikl" path="res://HUD/heart_container_full.png" id="3_ytumy"]
-[ext_resource type="Texture2D" uid="uid://ct1t2fs851fdo" path="res://HUD/heart_container_half.png" id="4_sqalw"]
-[ext_resource type="Texture2D" uid="uid://p5emdkfkfjla" path="res://HUD/heart_container_empty.png" id="5_qm1x7"]
+[ext_resource type="Texture2D" uid="uid://bqaflvu68csdr" path="res://HUD/heart_container_full.png" id="3_ytumy"]
+[ext_resource type="Texture2D" uid="uid://cng2bshf0lse0" path="res://HUD/heart_container_half.png" id="4_sqalw"]
+[ext_resource type="Texture2D" uid="uid://dmd5romwwdo8e" path="res://HUD/heart_container_empty.png" id="5_qm1x7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_32p8h"]
 
@@ -43,11 +43,14 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
 layout_mode = 2
 texture = ExtResource("3_ytumy")
+stretch_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
 layout_mode = 2
 texture = ExtResource("4_sqalw")
+stretch_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
 layout_mode = 2
 texture = ExtResource("5_qm1x7")
+stretch_mode = 5
