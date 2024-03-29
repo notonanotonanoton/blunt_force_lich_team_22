@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://plhm8snkt7kh"
-path="res://.godot/imported/slime.png-59d9140929d35410dde0ef9796619b0b.ctex"
+uid="uid://c834telxxcc06"
+path="res://.godot/imported/dirt_and_rock_tileset.png-3efb9bc94c07385b02c28926c65e3690.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/slime.png"
-dest_files=["res://.godot/imported/slime.png-59d9140929d35410dde0ef9796619b0b.ctex"]
+source_file="res://GraveyardTileSet/dirt_and_rock_tileset.png"
+dest_files=["res://.godot/imported/dirt_and_rock_tileset.png-3efb9bc94c07385b02c28926c65e3690.ctex"]
 
 [params]
 
