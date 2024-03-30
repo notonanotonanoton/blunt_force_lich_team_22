@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wl5kn6voh5qi"
-path="res://.godot/imported/graveyard_decoration.png-518fbca81befba810405c46b87121fb8.ctex"
+uid="uid://dfg63drc2dpj5"
+path="res://.godot/imported/character_phylactery.png-bfbb7966b60dc5ed271198f54c7bc1ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GraveyardTileSet/graveyard_decoration.png"
-dest_files=["res://.godot/imported/graveyard_decoration.png-518fbca81befba810405c46b87121fb8.ctex"]
+source_file="res://physics_objects/character_phylactery.png"
+dest_files=["res://.godot/imported/character_phylactery.png-bfbb7966b60dc5ed271198f54c7bc1ec.ctex"]
 
 [params]
 
