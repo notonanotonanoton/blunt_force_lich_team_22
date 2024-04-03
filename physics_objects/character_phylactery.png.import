@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://plhm8snkt7kh"
-path="res://.godot/imported/slime.png-59d9140929d35410dde0ef9796619b0b.ctex"
+uid="uid://dfg63drc2dpj5"
+path="res://.godot/imported/character_phylactery.png-bfbb7966b60dc5ed271198f54c7bc1ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/slime.png"
-dest_files=["res://.godot/imported/slime.png-59d9140929d35410dde0ef9796619b0b.ctex"]
+source_file="res://physics_objects/character_phylactery.png"
+dest_files=["res://.godot/imported/character_phylactery.png-bfbb7966b60dc5ed271198f54c7bc1ec.ctex"]
 
 [params]
 
