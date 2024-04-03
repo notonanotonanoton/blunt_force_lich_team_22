@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1o2ymh2bg2j2"]
 
 [ext_resource type="Texture2D" uid="uid://dsp4exd2dk4lb" path="res://GraveyardTileSet/dirt_and_rock_tileset.png" id="2_s8b55"]
-[ext_resource type="Texture2D" uid="uid://wl5kn6voh5qi" path="res://GraveyardTileSet/graveyard_decoration.png" id="3_w5c8x"]
+[ext_resource type="Texture2D" uid="uid://cll33r7w4q7yx" path="res://GraveyardTileSet/graveyard_decoration.png" id="3_w5c8x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn16e"]
 texture = ExtResource("2_s8b55")
