@@ -11,7 +11,7 @@ func exit():
 	pass
 
 func update(_delta: float):
-	if Input.is_key_pressed(KEY_T):
+	if Input.is_key_pressed(KEY_T) and player_character.is_on_floor():
 		if picked_up_box != null:
 			picked_up_box.thrown_by(player_character)
 			if (player_character.is_on_floor()):
