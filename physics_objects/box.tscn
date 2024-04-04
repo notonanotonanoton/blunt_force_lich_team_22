@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cupv7wvlaedxn"]
 
-[ext_resource type="Texture2D" uid="uid://dods0drhoxk2n" path="res://icon.svg" id="1_c1bqm"]
+[ext_resource type="Texture2D" uid="uid://dfg63drc2dpj5" path="res://physics_objects/character_phylactery.png" id="1_ifsfx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_78kp0"]
 friction = 0.83
@@ -21,7 +21,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if held:
+		get_node(\"CollisionShape2D\").disabled = true
 		self.global_transform.origin = ((first_sender.position)-Vector2(0, 15))
+	else:
+		get_node(\"CollisionShape2D\").disabled = false
 
 
 func pick_up(sender):
@@ -46,7 +49,7 @@ func throw(sender):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg1l1"]
-size = Vector2(16, 17)
+size = Vector2(14, 14)
 
 [node name="Box" type="Node2D"]
 position = Vector2(11, 25)
@@ -68,5 +71,4 @@ debug_color = Color(0.0627451, 0.572549, 0.819608, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="pick_up_box"]
 position = Vector2(0, 5.36442e-07)
-scale = Vector2(0.14, 0.14)
-texture = ExtResource("1_c1bqm")
+texture = ExtResource("1_ifsfx")

@@ -81,7 +81,6 @@ func _physics_process(delta):
 			animation_player.stop()
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
-
 	move_and_slide()
 
 func _on_area_2d_send_box_status(arg2):

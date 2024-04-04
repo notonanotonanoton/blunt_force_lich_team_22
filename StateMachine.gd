@@ -13,10 +13,12 @@ func _ready():
 			
 	if inital_state:
 		inital_state.enter()
+		print(inital_state)
 		current_state = inital_state
 		
 func _process(delta):
 	if current_state:
+		#print(current_state)
 		current_state.update(delta)
 	
 func state_physics_process(delta):
