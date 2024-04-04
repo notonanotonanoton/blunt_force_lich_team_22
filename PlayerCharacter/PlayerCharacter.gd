@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-signal request_box_status
-
 #TODO has to be changed later to accomodate animations
 @onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var animation_player = $AnimationPlayer
@@ -12,21 +10,13 @@ signal request_box_status
 @export var friction : float = 0.5
 @export var max_fall_speed : float = 400
 @export var push_force: float = 150.0
-var picked_up_box : RigidBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 var looking_direction : float
+var picked_up_box : RigidBody2D
 #func _ready():
 #	
-
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_E:
-			emit_signal("request_box_status")
-		if event.pressed and event.keycode == KEY_T:
-			if picked_up_box != null:
-				picked_up_box.throw(self)
 
 func jump():
 	velocity.y = jump_velocity
@@ -82,10 +72,3 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 	move_and_slide()
-
-func _on_area_2d_send_box_status(arg2):
-	for body in arg2:
-		if body.name == "pick_up_box":
-			body.pick_up(self)
-			picked_up_box = body
-

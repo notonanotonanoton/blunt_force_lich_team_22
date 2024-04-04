@@ -17,7 +17,6 @@ var first_sender
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if held:
@@ -27,14 +26,13 @@ func _physics_process(delta):
 		get_node(\"CollisionShape2D\").disabled = false
 
 
-func pick_up(sender):
+func picked_up_by(sender):
 	if first_sender == null:
 		first_sender = sender
 		self.freeze = true
 		held = true
 
-
-func throw(sender):
+func thrown_by(sender):
 	held = false;
 	self.freeze = false;
 	first_sender = null;
