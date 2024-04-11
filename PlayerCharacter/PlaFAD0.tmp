@@ -106,6 +106,8 @@ shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="Health" parent="." instance=ExtResource("9_x7wds")]
 health = 12
+knockback_stun = null
+knockback_modifier = null
 
 [connection signal="request_box_status" from="." to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
