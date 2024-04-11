@@ -33,6 +33,6 @@ collision_layer = 4
 
 [node name="Box" parent="." instance=ExtResource("4_ak2be")]
 light_mask = 0
-position = Vector2(-32, -139)
+position = Vector2(0, 100)
 
 [node name="HUDCanvas" parent="." instance=ExtResource("5_7nwqq")]
