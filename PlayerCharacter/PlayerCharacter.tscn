@@ -63,8 +63,10 @@ one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("1_d0byc")
+
+inital_state = NodePath("PlayerInAir")
 
 [node name="PlayerInAir" type="Node" parent="StateMachine" groups=["Player"]]
 script = ExtResource("4_5vqem")
