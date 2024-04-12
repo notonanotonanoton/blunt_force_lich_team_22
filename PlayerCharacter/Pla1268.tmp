@@ -63,10 +63,8 @@ one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_d0byc")
-
-inital_state = NodePath("PlayerInAir")
 
 [node name="PlayerInAir" type="Node" parent="StateMachine" groups=["Player"]]
 script = ExtResource("4_5vqem")
@@ -108,6 +106,8 @@ shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="Health" parent="." instance=ExtResource("9_x7wds")]
 health = 12
+knockback_stun = null
+knockback_modifier = null
 
 [connection signal="request_box_status" from="." to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
