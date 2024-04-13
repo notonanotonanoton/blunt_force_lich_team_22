@@ -4,7 +4,7 @@ class_name PlayerOnGround
 
 
 func enter():
-	print("Entered PlayereOnGround state")
+	pass
 
 func exit():
 	pass

@@ -50,7 +50,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
-size = Vector2(20, 25)
+size = Vector2(13, 22)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -62,10 +62,10 @@ shape = SubResource("RectangleShape2D_6uw8h")
 one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -25)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("1_d0byc")
-
 inital_state = NodePath("PlayerInAir")
 
 [node name="PlayerInAir" type="Node" parent="StateMachine" groups=["Player"]]
@@ -103,7 +103,7 @@ offset = Vector2(0, -16)
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hit box"]
-position = Vector2(0, 4.5)
+position = Vector2(-0.5, 5)
 shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="Health" parent="." instance=ExtResource("9_x7wds")]

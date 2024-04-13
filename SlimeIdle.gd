@@ -49,6 +49,7 @@ func update(_delta: float):
 	if(!slime.is_on_floor()):
 		if(slime.is_on_ceiling()):
 			slime.velocity.y= 0
+			$slime_Sprite2D.flip_h = true 
 		else:
 			slime.velocity.y += slime.gravity*_delta
 	
@@ -57,7 +58,7 @@ func update(_delta: float):
 		state_transition.emit(self,"SlimeAgro")
 	
 	#Is the trigger for jump
-	if (jump_time > 0):
+	if (jump_time > 0 or slime.is_on_wall()):
 		jump_time -= _delta
 	else :
 		state_transition.emit(self,"SlimeJump")

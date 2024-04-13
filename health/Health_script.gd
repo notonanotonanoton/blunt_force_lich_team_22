@@ -44,7 +44,6 @@ func take_damage(damage, enemy_position : Vector2):
 			child.change_state(child.current_state, "PlayerTakingDamage")
 	
 	if timer.is_stopped() == true:
-		print("player has taken damage; ", damage, ". This has reduced their health from: ", health,  " to: ", health-damage, "from position: ", enemy_position)
 		health = health-damage
 		
 		#print("TEST PRINT: ", get_parent().global_position)
@@ -76,4 +75,3 @@ func take_damage(damage, enemy_position : Vector2):
 	
 func _on_timer_timeout():
 	get_parent().acceleration = max_parent_acceleration
-	print("hell yeah baybe")
