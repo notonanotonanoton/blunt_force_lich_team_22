@@ -85,7 +85,9 @@ func _physics_process(delta):
 
 func _on_area_2d_send_box_status(arg2):
 	for body in arg2:
-		if body.name == "pick_up_box":
+		print(body.name)
+		if body.name == "Box":
+			print("check succeeded")
 			body.pick_up(self)
 			picked_up_box = body
 

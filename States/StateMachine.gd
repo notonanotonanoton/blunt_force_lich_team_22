@@ -24,7 +24,7 @@ func state_physics_process(delta):
 		current_state.physics_update(delta)
 		
 func change_state(old_state : State, new_state_name : String):
-	print("changed state to: " + new_state_name)
+	#print("changed state to: " + new_state_name)
 	if old_state != current_state:
 		return
 		
