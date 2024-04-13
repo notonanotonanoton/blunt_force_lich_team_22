@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dftdwc1mtyffk"]
-
-[ext_resource type="Script" path="res://health/Hit_Box_Script.gd" id="1_udflv"]
-
-[node name="Area2D2" type="Area2D"]
-script = ExtResource("1_udflv")

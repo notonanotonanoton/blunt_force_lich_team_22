@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqaflvu68csdr"
-path="res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"
+uid="uid://dfg63drc2dpj5"
+path="res://.godot/imported/character_phylactery.png-655c810ef61e07d91ee2906d65034d07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/heart_container_full.png"
-dest_files=["res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"]
+source_file="res://playerbox/character_phylactery.png"
+dest_files=["res://.godot/imported/character_phylactery.png-655c810ef61e07d91ee2906d65034d07.ctex"]
 
 [params]
 

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://k3yqlrjr838v"]
-
-[ext_resource type="Script" path="res://health/Hurt_Box_Script.gd" id="1_oi5di"]
-
-[node name="Area2D2" type="Area2D"]
-script = ExtResource("1_oi5di")
-
-[connection signal="area_entered" from="." to="." method="_on_hit_box_entered"]

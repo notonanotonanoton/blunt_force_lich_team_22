@@ -1,7 +1,11 @@
-extends Node
-class_name StateMachine
-@export var inital_state : State
+[gd_scene load_steps=2 format=3 uid="uid://b7r7lkeiihxon"]
 
+[sub_resource type="GDScript" id="GDScript_rtva5"]
+script/source = "extends Node
+class_name EnemyStateMachine
+
+@export var inital_state : State
+@export var acceleration : float = 1
 var current_state : State
 var states : Dictionary = {}
 
@@ -15,20 +19,20 @@ func _ready() -> void:
 		inital_state.enter()
 		current_state = inital_state
 		
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	if current_state:
 		current_state.update(delta)
 	
-func state_physics_process(delta) -> void:
+func state_physics_process(delta : float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 		
 func change_state(old_state : State, new_state_name : String) -> void:
-	#print("changed state to: " + new_state_name)
+	#print(\"changed state to: \" + new_state_name)
 	if old_state != current_state:
 		return
 		
-	var new_state : State = states.get(new_state_name.to_lower())
+	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return
 		
@@ -38,3 +42,7 @@ func change_state(old_state : State, new_state_name : String) -> void:
 	new_state.enter()
 	
 	current_state = new_state
+"
+
+[node name="EnemyStateMachine" type="Node"]
+script = SubResource("GDScript_rtva5")
