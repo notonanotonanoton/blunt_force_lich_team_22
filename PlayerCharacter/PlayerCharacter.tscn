@@ -126,10 +126,10 @@ position = Vector2(0, 16)
 texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
 
-[node name="Hit box" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_1ailf")]
+[node name="HitBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_1ailf")]
 health_component = NodePath("../Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit box"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_dl0fu")
 
