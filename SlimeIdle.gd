@@ -49,7 +49,6 @@ func update(_delta: float):
 	if(!slime.is_on_floor()):
 		if(slime.is_on_ceiling()):
 			slime.velocity.y= 0
-			$slime_Sprite2D.flip_h = true 
 		else:
 			slime.velocity.y += slime.gravity*_delta
 	
