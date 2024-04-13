@@ -9,5 +9,5 @@ func exit() -> void:
 
 func update(_delta: float) -> void:
 	if (player_character.is_on_floor()):
-		state_transition.emit(self, "playeronground")
+		state_transition.emit(self, "PlayerOnGround")
 	
