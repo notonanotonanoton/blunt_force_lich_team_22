@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvpbt2oua1i2s"]
-
-[ext_resource type="Script" path="res://states/StateMachine.gd" id="1_mhkab"]
-
-[node name="PlayerStateMachine" type="Node"]
-script = ExtResource("1_mhkab")
