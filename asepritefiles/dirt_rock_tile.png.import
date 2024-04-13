@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqaflvu68csdr"
-path="res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"
+uid="uid://5ddgttalnv1p"
+path="res://.godot/imported/dirt_rock_tile.png-a7ed9b0213bb06af74a247635f590418.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/heart_container_full.png"
-dest_files=["res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"]
+source_file="res://asepritefiles/dirt_rock_tile.png"
+dest_files=["res://.godot/imported/dirt_rock_tile.png-a7ed9b0213bb06af74a247635f590418.ctex"]
 
 [params]
 
