@@ -72,3 +72,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 	move_and_slide()
+
+func _on_area_2d_send_box_status(arg2):
+	for body in arg2:
+		print(body.name)
+		if body.name == "Box":
+			print("check succeeded")
+			body.pick_up(self)
+			picked_up_box = body

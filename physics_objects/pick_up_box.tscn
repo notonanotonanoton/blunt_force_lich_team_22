@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dijgecmt4u24j"]
+[gd_scene load_steps=4 format=3 uid="uid://cupv7wvlaedxn"]
 
 [ext_resource type="Texture2D" uid="uid://dfg63drc2dpj5" path="res://physics_objects/character_phylactery.png" id="1_ifsfx"]
 
@@ -23,6 +23,7 @@ func _ready():
 func _physics_process(delta):
 	if held:
 		self.global_transform.origin = ((first_sender.global_position)-Vector2(0, 20))
+
 
 func picked_up_by(sender):
 	if first_sender == null:

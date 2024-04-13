@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1jo3bog6hb7"]
-
-[ext_resource type="Script" path="res://health/Health_script.gd" id="1_hwbbc"]
-
-[node name="HealthModule" type="Node"]
-script = ExtResource("1_hwbbc")
