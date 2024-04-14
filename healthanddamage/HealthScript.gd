@@ -46,17 +46,7 @@ func take_damage(damage, enemy_position : Vector2) -> void:
 	if timer.is_stopped() == true:
 		health = health-damage
 		
-		#print("TEST PRINT: ", get_parent().global_position)
-		
-		
-		#find a usable global position (characterbody2d does not have it???)
-
-
-	#	for child in get_parent().get_children():
-	#		if child is CollisionShape2D:
-	#			self_position = child.global_position
-
-		
+	
 		var knockback_direction = enemy_position.direction_to(get_parent().global_position)
 		#make sure we give some airtime
 		var knockback_strength = damage*knockback_modifier

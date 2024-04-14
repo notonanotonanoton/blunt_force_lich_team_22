@@ -13,6 +13,10 @@ var jump_velocity : float = -jump_value
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export var push_force: float = 150.0
 
+var player_died : bool = false;
+
+signal death
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
@@ -77,3 +81,16 @@ func _physics_process(delta : float) -> void:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 		animation_player.play("RESET")
 	move_and_slide()
+
+
+func _on_health_death_signal():
+	#freeze the physics process since the game is finished. If we move movement mechanics out of physics process, consider using the player_died variable
+	set_physics_process(false)
+	player_died = true;
+	
+	#make player invisible
+	visible = false;
+	scale = Vector2(0, 0);
+	
+	#signal the death screen to becomme visible
+	emit_signal("death");
