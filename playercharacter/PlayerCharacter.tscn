@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
-[ext_resource type="Script" path="res://PlayerCharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://ohror34x8e6b" path="res://PlayerCharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
+[ext_resource type="Texture2D" uid="uid://ohror34x8e6b" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Script" path="res://playercharacter/BoxDetector.gd" id="3_djr33"]
 [ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
@@ -94,7 +94,7 @@ offset = Vector2(0, -25)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("1_d0byc")
-inital_state = NodePath("PlayerOnGround")
+inital_state = NodePath("PlayerInAir")
 
 [node name="PlayerInAir" type="Node" parent="StateMachine"]
 script = ExtResource("4_5vqem")

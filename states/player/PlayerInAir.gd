@@ -2,6 +2,7 @@ extends State
 @onready var player_character : CharacterBody2D = $"../.."
 
 func enter() -> void:
+	#print("Entered playerinair state")
 	pass # Replace with function body.
 
 func exit() -> void:

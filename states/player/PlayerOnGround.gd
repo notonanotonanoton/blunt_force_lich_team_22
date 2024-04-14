@@ -4,7 +4,8 @@ signal request_box_status
 var picked_up_box : RigidBody2D
 
 func enter() -> void:
-	print("Entered PlayereOnGround state")
+	#print("Entered PlayereOnGround state")
+	pass
 
 func exit() -> void:
 	pass
