@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeIdle.gd" id="3_oekhu"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeJump.gd" id="4_oxv7e"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
-[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HurtBoxComponent.tscn" id="6_yud86"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="6_yud86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(22, 14)

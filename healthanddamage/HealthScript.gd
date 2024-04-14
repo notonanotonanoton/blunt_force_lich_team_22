@@ -61,6 +61,7 @@ func take_damage(damage, enemy_position : Vector2) -> void:
 		if(health<=0):
 			health = 0
 			emit_signal("death_signal")
+			#todo: come back to this and check if we can use below code
 			#get_parent().queue_free()
 	
 func _on_timer_timeout() -> void:

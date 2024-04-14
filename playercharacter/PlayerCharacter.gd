@@ -23,9 +23,6 @@ var fast_fall_gravity : int = default_gravity * 1.5
 var looking_direction : float
 var picked_up_box : RigidBody2D
 
-#func _ready():
-#	
-
 func jump() -> void:
 	velocity.y = jump_velocity
 

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
 [ext_resource type="Script" path="res://states/player/PlayerCarryingBox.gd" id="5_aj4i2"]
-[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HitBoxComponent.tscn" id="8_1ailf"]
+[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
@@ -127,10 +127,10 @@ position = Vector2(0, 16)
 texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
 
-[node name="HitBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_1ailf")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_4pe4k")]
 health_component = NodePath("../Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_dl0fu")
 
