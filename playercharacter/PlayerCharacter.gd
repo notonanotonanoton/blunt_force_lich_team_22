@@ -17,7 +17,7 @@ var jump_velocity : float = -jump_value
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 var looking_direction : float
-var picked_up_box : RigidBody2D
+var picked_up_box : CharacterBody2D
 
 #func _ready():
 #	

@@ -34,4 +34,4 @@ collision_layer = 4
 [node name="HUDCanvas" parent="." instance=ExtResource("5_7nwqq")]
 
 [node name="pick_up_box" parent="." instance=ExtResource("4_ak2be")]
-position = Vector2(-36, 87)
+position = Vector2(84, 121)
