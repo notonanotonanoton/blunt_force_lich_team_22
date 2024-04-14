@@ -1,6 +1,6 @@
 extends State
 @onready var player_character : CharacterBody2D = $"../.."
-var picked_up_box : RigidBody2D
+var picked_up_box : CharacterBody2D
 signal request_box
 
 func enter() -> void:
@@ -10,6 +10,7 @@ func exit() -> void:
 	pass
 
 func update(_delta: float) -> void:
+	#print("Håller lådan")
 	if Input.is_key_pressed(KEY_T) and player_character.is_on_floor():
 		if picked_up_box != null:
 			picked_up_box.thrown_by(player_character)
