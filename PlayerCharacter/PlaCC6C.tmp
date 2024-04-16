@@ -94,6 +94,8 @@ offset = Vector2(0, -25)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_d0byc")
+inital_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("3_wxpwy"))
+
 
 [node name="PlayerInAir" type="Node" parent="StateMachine"]
 script = ExtResource("4_5vqem")

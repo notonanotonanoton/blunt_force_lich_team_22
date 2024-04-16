@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ohror34x8e6b"
-path="res://.godot/imported/character_lich.png-15b8539b636747695507fd71f52b69de.ctex"
+path="res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PlayerCharacter/character_lich.png"
-dest_files=["res://.godot/imported/character_lich.png-15b8539b636747695507fd71f52b69de.ctex"]
+source_file="res://playercharacter/character_lich.png"
+dest_files=["res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"]
 
 [params]
 

@@ -18,7 +18,9 @@ size = Vector2(22, 14)
 script = ExtResource("1_ak0gr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
 texture = ExtResource("1_4mymv")
+offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -31,6 +33,9 @@ inital_state = NodePath("SlimeIdle")
 [node name="SlimeIdle" type="Node" parent="StateMachine"]
 script = ExtResource("3_oekhu")
 
+[node name="Timer" type="Timer" parent="StateMachine/SlimeIdle"]
+wait_time = 2.0
+
 [node name="SlimeJump" type="Node" parent="StateMachine"]
 script = ExtResource("4_oxv7e")
 
@@ -40,5 +45,7 @@ script = ExtResource("5_yc75d")
 [node name="HitBoxComponent" parent="." instance=ExtResource("6_yud86")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 6)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_ili36")
+
+[connection signal="timeout" from="StateMachine/SlimeIdle/Timer" to="StateMachine/SlimeIdle" method="_on_timer_timeout"]

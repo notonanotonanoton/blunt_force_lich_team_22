@@ -1,31 +1,45 @@
 extends State
 
+@onready var timer : Timer = $Timer
 @onready var slime : Slime = $"../.."
+@onready var sprite2d : Sprite2D = $"../../Sprite2D"
 var direction : float
 var Player: CharacterBody2D
 var wander_time : float
 var move_time : float
-var move_direction : float
+var Jump_Direction_Vertical : int
+var Jump_Direction_Horizontal : float
 var jump_time : float
+var just_jumped : bool
+var agro : bool
+
+
 func random():
 	if(randf_range(-1,1)> 0):
-		move_direction = 1
+		Jump_Direction_Horizontal = 1
 	else:
-		move_direction = -1
+		Jump_Direction_Horizontal = -1
 	wander_time = randf_range(1,4)
 
 func moveTime():
 	move_time = 2
 
 func enter():
+	agro = false
+	just_jumped = false
 	random()
+	timer.start(5)
 	Player = get_tree().get_first_node_in_group("Player")
-	jump_time = randf_range(5,10)
+	jump_time = randf_range(1,2)
 
 func exit():
 	pass
 
 func update(_delta: float):
+	if(slime.is_on_ceiling()):
+		Jump_Direction_Vertical = -1
+	else :
+		Jump_Direction_Vertical = 1
 	
 	#Checks Player
 	if (Player.position.x > slime.position.x):
@@ -40,26 +54,37 @@ func update(_delta: float):
 			move_time -= _delta
 		else :
 			slime.velocity.x = 0
-	else:
-		slime.velocity.x = slime.speed*move_direction
+	elif (jump_time > 0):
+		#slime.velocity.x = slime.speed*Jump_Direction_Horizontal
 		moveTime()
 		random()
 	
+	
 	#Basic gravity
-	if(!slime.is_on_floor()):
-		if(slime.is_on_ceiling()):
-			slime.velocity.y= 0
-		else:
-			slime.velocity.y += slime.gravity*_delta
+	if(!slime.is_on_floor() or !slime.is_on_ceiling()):
+		slime.velocity.y += slime.gravity*_delta*Jump_Direction_Vertical
+	
+		if((slime.is_on_floor() or slime.is_on_ceiling())and just_jumped):
+			slime.velocity.x = 0
+
+
 	
 	#Is the trigger for aggro on player
 	if (direction < 30):
+		print("ANGY")
 		state_transition.emit(self,"SlimeAgro")
 	
+	
+	
+	
+	
 	#Is the trigger for jump
-	if (jump_time > 0 or slime.is_on_wall()):
-		jump_time -= _delta
-	else :
-		state_transition.emit(self,"SlimeJump")
-	
-	
+func _on_timer_timeout():
+	if(!agro):
+		if(randi_range(1,5) != 2):
+			slime.velocity.y = -randi_range(20,40) * Jump_Direction_Vertical*slime.speed
+			slime.velocity.x = slime.speed*Jump_Direction_Horizontal*randi_range(10,20)
+			just_jumped = true
+			timer.start(2)
+		else:
+			slime.velocity.y = -randi_range(500,600) * Jump_Direction_Vertical
