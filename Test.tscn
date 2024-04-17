@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="2_hpaix"]
 [ext_resource type="PackedScene" uid="uid://dbb1d8qrv2mol" path="res://enemy/slime/Slime.tscn" id="3_k1yn0"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://playerbox/PlayerBox.tscn" id="4_ak2be"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="5_7nwqq"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="6_jaqc5"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="5_7nwqq"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="6_jaqc5"]
 
 [node name="Scene_Root" type="Node2D"]
 
@@ -35,7 +35,6 @@ collision_layer = 4
 [node name="HUDCanvas" parent="." instance=ExtResource("5_7nwqq")]
 
 [node name="pick_up_box" parent="." instance=ExtResource("4_ak2be")]
-
 position = Vector2(-36, 87)
 
 [node name="Game_Over_Screen" parent="." instance=ExtResource("6_jaqc5")]
