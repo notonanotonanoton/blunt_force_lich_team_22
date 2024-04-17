@@ -42,11 +42,6 @@ func _physics_process(delta : float) -> void:
 		else:
 			velocity.y = max_fall_speed
 
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
-
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump()
