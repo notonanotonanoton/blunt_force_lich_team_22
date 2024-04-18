@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbb1d8qrv2mol"]
+[gd_scene load_steps=9 format=3 uid="uid://dbb1d8qrv2mol"]
 
 [ext_resource type="Texture2D" uid="uid://plhm8snkt7kh" path="res://enemy/slime/slime.png" id="1_4mymv"]
 [ext_resource type="Script" path="res://enemy/slime/Slime.gd" id="1_ak0gr"]
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ggbrp"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeIdle.gd" id="3_oekhu"]
-[ext_resource type="Script" path="res://states/enemy/slime/SlimeJump.gd" id="4_oxv7e"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HurtBoxComponent.tscn" id="6_yud86"]
 
@@ -35,9 +34,6 @@ script = ExtResource("3_oekhu")
 
 [node name="Timer" type="Timer" parent="StateMachine/SlimeIdle"]
 wait_time = 2.0
-
-[node name="SlimeJump" type="Node" parent="StateMachine"]
-script = ExtResource("4_oxv7e")
 
 [node name="SlimeAgro" type="Node" parent="StateMachine"]
 script = ExtResource("5_yc75d")

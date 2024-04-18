@@ -25,7 +25,7 @@ func update(_delta: float) -> void:
 	if (!slime.is_on_floor()):
 		slime.velocity.y += slime.gravity*_delta
 	
-	if (direction < -50 or direction > 50):
+	if (direction < -80 or direction > 80):
 		slime.velocity.x = 0
 		state_transition.emit(self,"SlimeIdle")
 		
