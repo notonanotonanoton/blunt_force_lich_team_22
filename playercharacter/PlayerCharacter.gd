@@ -13,6 +13,10 @@ var jump_velocity : float = -jump_value
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export var push_force: float = 150.0
 
+@export var timer : Timer
+@export var coyote_time : float = 0.1
+var jump_is_available : bool = true
+
 var player_died : bool = false;
 
 signal death
@@ -22,6 +26,10 @@ var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_grav
 var fast_fall_gravity : int = default_gravity * 1.5
 var looking_direction : float
 var picked_up_box : CharacterBody2D
+
+func _ready():
+	timer.one_shot = true
+	timer.wait_time = coyote_time
 
 func jump() -> void:
 	velocity.y = jump_velocity
@@ -42,8 +50,15 @@ func _physics_process(delta : float) -> void:
 		else:
 			velocity.y = max_fall_speed
 
+	if not is_on_floor():
+		if jump_is_available:
+			if timer.is_stopped():
+				timer.start()
+	else:
+		jump_is_available = true
+	
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and jump_is_available:
 		jump()
 		
 	if Input.is_action_just_released("ui_accept"):
@@ -86,3 +101,7 @@ func _on_health_death_signal():
 	
 	#signal the death screen to becomme visible
 	emit_signal("death");
+
+
+func _on_coyote_timer_timeout():
+	jump_is_available = false;
