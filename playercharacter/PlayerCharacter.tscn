@@ -80,10 +80,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(13, 22)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("timer")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "velocity_timer")]
 z_index = 1
 script = ExtResource("1_iplij")
-timer = NodePath("CoyoteTimer")
+coyote_timer = NodePath("CoyoteTimer")
+velocity_timer = NodePath("velocityFreezeTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -139,6 +140,8 @@ shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 
+[node name="velocityFreezeTimer" type="Timer" parent="."]
+
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="request_box" from="StateMachine/PlayerCarryingBox" to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
@@ -147,3 +150,4 @@ shape = SubResource("RectangleShape2D_dl0fu")
 [connection signal="send_box_status" from="Area2D" to="StateMachine/PlayerCarryingBox" method="_on_area_2d_send_box_status"]
 [connection signal="death_signal" from="Health" to="." method="_on_health_death_signal"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="velocityFreezeTimer" to="." method="_on_velocity_freeze_timer_timeout"]

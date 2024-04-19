@@ -13,9 +13,15 @@ var jump_velocity : float = -jump_value
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export var push_force: float = 150.0
 
-@export var timer : Timer
+@export var coyote_timer : Timer
 @export var coyote_time : float = 0.1
+
+@export var velocity_timer : Timer
+@export var velocity_time : float = 0.05
+
+var player_jumped : bool = false;
 var jump_is_available : bool = true
+
 
 var player_died : bool = false;
 
@@ -28,8 +34,11 @@ var looking_direction : float
 var picked_up_box : CharacterBody2D
 
 func _ready():
-	timer.one_shot = true
-	timer.wait_time = coyote_time
+	coyote_timer.one_shot = true
+	coyote_timer.wait_time = coyote_time
+	
+	velocity_timer.one_shot = true
+	velocity_timer.wait_time = velocity_time
 
 func jump() -> void:
 	velocity.y = jump_velocity
@@ -49,17 +58,22 @@ func _physics_process(delta : float) -> void:
 		# Ensure fall speed past max_fall_speed is consistent
 		else:
 			velocity.y = max_fall_speed
-
+	if not player_jumped and not velocity_timer.is_stopped():
+		velocity.y = 0
+		
 	if not is_on_floor():
 		if jump_is_available:
-			if timer.is_stopped():
-				timer.start()
+			if coyote_timer.is_stopped():
+				velocity_timer.start()
+				coyote_timer.start()
 	else:
 		jump_is_available = true
+		player_jumped = false;
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and jump_is_available:
+	if Input.is_action_just_pressed("ui_accept") and jump_is_available and not player_jumped:
 		jump()
+		player_jumped = true
 		
 	if Input.is_action_just_released("ui_accept"):
 		jump_cut()
@@ -105,3 +119,7 @@ func _on_health_death_signal():
 
 func _on_coyote_timer_timeout():
 	jump_is_available = false;
+
+func _on_velocity_freeze_timer_timeout():
+	player_jumped = false;
+	pass # Replace with function body.
