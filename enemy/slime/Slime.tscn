@@ -38,6 +38,9 @@ wait_time = 2.0
 [node name="SlimeAgro" type="Node" parent="StateMachine"]
 script = ExtResource("5_yc75d")
 
+[node name="Timer" type="Timer" parent="StateMachine/SlimeAgro"]
+one_shot = true
+
 [node name="HitBoxComponent" parent="." instance=ExtResource("6_yud86")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
@@ -45,3 +48,4 @@ position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_ili36")
 
 [connection signal="timeout" from="StateMachine/SlimeIdle/Timer" to="StateMachine/SlimeIdle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/SlimeAgro/Timer" to="StateMachine/SlimeAgro" method="_on_timer_timeout"]

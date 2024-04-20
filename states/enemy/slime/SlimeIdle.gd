@@ -8,11 +8,11 @@ var Player: CharacterBody2D
 var Jump_Direction_Vertical : int
 var Jump_Direction_Horizontal : float
 var jump_time : float
-var just_jumped : bool
 var agro : bool
 var moving_time : bool
 var just_once : bool
 var wall : bool
+var slime_speed_realisify : float
 
 
 func random():
@@ -26,14 +26,14 @@ func random():
 func enter():
 	moving_time = true
 	agro = false
-	just_jumped = false
+	slime.just_jumped = false
 	random()
 	timer.start(3)
 	Player = get_tree().get_first_node_in_group("Player")
 	jump_time = randf_range(1,4)
 
 func exit():
-	pass
+	agro = true
 
 func update(_delta: float):
 	if(slime.is_on_ceiling()):
@@ -51,25 +51,35 @@ func update(_delta: float):
 	if(!slime.is_on_floor() or !slime.is_on_ceiling()):
 		slime.velocity.y += slime.gravity*_delta*Jump_Direction_Vertical
 	
-		if((slime.is_on_floor() or slime.is_on_ceiling())and just_jumped):
+		if((slime.is_on_floor() or slime.is_on_ceiling())and slime.just_jumped):
 			slime.velocity.x = 0
-			just_jumped = false
+			slime.just_jumped = false
 			moving_time = true
 	
 	#Is the trigger for aggro on player
 	if (direction < 20 and slime.is_on_ceiling()):
 		state_transition.emit(self,"SlimeAgro")
-		agro = true
+
 	elif (direction < 80 and !slime.is_on_ceiling()):
 		state_transition.emit(self,"SlimeAgro")
-		agro = true
 	
 	#Responsible for movment of the slime
 	if(moving_time):
 		if(just_once):
 			timer.start(4)
 			just_once = false
-		slime.velocity.x = slime.speed*Jump_Direction_Horizontal
+			slime_speed_realisify = 1.25
+		
+		if(timer.time_left > 3):
+			slime_speed_realisify = 1
+		elif (timer.time_left > 2):
+			slime_speed_realisify = 0.75
+		elif (timer.time_left > 1):
+			slime_speed_realisify = 0.5
+		else :
+			slime_speed_realisify = 0
+		
+		slime.velocity.x = slime.speed*Jump_Direction_Horizontal*slime_speed_realisify
 		if(slime.is_on_wall()):
 			if(!wall):
 				Jump_Direction_Horizontal *= -1
@@ -87,7 +97,7 @@ func update(_delta: float):
 	
 	#Is the trigger for jump
 func _on_timer_timeout():
-	if(!agro and !just_jumped and !moving_time):
+	if(!agro and !slime.just_jumped and !moving_time):
 		moving_time = false
 		just_once = true
 		slime.velocity.x = 0
@@ -95,12 +105,12 @@ func _on_timer_timeout():
 			var temp : int = randi_range(20,40)
 			slime.velocity.y = -temp * Jump_Direction_Vertical*slime.speed
 			slime.velocity.x = slime.speed*Jump_Direction_Horizontal*temp
-			just_jumped = true
+			slime.just_jumped = true
 			timer.start(jump_time)
 		else:
 			slime.velocity.y = -randi_range(500,600) * Jump_Direction_Vertical
 			timer.start(jump_time)
-			just_jumped = true
+			slime.just_jumped = true
 	elif (moving_time):
 		moving_time = false
 		just_once = true
