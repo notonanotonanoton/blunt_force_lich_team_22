@@ -82,6 +82,7 @@ size = Vector2(13, 22)
 
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("timer")]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_iplij")
 timer = NodePath("CoyoteTimer")
 
@@ -129,6 +130,8 @@ texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_4pe4k")]
+collision_layer = 2
+collision_mask = 4
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]

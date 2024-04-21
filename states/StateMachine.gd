@@ -1,6 +1,6 @@
 extends Node
 class_name StateMachine
-@export var inital_state : State
+@export var inital_state : Node
 
 var current_state : State
 var states : Dictionary = {}
@@ -15,11 +15,11 @@ func _ready() -> void:
 		inital_state.enter()
 		current_state = inital_state
 		
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	if current_state:
 		current_state.update(delta)
 	
-func state_physics_process(delta) -> void:
+func _physics_process(delta : float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 		

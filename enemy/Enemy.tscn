@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://bvdm34jbnkrr4"]
+
+[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_8my67"]
+[ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_jeryg"]
+[ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ba1bg"]
+[ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="4_yeqss"]
+[ext_resource type="Script" path="res://states/enemy/EnemyIdle.gd" id="5_tmifh"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="7_8em8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhswi"]
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
+size = Vector2(20, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ili36"]
+size = Vector2(20, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycj8t"]
+radius = 50.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector")]
+collision_layer = 4
+script = ExtResource("1_8my67")
+aggro_radius = NodePath("AggroRadius/CollisionShape2D")
+direction_flip = NodePath("DirectionFlip")
+sprite = NodePath("DirectionFlip/Sprite2D")
+ground_detector = NodePath("DirectionFlip/GroundDetector")
+low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
+jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+
+[node name="DirectionFlip" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="DirectionFlip"]
+texture = ExtResource("2_jeryg")
+
+[node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_lhswi")
+
+[node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
+position = Vector2(16, 48)
+shape = SubResource("RectangleShape2D_lhswi")
+
+[node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
+position = Vector2(16, -20)
+shape = SubResource("RectangleShape2D_f880n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_fsb11")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("3_ba1bg")
+inital_state = NodePath("EnemyIdle")
+
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer")]
+script = ExtResource("4_yeqss")
+enemy = NodePath("../..")
+attack_timer = NodePath("AttackTimer")
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
+process_callback = 0
+one_shot = true
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "timer", "timer_move")]
+script = ExtResource("5_tmifh")
+enemy = NodePath("../..")
+timer = NodePath("IdleTimer")
+timer_move = NodePath("IdleTimerMove")
+move_duration = null
+idle_duration = null
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/EnemyIdle"]
+process_callback = 0
+one_shot = true
+
+[node name="IdleTimerMove" type="Timer" parent="StateMachine/EnemyIdle"]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("7_8em8b")]
+position = Vector2(0, 10)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_ili36")
+
+[node name="AggroRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_ycj8t")
+
+[connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
+[connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
+[connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]
