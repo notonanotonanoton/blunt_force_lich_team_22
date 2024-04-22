@@ -33,10 +33,10 @@ func picked_up_by(sender : CharacterBody2D) -> void:
 		disable_collision()
 
 func thrown_by(sender : CharacterBody2D, charge_time : float) -> void:
-	var charge_factor : float = 1 + charge_time
-	
 	if (charge_time > 1):
 		charge_time = 1
+	
+	var charge_factor : float = 1 + charge_time
 	
 	if held:
 		held = false
