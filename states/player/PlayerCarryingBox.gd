@@ -30,6 +30,3 @@ func _on_area_2d_send_box_status(arg : ) -> void:
 	for body in arg:
 		if body.name == "pick_up_box":
 			picked_up_box = body
-
-func _on_timer_timeout():
-	pass # Replace with function body.
