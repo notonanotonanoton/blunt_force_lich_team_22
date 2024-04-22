@@ -43,6 +43,13 @@ project/assembly_name="Blunt_Force_Lich"
 
 import/blender/enabled=false
 
+[layer_names]
+
+2d_physics/layer_1="GroundLayer"
+2d_physics/layer_2="PlayerLayer"
+2d_physics/layer_3="EnemyLayer"
+2d_physics/layer_4="BoxLayer"
+
 [physics]
 
 2d/run_on_separate_thread=true

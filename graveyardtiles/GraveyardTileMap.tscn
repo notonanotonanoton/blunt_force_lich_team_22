@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1o2ymh2bg2j2"]
 
-[ext_resource type="Texture2D" uid="uid://blg6offqwcpmb" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
-[ext_resource type="Texture2D" uid="uid://c0n4lv08iefcf" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
+[ext_resource type="Texture2D" uid="uid://dufq8klflgv2i" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
+[ext_resource type="Texture2D" uid="uid://cg1qc0v7sqfei" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn16e"]
 texture = ExtResource("2_s8b55")
@@ -140,11 +140,10 @@ texture_region_size = Vector2i(32, 32)
 3:2/0 = 0
 3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:2/0/physics_layer_0/angular_velocity = 0.0
-4:1/size_in_atlas = Vector2i(1, 2)
-4:1/0 = 0
-4:1/0/texture_origin = Vector2i(0, 16)
-4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/size_in_atlas = Vector2i(2, 1)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_cw68q"]
 tile_size = Vector2i(32, 32)

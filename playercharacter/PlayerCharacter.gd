@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name playercharacter
+class_name PlayerCharacter
 
 #TODO has to be changed later to accomodate animations
 @onready var sprite_2d : Sprite2D = $Sprite2D
@@ -13,6 +13,16 @@ var jump_velocity : float = -jump_value
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export var push_force: float = 150.0
 
+@export var coyote_timer : Timer
+@export var coyote_time : float = 0.1
+
+@export var velocity_timer : Timer
+@export var velocity_time : float = 0.05
+
+var player_jumped : bool = false;
+var jump_is_available : bool = true
+
+
 var player_died : bool = false;
 
 signal death
@@ -22,6 +32,13 @@ var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_grav
 var fast_fall_gravity : int = default_gravity * 1.5
 var looking_direction : float
 var picked_up_box : CharacterBody2D
+
+func _ready():
+	coyote_timer.one_shot = true
+	coyote_timer.wait_time = coyote_time
+	
+	velocity_timer.one_shot = true
+	velocity_timer.wait_time = velocity_time
 
 func jump() -> void:
 	velocity.y = jump_velocity
@@ -41,15 +58,22 @@ func _physics_process(delta : float) -> void:
 		# Ensure fall speed past max_fall_speed is consistent
 		else:
 			velocity.y = max_fall_speed
-
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
-
+	if not player_jumped and not velocity_timer.is_stopped():
+		velocity.y = 0
+		
+	if not is_on_floor():
+		if jump_is_available:
+			if coyote_timer.is_stopped():
+				velocity_timer.start()
+				coyote_timer.start()
+	else:
+		jump_is_available = true
+		player_jumped = false;
+	
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and jump_is_available and not player_jumped:
 		jump()
+		player_jumped = true
 		
 	if Input.is_action_just_released("ui_accept"):
 		jump_cut()
@@ -91,3 +115,11 @@ func _on_health_death_signal():
 	
 	#signal the death screen to becomme visible
 	emit_signal("death");
+
+
+func _on_coyote_timer_timeout():
+	jump_is_available = false;
+
+func _on_velocity_freeze_timer_timeout():
+	player_jumped = false;
+	pass # Replace with function body.

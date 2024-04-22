@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://ohror34x8e6b" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Texture2D" uid="uid://cpxhjvkw011tl" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Script" path="res://playercharacter/BoxDetector.gd" id="3_djr33"]
 [ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
@@ -80,9 +80,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(13, 22)
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "velocity_timer")]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_iplij")
+coyote_timer = NodePath("CoyoteTimer")
+velocity_timer = NodePath("velocityFreezeTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -128,6 +131,8 @@ texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_4pe4k")]
+collision_layer = 2
+collision_mask = 4
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -136,6 +141,10 @@ shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="Health" parent="." instance=ExtResource("9_x7wds")]
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="velocityFreezeTimer" type="Timer" parent="."]
+
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="request_box" from="StateMachine/PlayerCarryingBox" to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
@@ -143,3 +152,5 @@ shape = SubResource("RectangleShape2D_dl0fu")
 [connection signal="send_box_status" from="Area2D" to="StateMachine/PlayerOnGround" method="_on_area_2d_send_box_status"]
 [connection signal="send_box_status" from="Area2D" to="StateMachine/PlayerCarryingBox" method="_on_area_2d_send_box_status"]
 [connection signal="death_signal" from="Health" to="." method="_on_health_death_signal"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="velocityFreezeTimer" to="." method="_on_velocity_freeze_timer_timeout"]
