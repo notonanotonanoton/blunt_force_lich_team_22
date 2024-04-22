@@ -32,17 +32,21 @@ func picked_up_by(sender : CharacterBody2D) -> void:
 		held = true
 		disable_collision()
 
-func thrown_by(sender : CharacterBody2D) -> void:
+func thrown_by(sender : CharacterBody2D, charge_time : float) -> void:
+	if (charge_time > 1):
+		charge_time = 1
+	
+	var charge_factor : float = 1 + charge_time
+	
 	if held:
-		print("throw box")
 		held = false
 		enable_collision()
 		first_sender = null
 		set_deferred("freeze", false)
 		if sender.looking_direction == 1:
-			velocity = Vector2(250, -150)
+			velocity = Vector2(200, -50) * charge_factor
 		else:
-			velocity = Vector2(-250, -150)
+			velocity = Vector2(-200, -50) * charge_factor
 	
 func disable_collision()-> void:
 	collision_shape.set_deferred("disabled", true)

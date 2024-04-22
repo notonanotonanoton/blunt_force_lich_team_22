@@ -11,7 +11,6 @@ func exit() -> void:
 	pass
 
 func update(_delta: float) -> void:
-	#print("in playerongroudn state")
 	if (!player_character.is_on_floor()):
 		state_transition.emit(self, "playerinair")
 	
