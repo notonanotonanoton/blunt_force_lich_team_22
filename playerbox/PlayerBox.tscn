@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cupv7wvlaedxn"]
+[gd_scene load_steps=6 format=3 uid="uid://cupv7wvlaedxn"]
 
 [ext_resource type="Texture2D" uid="uid://dfg63drc2dpj5" path="res://playerbox/character_phylactery.png" id="1_ifsfx"]
 [ext_resource type="Script" path="res://playerbox/PlayerBox.gd" id="1_w7fsv"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="3_bl2yy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gahia"]
 size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
 
 [node name="pick_up_box" type="CharacterBody2D"]
 collision_layer = 8
@@ -16,3 +19,9 @@ texture = ExtResource("1_ifsfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gahia")
+
+[node name="HurtBoxComponent" parent="." instance=ExtResource("3_bl2yy")]
+damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("RectangleShape2D_b7i6a")

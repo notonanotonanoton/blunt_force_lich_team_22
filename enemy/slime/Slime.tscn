@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbb1d8qrv2mol"]
+[gd_scene load_steps=13 format=3 uid="uid://dbb1d8qrv2mol"]
 
 [ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="1_4mymv"]
 [ext_resource type="Script" path="res://enemy/slime/Slime.gd" id="1_ak0gr"]
@@ -7,12 +7,17 @@
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeJump.gd" id="4_oxv7e"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="6_yud86"]
+[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="8_rdxff"]
+[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_tm377"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(22, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ili36"]
 size = Vector2(22, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnud1"]
+size = Vector2(65, 20)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_ak0gr")
@@ -40,5 +45,14 @@ script = ExtResource("5_yc75d")
 [node name="HitBoxComponent" parent="." instance=ExtResource("6_yud86")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 6)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_ili36")
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_rdxff")]
+
+[node name="HitBoxComponent2" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_tm377")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent2"]
+position = Vector2(2.5, 6)
+shape = SubResource("RectangleShape2D_jnud1")
