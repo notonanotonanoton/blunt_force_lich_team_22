@@ -17,11 +17,11 @@ func _ready() -> void:
 	attack_timer.wait_time = attack_speed
 
 func enter() -> void:
-	print("Entered enemy aggro")
+	#print("Entered enemy aggro")
 	enemy.aggro_radius.shape.radius += aggro_range_increase
 
 func exit() -> void:
-	print("Exited enemy aggro")
+	#print("Exited enemy aggro")
 	enemy.target_player = null
 	distance_to_player = 0.0
 	enemy.aggro_radius.shape.radius -= aggro_range_increase

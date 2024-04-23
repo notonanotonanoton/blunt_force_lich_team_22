@@ -8,6 +8,7 @@
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
+size = Vector2(14, 14)
 
 [node name="pick_up_box" type="CharacterBody2D"]
 collision_layer = 8
@@ -21,7 +22,8 @@ texture = ExtResource("1_ifsfx")
 shape = SubResource("RectangleShape2D_gahia")
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("3_bl2yy")]
-damage = 5
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 shape = SubResource("RectangleShape2D_b7i6a")

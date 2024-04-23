@@ -13,12 +13,13 @@ func _ready() -> void:
 	timer.wait_time = idle_duration
 
 func enter() -> void:
-	print("Entered enemy idle")
+	#print("Entered enemy idle")
 	timer.start()
 
 func exit() -> void:
-	print("Exited enemy idle")
+	#print("Exited enemy idle")
 	timer.stop()
+	timer_move.stop()
 
 func update(delta : float) -> void:
 	pass
@@ -34,12 +35,12 @@ func _on_aggro_radius_body_entered(body : PlayerCharacter):
 	state_transition.emit(self, "EnemyAggro")
 
 func _on_idle_timer_timeout():
-	print("idle timeout")
+	#print("idle timeout")
 	#throws away results of 0 in setter func
 	enemy.move_direction = randi_range(-1, 1)
 	timer_move.start()
 
 func _on_idle_timer_move_timeout():
-	print("idle move timeout")
+	#print("idle move timeout")
 	#randomizes wait time before move
 	timer.start(randi_range(idle_duration-1, idle_duration+1))

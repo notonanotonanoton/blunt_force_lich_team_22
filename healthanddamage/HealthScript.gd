@@ -63,8 +63,8 @@ func take_damage(damage, enemy_position : Vector2) -> void:
 			emit_signal("death_signal")
 			#todo: come back to this and check if we can use below code
 			#
-			if get_parent() is Slime:
-				get_parent().queue_free()
+
+			get_parent().queue_free()
 	
 func _on_timer_timeout() -> void:
 	get_parent().acceleration = max_parent_acceleration
