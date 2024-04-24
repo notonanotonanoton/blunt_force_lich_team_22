@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbn56ue5raca5"]
+[gd_scene load_steps=7 format=3 uid="uid://dbn56ue5raca5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_ymwx5"]
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="2_hpaix"]
-[ext_resource type="PackedScene" uid="uid://dbb1d8qrv2mol" path="res://enemy/slime/Slime.tscn" id="3_k1yn0"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://playerbox/PlayerBox.tscn" id="4_ak2be"]
 [ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="5_7nwqq"]
 [ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="6_jaqc5"]
@@ -24,14 +23,6 @@ layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array(131064, 3, 0, 131065, 3, 0, 262142, 3, 0, 131076, 3, 0, 327675, 65539, 0, 131066, 65539, 0, 196609, 65539, 0, 196608, 131075, 0, 196611, 196611, 0, 65544, 3, 0, 65545, 65539, 0, 65547, 65539, 0, 196622, 3, 0, 131087, 65539, 0, 65554, 65539, 0, 196625, 131075, 0, 196620, 196611, 0, 196628, 196611, 0, 196630, 3, 0, 131095, 3, 0, 196632, 65539, 0, 458743, 196611, 1, 458745, 262147, 0, 262140, 3, 0)
 layer_4/name = "DecorationsBackground"
 layer_4/y_sort_origin = -10
-
-[node name="Slime" parent="." instance=ExtResource("3_k1yn0")]
-position = Vector2(235, 48)
-collision_layer = 4
-
-[node name="Slime2" parent="." instance=ExtResource("3_k1yn0")]
-position = Vector2(364, 48)
-collision_layer = 4
 
 [node name="HUDCanvas" parent="." instance=ExtResource("5_7nwqq")]
 
