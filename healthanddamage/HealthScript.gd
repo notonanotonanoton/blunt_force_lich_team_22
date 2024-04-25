@@ -2,7 +2,7 @@ extends Node
 class_name HealthComponent
 
 @export var health : int = 3
-@export var knockback_stun : float = 0.3
+@export var knockback_stun : float = 0.4
 
 # big characters should have a smaller modifier
 @export var knockback_modifier : int = 200
@@ -39,10 +39,6 @@ func get_max_health() -> int:
 	return max_health
 
 func take_damage(damage : int, enemy_position : Vector2) -> void:
-	
-	for child in get_parent().get_children():
-		if child.is_class("state_machine"):
-			child.change_state(child.current_state, "PlayerTakingDamage")
 	
 	if timer.is_stopped() == true:
 		health -= damage

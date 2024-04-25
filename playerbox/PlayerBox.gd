@@ -6,11 +6,11 @@ var collision_shape : CollisionShape2D
 @export_range(0, 1, 0.1) var friction : float = 0.5
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	collision_shape = get_node("CollisionShape2D") as CollisionShape2D
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(delta : float) -> void:
 	move_and_slide()
 	#print(held)
@@ -39,10 +39,14 @@ func thrown_by(sender : CharacterBody2D, charge_time : float) -> void:
 	var charge_factor : float = 1 + charge_time
 	
 	if held:
+		#reactivates physics and allows the box to be picked up again
 		held = false
 		enable_collision()
 		first_sender = null
 		set_deferred("freeze", false)
+		
+		
+		#decides where the box will be thrown
 		if sender.looking_direction == 1:
 			velocity = Vector2(200, -50) * charge_factor
 		else:

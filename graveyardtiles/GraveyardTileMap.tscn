@@ -1,7 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1o2ymh2bg2j2"]
+[gd_scene load_steps=9 format=3 uid="uid://c1o2ymh2bg2j2"]
 
+[ext_resource type="Texture2D" uid="uid://d1cr20fqut5e8" path="res://asepritefiles/player_and_enemy_spawn_icons.png" id="1_hmuug"]
 [ext_resource type="Texture2D" uid="uid://dufq8klflgv2i" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
 [ext_resource type="Texture2D" uid="uid://cg1qc0v7sqfei" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
+[ext_resource type="Script" path="res://graveyardtiles/SpawnScript.gd" id="4_spift"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ew0"]
+texture = ExtResource("1_hmuug")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/next_alternative_id = 2
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/next_alternative_id = 2
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn16e"]
 texture = ExtResource("2_s8b55")
@@ -150,6 +168,7 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_nn16e")
 sources/3 = SubResource("TileSetAtlasSource_08sqm")
+sources/0 = SubResource("TileSetAtlasSource_g1ew0")
 
 [node name="DefaultTileMap" type="TileMap"]
 tile_set = SubResource("TileSet_cw68q")
@@ -173,3 +192,4 @@ layer_4/y_sort_origin = 10
 layer_4/z_index = 1
 layer_4/navigation_enabled = false
 layer_4/tile_data = PackedInt32Array()
+script = ExtResource("4_spift")

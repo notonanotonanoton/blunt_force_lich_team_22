@@ -4,7 +4,8 @@ class_name hit_box_component
 @export var damage : int = 1
 var unbuffed_damage : int
 
-# Called when the node enters the scene tree for the first time.
+#this is the area that the parent can damage enemies in
+
 func _ready() -> void:
 	unbuffed_damage = damage;
 
