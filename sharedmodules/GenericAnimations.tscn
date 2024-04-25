@@ -2,10 +2,5 @@
 
 [ext_resource type="Script" path="res://sharedmodules/GenericAnimations.gd" id="1_k0py3"]
 
-[node name="GenericAnimations" type="Node2D" node_paths=PackedStringArray("frame_duration_timer")]
+[node name="GenericAnimations" type="Node2D"]
 script = ExtResource("1_k0py3")
-frame_duration_timer = NodePath("FrameDurationTimer")
-
-[node name="FrameDurationTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true

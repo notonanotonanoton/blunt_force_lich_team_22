@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name PlayerCharacter
 
 #TODO has to be changed later to accomodate animations
-@onready var sprite_2d : Sprite2D = $Sprite2D
+@onready var player_sprites : Node2D = $PlayerSprites
 @onready var animation_player = $AnimationPlayer
 
 @export_range(0, 400, 5) var speed : float = 165.0 #165
@@ -83,9 +83,9 @@ func _physics_process(delta : float) -> void:
 	var direction : int = Input.get_axis("ui_left", "ui_right")
 
 	if direction > 0:
-		sprite_2d.flip_h = false;
+		player_sprites.scale.x = direction;
 	elif direction < 0:
-		sprite_2d.flip_h = true;
+		player_sprites.scale.x = direction;
 
 	if direction != 0:
 		looking_direction = direction

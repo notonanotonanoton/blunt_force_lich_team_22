@@ -22,7 +22,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("PlayerSprites/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("PlayerSprites/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +50,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("PlayerSprites/Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +62,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("PlayerSprites/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -126,11 +126,6 @@ libraries = {
 "": SubResource("AnimationLibrary_iygft")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 16)
-texture = ExtResource("1_x272j")
-offset = Vector2(0, -16)
-
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_4pe4k")]
 collision_layer = 2
 collision_mask = 4
@@ -147,7 +142,14 @@ shape = SubResource("RectangleShape2D_dl0fu")
 [node name="velocityFreezeTimer" type="Timer" parent="."]
 
 [node name="GenericAnimations" parent="." node_paths=PackedStringArray("parent_sprite") instance=ExtResource("10_2l7ge")]
-parent_sprite = NodePath("../Sprite2D")
+parent_sprite = NodePath("../PlayerSprites/Sprite2D")
+
+[node name="PlayerSprites" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerSprites"]
+position = Vector2(0, 16)
+texture = ExtResource("1_x272j")
+offset = Vector2(0, -16)
 
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="Area2D" method="_on_player_character_request_box_status"]
 [connection signal="request_box" from="StateMachine/PlayerCarryingBox" to="Area2D" method="_on_player_character_request_box_status"]
