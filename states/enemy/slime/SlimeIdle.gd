@@ -17,7 +17,7 @@ var slime_speed_realisify : float
 
 
 func random():
-	if(randf_range(-1,1)> 0):
+	if(randi_range(-1,1)> 0):
 		Jump_Direction_Horizontal = 1
 		if(slime.is_on_ceiling()):
 			animation.play("Look_Left")
@@ -29,7 +29,7 @@ func random():
 			animation.play("Look_Right")
 		elif(slime.is_on_floor()):
 			animation.play("Look_Left")
-	jump_time = randf_range(1,4)
+	jump_time = randi_range(1,4)
 
 
 func enter():
@@ -40,7 +40,7 @@ func enter():
 	slime.just_jumped = false
 	timer.start(3)
 	Player = get_tree().get_first_node_in_group("Player")
-	jump_time = randf_range(1,4)
+	jump_time = randi_range(1,4)
 
 func exit():
 	agro = true
@@ -57,11 +57,10 @@ func update(_delta: float):
 
 	
 	#Checks Player
-	if (Player.position.x > slime.position.x):
+	if (Player != null and Player.position.x > slime.position.x):
 		direction = Player.position.x - slime.position.x
-	else:
+	elif(Player != null):
 		direction = slime.position.x - Player.position.x
-	
 	#Basic gravity
 	if(!slime.is_on_floor() or !slime.is_on_ceiling()):
 		slime.velocity.y += slime.gravity*_delta*Jump_Direction_Vertical

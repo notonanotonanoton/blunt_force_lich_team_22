@@ -85,8 +85,16 @@ size = Vector2(13, 22)
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_iplij")
+speed = null
+acceleration = null
+jump_value = null
+friction = null
+max_fall_speed = null
+push_force = null
 coyote_timer = NodePath("CoyoteTimer")
+coyote_time = null
 velocity_timer = NodePath("velocityFreezeTimer")
+velocity_time = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -96,9 +104,8 @@ one_way_collision = true
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -25)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_d0byc")
-inital_state = NodePath("PlayerInAir")
 
 [node name="PlayerInAir" type="Node" parent="StateMachine"]
 script = ExtResource("4_5vqem")

@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeIdle.gd" id="3_oekhu"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="6_yud86"]
-[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="8_rdxff"]
-[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_tm377"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(22, 14)
@@ -187,7 +185,7 @@ _data = {
 }
 
 [node name="Slime" type="CharacterBody2D"]
-collision_layer = 257
+collision_layer = 258
 collision_mask = 257
 script = ExtResource("1_ak0gr")
 
