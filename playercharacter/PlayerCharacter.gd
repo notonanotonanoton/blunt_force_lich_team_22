@@ -26,7 +26,7 @@ var jump_is_available : bool = true
 var player_died : bool = false;
 
 signal death
-signal walking
+signal step_taken
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -83,26 +83,18 @@ func _physics_process(delta : float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : int = Input.get_axis("ui_left", "ui_right")
 
-	if direction > 0:
-		player_sprites.scale.x = direction;
-	elif direction < 0:
-		player_sprites.scale.x = direction;
-
-	if direction != 0:
+	if (direction > 0 or direction < 0):
+		player_sprites.scale.x = direction
 		looking_direction = direction
+		if (is_on_floor):
+			emit_signal("step_taken")
 
 	# Check to make sure player doesn't slide more when running opposite way
 	# There may be a better solution
 	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
 		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
-		if is_on_floor():
-			animation_player.play("walk")
-		else:
-			#animation_player.play("RESET")
-			pass
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
-		#animation_player.play("RESET")
 	move_and_slide()
 	
 

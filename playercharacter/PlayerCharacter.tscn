@@ -85,16 +85,8 @@ size = Vector2(13, 22)
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_iplij")
-speed = null
-acceleration = null
-jump_value = null
-friction = null
-max_fall_speed = null
-push_force = null
 coyote_timer = NodePath("CoyoteTimer")
-coyote_time = null
 velocity_timer = NodePath("velocityFreezeTimer")
-velocity_time = null
 
 [node name="PlayerSprites" type="Node2D" parent="."]
 
@@ -108,8 +100,10 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_6uw8h")
 one_way_collision = true
 
-[node name="GenericAnimations" parent="." node_paths=PackedStringArray("parent_sprite") instance=ExtResource("10_2l7ge")]
-parent_sprite = NodePath("../PlayerSprites/Sprite2D")
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("parent_sprite", "health_node", "character") instance=ExtResource("10_2l7ge")]
+parent_sprite = NodePath("../PlayerSprites")
+health_node = NodePath("../Health")
+character = NodePath("..")
 
 [node name="Health" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("9_x7wds")]
 generic_animations = NodePath("../GenericAnimations")

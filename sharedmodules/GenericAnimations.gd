@@ -4,10 +4,12 @@ class_name GenericAnimations
 
 @export_category("Nodes")
 @export var parent_sprite : Node2D
+@export var health_node : HealthComponent
+@export var character : CharacterBody2D
 
 @export_category("Values")
-@export_range(0, 10, 1) var walk_rotation_degree : int = 5
-@export_range(0, 10, 1) var walk_step_height : int = 5
+@export_range(0, 10, 1) var walk_rotation_degree : int = 10
+@export_range(-10, 0, 1) var walk_step_height : int = -3
 
 var damage_tween_flash : Tween
 var damage_tween_shake : Tween
@@ -16,35 +18,39 @@ var walk_step : Tween
 var walk_rotation : Tween
 
 func _ready() -> void:
-	pass
+	health_node.damage_taken.connect(_on_damage_taken)
+	character.step_taken.connect(_on_step_taken)
 
 #will have issues if called a second time before finishing,
 #therefore the tweens are saved outside of the function and
-#discarded if called too early.
+#the function is exited if called too early. exiting is 
+#preferred here to ensure the animation ends sooner after
+#movement stops
 func walk_animation() -> void:
 	if (walk_step or walk_rotation):
-		walk_step.kill()
-		walk_rotation.kill()
+		if (walk_step.is_running()):
+			return
+		if (walk_rotation.is_running()):
+			return
 	walk_step = self.create_tween()
 	walk_rotation = self.create_tween()
 	
-	var rotation_offset : int = walk_rotation_degree
-	var degree : int = rotation_offset
+	var height : int = walk_step_height
+	var degree : int = walk_rotation_degree
 	
-	var default_sprite_position : int = parent_sprite.position.y
-	
-	#has to end on an even number or else position.y
+	#has to end on an uneven number or else position.y
 	#will be unsynced after end of animation
-	for frame : int in range(1, 4):
+	for frame : int in range(1, 3):
 		if (frame % 2 == 0):
 			degree = 0
-			walk_step_height
+			height = 0
 		else:
+			height = walk_step_height
+			walk_rotation_degree *= -1
 			degree = walk_rotation_degree
-			degree *= -1
-		walk_rotation.tween_property(parent_sprite, "rotation", walk_rotation, 0.1)
-		walk_rotation.parallel().tween_property(parent_sprite, "position:y", 
-		default_sprite_position + walk_step_height, 0.1)
+		walk_rotation.tween_property(parent_sprite, "rotation_degrees", degree, 0.1)
+		walk_step.tween_property(parent_sprite, "position:y", 
+		height, 0.1)
 	
 
 #will have issues if called a second time before finishing,
@@ -70,7 +76,7 @@ func take_damage_animation() -> void:
 		sprite_offset *= -1
 		damage_tween_shake.tween_property(parent_sprite, "position:x", sprite_offset, shake_duration)
 
-func _on_health_taken_damage() -> void:
+func _on_damage_taken() -> void:
 	take_damage_animation()
 
 func _on_step_taken() -> void:

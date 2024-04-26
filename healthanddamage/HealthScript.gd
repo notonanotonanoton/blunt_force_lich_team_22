@@ -12,7 +12,7 @@ var max_health : int
 var max_parent_acceleration : float
 
 signal death_signal
-signal taken_damage
+signal damage_taken
 
 func _ready() -> void:
 	max_health = health
@@ -24,9 +24,6 @@ func _ready() -> void:
 	timer.wait_time = knockback_stun
 	timer.one_shot = true
 	add_child(timer)
-	
-	#DOES NOT WORK!!
-	self.taken_damage.connect(Callable(generic_animations, "_on_health_taken_damage"))
 
 func set_health(hp : int) -> void:
 	health = hp
@@ -64,7 +61,7 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			emit_signal("death_signal")
 			get_parent().queue_free()
 		else:
-			emit_signal("taken_damage")
+			emit_signal("damage_taken")
 	
 func _on_timer_timeout() -> void:
 	get_parent().acceleration = max_parent_acceleration
