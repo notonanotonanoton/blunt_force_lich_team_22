@@ -10,9 +10,10 @@ size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
 size = Vector2(14, 14)
 
-[node name="pick_up_box" type="CharacterBody2D"]
+[node name="pick_up_box" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer")]
 collision_layer = 8
 script = ExtResource("1_w7fsv")
+arming_timer = NodePath("arming_timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.36442e-07)
@@ -27,3 +28,5 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 shape = SubResource("RectangleShape2D_b7i6a")
+
+[node name="arming_timer" type="Timer" parent="."]

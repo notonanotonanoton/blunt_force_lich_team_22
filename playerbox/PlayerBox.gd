@@ -5,11 +5,27 @@ var first_sender : CharacterBody2D
 var collision_shape : CollisionShape2D
 @export_range(0, 1, 0.1) var friction : float = 0.5
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var arming_timer : Timer
+@export var minimum_arming_time : float = 0.15
 
+#this will only check so that the box is moving at all. 
+#Assuming you want to have a specific minimum traveling air speed then you will need to measure the desired amount and input it.
+#The current general travel-speed is ~~200
+@export var minimum_speed : int = 1
 
 func _ready() -> void:
 	collision_shape = get_node("CollisionShape2D") as CollisionShape2D
+	arming_timer.one_shot = true
+	arming_timer.wait_time = minimum_arming_time
 
+func can_deal_damage() -> bool:
+	#print("check if timer is stopped: ", arming_timer.is_stopped())
+	if arming_timer.is_stopped():
+		#print("checking minimum velocity: ", minimum_speed)
+		#print("checking current velocity: ", velocity.x)
+		if velocity.x>minimum_speed:
+			return true
+	return false
 
 func _physics_process(delta : float) -> void:
 	move_and_slide()
@@ -33,6 +49,9 @@ func picked_up_by(sender : CharacterBody2D) -> void:
 		disable_collision()
 
 func thrown_by(sender : CharacterBody2D, charge_time : float) -> void:
+	
+	arming_timer.start()
+	
 	if (charge_time > 1):
 		charge_time = 1
 	

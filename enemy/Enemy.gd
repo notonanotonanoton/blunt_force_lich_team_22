@@ -31,6 +31,9 @@ var move_direction : int = 1:
 
 var target_player : PlayerCharacter = null
 
+#this function checks if the parent of a hurtbox is allowed to deal damage. It must exist on ALL hurtbox parent instances
+func can_deal_damage() -> bool:
+	return true
 
 #many functions are called in states inside the state machine
 

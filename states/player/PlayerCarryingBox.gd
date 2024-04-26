@@ -5,12 +5,6 @@ var charge_time : float = 0.0
 var charging_throw : bool = false
 signal request_box
 
-func enter() -> void:
-	print("Entered PlayerCarryingBox state")
-	
-func exit() -> void:
-	pass
-
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("throw_box"):
 		if picked_up_box != null:

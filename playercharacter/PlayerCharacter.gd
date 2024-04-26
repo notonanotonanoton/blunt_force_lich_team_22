@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name PlayerCharacter
 
 #TODO has to be changed later to accomodate animations
+#TODO: consider converting to enemy template
+#TODO: assuming previous conditional is true, rename enemy template -> character template
 @onready var player_sprites : Node2D = $PlayerSprites
 @onready var animation_player = $AnimationPlayer
 
@@ -21,8 +23,6 @@ var jump_velocity : float = -jump_value
 
 var player_jumped : bool = false;
 var jump_is_available : bool = true
-
-
 var player_died : bool = false;
 
 signal death
@@ -102,6 +102,15 @@ func _physics_process(delta : float) -> void:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 		animation_player.play("RESET")
 	move_and_slide()
+	
+
+#this function checks if the parent of a hurtbox is allowed to deal damage. It must exist on ALL hurtbox instances
+#it allows for custom conditionals of logic, such as the box having an arming time and velocity
+#while maintaining maximum modularity in the health module in exchange for some boilerplate.
+#for the player, since we currently (26/04/2024) do not have any conditions that the player can't do damage in
+#it is always true
+func can_deal_damage() -> bool:
+	return true
 
 
 func _on_health_death_signal():

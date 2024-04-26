@@ -15,16 +15,14 @@ class_name interactive_tilemap
 #i dont know what data type this is
 @onready var half_cell_size := tile_set.tile_size * 0.5
 
-
-
 var search_layer : int = 0
 
-func _ready():
+func _ready() -> void:
 
 	_replace_tiles_with_scene()
 
 
-func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES):
+func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES) -> void:
 
 
 	#for every atlas coordinate in the dictionary

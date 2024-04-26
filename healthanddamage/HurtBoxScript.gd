@@ -3,7 +3,7 @@ class_name  hurt_box_component
 
 @export var health_component : HealthComponent
 
-#this is the area that the parent can get hurt in
+#this is the area that deals damage
 
 
 func damage(damage : int, enemy_position : Vector2) -> void:
