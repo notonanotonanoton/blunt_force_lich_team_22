@@ -58,8 +58,10 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 		
 		if(health<=0):
 			health = 0
-			emit_signal("death_signal")
-			get_parent().queue_free()
+			if(get_parent() is PlayerCharacter):
+				emit_signal("death_signal")
+			else:
+				get_parent().queue_free()
 		else:
 			emit_signal("damage_taken")
 	

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name player_box 
 
 var held : bool
 var first_sender : CharacterBody2D
@@ -48,7 +49,7 @@ func picked_up_by(sender : CharacterBody2D) -> void:
 		held = true
 		disable_collision()
 
-func thrown_by(sender : CharacterBody2D, charge_time : float) -> void:
+func throw(sender : CharacterBody2D, charge_time : float) -> void:
 	
 	arming_timer.start()
 	
