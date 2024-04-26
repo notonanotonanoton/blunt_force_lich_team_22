@@ -11,7 +11,7 @@ class_name Enemy
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
-@export_range(0, 400, 5) var speed : float = 120.0
+@export_range(0, 400, 5) var speed : float = 100.0
 @export_range(0, 1, 0.1) var acceleration : float = 0.8
 @export_range(-1000, 0, 10) var jump_velocity : float = -320.0
 @export_range(0, 1, 0.1) var friction : float = 0.8
@@ -58,7 +58,7 @@ func jump() -> void:
 	velocity.y = jump_velocity
 
 func move(delta : float) -> void:
-	velocity.x = move_toward(velocity.x, move_direction * speed, speed * acceleration * delta)
+	velocity.x = move_toward(velocity.x, move_direction * speed, (speed * 2) * acceleration * delta)
 	if(is_on_floor()):
 		handle_wall_or_gap()
 		if ((move_direction == 1 and velocity.x < 0) or

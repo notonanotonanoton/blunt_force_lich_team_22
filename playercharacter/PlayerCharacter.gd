@@ -26,6 +26,7 @@ var jump_is_available : bool = true
 var player_died : bool = false;
 
 signal death
+signal walking
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -97,10 +98,11 @@ func _physics_process(delta : float) -> void:
 		if is_on_floor():
 			animation_player.play("walk")
 		else:
-			animation_player.play("RESET")
+			#animation_player.play("RESET")
+			pass
 	else:
 		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
-		animation_player.play("RESET")
+		#animation_player.play("RESET")
 	move_and_slide()
 	
 

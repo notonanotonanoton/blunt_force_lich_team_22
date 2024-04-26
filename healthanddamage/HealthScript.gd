@@ -1,6 +1,7 @@
 extends Node
 class_name HealthComponent
 
+@export var generic_animations : GenericAnimations
 @export var health : int = 3
 @export var knockback_stun : float = 0.4
 
@@ -23,6 +24,9 @@ func _ready() -> void:
 	timer.wait_time = knockback_stun
 	timer.one_shot = true
 	add_child(timer)
+	
+	#DOES NOT WORK!!
+	self.taken_damage.connect(Callable(generic_animations, "_on_health_taken_damage"))
 
 func set_health(hp : int) -> void:
 	health = hp
