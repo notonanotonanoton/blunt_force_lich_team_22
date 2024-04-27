@@ -67,7 +67,10 @@ func throw(sender : CharacterBody2D, charge_time : float) -> void:
 		
 		
 		#decides where the box will be thrown
-		velocity = Vector2((200 * sender.player_sprites.scale.x), -50) * charge_factor
+		if sender.looking_direction == 1:
+			velocity = Vector2(200, -50) * charge_factor
+		else:
+			velocity = Vector2(-200, -50) * charge_factor
 	
 func disable_collision()-> void:
 	collision_shape.set_deferred("disabled", true)

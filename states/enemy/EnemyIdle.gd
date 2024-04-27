@@ -41,7 +41,7 @@ func _on_aggro_radius_body_entered(body : CharacterBody2D):
 func _on_idle_timer_timeout():
 	#print("idle timeout")
 	#throws away results of 0 in setter func
-	enemy.looking_direction = randi_range(-1, 1)
+	enemy.move_direction = randi_range(-1, 1)
 	timer_move.start()
 
 func _on_idle_timer_move_timeout():

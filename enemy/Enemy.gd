@@ -24,18 +24,14 @@ class_name Enemy
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 
-#is -1 for left or 1 for right. starts as right.
-#has to have the same variable name as PlayerCharacter
-var looking_direction : int = 1:
+#is -1 for left or 1 for right. starts as right
+var move_direction : int = 1:
 	set(new_direction):
-		if(new_direction == 1 or new_direction == -1 and looking_direction != new_direction):
-			looking_direction = new_direction
+		if(new_direction == 1 or new_direction == -1 and move_direction != new_direction):
+			move_direction = new_direction
 			direction_flip.scale.x = new_direction
 
 var target_player : PlayerCharacter = null
-
-signal step_taken
-signal jumped
 
 #this function checks if the parent of a hurtbox is allowed to deal damage. It must exist on ALL hurtbox parent instances
 func can_deal_damage() -> bool:
@@ -73,12 +69,11 @@ func highJump() -> void:
 	velocity.y = jump_velocity*2
 
 func move(delta : float) -> void:
-	velocity.x = move_toward(velocity.x, looking_direction * speed, (speed * 2) * acceleration * delta)
+	velocity.x = move_toward(velocity.x, move_direction * speed, (speed * 2) * acceleration * delta)
 	if(is_on_floor()):
-		emit_signal("step_taken")
 		handle_wall_or_gap()
-		if ((looking_direction == 1 and velocity.x < 0) or
-	 (looking_direction == -1 and velocity.x > 0)):
+		if ((move_direction == 1 and velocity.x < 0) or
+	 (move_direction == -1 and velocity.x > 0)):
 			stop_move(delta)
 
 func stop_move(delta : float) -> void:
@@ -87,12 +82,12 @@ func stop_move(delta : float) -> void:
 func handle_wall_or_gap() -> void:
 	if(not ground_detector.has_overlapping_bodies()):
 		if(not low_ground_detector.has_overlapping_bodies()):
-			looking_direction *= -1
+			move_direction *= -1
 	
 	#currently this makes the enemy jump when it's against a wall and
 	#move_direction *= -1 is called. this may be left as is or fixed in the future
 	elif(is_on_wall()):
 		if(jump_block_detector.has_overlapping_bodies()):
-			looking_direction *= -1
+			move_direction *= -1
 		else:
 			jump()

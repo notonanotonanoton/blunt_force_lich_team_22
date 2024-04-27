@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvdm34jbnkrr4"]
+[gd_scene load_steps=19 format=3 uid="uid://bvdm34jbnkrr4"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_q5kje"]
 [ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_jeryg"]
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ba1bg"]
-[ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_erwrf"]
 [ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="4_yeqss"]
 [ext_resource type="Script" path="res://states/enemy/EnemyIdle.gd" id="5_tmifh"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="6_f1jtg"]
@@ -99,7 +98,7 @@ collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
 direction_flip = NodePath("DirectionFlip")
-sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
+sprite = NodePath("DirectionFlip/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
@@ -108,9 +107,7 @@ jump_velocity = -450.0
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
-[node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
-
-[node name="Sprite2D" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
+[node name="Sprite2D" type="Sprite2D" parent="DirectionFlip"]
 texture = ExtResource("2_jeryg")
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
@@ -120,13 +117,6 @@ collision_layer = 0
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_lhswi")
 
-[node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
-position = Vector2(16, -20)
-shape = SubResource("RectangleShape2D_f880n")
-
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
@@ -134,10 +124,12 @@ collision_layer = 0
 position = Vector2(16, 48)
 shape = SubResource("RectangleShape2D_lhswi")
 
-[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_erwrf")]
-animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
-health_node = NodePath("../HealthComponent")
-character = NodePath("..")
+[node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
+position = Vector2(16, -20)
+shape = SubResource("RectangleShape2D_f880n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
