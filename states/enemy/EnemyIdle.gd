@@ -4,6 +4,7 @@ extends State
 @export var enemy : Enemy
 @export var timer : Timer
 @export var timer_move : Timer
+@onready var jump_timer : Timer = $HighJumpTimer
 
 @export_category("Values")
 @export_range(0, 5, 1) var move_duration : int = 3
@@ -15,11 +16,13 @@ func _ready() -> void:
 func enter() -> void:
 	#print("Entered enemy idle")
 	timer.start()
+	jump_timer.start(enemy.highJumpTime)
 
 func exit() -> void:
 	#print("Exited enemy idle")
 	timer.stop()
 	timer_move.stop()
+	jump_timer.stop()
 
 func update(delta : float) -> void:
 	pass
@@ -45,3 +48,9 @@ func _on_idle_timer_move_timeout():
 	#print("idle move timeout")
 	#randomizes wait time before move
 	timer.start(randi_range(idle_duration-1, idle_duration+1))
+
+#High jump timer
+func _on_timer_timeout():
+	enemy.highJump()
+	jump_timer.start(enemy.highJumpTime)
+	pass # Replace with function body.

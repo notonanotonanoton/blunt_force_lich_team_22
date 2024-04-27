@@ -8,9 +8,11 @@ class_name Enemy
 @export var ground_detector : Area2D
 @export var low_ground_detector : Area2D
 @export var jump_block_detector : Area2D
+@onready var animation : AnimationPlayer = $AnimationPlayer
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
+@export_range(0, 10, 0.5) var highJumpTime : float = 5
 @export_range(0, 400, 5) var speed : float = 100.0
 @export_range(0, 1, 0.1) var acceleration : float = 0.8
 @export_range(-1000, 0, 10) var jump_velocity : float = -320.0
@@ -47,10 +49,16 @@ func _ready() -> void:
 func _physics_process(delta : float) -> void:
 	apply_gravity(delta)
 	move_and_slide()
+	if is_on_ceiling():
+		animation.play("flipped")
+	else:
+		animation.play("unflipped")
 
 func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
-		if velocity.y < 0:
+		if is_on_ceiling() and target_player == null:
+			velocity.y = 0
+		elif velocity.y < 0:
 			velocity.y += (default_gravity * gravity_scale) * delta
 		elif velocity.y < max_fall_speed:
 			velocity.y += (fast_fall_gravity * gravity_scale) * delta
@@ -60,7 +68,9 @@ func apply_gravity(delta : float) -> void:
 
 func jump() -> void:
 	velocity.y = jump_velocity
-	emit_signal("jumped")
+	
+func highJump() -> void:
+	velocity.y = jump_velocity*2
 
 func move(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, looking_direction * speed, (speed * 2) * acceleration * delta)

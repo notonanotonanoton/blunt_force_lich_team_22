@@ -13,6 +13,7 @@ class_name PlayerCharacter
 @export_range(0, 1, 0.1) var acceleration : float = 0.5
 @export_range(-1000, 0, 10) var jump_velocity : float = -430.0
 @export_range(0, 1, 0.1) var friction : float = 0.5
+@export_range(0,4,0.1) var lesser_jump_decress : float = 2
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
 @export_range(0, 0.1, 0.01) var velocity_time : float = 0.05
@@ -68,7 +69,7 @@ func jump() -> void:
 
 func jump_cut() -> void:
 	if velocity.y < 0:
-		velocity.y = velocity.y / 2
+		velocity.y = velocity.y / lesser_jump_decress
 
 func _process_jump(delta_time : float) -> void:
 		# Handle jump. i couldn't figure out how to move this out
