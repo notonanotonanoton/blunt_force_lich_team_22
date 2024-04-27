@@ -48,7 +48,7 @@ func attack(delta : float) -> void:
 	
 	enemy.jump()
 	enemy.velocity.x = move_toward(enemy.velocity.x, 
-	enemy.move_direction * enemy.speed, enemy.speed * 5)
+	enemy.looking_direction * enemy.speed, enemy.speed * 5)
 	
 	if(attack_speed > 1.5):
 		attack_timer.start(randf_range(attack_speed-0.5, attack_speed+0.5))
@@ -60,9 +60,11 @@ func get_distance() -> void:
 	 0).distance_to(Vector2(enemy.target_player.global_position.x, 0))
 	
 	if(enemy.global_position.direction_to(enemy.target_player.global_position).x < 0):
-		enemy.move_direction = -1
+		enemy.looking_direction = -1
 	else:
-		enemy.move_direction = 1
+		enemy.looking_direction = 1
 
-func _on_aggro_radius_body_exited(body : PlayerCharacter) -> void:
-	state_transition.emit(self, "EnemyIdle")
+func _on_aggro_radius_body_exited(body : Node2D) -> void:
+	if (body == PlayerCharacter):
+		print("player left aggro")
+		state_transition.emit(self, "EnemyIdle")
