@@ -37,6 +37,7 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+speed = 30.0
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
