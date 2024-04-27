@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvdm34jbnkrr4"]
+[gd_scene load_steps=19 format=3 uid="uid://bvdm34jbnkrr4"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_q5kje"]
 [ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_jeryg"]
@@ -21,13 +21,79 @@ size = Vector2(20, 12)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ycj8t"]
 radius = 50.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fn0b"]
+size = Vector2(20, 179)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lnhu"]
 size = Vector2(20, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
 size = Vector2(20, 12)
 
+[sub_resource type="Animation" id="Animation_s7n6h"]
+resource_name = "flipped"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionFlip/Sprite2D:flip_v")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirectionFlip/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_wfd25"]
+resource_name = "unflipped"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionFlip/Sprite2D:flip_v")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirectionFlip/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pum1g"]
+_data = {
+"flipped": SubResource("Animation_s7n6h"),
+"unflipped": SubResource("Animation_wfd25")
+}
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector")]
+position = Vector2(0, -10)
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -36,6 +102,8 @@ sprite = NodePath("DirectionFlip/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+speed = 30.0
+jump_velocity = -450.0
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -95,6 +163,8 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
+[node name="HighJumpTimer" type="Timer" parent="StateMachine/EnemyIdle"]
+
 [node name="AggroRadius" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -102,6 +172,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_ycj8t")
+
+[node name="CollisionShape2DRoof" type="CollisionShape2D" parent="AggroRadius"]
+position = Vector2(0, 99.5)
+shape = SubResource("RectangleShape2D_1fn0b")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_f1jtg")]
 
@@ -122,7 +196,13 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_hk280")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pum1g")
+}
+
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
+[connection signal="timeout" from="StateMachine/EnemyIdle/HighJumpTimer" to="StateMachine/EnemyIdle" method="_on_timer_timeout"]
 [connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
 [connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]

@@ -84,6 +84,11 @@ size = Vector2(13, 22)
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_iplij")
+speed = 155.0
+acceleration = 0.4
+jump_value = 480.0
+friction = 0.6
+lesser_jump_decress = 1.5
 coyote_timer = NodePath("CoyoteTimer")
 velocity_timer = NodePath("velocityFreezeTimer")
 
@@ -109,6 +114,9 @@ generic_animations = NodePath("../GenericAnimations")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -25)
+limit_smoothed = true
+position_smoothing_speed = 10.0
+rotation_smoothing_speed = 10.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_d0byc")
