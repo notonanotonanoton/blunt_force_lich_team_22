@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 class_name PlayerCharacter
 
 @export_category("Nodes")

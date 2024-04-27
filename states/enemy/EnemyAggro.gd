@@ -64,7 +64,6 @@ func get_distance() -> void:
 	else:
 		enemy.looking_direction = 1
 
-func _on_aggro_radius_body_exited(body : Node2D) -> void:
-	if (body == PlayerCharacter):
-		print("player left aggro")
+func _on_aggro_radius_body_exited(body : CharacterBody2D) -> void:
+	if body is PlayerCharacter:
 		state_transition.emit(self, "EnemyIdle")
