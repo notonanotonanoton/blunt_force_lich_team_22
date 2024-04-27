@@ -21,7 +21,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprites/Sprite2D:position")
+tracks/0/path = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,7 +33,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprites/Sprite2D:rotation")
+tracks/1/path = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -49,7 +49,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprites/Sprite2D:rotation")
+tracks/0/path = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprites/Sprite2D:position")
+tracks/1/path = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -80,29 +80,37 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(13, 22)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "velocity_timer")]
-z_index = 1
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer")]
 collision_layer = 2
 script = ExtResource("1_iplij")
+speed = 155.0
+acceleration = 0.4
+jump_value = 480.0
+friction = 0.6
+lesser_jump_decress = 1.5
+player_sprites = NodePath("DirectionFlip")
+animation_player = NodePath("AnimationPlayer")
 coyote_timer = NodePath("CoyoteTimer")
 velocity_timer = NodePath("velocityFreezeTimer")
 
-[node name="PlayerSprites" type="Node2D" parent="."]
+[node name="DirectionFlip" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerSprites"]
+[node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
+
+[node name="Sprite2D" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
 position = Vector2(0, 16)
 texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
+
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("10_2l7ge")]
+animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
+health_node = NodePath("../Health")
+character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_6uw8h")
 one_way_collision = true
-
-[node name="GenericAnimations" parent="." node_paths=PackedStringArray("parent_sprite", "health_node", "character") instance=ExtResource("10_2l7ge")]
-parent_sprite = NodePath("../PlayerSprites")
-health_node = NodePath("../Health")
-character = NodePath("..")
 
 [node name="Health" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("9_x7wds")]
 generic_animations = NodePath("../GenericAnimations")
