@@ -13,7 +13,6 @@ class_name PlayerCharacter
 @export_range(0, 1000, 10) var jump_value : float = 430.0 #-430
 var jump_velocity : float = -jump_value
 @export_range(0, 1, 0.1) var friction : float = 0.5
-@export_range(0,4,0.1) var lesser_jump_decress : float = 2
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 
 
@@ -73,7 +72,7 @@ func jump() -> void:
 
 func jump_cut() -> void:
 	if velocity.y < 0:
-		velocity.y = velocity.y / lesser_jump_decress
+		velocity.y = velocity.y / 2
 
 func _process_jump(delta_time : float) -> void:
 		# Handle jump. i couldn't figure out how to move this out
@@ -189,7 +188,6 @@ func _on_health_death_signal() -> void:
 	
 	#signal the death screen to becomme visible
 	emit_signal("death");
-
 
 
 func _on_coyote_timer_timeout() -> void:
