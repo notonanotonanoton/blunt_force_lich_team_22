@@ -66,3 +66,8 @@ func show_box() -> void:
 	collision_shape.set_deferred("disabled", false)
 	hitbox.set_deferred("disabled", false)
 	visible = true
+
+
+func _on_hit_box_component_dealt_damage(target_global_position : Vector2):
+	velocity = target_global_position.direction_to(global_position)*200
+	

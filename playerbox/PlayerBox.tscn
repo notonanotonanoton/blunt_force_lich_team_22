@@ -36,3 +36,5 @@ shape = SubResource("RectangleShape2D_b7i6a")
 [node name="ArmingTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
+
+[connection signal="dealt_damage" from="HitBoxComponent" to="." method="_on_hit_box_component_dealt_damage"]
