@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
-size = Vector2(8, 18)
+size = Vector2(8, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5w6f"]
 size = Vector2(24, 28)
@@ -78,7 +78,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
-size = Vector2(13, 22)
+size = Vector2(8, 20)
 
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer")]
 collision_layer = 2
@@ -106,7 +106,7 @@ health_node = NodePath("../Health")
 character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_6uw8h")
 one_way_collision = true
 
@@ -130,6 +130,7 @@ position = Vector2(0, 4)
 collision_layer = 0
 collision_mask = 8
 input_pickable = false
+monitorable = false
 script = ExtResource("3_djr33")
 
 [node name="BoxDetector" type="CollisionShape2D" parent="Area2D"]
@@ -148,7 +149,7 @@ collision_mask = 4
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 4.5)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
