@@ -129,6 +129,7 @@ one_way_collision = true
 
 [node name="Health" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("9_x7wds")]
 generic_animations = NodePath("../GenericAnimations")
+health = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -25)
@@ -172,6 +173,7 @@ one_shot = true
 [node name="velocityFreezeTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="damage_taken" from="Health" to="." method="_on_damage_taken"]
 [connection signal="death_signal" from="Health" to="." method="_on_health_death_signal"]
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]

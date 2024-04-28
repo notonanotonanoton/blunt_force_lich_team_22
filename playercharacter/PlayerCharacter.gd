@@ -43,6 +43,7 @@ var throw_tween : Tween
 signal death
 signal step_taken
 signal jumped
+signal update_healthbar
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -221,3 +222,7 @@ func _on_box_detector_body_entered(body : CharacterBody2D) -> void:
 func _on_box_detector_body_exited(body : CharacterBody2D) -> void:
 	if body is PlayerBox:
 		available_box = null
+
+func _on_damage_taken() -> void:
+	if (!player_died): #slime keeps attacking after player death
+		emit_signal("update_healthbar")
