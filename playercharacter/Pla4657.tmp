@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://d3w3dccb7j5jv" path="res://playercharacter/character_lich.png" id="1_x272j"]
-[ext_resource type="Texture2D" uid="uid://bdb384u6xa052" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
+[ext_resource type="Texture2D" uid="uid://cpxhjvkw011tl" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Script" path="res://playercharacter/BoxDetector.gd" id="3_djr33"]
 [ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
-[ext_resource type="Texture2D" uid="uid://8phli6y1qnxt" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
+[ext_resource type="Script" path="res://states/player/PlayerCarryingBox.gd" id="5_aj4i2"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
-size = Vector2(8, 20)
+size = Vector2(8, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5w6f"]
 size = Vector2(24, 28)
@@ -22,7 +22,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionFlip/GenericAnimationTarget/Lich:position")
+tracks/0/path = NodePath("PlayerSprites/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DirectionFlip/GenericAnimationTarget/Lich:rotation")
+tracks/1/path = NodePath("PlayerSprites/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +50,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionFlip/GenericAnimationTarget/Lich:rotation")
+tracks/0/path = NodePath("PlayerSprites/Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +62,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DirectionFlip/GenericAnimationTarget/Lich:position")
+tracks/1/path = NodePath("PlayerSprites/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -79,53 +79,31 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
-size = Vector2(8, 20)
+size = Vector2(13, 22)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "velocity_timer")]
+z_index = 1
 collision_layer = 2
 script = ExtResource("1_iplij")
-player_sprites = NodePath("DirectionFlip")
-animation_player = NodePath("AnimationPlayer")
 coyote_timer = NodePath("CoyoteTimer")
 velocity_timer = NodePath("velocityFreezeTimer")
-left_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/LeftArm")
-right_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/RightArm")
-box_sprite = NodePath("DirectionFlip/GenericAnimationTarget/Lich/Box")
-speed = 155.0
-acceleration = 0.4
-friction = 0.6
 
-[node name="DirectionFlip" type="Node2D" parent="."]
+[node name="PlayerSprites" type="Node2D" parent="."]
 
-[node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
-
-[node name="Lich" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerSprites"]
 position = Vector2(0, 16)
 texture = ExtResource("1_x272j")
 offset = Vector2(0, -16)
 
-[node name="LeftArm" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget/Lich"]
-position = Vector2(4, -11)
-texture = ExtResource("3_nm4hd")
-offset = Vector2(-4, -5)
-
-[node name="Box" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget/Lich"]
-position = Vector2(4, -13)
-
-[node name="RightArm" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget/Lich"]
-position = Vector2(-4, -11)
-texture = ExtResource("4_21f1s")
-offset = Vector2(4, -5)
-
-[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("10_2l7ge")]
-animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
-health_node = NodePath("../Health")
-character = NodePath("..")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_6uw8h")
 one_way_collision = true
+
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("parent_sprite", "health_node", "character") instance=ExtResource("10_2l7ge")]
+parent_sprite = NodePath("../PlayerSprites")
+health_node = NodePath("../Health")
+character = NodePath("..")
 
 [node name="Health" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("9_x7wds")]
 generic_animations = NodePath("../GenericAnimations")
@@ -142,14 +120,19 @@ script = ExtResource("4_5vqem")
 [node name="PlayerOnGround" type="Node" parent="StateMachine"]
 script = ExtResource("3_wxpwy")
 
-[node name="BoxDetector" type="Area2D" parent="."]
+[node name="PlayerCarryingBox" type="Node" parent="StateMachine"]
+script = ExtResource("5_aj4i2")
+
+[node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 4)
 collision_layer = 0
 collision_mask = 8
 input_pickable = false
-monitorable = false
+script = ExtResource("3_djr33")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxDetector"]
+[node name="BoxDetector" type="CollisionShape2D" parent="Area2D"]
+light_mask = 4
+visibility_layer = 4
 shape = SubResource("RectangleShape2D_n5w6f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -163,18 +146,19 @@ collision_mask = 4
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 6)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_dl0fu")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-one_shot = true
 
 [node name="velocityFreezeTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="death_signal" from="Health" to="." method="_on_health_death_signal"]
-[connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
-[connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
-[connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
+[connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="Area2D" method="_on_player_character_request_box_status"]
+[connection signal="request_box" from="StateMachine/PlayerCarryingBox" to="Area2D" method="_on_player_character_request_box_status"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="send_box_status" from="Area2D" to="StateMachine/PlayerOnGround" method="_on_area_2d_send_box_status"]
+[connection signal="send_box_status" from="Area2D" to="StateMachine/PlayerCarryingBox" method="_on_area_2d_send_box_status"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="velocityFreezeTimer" to="." method="_on_velocity_freeze_timer_timeout"]

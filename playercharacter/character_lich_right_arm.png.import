@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceisxkpgy476d"
-path="res://.godot/imported/stone_brick_tileset.png-f99e36a03b4ea86e9a7688dcbb6e61e6.ctex"
+uid="uid://8phli6y1qnxt"
+path="res://.godot/imported/character_lich_right_arm.png-e824af1dc9bbc53fb2d1bbc3dd189809.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/stone_brick_tileset.png"
-dest_files=["res://.godot/imported/stone_brick_tileset.png-f99e36a03b4ea86e9a7688dcbb6e61e6.ctex"]
+source_file="res://playercharacter/character_lich_right_arm.png"
+dest_files=["res://.godot/imported/character_lich_right_arm.png-e824af1dc9bbc53fb2d1bbc3dd189809.ctex"]
 
 [params]
 

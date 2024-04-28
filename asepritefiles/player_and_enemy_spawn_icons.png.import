@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqaflvu68csdr"
-path="res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"
+uid="uid://d1cr20fqut5e8"
+path="res://.godot/imported/player_and_enemy_spawn_icons.png-31a37db35c98e73fb0615dc4d5ed1920.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/heart_container_full.png"
-dest_files=["res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"]
+source_file="res://asepritefiles/player_and_enemy_spawn_icons.png"
+dest_files=["res://.godot/imported/player_and_enemy_spawn_icons.png-31a37db35c98e73fb0615dc4d5ed1920.ctex"]
 
 [params]
 

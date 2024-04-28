@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbb1d8qrv2mol"]
+[gd_scene load_steps=17 format=3 uid="uid://dbb1d8qrv2mol"]
 
 [ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="1_4mymv"]
 [ext_resource type="Script" path="res://enemy/slime/Slime.gd" id="1_ak0gr"]
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ggbrp"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeIdle.gd" id="3_oekhu"]
-[ext_resource type="Script" path="res://states/enemy/slime/SlimeJump.gd" id="4_oxv7e"]
 [ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="6_yud86"]
 
@@ -14,14 +13,189 @@ size = Vector2(22, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ili36"]
 size = Vector2(22, 14)
 
+[sub_resource type="Animation" id="Animation_waw3d"]
+resource_name = "High_Jump"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 1.6), Vector2(1, 2.2)]
+}
+
+[sub_resource type="Animation" id="Animation_1j23r"]
+resource_name = "Look_Left"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wgy23"]
+resource_name = "Look_Right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v1ve6"]
+resource_name = "Moving"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6der2"]
+resource_name = "Normal_Jump"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.3, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.8), Vector2(1, 0.7), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ew7sh"]
+resource_name = "On_Ceiling"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e-05),
+"update": 0,
+"values": [3.14159]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e-05),
+"update": 0,
+"values": [Vector2(0, -7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1.32837e-05),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x504i"]
+resource_name = "reset"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0vlm"]
+_data = {
+"High_Jump": SubResource("Animation_waw3d"),
+"Look_Left": SubResource("Animation_1j23r"),
+"Look_Right": SubResource("Animation_wgy23"),
+"Moving": SubResource("Animation_v1ve6"),
+"Normal_Jump": SubResource("Animation_6der2"),
+"On_Ceiling": SubResource("Animation_ew7sh"),
+"reset": SubResource("Animation_x504i")
+}
+
 [node name="Slime" type="CharacterBody2D"]
+collision_layer = 258
+collision_mask = 257
 script = ExtResource("1_ak0gr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 7)
 texture = ExtResource("1_4mymv")
+offset = Vector2(0, -16)
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_fsb11")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
@@ -31,14 +205,24 @@ inital_state = NodePath("SlimeIdle")
 [node name="SlimeIdle" type="Node" parent="StateMachine"]
 script = ExtResource("3_oekhu")
 
-[node name="SlimeJump" type="Node" parent="StateMachine"]
-script = ExtResource("4_oxv7e")
+[node name="Timer" type="Timer" parent="StateMachine/SlimeIdle"]
+wait_time = 2.0
 
 [node name="SlimeAgro" type="Node" parent="StateMachine"]
 script = ExtResource("5_yc75d")
 
+[node name="Timer" type="Timer" parent="StateMachine/SlimeAgro"]
+one_shot = true
+
 [node name="HitBoxComponent" parent="." instance=ExtResource("6_yud86")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_ili36")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i0vlm")
+}
+
+[connection signal="timeout" from="StateMachine/SlimeIdle/Timer" to="StateMachine/SlimeIdle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/SlimeAgro/Timer" to="StateMachine/SlimeAgro" method="_on_timer_timeout"]

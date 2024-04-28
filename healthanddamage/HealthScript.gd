@@ -1,20 +1,29 @@
 extends Node
 class_name HealthComponent
 
-@export var health : int = 3
-@export var knockback_stun : float = 0.3
+@export_category("Nodes")
+@export var generic_animations : GenericAnimations
+
+@export_category("Values")
+@export_range(0, 0.5, 0.1) var knockback_stun : float = 0.3
+@export_range(0, 200, 10) var knockback_strength : int = 75
+@export_range(1, 50, 1) var health : int = 3
 
 # big characters should have a smaller modifier
-@export var knockback_modifier : int = 500
+
 var timer : Timer = Timer.new()
 var max_health : int
+var parent : CharacterBody2D
 var max_parent_acceleration : float
+var player_knockback_strength : int = knockback_strength * 3
 
 signal death_signal
+signal damage_taken
 
 func _ready() -> void:
+	parent = get_parent()
 	max_health = health
-	max_parent_acceleration = get_parent().acceleration
+	max_parent_acceleration = parent.acceleration
 	
 	
 	timer.connect("timeout", _on_timer_timeout)
@@ -37,32 +46,31 @@ func get_health() -> int:
 func get_max_health() -> int:
 	return max_health
 
-func take_damage(damage, enemy_position : Vector2) -> void:
-	
-	for child in get_parent().get_children():
-		if child.is_class("state_machine"):
-			child.change_state(child.current_state, "PlayerTakingDamage")
+func take_damage(damage : int, enemy_position : Vector2) -> void:
 	
 	if timer.is_stopped() == true:
-		health = health-damage
+		health -= damage
 		
-	
-		var knockback_direction = enemy_position.direction_to(get_parent().global_position)
-		#make sure we give some airtime
-		var knockback_strength = damage*knockback_modifier
-		var knockback = knockback_direction*knockback_strength
+		var knockback_up : = Vector2i(0, -40)
+		var knockback : Vector2i
+		if parent is PlayerCharacter:
+			knockback = enemy_position.direction_to(parent.global_position) * player_knockback_strength
+		else:
+			knockback = enemy_position.direction_to(parent.global_position) * knockback_strength
 		
+		parent.velocity = knockback + knockback_up
 		
-		get_parent().velocity =knockback+Vector2(0, -30)
-		
-		get_parent().acceleration = 0
+		parent.acceleration = 0
 		timer.start()
 		
 		if(health<=0):
 			health = 0
-			emit_signal("death_signal")
-			#todo: come back to this and check if we can use below code
-			#get_parent().queue_free()
+			if(get_parent() is PlayerCharacter):
+				emit_signal("death_signal")
+			else:
+				get_parent().queue_free()
+		else:
+			emit_signal("damage_taken")
 	
 func _on_timer_timeout() -> void:
-	get_parent().acceleration = max_parent_acceleration
+	parent.acceleration = max_parent_acceleration

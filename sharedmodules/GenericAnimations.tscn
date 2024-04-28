@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bodo0mxlvmgdg"]
+
+[ext_resource type="Script" path="res://sharedmodules/GenericAnimations.gd" id="1_k0py3"]
+
+[node name="GenericAnimations" type="Node2D"]
+script = ExtResource("1_k0py3")

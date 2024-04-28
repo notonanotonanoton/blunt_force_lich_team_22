@@ -1,14 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cupv7wvlaedxn"]
+[gd_scene load_steps=6 format=3 uid="uid://cupv7wvlaedxn"]
 
 [ext_resource type="Texture2D" uid="uid://dfg63drc2dpj5" path="res://playerbox/character_phylactery.png" id="1_ifsfx"]
 [ext_resource type="Script" path="res://playerbox/PlayerBox.gd" id="1_w7fsv"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="3_bl2yy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gahia"]
 size = Vector2(14, 14)
 
-[node name="pick_up_box" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
+size = Vector2(14, 14)
+
+[node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer", "sprite", "collision_shape", "hitbox")]
 collision_layer = 8
 script = ExtResource("1_w7fsv")
+arming_timer = NodePath("ArmingTimer")
+sprite = NodePath("Sprite2D")
+collision_shape = NodePath("CollisionShape2D")
+hitbox = NodePath("HitBoxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.36442e-07)
@@ -16,3 +24,14 @@ texture = ExtResource("1_ifsfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gahia")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_bl2yy")]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_b7i6a")
+
+[node name="ArmingTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
