@@ -62,15 +62,15 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 		
 		parent.acceleration = 0
 		timer.start()
-		
+		emit_signal("damage_taken")
 		if(health<=0):
 			health = 0
 			if(get_parent() is PlayerCharacter):
 				emit_signal("death_signal")
 			else:
 				get_parent().queue_free()
-		else:
-			emit_signal("damage_taken")
 	
 func _on_timer_timeout() -> void:
 	parent.acceleration = max_parent_acceleration
+
+
