@@ -17,6 +17,7 @@ arming_timer = NodePath("ArmingTimer")
 sprite = NodePath("Sprite2D")
 collision_shape = NodePath("CollisionShape2D")
 hitbox = NodePath("HitBoxComponent")
+minimum_arming_time = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.36442e-07)
