@@ -33,7 +33,7 @@ func physics_update(delta : float) -> void:
 	get_distance()
 	
 	if(distance_to_player > max_player_proximity):
-		enemy.move(delta)
+		enemy.move(delta, 1.0)
 	elif(abs(enemy.velocity.x) > 0):
 		enemy.stop_move(delta)
 	#condition may have to be changed for enemies that want to move and attack at the same time
@@ -45,10 +45,9 @@ func physics_update(delta : float) -> void:
 func attack(delta : float) -> void:
 	
 	#maybe add charge-up timer here?
-	
-	enemy.jump()
-	enemy.velocity.x = move_toward(enemy.velocity.x, 
-	enemy.looking_direction * enemy.speed, enemy.speed * 5)
+	if enemy.is_on_floor():
+		enemy.jump(1.0)
+	enemy.move(delta, 1.25)
 	
 	if(attack_speed > 1.5):
 		attack_timer.start(randf_range(attack_speed-0.5, attack_speed+0.5))

@@ -1,84 +1,68 @@
 extends CharacterBody2D
-class_name player_box 
+class_name PlayerBox
 
-var held : bool
-var first_sender : CharacterBody2D
-var collision_shape : CollisionShape2D
-@export_range(0, 1, 0.1) var friction : float = 0.5
-var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export_category("Nodes")
 @export var arming_timer : Timer
-@export var minimum_arming_time : float = 0.15
+@export var sprite : Sprite2D
+@export var collision_shape : CollisionShape2D
+@export var hitbox : hit_box_component
 
-#this will only check so that the box is moving at all. 
-#Assuming you want to have a specific minimum traveling air speed then you will need to measure the desired amount and input it.
-#The current general travel-speed is ~~200
-@export var minimum_speed : int = 1
+@export_category("Values")
+@export_range(0, 1, 0.1) var friction : float = 0.8
+@export_range(0, 1, 0.05) var minimum_arming_time : float = 0.1
+@export_range(0, 300, 1) var minimum_damage_speed : int = 80
+
+var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var holder : PlayerCharacter
+#needed for healthmodule implementation
+var can_deal_damage : bool = false
 
 func _ready() -> void:
-	collision_shape = get_node("CollisionShape2D") as CollisionShape2D
-	arming_timer.one_shot = true
 	arming_timer.wait_time = minimum_arming_time
 
-func can_deal_damage() -> bool:
-	#print("check if timer is stopped: ", arming_timer.is_stopped())
-	if arming_timer.is_stopped():
-		#print("checking minimum velocity: ", minimum_speed)
-		#print("checking current velocity: ", velocity.x)
-		if velocity.x>minimum_speed:
-			return true
-	return false
-
 func _physics_process(delta : float) -> void:
-	move_and_slide()
-	#print(held)
-	if held:
-		position.x = first_sender.position.x
-		position.y = first_sender.position.y - 15
+	if arming_timer.is_stopped() and abs(velocity.x) > minimum_damage_speed:
+		sprite.modulate = Color(1.5, 1.5, 1.5)
+		can_deal_damage = true
+	else:
+		sprite.modulate = Color(1, 1, 1)
+		can_deal_damage = false
+	
+	if holder:
+		position.x = holder.position.x
+		position.y = holder.position.y - 6
 		
 	elif !is_on_floor():
 		velocity.y += default_gravity * delta
 		
 	if is_on_floor():
-		if (velocity.x > 0 || velocity.x < 0):
-			velocity.x = (velocity.x) * friction * delta
-		
-func picked_up_by(sender : CharacterBody2D) -> void:
-	if first_sender == null:
-		first_sender = sender
-		set_deferred("freeze", true)
-		held = true
-		disable_collision()
+		if velocity.x > 0 or velocity.x < 0:
+			velocity.x -= (velocity.x * 10) * (friction * delta)
+	
+	move_and_slide()
 
-func throw(sender : CharacterBody2D, charge_time : float) -> void:
-	
-	arming_timer.start()
-	
-	if (charge_time > 1):
-		charge_time = 1
-	
-	var charge_factor : float = 1 + charge_time
-	
-	if held:
-		#reactivates physics and allows the box to be picked up again
-		held = false
-		enable_collision()
-		first_sender = null
-		set_deferred("freeze", false)
-		
-		
-		#decides where the box will be thrown
-		velocity = Vector2((200 * sender.player_sprites.scale.x), -50) * charge_factor
-	
-func disable_collision()-> void:
+func pick_up(sender : PlayerCharacter) -> void:
+	if holder == null:
+		holder = sender
+		hide_box()
+
+func throw(throw_force : Vector2i) -> void:
+	if holder:
+		var jump_offset : = Vector2i(0, 0)
+		var holder_velocity : int = abs(holder.velocity.y)
+		if holder_velocity >= 1:
+			jump_offset = Vector2i(0, holder_velocity / 2)
+		show_box()
+		holder = null
+		arming_timer.start()
+		velocity = throw_force + jump_offset
+
+func hide_box() -> void:
 	collision_shape.set_deferred("disabled", true)
+	hitbox.set_deferred("disabled", true)
+	visible = false
 
-func enable_collision() -> void:
+func show_box() -> void:
 	collision_shape.set_deferred("disabled", false)
-	
-""" set velocity instead for characterbody2d
-func send_right() -> void:
-	apply_central_impulse(Vector2(500, -500))
-
-func send_left() -> void:
-	apply_central_impulse(Vector2(-500, -500))
-"""
+	hitbox.set_deferred("disabled", false)
+	visible = true

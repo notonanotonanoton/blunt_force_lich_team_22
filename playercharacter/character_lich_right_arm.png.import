@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3w3dccb7j5jv"
-path="res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"
+uid="uid://8phli6y1qnxt"
+path="res://.godot/imported/character_lich_right_arm.png-e824af1dc9bbc53fb2d1bbc3dd189809.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://playercharacter/character_lich.png"
-dest_files=["res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"]
+source_file="res://playercharacter/character_lich_right_arm.png"
+dest_files=["res://.godot/imported/character_lich_right_arm.png-e824af1dc9bbc53fb2d1bbc3dd189809.ctex"]
 
 [params]
 

@@ -7,6 +7,9 @@ class_name PlayerCharacter
 @export var animation_player : AnimationPlayer
 @export var coyote_timer : Timer
 @export var velocity_timer : Timer
+@export var left_arm : Sprite2D
+@export var right_arm : Sprite2D
+@export var box_sprite : Sprite2D
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : float = 165.0
@@ -16,6 +19,11 @@ class_name PlayerCharacter
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
 @export_range(0, 0.1, 0.01) var velocity_time : float = 0.05
+@export_range(350, 750, 25) var throw_force_x : int = 375
+@export_range(-500, -250, 25) var throw_force_y : int = -275
+@export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
+#needed for healthmodule implementation
+@export var can_deal_damage : bool = false
 
 #coyote timer logic
 var player_jumped : bool = false;
@@ -23,10 +31,14 @@ var jump_is_available : bool = true
 var player_died : bool = false;
 
 #box throwing logic
+#charge_time has to start at 0.0 for code logic
 var charge_time : float = 0.0
+const charge_minimum : float = 0.3
 var charging_throw : bool = false
-
-signal request_box_status
+const max_throw_anim_rot_deg : float = -20
+var max_throw_force : = Vector2i(throw_force_x, throw_force_y)
+var interact_released : bool = false
+var throw_tween : Tween
 
 signal death
 signal step_taken
@@ -35,15 +47,13 @@ signal jumped
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
-var picked_up_box : CharacterBody2D
+
+var picked_up_box : PlayerBox
+var available_box : PlayerBox
 
 func _ready() -> void:
-	coyote_timer.one_shot = true
 	coyote_timer.wait_time = coyote_time
-	
-	velocity_timer.one_shot = true
 	velocity_timer.wait_time = velocity_time
-
 
 func _physics_process(delta : float) -> void:
 	
@@ -51,7 +61,7 @@ func _physics_process(delta : float) -> void:
 
 	_process_jump_availability()
 	
-	_process_jump(delta)
+	_process_jump()
 		
 	_process_movement(delta)
 	
@@ -70,7 +80,7 @@ func jump_cut() -> void:
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
-func _process_jump(delta_time : float) -> void:
+func _process_jump() -> void:
 		# Handle jump. i couldn't figure out how to move this out
 	if Input.is_action_just_pressed("ui_accept") and jump_is_available and not player_jumped:
 		jump()
@@ -94,66 +104,93 @@ func _process_jump_availability() -> void:
 		player_jumped = false;
 
 ##box functions
+func _unhandled_input(event : InputEvent) -> void:
+	if event.is_action_pressed("interact_or_throw"):
+		if not picked_up_box and available_box and available_box.is_on_floor():
+			picked_up_box = available_box
+			picked_up_box.pick_up(self)
+			apply_carrying_sprites(true)
 
-func _unhandled_input(event) -> void:
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_E:
-			emit_signal("request_box_status")
+func _process_throw(delta : float) -> void:
+	if picked_up_box:
+		if Input.is_action_just_released("interact_or_throw"):
+			interact_released = true
+			if charge_time > 0.0:
+				apply_carrying_sprites(false)
+				#need to save charge_time as multiplier for Tweens because
+				#of time sensitivity
+				var multiplier = charge_time
+				var direction : int = player_sprites.scale.x
+				picked_up_box.throw(Vector2i(throw_force_x * direction, 
+				throw_force_y) * charge_time)
+				
+				interact_released = false
+				picked_up_box = null
+				charge_time = 0.0
+				
+				if throw_tween:
+					throw_tween.kill()
+				throw_tween = self.create_tween()
+				
+				throw_tween.tween_property(player_sprites, "rotation_degrees",
+				(-max_throw_anim_rot_deg) * direction, 0.1)
+				throw_tween.tween_property(player_sprites, "rotation_degrees", 0, 0.5)
+				
+				multiplier = 0.0
+				
+		
+		elif Input.is_action_pressed("interact_or_throw") and interact_released:
+			charge_time += throw_charge_rate * delta
+			charge_time = clampf(charge_time, charge_minimum, 1.0)
+			player_sprites.rotation_degrees = lerpf(0.0,
+			max_throw_anim_rot_deg * player_sprites.scale.x, charge_time)
 
-
-func _process_throw(delta_time : float) -> void:
-	if Input.is_action_just_pressed("throw_box"):
-		if picked_up_box != null:
-			charging_throw = true
-	
-	if charging_throw:
-		charge_time += delta_time
-			
-	if (Input.is_action_just_released("throw_box")):
-		picked_up_box.throw(self, charge_time)
-		charge_time = 0.0
-		charging_throw = false
-
-
-#this function checks if the parent of a hurtbox is allowed to deal damage. It must exist on ALL hurtbox instances
-#it allows for custom conditionals of logic, such as the box having an arming time and velocity
-#while maintaining maximum modularity in the health module in exchange for some boilerplate.
-#for the player, since we currently (26/04/2024) do not have any conditions that the player can't do damage in
-#it is always true
-func can_deal_damage() -> bool:
-	return true
+func apply_carrying_sprites(apply : bool) -> void:
+	if apply:
+		right_arm.rotation_degrees = -45
+		left_arm.rotation_degrees = 30
+		left_arm.position.x += 1
+		left_arm.position.y -= 1
+		box_sprite.texture = picked_up_box.sprite.texture
+	else:
+		right_arm.rotation_degrees = 0
+		left_arm.rotation_degrees = 0
+		left_arm.position.x -= 1
+		left_arm.position.y += 1
+		box_sprite.texture = null
 
 
 ##Movement functions 
 
-func _apply_gravity(delta_time : float) -> void:
+func _apply_gravity(delta : float) -> void:
 	if not is_on_floor():
 		if velocity.y < 0:
-			velocity.y += (default_gravity) * delta_time
+			velocity.y += default_gravity * delta
 		elif velocity.y < max_fall_speed:
-			velocity.y += fast_fall_gravity * delta_time
+			velocity.y += fast_fall_gravity * delta
 		# Ensure fall speed past max_fall_speed is consistent
 		else:
 			velocity.y = max_fall_speed
 
 
-func _process_movement(deltatime : float) -> void:
+func _process_movement(delta : float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : int = Input.get_axis("ui_left", "ui_right")
 
 	if (direction > 0 or direction < 0):
 		#this value is used by other code to get the player's direction
-		player_sprites.scale.x = direction
+		if charge_time == 0:
+			player_sprites.scale.x = direction
 		if is_on_floor():
 			emit_signal("step_taken")
 
 	# Check to make sure player doesn't slide more when running opposite way
 	# There may be a better solution
 	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
-		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * deltatime)
+		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * deltatime)
+		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 		
 
 
@@ -177,9 +214,10 @@ func _on_coyote_timer_timeout() -> void:
 func _on_velocity_freeze_timer_timeout() -> void:
 	player_jumped = false;
 
-func _on_area_2d_send_box_status(arg) -> void:
-	#if we type-hint the arg type then we are not allowed to iterate over them
-	for body in arg:
-		if body is player_box:
-			body.picked_up_by(self)
-			picked_up_box = body
+func _on_box_detector_body_entered(body : CharacterBody2D) -> void:
+	if body is PlayerBox:
+		available_box = body
+
+func _on_box_detector_body_exited(body : CharacterBody2D) -> void:
+	if body is PlayerBox:
+		available_box = null
