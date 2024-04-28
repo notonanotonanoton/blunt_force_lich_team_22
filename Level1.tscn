@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://divvuno831tu2"]
+[gd_scene load_steps=6 format=3 uid="uid://divvuno831tu2"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_qlp1i"]
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="2_cw1nk"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://playerbox/PlayerBox.tscn" id="3_3swey"]
 [ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_50iu8"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_bx3wq"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,3 +25,8 @@ position = Vector2(-61, 220)
 position = Vector2(1046, 1156)
 
 [node name="HUDCanvas" parent="." instance=ExtResource("4_50iu8")]
+
+[node name="Game_Over_Screen" parent="." instance=ExtResource("5_bx3wq")]
+
+[connection signal="death" from="PlayerCharacter" to="Game_Over_Screen" method="_on_player_character_death"]
+[connection signal="update_healthbar" from="PlayerCharacter" to="HUDCanvas" method="_update_healthbar_on_damage_taken"]
