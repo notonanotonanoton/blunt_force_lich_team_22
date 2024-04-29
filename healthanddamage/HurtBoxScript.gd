@@ -3,7 +3,7 @@ class_name  hurt_box_component
 
 @export var health_component : HealthComponent
 
-#this is the area that deals damage
+#this is the area that recieves
 
 
 func damage(damage : int, enemy_position : Vector2) -> void:

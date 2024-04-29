@@ -2,13 +2,15 @@ extends TileMap
 
 class_name interactive_tilemap
 
+@export var enemy : String 
 
 
 @export var TILE_SCENES: Dictionary = {
 	#insert the atlas coordinate of the spawner and the filepath to the object it should spawn
 	Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	Vector2i(1,0): preload("res://enemy/Enemy.tscn"),
-	Vector2i(2,0): preload("res://playerbox/PlayerBox.tscn") 
+	Vector2i(2,0): preload("res://playerbox/PlayerBox.tscn"),
+	Vector2i(3,0): preload("res://enemy/damage_obstacle/Spikes.tscn")
 }
 
 #decrement global pos with this if you want to start in the corner of the tile
