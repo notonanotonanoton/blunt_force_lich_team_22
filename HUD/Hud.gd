@@ -4,7 +4,8 @@ extends Node
 @export var full_heart : Texture2D
 @export var half_heart : Texture2D
 @export var empty_heart : Texture2D
-@export var character : PlayerCharacter
+
+var character : PlayerCharacter
 
 enum HealthLevel {
 	FULL,
@@ -16,6 +17,13 @@ var current_health_level : int = HealthLevel.FULL
 var current_heart_index : int = 2
 
 func _ready() -> void:
+	pass
+
+func _on_children_entered() -> void: 
+	await get_tree().create_timer(0.5).timeout
+	for node in get_parent().get_children():
+		if node is PlayerCharacter:
+			character = node
 	character.health_changed.connect(_on_character_health_changed)
 	character.max_health_changed.connect(_on_character_max_health_changed)
 
