@@ -8,6 +8,7 @@ class_name Enemy
 @export var ground_detector : Area2D
 @export var low_ground_detector : Area2D
 @export var jump_block_detector : Area2D
+@export var collision : CollisionShape2D
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
@@ -23,6 +24,9 @@ class_name Enemy
 
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
+var collision_offset : int
+
+var behavior_extension : EnemyBehaviorExtension
 
 #is -1 for left or 1 for right. starts as right.
 #has to have the same variable name as PlayerCharacter
@@ -41,6 +45,13 @@ signal jumped
 
 func _ready() -> void:
 	aggro_radius.shape.radius = aggro_range
+	collision_offset = (collision.shape.get_rect().size.x + 1) / 2
+	print(collision_offset)
+	
+	var parent_children : Array = get_parent().get_parent().get_children()
+	for child in parent_children:
+		if child is EnemyBehaviorExtension:
+			behavior_extension = child
 
 func _physics_process(delta : float) -> void:
 	apply_gravity(delta)

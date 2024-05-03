@@ -28,7 +28,7 @@ size = Vector2(20, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -37,6 +37,7 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+collision = NodePath("CollisionShape2D")
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -79,12 +80,17 @@ shape = SubResource("RectangleShape2D_fsb11")
 script = ExtResource("3_ba1bg")
 inital_state = NodePath("EnemyIdle")
 
-[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer")]
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
 script = ExtResource("4_yeqss")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
+proximity_timer = NodePath("ProximityTimer")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
+process_callback = 0
+one_shot = true
+
+[node name="ProximityTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
 one_shot = true
 
