@@ -6,8 +6,7 @@ class_name HealthComponent
 
 @export_category("Values")
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.3
-@export_range(0, 200, 10) var knockback_strength : int = 100
-@export_range(-200, 0, 10) var knockback_up_strength : int = -60
+@export_range(0, 200, 10) var knockback_strength : int = 75
 @export_range(1, 50, 1) var health : int = 3
 
 # big characters should have a smaller modifier
@@ -16,6 +15,7 @@ var timer : Timer = Timer.new()
 var max_health : int
 var parent : CharacterBody2D
 var max_parent_acceleration : float
+var player_knockback_strength : int = knockback_strength * 3
 
 signal death_signal
 signal damage_taken
@@ -51,15 +51,14 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 	if timer.is_stopped() == true:
 		health -= damage
 		
-		var knockback : int = knockback_strength
+		var knockback_up : = Vector2i(0, -40)
+		var knockback : Vector2i
 		if parent is PlayerCharacter:
-			knockback *= 2
+			knockback = enemy_position.direction_to(parent.global_position) * player_knockback_strength
+		else:
+			knockback = enemy_position.direction_to(parent.global_position) * knockback_strength
 		
-		#saves direction
-		if(enemy_position.direction_to(parent.global_position).x < 0):
-			knockback *= -1
-		
-		parent.velocity = Vector2i(knockback, knockback_up_strength)
+		parent.velocity = knockback + knockback_up
 		
 		parent.acceleration = 0
 		timer.start()

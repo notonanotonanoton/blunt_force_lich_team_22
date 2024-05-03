@@ -44,9 +44,10 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	apply_gravity(delta)
-	if ((looking_direction == 1 and velocity.x < 0) or
+	if is_on_floor():
+		if ((looking_direction == 1 and velocity.x < 0) or
 	 (looking_direction == -1 and velocity.x > 0)):
-		stop_move(delta)
+			stop_move(delta)
 			
 	move_and_slide()
 
@@ -70,7 +71,7 @@ func move(delta : float, move_mult : float) -> void:
 		handle_wall_or_gap()
 
 func stop_move(delta : float) -> void:
-	velocity.x = move_toward(velocity.x, 0, (speed * 8) * friction * delta)
+	velocity.x = move_toward(velocity.x, 0, (speed * 5) * friction * delta)
 
 func handle_wall_or_gap() -> void:
 	if(not ground_detector.has_overlapping_bodies()):
