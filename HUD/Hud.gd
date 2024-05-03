@@ -1,33 +1,45 @@
 extends Node
 
 @export var heart_containers : HBoxContainer
+@export var full_heart : Texture2D
+@export var half_heart : Texture2D
+@export var empty_heart : Texture2D
+var character : PlayerCharacter
+
 
 enum HealthLevel {
 	FULL,
 	HALF,
 }
 
-var current_health_level = HealthLevel.FULL
+var max_health : int = 0
+var current_health_level : int = HealthLevel.FULL
 var current_heart_index : int = 2
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _ready() -> void:
 	pass
-	
-func _update_healthbar_on_damage_taken():
-	var full_heart = load("res://HUD/heart_container_full.png")
-	var half_heart = load("res://HUD/heart_container_half.png")
-	var empty_heart = load("res://HUD/heart_container_empty.png")
-	var heart = heart_containers.get_child(current_heart_index)
-	match current_health_level:
-		HealthLevel.FULL:
-			current_health_level = HealthLevel.HALF
-			heart.texture = half_heart
-		HealthLevel.HALF:
-			current_health_level = HealthLevel.FULL
-			heart.texture = empty_heart
-			current_heart_index -= 1
+
+
+func _on_children_entered() -> void: 
+	await get_tree().create_timer(0.5).timeout
+	for node in get_parent().get_children():
+		if node is PlayerCharacter:
+			character = node
+	character.health_changed.connect(_on_character_health_changed)
+	character.max_health_changed.connect(_on_character_max_health_changed)
+
+func _on_character_health_changed(current_health : int) -> void:
+	pass
+
+func _on_character_max_health_changed(current_max_health : int) -> void:
+	print("max health change")
+	#assumes health level is always even
+	var heart_count : int = current_max_health / 2
+	for child : TextureRect in heart_containers.get_children():
+		if child != null:
+			child.queue_free()
+	for count in range(1, heart_count):
+		var new_heart : TextureRect = TextureRect.new()
+		new_heart.texture = full_heart
+		heart_containers.add_child(new_heart)
+

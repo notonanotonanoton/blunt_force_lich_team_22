@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_ymwx5"]
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="2_hpaix"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://playerbox/PlayerBox.tscn" id="4_ak2be"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="5_7nwqq"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="6_jaqc5"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="5_7nwqq"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="6_jaqc5"]
 [ext_resource type="PackedScene" uid="uid://bvdm34jbnkrr4" path="res://enemy/Enemy.tscn" id="7_eewdf"]
 
 [node name="Scene_Root" type="Node2D"]
 
-[node name="PlayerCharacter" parent="." groups=["Player"] instance=ExtResource("1_ymwx5")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_ymwx5")]
 position = Vector2(43, 53)
 
 [node name="GraveyardTileMap" parent="." instance=ExtResource("2_hpaix")]
@@ -32,5 +32,4 @@ position = Vector2(-36, 87)
 [node name="Enemy" parent="." instance=ExtResource("7_eewdf")]
 position = Vector2(-98, 91)
 
-[connection signal="death" from="PlayerCharacter" to="Game_Over_Screen" method="_on_player_character_death"]
-[connection signal="update_healthbar" from="PlayerCharacter" to="HUDCanvas" method="_update_healthbar_on_damage_taken"]
+[connection signal="player_death" from="PlayerCharacter" to="Game_Over_Screen" method="_on_player_character_player_death"]

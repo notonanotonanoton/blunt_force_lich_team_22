@@ -10,6 +10,7 @@ class_name PlayerCharacter
 @export var left_arm : Sprite2D
 @export var right_arm : Sprite2D
 @export var box_sprite : Sprite2D
+@export var health_node : HealthComponent
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : float = 165.0
@@ -22,6 +23,7 @@ class_name PlayerCharacter
 @export_range(350, 750, 25) var throw_force_x : int = 375
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
+
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = false
 
@@ -40,10 +42,11 @@ var max_throw_force : = Vector2i(throw_force_x, throw_force_y)
 var interact_released : bool = false
 var throw_tween : Tween
 
-signal death
+signal player_death
 signal step_taken
 signal jumped
-signal update_healthbar
+signal health_changed
+signal max_health_changed
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -55,6 +58,9 @@ var available_box : PlayerBox
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_time
 	velocity_timer.wait_time = velocity_time
+	
+	health_node.health_changed.connect(_on_health_changed)
+	health_node.max_health_changed.connect(_on_max_health_changed)
 
 func _physics_process(delta : float) -> void:
 	
@@ -197,17 +203,20 @@ func _process_movement(delta : float) -> void:
 
 ##signal functions
 
-func _on_health_death_signal() -> void:
+#takes in a redundant Vector2i. maybe separate signal?
+func _on_health_death(position : Vector2i) -> void:
 	#freeze the physics process since the game is finished. If we move movement mechanics out of physics process, consider using the player_died variable
 	set_physics_process(false)
+	#removes player detection from game. use better solution like export
+	get_node("CollisionShape2D").set_deferred("disabled", true)
 	player_died = true;
 	
 	#make player invisible
-	visible = false;
-	scale = Vector2(0, 0);
+	player_sprites.visible = false
+	#scale = Vector2(0, 0);
 	
 	#signal the death screen to becomme visible
-	emit_signal("death");
+	emit_signal("player_death");
 
 func _on_coyote_timer_timeout() -> void:
 	jump_is_available = false;
@@ -223,6 +232,9 @@ func _on_box_detector_body_exited(body : CharacterBody2D) -> void:
 	if body is PlayerBox:
 		available_box = null
 
-func _on_damage_taken() -> void:
+func _on_health_changed(health_change : int) -> void:
 	if (!player_died): #slime keeps attacking after player death
-		emit_signal("update_healthbar")
+		emit_signal("health_changed", health_change)
+
+func _on_max_health_changed(max_health_change : int) -> void:
+	emit_signal("max_health_changed", max_health_change)

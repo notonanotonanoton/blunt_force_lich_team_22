@@ -81,7 +81,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 player_sprites = NodePath("DirectionFlip")
@@ -91,6 +91,7 @@ velocity_timer = NodePath("velocityFreezeTimer")
 left_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/LeftArm")
 right_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/RightArm")
 box_sprite = NodePath("DirectionFlip/GenericAnimationTarget/Lich/Box")
+health_node = NodePath("Health")
 speed = 155.0
 acceleration = 0.4
 friction = 0.6
@@ -174,7 +175,6 @@ one_shot = true
 one_shot = true
 
 [connection signal="damage_taken" from="Health" to="." method="_on_damage_taken"]
-[connection signal="death_signal" from="Health" to="." method="_on_health_death_signal"]
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
