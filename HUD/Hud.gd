@@ -6,6 +6,7 @@ extends Node
 @export var empty_heart : Texture2D
 
 var character : PlayerCharacter
+var health_module : HealthComponent
 
 enum HealthLevel {
 	FULL,
@@ -24,11 +25,13 @@ func _on_children_entered() -> void:
 	for node in get_parent().get_children():
 		if node is PlayerCharacter:
 			character = node
-
+	health_module = character.get_node("Health")
+	
 	character.health_changed.connect(_on_character_health_changed)
 	character.max_health_changed.connect(_on_character_max_health_changed)
 
 func _on_character_health_changed(current_health : int) -> void:
+	print(current_health)
 	pass
 
 func _on_character_max_health_changed(current_max_health : int) -> void:

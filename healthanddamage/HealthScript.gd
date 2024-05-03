@@ -72,6 +72,7 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
 		else:
+			emit_signal("health_changed") #testa ha den där 
 			emit_signal("damage_taken")
 	
 func _on_timer_timeout() -> void:
