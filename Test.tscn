@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_ymwx5"]
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="2_hpaix"]
 [ext_resource type="PackedScene" uid="uid://cupv7wvlaedxn" path="res://playerbox/PlayerBox.tscn" id="4_ak2be"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="5_7nwqq"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="6_jaqc5"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="5_7nwqq"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="6_jaqc5"]
 [ext_resource type="PackedScene" uid="uid://bvdm34jbnkrr4" path="res://enemy/Enemy.tscn" id="7_eewdf"]
 
 [node name="Scene_Root" type="Node2D"]
