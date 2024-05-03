@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bodo0mxlvmgdg"]
+[gd_scene load_steps=4 format=3 uid="uid://bodo0mxlvmgdg"]
 
 [ext_resource type="Script" path="res://sharedmodules/GenericAnimations.gd" id="1_k0py3"]
+[ext_resource type="PackedScene" uid="uid://17w1u40hsigi" path="res://sharedmodules/DeathDustCloudFG.tscn" id="2_r1uih"]
+[ext_resource type="PackedScene" uid="uid://beo0vp02q6oi7" path="res://sharedmodules/DeathDustCloudBG.tscn" id="3_db3q8"]
 
 [node name="GenericAnimations" type="Node2D"]
 script = ExtResource("1_k0py3")
+death_dust_cloud_fg = ExtResource("2_r1uih")
+death_dust_cloud_bg = ExtResource("3_db3q8")

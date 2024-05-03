@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://beo0vp02q6oi7"]
+
+[ext_resource type="Texture2D" uid="uid://cl4jkvyv5rcyu" path="res://sharedmodules/death_dust_cloud_bg.png" id="1_jyqqf"]
+[ext_resource type="Script" path="res://sharedmodules/DeathDustCloud.gd" id="2_jpn3i"]
+
+[node name="DeathDustCloudBG" type="Sprite2D"]
+texture = ExtResource("1_jyqqf")
+script = ExtResource("2_jpn3i")

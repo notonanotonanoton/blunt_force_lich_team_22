@@ -174,7 +174,7 @@ one_shot = true
 [node name="velocityFreezeTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="damage_taken" from="Health" to="." method="_on_damage_taken"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
