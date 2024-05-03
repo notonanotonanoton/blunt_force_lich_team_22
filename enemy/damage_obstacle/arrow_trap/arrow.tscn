@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm0upf1ctfep6"]
+
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="1_8k50d"]
+[ext_resource type="Script" path="res://enemy/damage_obstacle/arrow_trap/arrow.gd" id="1_fw7wa"]
+[ext_resource type="Texture2D" uid="uid://dods0drhoxk2n" path="res://icon.svg" id="2_hkup0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioc0h"]
+size = Vector2(30, 4)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fw7wa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.06639e-07, -1.49012e-07)
+scale = Vector2(0.234375, 0.03125)
+texture = ExtResource("2_hkup0")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("1_8k50d")]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_ioc0h")
