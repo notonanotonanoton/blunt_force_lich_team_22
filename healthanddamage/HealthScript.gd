@@ -6,6 +6,8 @@ class_name HealthComponent
 
 @export_category("Values")
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.3
+@export var invincibility_time : float = 0.75
+
 @export_range(0, 200, 10) var knockback_strength : int = 100
 @export_range(-200, 0, 10) var knockback_up_strength : int = -60
 @export_range(1, 50, 1) var health : int = 3
@@ -14,9 +16,12 @@ var max_health : int = health
 
 # big characters should have a smaller modifier
 
-var timer : Timer = Timer.new()
+var stun_timer : Timer = Timer.new()
+var invincibility_timer : Timer = Timer.new()
 var parent : CharacterBody2D
 var max_parent_acceleration : float
+var player_left_hitbox : bool = true
+var latest_enemy_hit_pos
 
 signal death
 signal health_changed
@@ -30,11 +35,17 @@ func _ready() -> void:
 	max_parent_acceleration = parent.acceleration
 	
 	
-	timer.connect("timeout", _on_timer_timeout)
+	stun_timer.connect("timeout", _on_stun_timer_timeout)
 
-	timer.wait_time = knockback_stun
-	timer.one_shot = true
-	add_child(timer)
+	stun_timer.wait_time = knockback_stun
+	stun_timer.one_shot = true
+	add_child(stun_timer)
+	
+	invincibility_timer.connect("timeout", on_invincibility_timer_timeout)
+
+	invincibility_timer.wait_time = invincibility_time
+	invincibility_timer.one_shot = true
+	add_child(invincibility_timer)
 
 #this will currently cause issues with player HUD
 func set_health(hp : int) -> void:
@@ -52,8 +63,9 @@ func get_max_health() -> int:
 	return max_health
 
 func take_damage(damage : int, enemy_position : Vector2) -> void:
-	
-	if timer.is_stopped() == true:
+	player_left_hitbox = false;
+	latest_enemy_hit_pos = enemy_position
+	if invincibility_timer.is_stopped() == true:
 		health -= damage
 		
 		var knockback : int = knockback_strength
@@ -67,14 +79,22 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 		parent.velocity = Vector2i(knockback, knockback_up_strength)
 		
 		parent.acceleration = 0
-		timer.start()
+		stun_timer.start()
+		invincibility_timer.start()
 		if(health<=0):
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
 		else:
 			emit_signal("damage_taken")
 	
-func _on_timer_timeout() -> void:
+func _on_stun_timer_timeout() -> void:
 	parent.acceleration = max_parent_acceleration
 
+		
+func on_invincibility_timer_timeout() -> void:
+	if(player_left_hitbox == false):
+		take_damage(1, latest_enemy_hit_pos)
 
+func update_player_left_hitbox():
+	player_left_hitbox = true
+	
