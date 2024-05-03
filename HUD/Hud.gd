@@ -24,6 +24,7 @@ func _on_children_entered() -> void:
 	for node in get_parent().get_children():
 		if node is PlayerCharacter:
 			character = node
+
 	character.health_changed.connect(_on_character_health_changed)
 	character.max_health_changed.connect(_on_character_max_health_changed)
 
