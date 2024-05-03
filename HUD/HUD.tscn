@@ -1,6 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfhtp1jp0gogq"]
 
 [ext_resource type="Script" path="res://HUD/Hud.gd" id="1_afw2d"]
+
 [ext_resource type="Texture2D" uid="uid://cw1ovxqg0w4vq" path="res://hud/bar_accent.png" id="1_hoynb"]
 [ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://hud/health_bar_texture.tres" id="2_qc45e"]
 [ext_resource type="Texture2D" uid="uid://cng2bshf0lse0" path="res://hud/heart_container_half.png" id="3_knw06"]

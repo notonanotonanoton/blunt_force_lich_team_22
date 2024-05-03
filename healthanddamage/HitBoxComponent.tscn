@@ -6,3 +6,4 @@
 script = ExtResource("1_oi5di")
 
 [connection signal="area_entered" from="." to="." method="_on_hit_box_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
