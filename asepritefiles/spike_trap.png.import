@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqaflvu68csdr"
-path="res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"
+uid="uid://c16nu57r7jjug"
+path="res://.godot/imported/spike_trap.png-c6dbf51fa470ad4494e53bc2ef5335a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/heart_container_full.png"
-dest_files=["res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"]
+source_file="res://asepritefiles/spike_trap.png"
+dest_files=["res://.godot/imported/spike_trap.png-c6dbf51fa470ad4494e53bc2ef5335a7.ctex"]
 
 [params]
 

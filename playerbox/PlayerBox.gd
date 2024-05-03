@@ -11,6 +11,7 @@ class_name PlayerBox
 @export_range(0, 1, 0.1) var friction : float = 0.8
 @export_range(0, 1, 0.05) var minimum_arming_time : float = 0.1
 @export_range(0, 300, 1) var minimum_damage_speed : int = 80
+@export_range(0, 300, 10) var hit_bounce_strength : int = 150
 
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var holder : PlayerCharacter
@@ -66,3 +67,12 @@ func show_box() -> void:
 	collision_shape.set_deferred("disabled", false)
 	hitbox.set_deferred("disabled", false)
 	visible = true
+
+
+func _on_hit_box_component_dealt_damage(target_global_position : Vector2):
+	var knockback = hit_bounce_strength
+	if target_global_position.direction_to(global_position).x < 0:
+		knockback *= -1
+	
+	velocity = Vector2i(knockback, (knockback + 1) / 2)
+	
