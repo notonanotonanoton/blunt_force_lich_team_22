@@ -8,24 +8,9 @@ class_name HealthComponent
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.3
 @export_range(0, 200, 10) var knockback_strength : int = 100
 @export_range(-200, 0, 10) var knockback_up_strength : int = -60
-@export_range(1, 50, 1) var health : int = 3 :
-	set(new_health):
-		if new_health < 0:
-			health = 0
-		elif new_health > max_health:
-			health = max_health
-		else:
-			health = new_health
-		emit_signal("health_changed", health)
+@export_range(1, 50, 1) var health : int = 3
 
-var max_health : int = health :
-	set(new_max_health):
-		if new_max_health < 0:
-			max_health = 0
-		else:
-			max_health = new_max_health
-		print("max health changed, health script")
-		emit_signal("max_health_changed", max_health)
+var max_health : int = health
 
 # big characters should have a smaller modifier
 
