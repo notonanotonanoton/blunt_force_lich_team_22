@@ -18,3 +18,5 @@ layer_5/tile_data = PackedInt32Array(1179619, 2, 1, 1114083, 2, 1610612737, 1048
 [node name="HUDCanvas" parent="." instance=ExtResource("4_50iu8")]
 
 [node name="Game_Over_Screen" parent="." instance=ExtResource("5_bx3wq")]
+
+[connection signal="loaded_children" from="GraveyardTileMap" to="HUDCanvas" method="_on_children_entered"]
