@@ -8,20 +8,39 @@ class_name HealthComponent
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.3
 @export_range(0, 200, 10) var knockback_strength : int = 100
 @export_range(-200, 0, 10) var knockback_up_strength : int = -60
-@export_range(1, 50, 1) var health : int = 3
+@export_range(1, 50, 1) var health : int = 3 :
+	set(new_health):
+		if new_health < 0:
+			health = 0
+		elif new_health > max_health:
+			health = max_health
+		else:
+			health = new_health
+		emit_signal("health_changed", health)
+
+var max_health : int = health :
+	set(new_max_health):
+		if new_max_health < 0:
+			max_health = 0
+		else:
+			max_health = new_max_health
+		print("max health changed, health script")
+		emit_signal("max_health_changed", max_health)
 
 # big characters should have a smaller modifier
 
 var timer : Timer = Timer.new()
-var max_health : int
 var parent : CharacterBody2D
 var max_parent_acceleration : float
 
-signal death_signal
+signal death
+signal health_changed
+signal max_health_changed
 signal damage_taken
 
 func _ready() -> void:
 	parent = get_parent()
+	
 	max_health = health
 	max_parent_acceleration = parent.acceleration
 	
@@ -32,6 +51,7 @@ func _ready() -> void:
 	timer.one_shot = true
 	add_child(timer)
 
+#this will currently cause issues with player HUD
 func set_health(hp : int) -> void:
 	health = hp
 
@@ -63,13 +83,11 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 		
 		parent.acceleration = 0
 		timer.start()
-		emit_signal("damage_taken")
 		if(health<=0):
-			health = 0
-			if(get_parent() is PlayerCharacter):
-				emit_signal("death_signal")
-			else:
-				get_parent().queue_free()
+			#queue_free handled in genericanimations
+			emit_signal("death", parent.global_position)
+		else:
+			emit_signal("damage_taken")
 	
 func _on_timer_timeout() -> void:
 	parent.acceleration = max_parent_acceleration

@@ -6,6 +6,8 @@ class_name GenericAnimations
 @export var animation_target : Node2D
 @export var health_node : HealthComponent
 @export var character : CharacterBody2D
+@export var death_dust_cloud_fg : PackedScene
+@export var death_dust_cloud_bg : PackedScene
 
 @export_category("Values")
 @export_range(0, 10, 1) var walk_rotation_degree : int = 5
@@ -23,6 +25,7 @@ func _ready() -> void:
 	health_node.damage_taken.connect(_on_damage_taken)
 	character.step_taken.connect(_on_step_taken)
 	character.jumped.connect(_on_jumped)
+	health_node.death.connect(_on_death)
 
 #will have issues if called a second time before finishing,
 #therefore the tweens are saved outside of the function and
@@ -97,6 +100,22 @@ func jump_animation() -> void:
 	jump_squish.parallel().tween_property(animation_target, "scale", Vector2(0.9, 1.1), 0.2)
 	jump_squish.tween_property(animation_target, "scale", Vector2(1, 1), 0.1).set_delay(0.1)
 
+#queue_free is handled here instead
+func death_animation(pos : Vector2i) -> void:
+	var parent : CharacterBody2D = get_parent()
+	var root : Node2D = parent.get_parent()
+	var fg_instance : DustCloudAnimation = death_dust_cloud_fg.instantiate()
+	var bg_instance : DustCloudAnimation = death_dust_cloud_bg.instantiate()
+	
+	root.add_child(fg_instance)
+	root.add_child(bg_instance)
+	
+	fg_instance.start(pos, -30, pos.y - 40)
+	bg_instance.start(pos, 45, pos.y - 40)
+	
+	if not parent is PlayerCharacter:
+		parent.queue_free()
+
 func _on_damage_taken() -> void:
 	take_damage_animation()
 
@@ -105,3 +124,6 @@ func _on_step_taken() -> void:
 
 func _on_jumped() -> void:
 	jump_animation() 
+
+func _on_death(position : Vector2i) -> void:
+	death_animation(position)
