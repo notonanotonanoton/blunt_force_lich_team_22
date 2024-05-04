@@ -25,6 +25,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	enemy.aggro_radius.shape.radius += aggro_range_increase
+	enemy.flip_gravity(false)
 
 func exit() -> void:
 	enemy.target_player = null
@@ -47,10 +48,8 @@ func physics_update(delta : float) -> void:
 
 #enemies should all implement their own attacks.
 func attack(delta : float) -> void:
-	var behavior : EnemyBehaviorExtension = enemy.behavior_extension
-	
-	if behavior != null:
-		behavior.attack(delta)
+	if enemy.behavior_extension:
+		enemy.behavior_extension.attack(delta)
 	
 	attack_timer.start(randf_range(attack_speed-0.1, attack_speed+0.1))
 

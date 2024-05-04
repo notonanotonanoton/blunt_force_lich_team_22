@@ -21,7 +21,7 @@ var invincibility_timer : Timer = Timer.new()
 var parent : CharacterBody2D
 var max_parent_acceleration : float
 var player_left_hitbox : bool = true
-var latest_enemy_hit_pos
+var latest_enemy_hit_pos : Vector2
 
 signal death
 signal health_changed
@@ -95,6 +95,6 @@ func on_invincibility_timer_timeout() -> void:
 	if(player_left_hitbox == false):
 		take_damage(1, latest_enemy_hit_pos)
 
-func update_player_left_hitbox():
+func update_player_left_hitbox() -> void:
 	player_left_hitbox = true
 	

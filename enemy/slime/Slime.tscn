@@ -1,228 +1,154 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbb1d8qrv2mol"]
+[gd_scene load_steps=18 format=3 uid="uid://dcvp2cmkmvptm"]
 
-[ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="1_4mymv"]
-[ext_resource type="Script" path="res://enemy/slime/Slime.gd" id="1_ak0gr"]
-[ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ggbrp"]
-[ext_resource type="Script" path="res://states/enemy/slime/SlimeIdle.gd" id="3_oekhu"]
-[ext_resource type="Script" path="res://states/enemy/slime/SlimeAggro.gd" id="5_yc75d"]
-[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="6_yud86"]
+[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_qdmu2"]
+[ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_cxvn0"]
+[ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_umadh"]
+[ext_resource type="Script" path="res://states/StateMachine.gd" id="4_25h2n"]
+[ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="5_qxqf4"]
+[ext_resource type="Script" path="res://states/enemy/EnemyIdle.gd" id="6_4q57u"]
+[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="7_go46b"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="8_qmwvd"]
+[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_eua0n"]
+[ext_resource type="Script" path="res://enemy/slime/SlimeBehavior.gd" id="10_cgpk1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhswi"]
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjqul"]
+size = Vector2(6, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7a1x"]
+size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
-size = Vector2(22, 14)
+size = Vector2(20, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ili36"]
-size = Vector2(22, 14)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycj8t"]
+radius = 50.0
 
-[sub_resource type="Animation" id="Animation_waw3d"]
-resource_name = "High_Jump"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 1.6), Vector2(1, 2.2)]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lnhu"]
+size = Vector2(20, 12)
 
-[sub_resource type="Animation" id="Animation_1j23r"]
-resource_name = "Look_Left"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
+size = Vector2(20, 12)
 
-[sub_resource type="Animation" id="Animation_wgy23"]
-resource_name = "Look_Right"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension")]
+collision_layer = 4
+script = ExtResource("1_qdmu2")
+aggro_radius = NodePath("AggroRadius/CollisionShape2D")
+direction_flip = NodePath("DirectionFlip")
+sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
+ground_detector = NodePath("DirectionFlip/GroundDetector")
+low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
+jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+collision = NodePath("CollisionShape2D")
+behavior_extension = NodePath("SlimeBehavior")
 
-[sub_resource type="Animation" id="Animation_v1ve6"]
-resource_name = "Moving"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.5, 1), Vector2(1, 1)]
-}
+[node name="DirectionFlip" type="Node2D" parent="."]
 
-[sub_resource type="Animation" id="Animation_6der2"]
-resource_name = "Normal_Jump"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.3, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.8), Vector2(1, 0.7), Vector2(1, 1)]
-}
+[node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
 
-[sub_resource type="Animation" id="Animation_ew7sh"]
-resource_name = "On_Ceiling"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1e-05),
-"update": 0,
-"values": [3.14159]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1e-05),
-"update": 0,
-"values": [Vector2(0, -7)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1.32837e-05),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
+[node name="Sprite2D" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
+texture = ExtResource("2_cxvn0")
 
-[sub_resource type="Animation" id="Animation_x504i"]
-resource_name = "reset"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 7)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
+[node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0vlm"]
-_data = {
-"High_Jump": SubResource("Animation_waw3d"),
-"Look_Left": SubResource("Animation_1j23r"),
-"Look_Right": SubResource("Animation_wgy23"),
-"Moving": SubResource("Animation_v1ve6"),
-"Normal_Jump": SubResource("Animation_6der2"),
-"On_Ceiling": SubResource("Animation_ew7sh"),
-"reset": SubResource("Animation_x504i")
-}
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_lhswi")
 
-[node name="Slime" type="CharacterBody2D"]
-collision_layer = 258
-collision_mask = 257
-script = ExtResource("1_ak0gr")
+[node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 7)
-texture = ExtResource("1_4mymv")
-offset = Vector2(0, -16)
-flip_h = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
+position = Vector2(16, -20)
+shape = SubResource("RectangleShape2D_pjqul")
+
+[node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
+position = Vector2(16, 64)
+shape = SubResource("RectangleShape2D_o7a1x")
+
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_umadh")]
+animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
+health_node = NodePath("../HealthComponent")
+character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_fsb11")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
-script = ExtResource("3_ggbrp")
-inital_state = NodePath("SlimeIdle")
+script = ExtResource("4_25h2n")
+inital_state = NodePath("EnemyIdle")
 
-[node name="SlimeIdle" type="Node" parent="StateMachine"]
-script = ExtResource("3_oekhu")
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
+script = ExtResource("5_qxqf4")
+enemy = NodePath("../..")
+attack_timer = NodePath("AttackTimer")
+proximity_timer = NodePath("ProximityTimer")
 
-[node name="Timer" type="Timer" parent="StateMachine/SlimeIdle"]
-wait_time = 2.0
-
-[node name="SlimeAgro" type="Node" parent="StateMachine"]
-script = ExtResource("5_yc75d")
-
-[node name="Timer" type="Timer" parent="StateMachine/SlimeAgro"]
+[node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
+process_callback = 0
 one_shot = true
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("6_yud86")]
+[node name="ProximityTimer" type="Timer" parent="StateMachine/EnemyAggro"]
+process_callback = 0
+one_shot = true
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "timer", "timer_move")]
+script = ExtResource("6_4q57u")
+enemy = NodePath("../..")
+timer = NodePath("IdleTimer")
+timer_move = NodePath("IdleTimerMove")
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/EnemyIdle"]
+process_callback = 0
+one_shot = true
+
+[node name="IdleTimerMove" type="Timer" parent="StateMachine/EnemyIdle"]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="AggroRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_ycj8t")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_go46b")]
+generic_animations = NodePath("../GenericAnimations")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("8_qmwvd")]
+collision_layer = 0
+collision_mask = 2
+monitorable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-shape = SubResource("RectangleShape2D_ili36")
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_1lnhu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_i0vlm")
-}
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_eua0n")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
 
-[connection signal="timeout" from="StateMachine/SlimeIdle/Timer" to="StateMachine/SlimeIdle" method="_on_timer_timeout"]
-[connection signal="timeout" from="StateMachine/SlimeAgro/Timer" to="StateMachine/SlimeAgro" method="_on_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_hk280")
+
+[node name="SlimeBehavior" type="Node" parent="." node_paths=PackedStringArray("enemy")]
+script = ExtResource("10_cgpk1")
+enemy = NodePath("..")
+
+[connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
+[connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
+[connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]
