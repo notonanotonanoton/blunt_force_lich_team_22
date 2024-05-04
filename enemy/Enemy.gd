@@ -63,7 +63,6 @@ func apply_gravity(delta : float) -> void:
 		elif up_direction.y == 1 and velocity.y > 0:
 			velocity.y -= (default_gravity * gravity_scale) * delta
 		elif velocity.y < max_fall_speed:
-			print("this")
 			velocity.y += ((fast_fall_gravity * gravity_scale) * (up_direction.y * -1)) * delta
 		# Ensure fall speed past max is consistent
 		else:

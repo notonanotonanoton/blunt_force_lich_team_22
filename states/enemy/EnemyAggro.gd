@@ -54,10 +54,8 @@ func attack(delta : float) -> void:
 	attack_timer.start(randf_range(attack_speed-0.1, attack_speed+0.1))
 
 func proximity_action(delta : float) -> void:
-	var behavior : EnemyBehaviorExtension = enemy.behavior_extension
-	
-	if behavior != null:
-		behavior.proximity_action(delta)
+	if enemy.behavior_extension:
+		enemy.behavior_extension.proximity_action(delta)
 	
 	proximity_timer.start(randf_range(attack_speed-0.1, attack_speed+0.1))
 
