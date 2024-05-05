@@ -37,7 +37,11 @@ func update(delta : float) -> void:
 
 func physics_update(delta : float) -> void:
 	get_distance()
-	enemy.move(delta, 1.0)
+	
+	if enemy.is_ranged and distance_to_player <= attack_range:
+		enemy.stop_move(delta)
+	else:
+		enemy.move(delta, 1.0)
 	
 	#condition may have to be changed for enemies that want to move and attack at the same time
 	if distance_to_player <= attack_range and attack_timer.is_stopped():
