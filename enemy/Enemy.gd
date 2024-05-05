@@ -92,7 +92,8 @@ func handle_wall_or_gap(delta : float) -> void:
 	#currently this makes the enemy jump when it's against a wall and
 	#lookinig_direction *= -1 is called. this may be left as is or fixed in the future
 	elif(is_on_wall()):
-		if(jump_block_detector.has_overlapping_bodies() and not aggro_radius.shape.radius == aggro_range):
+		#this check is dependent on EnemyAggro temporarily changing the radius
+		if(jump_block_detector.has_overlapping_bodies() and aggro_radius.shape.radius == aggro_range):
 			looking_direction *= -1
 		else:
 			jump(delta, 1.0, false)
