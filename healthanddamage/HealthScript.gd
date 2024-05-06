@@ -46,6 +46,10 @@ func _ready() -> void:
 	invincibility_timer.wait_time = invincibility_time
 	invincibility_timer.one_shot = true
 	add_child(invincibility_timer)
+	
+	#For test purposes
+	await get_tree().create_timer(25).timeout
+	set_max_health(8)
 
 #this will currently cause issues with player HUD
 func set_health(hp : int) -> void:
@@ -61,6 +65,14 @@ func get_health() -> int:
 
 func get_max_health() -> int:
 	return max_health
+	
+func set_max_health(new_max_health : int) -> void:
+	if (new_max_health < max_health):
+		health -= 2
+	else:
+		health += 2
+	max_health = new_max_health
+	emit_signal("max_health_changed", new_max_health)
 
 func take_damage(damage : int, enemy_position : Vector2) -> void:
 	player_left_hitbox = false;
@@ -81,11 +93,11 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 		parent.acceleration = 0
 		stun_timer.start()
 		invincibility_timer.start()
+		emit_signal("health_changed", damage)  
+		emit_signal("damage_taken")
 		if(health<=0):
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
-		else:
-			emit_signal("damage_taken")
 	
 func _on_stun_timer_timeout() -> void:
 	parent.acceleration = max_parent_acceleration

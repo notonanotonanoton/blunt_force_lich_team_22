@@ -11,24 +11,30 @@
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="7_qu88o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cc5tl"]
+resource_local_to_scene = true
 size = Vector2(8, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+resource_local_to_scene = true
 size = Vector2(8, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4xav"]
+resource_local_to_scene = true
 size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(20, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ycj8t"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_168vn"]
+resource_local_to_scene = true
 radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lnhu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c58vq"]
+resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0lg1"]
+resource_local_to_scene = true
 size = Vector2(20, 12)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision")]
@@ -119,7 +125,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_ycj8t")
+shape = SubResource("CircleShape2D_168vn")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
 generic_animations = NodePath("../GenericAnimations")
@@ -130,7 +136,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_1lnhu")
+shape = SubResource("RectangleShape2D_c58vq")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_qu88o")]
 collision_layer = 4
@@ -139,7 +145,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_hk280")
+shape = SubResource("RectangleShape2D_c0lg1")
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]

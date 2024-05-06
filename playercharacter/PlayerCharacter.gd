@@ -61,7 +61,6 @@ var available_box : PlayerBox
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_time
 	velocity_timer.wait_time = velocity_time
-	
 	health_node.health_changed.connect(_on_health_changed)
 	health_node.max_health_changed.connect(_on_max_health_changed)
 
@@ -243,7 +242,7 @@ func _on_box_detector_body_exited(body : CharacterBody2D) -> void:
 		available_box = null
 
 func _on_health_changed(health_change : int) -> void:
-	if (!player_died): #slime keeps attacking after player death
+	if (!player_died): 
 		emit_signal("health_changed", health_change)
 
 func _on_max_health_changed(max_health_change : int) -> void:
