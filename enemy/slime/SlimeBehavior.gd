@@ -18,7 +18,9 @@ func _physics_process(delta : float) -> void:
 
 func attack(delta : float) -> void:
 	#write action here
-	pass
+	enemy.jump(delta,0.5,true)
+	enemy.velocity.x = delta*150*enemy.speed*enemy.looking_direction
+	enemy.stop_move(delta)
 
 func proximity_action(delta : float) -> void:
 	#write action here

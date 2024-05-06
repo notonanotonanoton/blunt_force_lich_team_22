@@ -90,6 +90,7 @@ func jump_cut() -> void:
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
+
 func _process_jump() -> void:
 		# Handle jump. i couldn't figure out how to move this out
 	if Input.is_action_just_pressed("ui_up") and jump_is_available and not player_jumped:
