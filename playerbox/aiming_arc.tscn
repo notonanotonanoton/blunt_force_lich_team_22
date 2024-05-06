@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://4wr5jop7or0"]
+
+[ext_resource type="Shader" path="res://playerbox/aiming_arc_shader.gdshader" id="1_nve2k"]
+[ext_resource type="Script" path="res://playerbox/aiming_arc.gd" id="1_y5h4o"]
+[ext_resource type="Texture2D" uid="uid://dja80hde85b0f" path="res://asepritefiles/aiming_arc_line.png" id="2_a6ehf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpl5u"]
+shader = ExtResource("1_nve2k")
+
+[node name="AimingArc" type="Line2D"]
+material = SubResource("ShaderMaterial_dpl5u")
+points = PackedVector2Array(1043, 7, 1064, 40, 1124, 58, 1184, 5, 1172, -12, 1083, -43)
+texture = ExtResource("2_a6ehf")
+texture_mode = 1
+script = ExtResource("1_y5h4o")

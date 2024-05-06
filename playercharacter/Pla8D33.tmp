@@ -85,6 +85,9 @@ size = Vector2(8, 20)
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox", "aiming_arc")]
 collision_layer = 2
 script = ExtResource("1_iplij")
+speed = 155.0
+acceleration = 0.4
+friction = 0.6
 player_sprites = NodePath("DirectionFlip")
 animation_player = NodePath("AnimationPlayer")
 coyote_timer = NodePath("CoyoteTimer")
@@ -96,17 +99,6 @@ health_node = NodePath("Health")
 collision = NodePath("CollisionShape2D")
 hurtbox = NodePath("HurtBox")
 aiming_arc = NodePath("AimingArc")
-speed = 155.0
-acceleration = 0.4
-jump_velocity = null
-friction = 0.6
-max_fall_speed = null
-coyote_time = null
-velocity_time = null
-throw_force_x = null
-throw_force_y = null
-throw_charge_rate = null
-can_deal_damage = null
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -187,6 +179,7 @@ one_shot = true
 one_shot = true
 
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
+position = Vector2(1433.42, 342.99)
 
 [connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
