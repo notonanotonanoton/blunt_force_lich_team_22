@@ -98,15 +98,7 @@ hurtbox = NodePath("HurtBox")
 aiming_arc = NodePath("AimingArc")
 speed = 155.0
 acceleration = 0.4
-jump_velocity = null
 friction = 0.6
-max_fall_speed = null
-coyote_time = null
-velocity_time = null
-throw_force_x = null
-throw_force_y = null
-throw_charge_rate = null
-can_deal_damage = null
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 

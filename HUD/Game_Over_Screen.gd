@@ -20,5 +20,5 @@ func _on_retry_button_pressed() -> void:
 	#print("retry button pressed")
 	get_tree().reload_current_scene()
 
-func _on_player_character_player_death():	
+func _on_player_character_player_death() -> void:	
 	visible = true
