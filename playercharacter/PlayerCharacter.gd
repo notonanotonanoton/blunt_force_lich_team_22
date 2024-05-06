@@ -242,6 +242,7 @@ func _on_box_detector_body_exited(body : CharacterBody2D) -> void:
 		available_box = null
 
 func _on_health_changed(health_change : int) -> void:
+	print("????")
 	if (!player_died): #slime keeps attacking after player death
 		emit_signal("health_changed", health_change)
 
