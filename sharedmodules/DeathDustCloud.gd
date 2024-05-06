@@ -10,7 +10,7 @@ func start(pos : Vector2i, rot_deg : int, height : int) -> void:
 	
 	tween.tween_property(self, "rotation_degrees", rot_deg, 1)
 	tween.tween_property(self, "position:y", height, 1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1, 0.2), 1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 1)
 	
 	await tween.finished
 	queue_free()

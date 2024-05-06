@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxgro3ipcb"
-path="res://.godot/imported/character_phylactery.png-655c810ef61e07d91ee2906d65034d07.ctex"
+uid="uid://b7bwdc7lbdug3"
+path="res://.godot/imported/box_outline.png-574855563460cda7f6e6953e185895ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://playerbox/character_phylactery.png"
-dest_files=["res://.godot/imported/character_phylactery.png-655c810ef61e07d91ee2906d65034d07.ctex"]
+source_file="res://playerbox/box_outline.png"
+dest_files=["res://.godot/imported/box_outline.png-574855563460cda7f6e6953e185895ba.ctex"]
 
 [params]
 

@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	if arming_timer.is_stopped() and abs(velocity.x) > minimum_damage_speed:
-		sprite.modulate = Color(1.5, 1.5, 1.5)
+		sprite.modulate = Color(1.8, 1.8, 2.0)
 		can_deal_damage = true
 	else:
 		sprite.modulate = Color(1, 1, 1)
