@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=18 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
+[ext_resource type="PackedScene" uid="uid://4wr5jop7or0" path="res://playerbox/aiming_arc.tscn" id="11_uyfgt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 20)
@@ -81,7 +82,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox", "aiming_arc")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 player_sprites = NodePath("DirectionFlip")
@@ -94,9 +95,18 @@ box_sprite = NodePath("DirectionFlip/GenericAnimationTarget/Lich/Box")
 health_node = NodePath("Health")
 collision = NodePath("CollisionShape2D")
 hurtbox = NodePath("HurtBox")
+aiming_arc = NodePath("AimingArc")
 speed = 155.0
 acceleration = 0.4
+jump_velocity = null
 friction = 0.6
+max_fall_speed = null
+coyote_time = null
+velocity_time = null
+throw_force_x = null
+throw_force_y = null
+throw_charge_rate = null
+can_deal_damage = null
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -175,6 +185,8 @@ one_shot = true
 
 [node name="velocityFreezeTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
 
 [connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]

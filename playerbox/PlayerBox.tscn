@@ -11,13 +11,14 @@ size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
 size = Vector2(14, 14)
 
-[node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer", "sprite", "collision_shape", "hitbox")]
+[node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer", "sprite", "collision_shape", "hitbox", "aiming_arc")]
 collision_layer = 8
 script = ExtResource("1_w7fsv")
 arming_timer = NodePath("ArmingTimer")
 sprite = NodePath("Sprite2D")
 collision_shape = NodePath("CollisionShape2D")
 hitbox = NodePath("HitBoxComponent")
+aiming_arc = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.36442e-07)

@@ -13,6 +13,8 @@ class_name PlayerBox
 @export_range(0, 300, 1) var minimum_damage_speed : int = 80
 @export_range(0, 300, 10) var hit_bounce_strength : int = 150
 
+@export var aiming_arc : Aiming_Arc
+
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var holder : PlayerCharacter
 #needed for healthmodule implementation
@@ -39,6 +41,7 @@ func _physics_process(delta : float) -> void:
 	if is_on_floor():
 		if velocity.x > 0 or velocity.x < 0:
 			velocity.x -= (velocity.x * 10) * (friction * delta)
+	
 	
 	move_and_slide()
 

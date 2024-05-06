@@ -13,6 +13,7 @@ class_name PlayerCharacter
 @export var health_node : HealthComponent
 @export var collision : CollisionShape2D
 @export var hurtbox : hurt_box_component
+@export var aiming_arc : Aiming_Arc
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : float = 165.0
@@ -125,6 +126,7 @@ func _process_throw(delta : float) -> void:
 		if Input.is_action_just_released("interact_or_throw"):
 			interact_released = true
 			if charge_time > 0.0:
+				
 				apply_carrying_sprites(false)
 				var jump_vel : Vector2 = Vector2(0, 0)
 				if velocity.y < 0:
@@ -132,6 +134,7 @@ func _process_throw(delta : float) -> void:
 				var direction : int = player_sprites.scale.x
 				picked_up_box.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)
+				aiming_arc.clear_points()
 				
 				interact_released = false
 				picked_up_box = null
@@ -148,9 +151,11 @@ func _process_throw(delta : float) -> void:
 		elif Input.is_action_pressed("interact_or_throw") and interact_released:
 			charge_time += throw_charge_rate * delta
 			charge_time = clampf(charge_time, charge_minimum, 1.0)
+			aiming_arc.display_trajectory((Vector2(throw_force_x * player_sprites.scale.x, throw_force_y)*charge_time), delta)
 			player_sprites.rotation_degrees = lerpf(0.0,
 			max_throw_anim_rot_deg * player_sprites.scale.x, charge_time)
 			if Input.is_action_just_pressed("cancel_throw"):
+				aiming_arc.clear_points()
 				charge_time = 0
 				player_sprites.rotation_degrees = 0
 				interact_released = false
