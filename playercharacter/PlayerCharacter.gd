@@ -11,6 +11,9 @@ class_name PlayerCharacter
 @export var right_arm : Sprite2D
 @export var box_sprite : Sprite2D
 @export var health_node : HealthComponent
+@export var collision : CollisionShape2D
+@export var hurtbox : hurt_box_component
+@export var aiming_arc : Aiming_Arc
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : float = 165.0
@@ -89,11 +92,11 @@ func jump_cut() -> void:
 
 func _process_jump() -> void:
 		# Handle jump. i couldn't figure out how to move this out
-	if Input.is_action_just_pressed("ui_accept") and jump_is_available and not player_jumped:
+	if Input.is_action_just_pressed("ui_up") and jump_is_available and not player_jumped:
 		jump()
 		player_jumped = true
 		
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("ui_up"):
 		jump_cut()
 		
 
@@ -123,13 +126,15 @@ func _process_throw(delta : float) -> void:
 		if Input.is_action_just_released("interact_or_throw"):
 			interact_released = true
 			if charge_time > 0.0:
+				
 				apply_carrying_sprites(false)
-				#need to save charge_time as multiplier for Tweens because
-				#of time sensitivity
-				var multiplier = charge_time
+				var jump_vel : Vector2 = Vector2(0, 0)
+				if velocity.y < 0:
+					jump_vel = Vector2(0, velocity.y) / 2
 				var direction : int = player_sprites.scale.x
-				picked_up_box.throw(Vector2i(throw_force_x * direction, 
-				throw_force_y) * charge_time)
+				picked_up_box.throw((Vector2(throw_force_x * direction, 
+				throw_force_y) * charge_time) + jump_vel)
+				aiming_arc.clear_points()
 				
 				interact_released = false
 				picked_up_box = null
@@ -142,15 +147,18 @@ func _process_throw(delta : float) -> void:
 				throw_tween.tween_property(player_sprites, "rotation_degrees",
 				(-max_throw_anim_rot_deg) * direction, 0.1)
 				throw_tween.tween_property(player_sprites, "rotation_degrees", 0, 0.5)
-				
-				multiplier = 0.0
-				
 		
 		elif Input.is_action_pressed("interact_or_throw") and interact_released:
 			charge_time += throw_charge_rate * delta
 			charge_time = clampf(charge_time, charge_minimum, 1.0)
+			aiming_arc.display_trajectory((Vector2(throw_force_x * player_sprites.scale.x, throw_force_y)*charge_time), delta)
 			player_sprites.rotation_degrees = lerpf(0.0,
 			max_throw_anim_rot_deg * player_sprites.scale.x, charge_time)
+			if Input.is_action_just_pressed("cancel_throw"):
+				aiming_arc.clear_points()
+				charge_time = 0
+				player_sprites.rotation_degrees = 0
+				interact_released = false
 
 func apply_carrying_sprites(apply : bool) -> void:
 	if apply:
@@ -204,11 +212,12 @@ func _process_movement(delta : float) -> void:
 ##signal functions
 
 #takes in a redundant Vector2i. maybe separate signal?
-func _on_health_death(position : Vector2i) -> void:
+func _on_health_death(_pos : Vector2i) -> void:
 	#freeze the physics process since the game is finished. If we move movement mechanics out of physics process, consider using the player_died variable
 	set_physics_process(false)
 	#removes player detection from game. use better solution like export
-	get_node("CollisionShape2D").set_deferred("disabled", true)
+	collision.set_deferred("disabled", true)
+	hurtbox.set_deferred("monitorable", false)
 	player_died = true;
 	
 	#make player invisible

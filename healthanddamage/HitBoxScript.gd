@@ -17,3 +17,9 @@ func _on_hit_box_entered(area : Area2D) -> void:
 		if get_parent().can_deal_damage:
 			emit_signal("dealt_damage", area.global_position)
 			area.damage(damage, global_position)
+			
+
+
+func _on_area_exited(area : Area2D):
+	if area is hurt_box_component:
+		area.update_player_left()

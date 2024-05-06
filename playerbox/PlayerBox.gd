@@ -9,7 +9,7 @@ class_name PlayerBox
 
 @export_category("Values")
 @export_range(0, 1, 0.1) var friction : float = 0.8
-@export_range(0, 1, 0.05) var minimum_arming_time : float = 0.1
+@export_range(0, 1, 0.05) var minimum_arming_time : float = 0.05
 @export_range(0, 300, 1) var minimum_damage_speed : int = 80
 @export_range(0, 300, 10) var hit_bounce_strength : int = 150
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	if arming_timer.is_stopped() and abs(velocity.x) > minimum_damage_speed:
-		sprite.modulate = Color(1.5, 1.5, 1.5)
+		sprite.modulate = Color(1.8, 1.8, 2.0)
 		can_deal_damage = true
 	else:
 		sprite.modulate = Color(1, 1, 1)
@@ -40,6 +40,7 @@ func _physics_process(delta : float) -> void:
 		if velocity.x > 0 or velocity.x < 0:
 			velocity.x -= (velocity.x * 10) * (friction * delta)
 	
+	
 	move_and_slide()
 
 func pick_up(sender : PlayerCharacter) -> void:
@@ -49,14 +50,10 @@ func pick_up(sender : PlayerCharacter) -> void:
 
 func throw(throw_force : Vector2i) -> void:
 	if holder:
-		var jump_offset : = Vector2i(0, 0)
-		var holder_velocity : int = abs(holder.velocity.y)
-		if holder_velocity >= 1:
-			jump_offset = Vector2i(0, holder_velocity / 2)
 		show_box()
 		holder = null
 		arming_timer.start()
-		velocity = throw_force + jump_offset
+		velocity = throw_force
 
 func hide_box() -> void:
 	collision_shape.set_deferred("disabled", true)

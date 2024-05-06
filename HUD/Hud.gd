@@ -41,7 +41,7 @@ func _on_character_max_health_changed(current_max_health : int) -> void:
 	for child : TextureRect in heart_containers.get_children():
 		if child != null:
 			child.queue_free()
-	for count in range(1, heart_count):
+	for count : int in range(1, heart_count):
 		var new_heart : TextureRect = TextureRect.new()
 		new_heart.texture = full_heart
 		heart_containers.add_child(new_heart)

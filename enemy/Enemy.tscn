@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvdm34jbnkrr4"]
+[gd_scene load_steps=17 format=3 uid="uid://bvdm34jbnkrr4"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_q5kje"]
 [ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_jeryg"]
@@ -10,11 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="7_8em8b"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="7_qu88o"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhswi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cc5tl"]
 size = Vector2(8, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
 size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4xav"]
+size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(20, 12)
@@ -28,7 +31,7 @@ size = Vector2(20, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -37,6 +40,7 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+collision = NodePath("CollisionShape2D")
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -50,7 +54,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_lhswi")
+shape = SubResource("RectangleShape2D_cc5tl")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
@@ -63,8 +67,8 @@ shape = SubResource("RectangleShape2D_f880n")
 collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
-position = Vector2(16, 48)
-shape = SubResource("RectangleShape2D_lhswi")
+position = Vector2(16, 64)
+shape = SubResource("RectangleShape2D_h4xav")
 
 [node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_erwrf")]
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
@@ -79,12 +83,17 @@ shape = SubResource("RectangleShape2D_fsb11")
 script = ExtResource("3_ba1bg")
 inital_state = NodePath("EnemyIdle")
 
-[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer")]
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
 script = ExtResource("4_yeqss")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
+proximity_timer = NodePath("ProximityTimer")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
+process_callback = 0
+one_shot = true
+
+[node name="ProximityTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
 one_shot = true
 
@@ -112,7 +121,8 @@ monitorable = false
 position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_ycj8t")
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_f1jtg")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
+generic_animations = NodePath("../GenericAnimations")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("7_8em8b")]
 collision_layer = 0
