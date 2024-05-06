@@ -13,8 +13,6 @@ class_name PlayerBox
 @export_range(0, 300, 1) var minimum_damage_speed : int = 80
 @export_range(0, 300, 10) var hit_bounce_strength : int = 150
 
-@export var aiming_arc : Aiming_Arc
-
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var holder : PlayerCharacter
 #needed for healthmodule implementation

@@ -2,14 +2,15 @@
 
 [ext_resource type="Shader" path="res://playerbox/aiming_arc_shader.gdshader" id="1_nve2k"]
 [ext_resource type="Script" path="res://playerbox/aiming_arc.gd" id="1_y5h4o"]
-[ext_resource type="Texture2D" uid="uid://dja80hde85b0f" path="res://asepritefiles/aiming_arc_line.png" id="2_a6ehf"]
+[ext_resource type="Texture2D" uid="uid://cgd4in8sk3vaq" path="res://asepritefiles/trajectory_line.png" id="2_yv2wg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpl5u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv0dc"]
 shader = ExtResource("1_nve2k")
 
 [node name="AimingArc" type="Line2D"]
-material = SubResource("ShaderMaterial_dpl5u")
+material = SubResource("ShaderMaterial_lv0dc")
 points = PackedVector2Array(1043, 7, 1064, 40, 1124, 58, 1184, 5, 1172, -12, 1083, -43)
-texture = ExtResource("2_a6ehf")
+texture = ExtResource("2_yv2wg")
 texture_mode = 1
+round_precision = 1
 script = ExtResource("1_y5h4o")
