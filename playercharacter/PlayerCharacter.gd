@@ -223,10 +223,10 @@ func _on_health_death(_pos : Vector2i) -> void:
 	collision.set_deferred("disabled", true)
 	hurtbox_collision.set_deferred("disabled", true)
 	
-	picked_up_box.throw(Vector2i(0, 0))
-	interact_released = false
-	picked_up_box = null
-	charge_time = 0.0
+	if picked_up_box:
+		picked_up_box.throw(Vector2i(0, 0))
+		picked_up_box = null
+		interact_released = false
 	
 	player_died = true;
 	
