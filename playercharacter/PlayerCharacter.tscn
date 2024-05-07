@@ -82,7 +82,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox", "aiming_arc")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 player_sprites = NodePath("DirectionFlip")
@@ -94,7 +94,7 @@ right_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/RightArm")
 box_sprite = NodePath("DirectionFlip/GenericAnimationTarget/Lich/Box")
 health_node = NodePath("Health")
 collision = NodePath("CollisionShape2D")
-hurtbox = NodePath("HurtBox")
+hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 speed = 155.0
 acceleration = 0.4

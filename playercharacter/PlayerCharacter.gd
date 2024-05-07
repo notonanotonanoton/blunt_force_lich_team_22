@@ -12,7 +12,7 @@ class_name PlayerCharacter
 @export var box_sprite : Sprite2D
 @export var health_node : HealthComponent
 @export var collision : CollisionShape2D
-@export var hurtbox : hurt_box_component
+@export var hurtbox_collision : CollisionShape2D
 @export var aiming_arc : Aiming_Arc
 
 @export_category("Values")
@@ -82,10 +82,12 @@ func _physics_process(delta : float) -> void:
 
 ## jump functions
 func jump() -> void:
+	print("jump")
 	velocity.y = jump_velocity
 	emit_signal("jumped")
 
 func jump_cut() -> void:
+	print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
@@ -120,6 +122,8 @@ func _unhandled_input(event : InputEvent) -> void:
 			picked_up_box = available_box
 			picked_up_box.pick_up(self)
 			apply_carrying_sprites(true)
+	
+	
 
 func _process_throw(delta : float) -> void:
 	if picked_up_box:
@@ -217,7 +221,13 @@ func _on_health_death(_pos : Vector2i) -> void:
 	set_physics_process(false)
 	#removes player detection from game. use better solution like export
 	collision.set_deferred("disabled", true)
-	hurtbox.set_deferred("monitorable", false)
+	hurtbox_collision.set_deferred("disabled", true)
+	
+	picked_up_box.throw(Vector2i(0, 0))
+	interact_released = false
+	picked_up_box = null
+	charge_time = 0.0
+	
 	player_died = true;
 	
 	#make player invisible

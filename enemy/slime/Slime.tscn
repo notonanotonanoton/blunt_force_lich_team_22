@@ -11,25 +11,32 @@
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_eua0n"]
 [ext_resource type="Script" path="res://enemy/slime/SlimeBehavior.gd" id="10_cgpk1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhswi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t82ya"]
+resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjqul"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbj8x"]
+resource_local_to_scene = true
 size = Vector2(6, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7a1x"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2w52"]
+resource_local_to_scene = true
 size = Vector2(8, 38)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyalf"]
+resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ycj8t"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_28gfj"]
+resource_local_to_scene = true
 radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lnhu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmvgn"]
+resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk280"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r57kf"]
+resource_local_to_scene = true
 size = Vector2(20, 12)
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension")]
@@ -58,21 +65,21 @@ collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_lhswi")
+shape = SubResource("RectangleShape2D_t82ya")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
-shape = SubResource("RectangleShape2D_pjqul")
+shape = SubResource("RectangleShape2D_xbj8x")
 
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
-shape = SubResource("RectangleShape2D_o7a1x")
+shape = SubResource("RectangleShape2D_t2w52")
 
 [node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_umadh")]
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
@@ -81,7 +88,7 @@ character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_fsb11")
+shape = SubResource("RectangleShape2D_cyalf")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("4_25h2n")
@@ -123,7 +130,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_ycj8t")
+shape = SubResource("CircleShape2D_28gfj")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_go46b")]
 generic_animations = NodePath("../GenericAnimations")
@@ -135,7 +142,7 @@ monitorable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_1lnhu")
+shape = SubResource("RectangleShape2D_nmvgn")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_eua0n")]
 collision_layer = 4
@@ -144,7 +151,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_hk280")
+shape = SubResource("RectangleShape2D_r57kf")
 
 [node name="SlimeBehavior" type="Node" parent="." node_paths=PackedStringArray("enemy")]
 script = ExtResource("10_cgpk1")
