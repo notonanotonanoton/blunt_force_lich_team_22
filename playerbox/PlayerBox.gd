@@ -66,8 +66,8 @@ func show_box() -> void:
 	visible = true
 
 
-func _on_hit_box_component_dealt_damage(target_global_position : Vector2):
-	var knockback = hit_bounce_strength
+func _on_hit_box_component_dealt_damage(target_global_position : Vector2) -> void:
+	var knockback : int = hit_bounce_strength
 	if target_global_position.direction_to(global_position).x < 0:
 		knockback *= -1
 	

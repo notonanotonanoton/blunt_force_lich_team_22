@@ -75,7 +75,7 @@ func _refresh_healthbar() -> void:
 	var health : int = health_module.get_health() 
 	var i : int = 0
 	while i < heart_containers.get_child_count():
-		var current_heart : TextureRect = heart_containers.get_child(i)
+		current_heart = heart_containers.get_child(i)
 		if health >= 2:
 			current_heart.texture = full_heart
 		elif health == 1:

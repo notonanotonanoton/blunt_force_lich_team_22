@@ -30,7 +30,7 @@ func physics_update(delta : float) -> void:
 	elif(abs(enemy.velocity.x) > 0):
 		enemy.stop_move(delta)
 
-func _on_aggro_radius_body_entered(body : CharacterBody2D):
+func _on_aggro_radius_body_entered(body : CharacterBody2D) -> void:
 	if body is PlayerCharacter:
 		enemy.target_player = body
 		state_transition.emit(self, "EnemyAggro")

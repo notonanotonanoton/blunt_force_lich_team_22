@@ -41,7 +41,7 @@ var charge_time : float = 0.0
 const charge_minimum : float = 0.3
 var charging_throw : bool = false
 const max_throw_anim_rot_deg : float = -20
-var max_throw_force : = Vector2i(throw_force_x, throw_force_y)
+var max_throw_force : Vector2i = Vector2i(throw_force_x, throw_force_y)
 var interact_released : bool = false
 var throw_tween : Tween
 

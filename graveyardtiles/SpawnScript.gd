@@ -15,7 +15,7 @@ signal loaded_children
 
 #decrement global pos with this if you want to start in the corner of the tile
 #i dont know what data type this is
-@onready var half_cell_size := tile_set.tile_size * 0.5
+@onready var half_cell_size : Vector2 = tile_set.tile_size * 0.5
 
 var search_layer : int = 0
 

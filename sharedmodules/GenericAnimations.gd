@@ -125,5 +125,5 @@ func _on_step_taken() -> void:
 func _on_jumped() -> void:
 	jump_animation() 
 
-func _on_death(position : Vector2i) -> void:
-	death_animation(position)
+func _on_death(pos : Vector2i) -> void:
+	death_animation(pos)
