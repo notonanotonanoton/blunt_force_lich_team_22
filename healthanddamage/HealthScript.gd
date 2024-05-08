@@ -48,8 +48,8 @@ func _ready() -> void:
 	add_child(invincibility_timer)
 	
 	#For test purposes
-	await get_tree().create_timer(25).timeout
-	set_max_health(8)
+	#await get_tree().create_timer(25).timeout
+	#set_max_health(8)
 
 #this will currently cause issues with player HUD
 func set_health(hp : int) -> void:

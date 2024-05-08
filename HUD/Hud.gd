@@ -5,6 +5,12 @@ extends Node
 @export var half_heart : Texture2D
 @export var empty_heart : Texture2D
 
+#this has to be replaced or altered with something
+#that works even after replacing the tilemap 
+@export var tilemap : interactive_tilemap
+
+@onready var heart_rect := preload("res://hud/HeartRect.tscn")
+
 var character : PlayerCharacter
 var health_module : HealthComponent
 
@@ -19,9 +25,11 @@ var current_heart_index : int
 var current_heart : TextureRect
 
 func _ready() -> void:
+	tilemap.loaded_children.connect(_on_children_entered)
 	current_heart_index = heart_containers.get_child_count() - 1
 
-func _on_children_entered() -> void: 
+func _on_children_entered() -> void:
+	print("called hud") 
 	await get_tree().create_timer(0.1).timeout
 	for node in get_parent().get_children():
 		if node is PlayerCharacter:
@@ -39,7 +47,7 @@ func _load_hearts() -> void:
 	await get_tree().create_timer(0.1).timeout
 	var heart_count : int = health_module.get_max_health() / 2
 	for count : int in range(heart_count):
-		var new_heart : TextureRect = TextureRect.new()
+		var new_heart : TextureRect = heart_rect.instantiate()
 		new_heart.texture = full_heart
 		heart_containers.add_child(new_heart)
 	
@@ -58,7 +66,7 @@ func _on_character_max_health_changed(new_max_health : int) -> void:
 	#assumes health level is always even
 	print("max health change")
 	if (new_max_health > current_max_health and new_max_health >= health_module.get_health()):
-		var new_heart : TextureRect = TextureRect.new()
+		var new_heart : TextureRect = heart_rect.instantiate()
 		heart_containers.add_child(new_heart)
 	else:
 		for child : TextureRect in heart_containers.get_children():
@@ -66,7 +74,7 @@ func _on_character_max_health_changed(new_max_health : int) -> void:
 				child.queue_free()
 		await get_tree().create_timer(0.1).timeout #använda free istället för queue free?
 		for count : int in range(0, new_max_health / 2):
-			var new_heart : TextureRect = TextureRect.new()
+			var new_heart : TextureRect = heart_rect.instantiate()
 			heart_containers.add_child(new_heart)
 	_refresh_healthbar()
 	

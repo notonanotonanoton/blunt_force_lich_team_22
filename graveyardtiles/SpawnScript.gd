@@ -20,8 +20,8 @@ signal loaded_children
 var search_layer : int = 0
 
 func _ready() -> void:
-
 	_replace_tiles_with_scene()
+	
 
 
 func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES) -> void:
