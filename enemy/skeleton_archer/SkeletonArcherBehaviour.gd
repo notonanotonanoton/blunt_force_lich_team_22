@@ -21,7 +21,7 @@ func attack(delta : float) -> void:
 	pass
 
 func proximity_action(delta : float) -> void:
-	#write action here
+	enemy.velocity.x -= 200*enemy.looking_direction
 	pass 
 
 func jump_action(delta : float) -> void:
