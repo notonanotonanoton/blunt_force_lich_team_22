@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://d3w3dccb7j5jv" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Texture2D" uid="uid://blltrdtx0mptp" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Texture2D" uid="uid://bdb384u6xa052" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
 [ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
 [ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
