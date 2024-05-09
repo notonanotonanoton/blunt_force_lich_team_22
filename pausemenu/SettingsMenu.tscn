@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgl7ch46tjgrw"]
+
+[ext_resource type="Script" path="res://pausemenu/Settings.gd" id="1_e8hlo"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e8hlo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 165.0
+offset_bottom = 23.0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window Mode"
+
+[node name="WindowMode" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Back"
+
+[connection signal="item_selected" from="HBoxContainer/WindowMode" to="." method="_on_window_mode_item_selected"]
+[connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]
