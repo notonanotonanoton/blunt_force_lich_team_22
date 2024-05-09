@@ -42,8 +42,7 @@ func attack(delta : float) -> void:
 	animation_timer.start(0.2)
 	await animation_timer.timeout
 	
-	var rot : Vector2 = (skeleton_arm.global_position + crossbow_offset *
-	 enemy.looking_direction).direction_to(enemy.target_player.global_position)
+	var rot : Vector2 = (skeleton_arm.global_position + crossbow_offset * enemy.looking_direction).direction_to(enemy.target_player.global_position)
 	
 	animation_timer.start(0.1)
 	await animation_timer.timeout

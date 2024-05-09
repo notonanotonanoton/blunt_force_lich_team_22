@@ -105,7 +105,8 @@ enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
 max_player_proximity = 80
-attack_range = 100
+attack_range = 200
+attack_rate = 3.0
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
@@ -165,6 +166,8 @@ shape = SubResource("RectangleShape2D_c0lg1")
 script = ExtResource("10_cndyi")
 skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 animation_timer = NodePath("AnimationTimer")
+backdash_strength = 360
+arrow_speed = 180
 enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]
