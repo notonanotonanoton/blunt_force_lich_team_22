@@ -25,7 +25,7 @@ var current_heart_index : int
 var current_heart : TextureRect
 
 func _ready() -> void:
-	tilemap.loaded_children.connect(_on_children_entered)
+	#tilemap.loaded_children.connect(_on_children_entered)
 	current_heart_index = heart_containers.get_child_count() - 1
 
 func _on_children_entered() -> void:
