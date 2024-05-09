@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://7ppe4bc3oiv3"]
+[gd_scene load_steps=19 format=3 uid="uid://7ppe4bc3oiv3"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_a6705"]
-[ext_resource type="Texture2D" uid="uid://6hp4ipwbhftp" path="res://enemy/slime/slime.png" id="2_0eqf8"]
+[ext_resource type="Texture2D" uid="uid://b21rwu1ufpi8o" path="res://enemy/skeletonarcher/skeleton_archer.png" id="2_hcmn2"]
+[ext_resource type="Texture2D" uid="uid://crxer282u38xc" path="res://enemy/skeletonarcher/skeleton_archer_arm_and_crossbow.png" id="3_5vu66"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_psxeh"]
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="4_qvt12"]
 [ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="5_5njcn"]
@@ -9,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="7_4dxvc"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="8_425km"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_dmps7"]
-[ext_resource type="Script" path="res://enemy/skeleton_archer/SkeletonArcherBehaviour.gd" id="10_cndyi"]
+[ext_resource type="Script" path="res://enemy/skeletonarcher/SkeletonArcherBehavior.gd" id="10_cndyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cc5tl"]
 resource_local_to_scene = true
@@ -24,7 +25,7 @@ resource_local_to_scene = true
 size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
-size = Vector2(20, 12)
+size = Vector2(8, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_168vn"]
 resource_local_to_scene = true
@@ -32,13 +33,13 @@ radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c58vq"]
 resource_local_to_scene = true
-size = Vector2(20, 12)
+size = Vector2(10, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0lg1"]
 resource_local_to_scene = true
-size = Vector2(20, 12)
+size = Vector2(12, 28)
 
-[node name="skeleton_archer" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension")]
+[node name="SkeletonArcher" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension")]
 collision_layer = 4
 script = ExtResource("1_a6705")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -49,8 +50,7 @@ low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SkeletonArcherBehaviour")
-jump_velocity = 550
-aggro_range = 120
+aggro_range = 130
 is_ranged = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
@@ -58,7 +58,12 @@ is_ranged = true
 [node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
 
 [node name="Sprite2D" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
-texture = ExtResource("2_0eqf8")
+texture = ExtResource("2_hcmn2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
+position = Vector2(-2, -4)
+texture = ExtResource("3_5vu66")
+offset = Vector2(2, 4)
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
@@ -87,7 +92,7 @@ health_node = NodePath("../HealthComponent")
 character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_fsb11")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
@@ -99,7 +104,8 @@ script = ExtResource("5_5njcn")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
-attack_range = 120
+max_player_proximity = 80
+attack_range = 100
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
@@ -114,8 +120,6 @@ script = ExtResource("6_cutlw")
 enemy = NodePath("../..")
 timer = NodePath("IdleTimer")
 timer_move = NodePath("IdleTimerMove")
-move_duration = 5
-idle_duration = 3
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/EnemyIdle"]
 process_callback = 0
@@ -145,7 +149,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 10)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_c58vq")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_dmps7")]
@@ -154,12 +158,18 @@ collision_mask = 8
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-position = Vector2(0, 10)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_c0lg1")
 
-[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("enemy")]
+[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer", "enemy")]
 script = ExtResource("10_cndyi")
+skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
+animation_timer = NodePath("AnimationTimer")
 enemy = NodePath("..")
+
+[node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]
+process_callback = 0
+wait_time = 0.01
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]

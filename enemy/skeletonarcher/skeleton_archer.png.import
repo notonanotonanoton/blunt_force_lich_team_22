@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dockpsn3b87ys"
-path="res://.godot/imported/skeleton_archer.png-7b269303acd2502c69303dbd7d5a4dc8.ctex"
+uid="uid://b21rwu1ufpi8o"
+path="res://.godot/imported/skeleton_archer.png-0f70682e9426703b175388fc7ca41d06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/skeleton_archer.png"
-dest_files=["res://.godot/imported/skeleton_archer.png-7b269303acd2502c69303dbd7d5a4dc8.ctex"]
+source_file="res://enemy/skeletonarcher/skeleton_archer.png"
+dest_files=["res://.godot/imported/skeleton_archer.png-0f70682e9426703b175388fc7ca41d06.ctex"]
 
 [params]
 

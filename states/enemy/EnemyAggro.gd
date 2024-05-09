@@ -9,15 +9,15 @@ extends State
 #stops moving once within this range. unimplemented for base enemy
 @export_range(1, 100, 1) var max_player_proximity : int = 30
 @export_range(10, 200, 10) var attack_range : int = 40
-@export_range(0.2, 10, 0.1) var attack_speed : float = 2.0
+@export_range(0.2, 10, 0.1) var attack_rate : float = 2.0
 @export_range(0, 300, 10) var aggro_range_increase : int = 80
 
 var offset : int
 var distance_to_player : float = 0.0
 
 func _ready() -> void:
-	attack_timer.wait_time = attack_speed
-	proximity_timer.wait_time = attack_speed
+	attack_timer.wait_time = attack_rate
+	proximity_timer.wait_time = attack_rate
 	
 	await enemy.ready
 	offset = enemy.collision_offset
@@ -55,13 +55,16 @@ func attack(delta : float) -> void:
 	if enemy.behavior_extension:
 		enemy.behavior_extension.attack(delta)
 	
-	attack_timer.start(randf_range(attack_speed-0.1, attack_speed+0.1))
+	attack_timer.start(randf_range(attack_rate-0.1, attack_rate+0.1))
 
 func proximity_action(delta : float) -> void:
 	if enemy.behavior_extension:
 		enemy.behavior_extension.proximity_action(delta)
 	
-	proximity_timer.start(randf_range(attack_speed-0.1, attack_speed+0.1))
+	if attack_rate > 0.5:
+		proximity_timer.start(randf_range(attack_rate-0.4, attack_rate-0.2))
+	else:
+		proximity_timer.start(randf_range(attack_rate-0.1, attack_rate+0.1))
 
 func get_distance() -> void:
 	var enemy_pos : Vector2 = enemy.global_position

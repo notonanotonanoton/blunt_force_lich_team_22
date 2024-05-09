@@ -10,7 +10,7 @@ signal loaded_children
 	Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	Vector2i(1,0): preload("res://enemy/slime/Slime.tscn"),
 	Vector2i(2,0): preload("res://playerbox/PlayerBox.tscn"),
-	Vector2i(3,0): preload("res://enemy/damage_obstacle/Spikes.tscn")
+	Vector2i(3,0): preload("res://enemy/damageobstacle/Spikes.tscn")
 }
 
 #decrement global pos with this if you want to start in the corner of the tile

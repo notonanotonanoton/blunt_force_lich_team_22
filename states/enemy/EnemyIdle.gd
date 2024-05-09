@@ -25,7 +25,6 @@ func update(delta : float) -> void:
 	pass
 
 func physics_update(delta : float) -> void:
-	enemy.velocity.x += 10
 	if(timer.is_stopped()):
 		enemy.move(delta, 0.5)
 	elif(abs(enemy.velocity.x) > 0):

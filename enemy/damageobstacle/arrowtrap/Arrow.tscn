@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cm0upf1ctfep6"]
+
+[ext_resource type="Script" path="res://enemy/damageobstacle/arrowtrap/Arrow.gd" id="1_s74v0"]
+[ext_resource type="Texture2D" uid="uid://b62oymkvrptsx" path="res://asepritefiles/arrow.png" id="2_yjp1g"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="3_lc0ge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0xb"]
+size = Vector2(3, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioc0h"]
+size = Vector2(13, 3)
+
+[node name="Arrow" type="Area2D" node_paths=PackedStringArray("ground_collider", "gravity_timer")]
+collision_layer = 0
+script = ExtResource("1_s74v0")
+ground_collider = NodePath("CollisionShape2D")
+gravity_timer = NodePath("GravityTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.06639e-07, -1.49012e-07)
+texture = ExtResource("2_yjp1g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, 0.5)
+shape = SubResource("RectangleShape2D_1k0xb")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_lc0ge")]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_ioc0h")
+
+[node name="GravityTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true

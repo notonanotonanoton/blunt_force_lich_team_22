@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://yyan0x7aj3p0"]
 
-[ext_resource type="Script" path="res://enemy/damage_obstacle/Spikes.gd" id="1_syton"]
+[ext_resource type="Script" path="res://enemy/damageobstacle/Spikes.gd" id="1_syton"]
 [ext_resource type="Texture2D" uid="uid://c16nu57r7jjug" path="res://asepritefiles/spike_trap.png" id="1_tubur"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="2_otglk"]
 

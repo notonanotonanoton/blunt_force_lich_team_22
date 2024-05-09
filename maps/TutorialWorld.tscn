@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bixyqpb1cnca7"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_1enxi"]
-[ext_resource type="PackedScene" uid="uid://8i7co26j7v2l" path="res://enemy/damage_obstacle/arrow_trap/arrow_trap.tscn" id="3_8vlwd"]
+[ext_resource type="PackedScene" uid="uid://8i7co26j7v2l" path="res://enemy/damageobstacle/arrowtrap/arrow_trap.tscn" id="3_8vlwd"]
 
 [node name="TutorialWorld" type="Node2D"]
 
