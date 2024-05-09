@@ -7,7 +7,7 @@ extends CanvasLayer
 var player_character : PlayerCharacter 
 
 func _ready() -> void:
-	tilemap.loaded_children.connect(_on_children_entered)
+#	tilemap.loaded_children.connect(_on_children_entered)
 	visible = false;
 	
 func _on_children_entered() -> void: 
