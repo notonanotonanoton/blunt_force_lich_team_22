@@ -35,4 +35,5 @@ size_flags_horizontal = 0
 layout_mode = 1
 
 [connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/SettingsMenu" method="_on_pause_menu_entered_settings"]
+[connection signal="aiming_arch_toggled" from="Pause/PauseMenu/SettingsMenu" to="PlayerCharacter" method="_on_settings_menu_aiming_arch_toggled"]
 [connection signal="back_pressed" from="Pause/PauseMenu/SettingsMenu" to="Pause/PauseMenu" method="_on_settings_menu_back_pressed"]

@@ -31,9 +31,10 @@ class_name PlayerCharacter
 @export var can_deal_damage : bool = false
 
 #coyote timer logic
-var player_jumped : bool = false;
+var player_jumped : bool = false
 var jump_is_available : bool = true
-var player_died : bool = false;
+var player_died : bool = false
+var aiming_arc_enabled : bool = true
 
 #box throwing logic
 #charge_time has to start at 0.0 for code logic
@@ -100,9 +101,6 @@ func jump_cut() -> void:
 
 
 func _process_jump_availability() -> void:
-	
-	
-	
 	if is_on_floor() and allow_jump_variable_resets:
 		jump_is_available = true
 		player_jumped = false;
@@ -160,7 +158,8 @@ func _process_throw(delta : float) -> void:
 		elif Input.is_action_pressed("interact_or_throw") and interact_released:
 			charge_time += throw_charge_rate * delta
 			charge_time = clampf(charge_time, charge_minimum, 1.0)
-			aiming_arc.display_trajectory((Vector2(throw_force_x * player_sprites.scale.x, throw_force_y)*charge_time), delta)
+			if (aiming_arc_enabled):
+				aiming_arc.display_trajectory((Vector2(throw_force_x * player_sprites.scale.x, throw_force_y)*charge_time), delta)
 			player_sprites.rotation_degrees = lerpf(0.0,
 			max_throw_anim_rot_deg * player_sprites.scale.x, charge_time)
 			if Input.is_action_just_pressed("cancel_throw"):
@@ -269,3 +268,10 @@ func _on_max_health_changed(max_health_change : int) -> void:
 
 func _on_jump_reset_freeze_timer_timeout():
 	allow_jump_variable_resets = true
+
+func _on_settings_menu_aiming_arch_toggled():
+	if (aiming_arc_enabled == true):
+		aiming_arc_enabled = false
+	else: 
+		aiming_arc_enabled = true
+	print(aiming_arc_enabled)

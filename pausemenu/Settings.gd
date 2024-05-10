@@ -1,8 +1,8 @@
 extends Control
 
 signal back_pressed
-
-@onready var window_button : OptionButton = $HBoxContainer/WindowMode
+signal aiming_arch_toggled 
+@onready var window_button : OptionButton = $VBoxContainer/HBoxContainer/WindowMode
 
 const WINDOW_MODE_ARRAY : Array[String] = [
 	"Full-Screen",
@@ -42,3 +42,6 @@ func _on_pause_menu_entered_settings() -> void:
 func _on_back_pressed() -> void:
 	hide()
 	emit_signal("back_pressed")
+	
+func _on_check_box_pressed():
+	emit_signal("aiming_arch_toggled")
