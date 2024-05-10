@@ -33,8 +33,6 @@ func _physics_process(delta : float) -> void:
 #things like getting the position of the arm cannot be saved in this function
 #as it needs to update the position after waiting for the timer
 func attack(delta : float) -> void:
-	if not enemy.target_player:
-		return
 	if crossbow_tween:
 		crossbow_tween.kill()
 	crossbow_tween = self.create_tween()
@@ -44,8 +42,12 @@ func attack(delta : float) -> void:
 	animation_timer.start(0.2)
 	await animation_timer.timeout
 	
-	var rot : Vector2 = (skeleton_arm.global_position + crossbow_offset *
-	 enemy.looking_direction).direction_to(enemy.target_player.global_position)
+	var rot : Vector2
+	if not enemy.target_player:
+		return
+	else:
+		rot = (skeleton_arm.global_position + crossbow_offset *
+		enemy.looking_direction).direction_to(enemy.target_player.global_position)
 	
 	animation_timer.start(0.1)
 	await animation_timer.timeout
@@ -53,7 +55,7 @@ func attack(delta : float) -> void:
 	var current_arrow : Arrow = arrow.instantiate()
 	get_parent().get_parent().add_child(current_arrow)
 	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
-	 enemy.looking_direction), rot)
+	enemy.looking_direction), rot)
 	#counts on the initial rotation being -90.
 	#have to use this instead of tween, as waiting is involved; leads to
 	#synchronization issues otherwise
