@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyfvjgfn7gwj5"]
 
-[ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
-[ext_resource type="PackedScene" uid="uid://88a7vrfi8tcp" path="res://Level1.01.tscn" id="2_0jt4g"]
+[ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://PlayerCharacter/PlayerCharacter.tscn" id="1_sq36r"]
 [ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_1ojgl"]
+[ext_resource type="PackedScene" uid="uid://b7hwrgdchtxiy" path="res://level2.01.tscn" id="4_pfs1p"]
 [ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
 
 [node name="MapManager" type="Node2D"]
@@ -10,9 +10,8 @@
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
 
-[node name="level1" parent="." instance=ExtResource("2_0jt4g")]
-position = Vector2(-214, 45)
-
 [node name="HUDCanvas" parent="." instance=ExtResource("4_1ojgl")]
 
 [node name="Game_Over_Screen" parent="." instance=ExtResource("5_nmudn")]
+
+[node name="Node2D" parent="." instance=ExtResource("4_pfs1p")]
