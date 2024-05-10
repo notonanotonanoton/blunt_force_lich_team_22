@@ -33,6 +33,8 @@ func _physics_process(delta : float) -> void:
 #things like getting the position of the arm cannot be saved in this function
 #as it needs to update the position after waiting for the timer
 func attack(delta : float) -> void:
+	if not enemy.target_player:
+		return
 	if crossbow_tween:
 		crossbow_tween.kill()
 	crossbow_tween = self.create_tween()
