@@ -50,7 +50,7 @@ low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SlimeBehavior")
-speed = 40
+speed = 55
 aggro_range = 70
 
 [node name="DirectionFlip" type="Node2D" parent="."]

@@ -70,7 +70,6 @@ func _ready() -> void:
 	health_node.max_health_changed.connect(_on_max_health_changed)
 
 func _physics_process(delta : float) -> void:
-	
 	_apply_gravity(delta)
 
 	_process_jump_availability()
