@@ -1,17 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyfvjgfn7gwj5"]
+[gd_scene load_steps=7 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://PlayerCharacter/PlayerCharacter.tscn" id="1_sq36r"]
 [ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_1ojgl"]
+[ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_gwa3m"]
+
 [ext_resource type="PackedScene" uid="uid://b7hwrgdchtxiy" path="res://level2.01.tscn" id="4_pfs1p"]
+
 [ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_583gp"]
 
 [node name="MapManager" type="Node2D"]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("game_over_screen") instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
+game_over_screen = NodePath("../Game_Over_Screen")
 
-[node name="HUDCanvas" parent="." instance=ExtResource("4_1ojgl")]
+[node name="level1" parent="." instance=ExtResource("2_0jt4g")]
+position = Vector2(-214, 45)
 
-[node name="Game_Over_Screen" parent="." instance=ExtResource("5_nmudn")]
+[node name="HUDCanvas" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_1ojgl")]
+character = NodePath("../PlayerCharacter")
 
-[node name="Node2D" parent="." instance=ExtResource("4_pfs1p")]
+[node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("5_nmudn")]
+player_character = NodePath("../PlayerCharacter")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Pause" instance=ExtResource("5_gwa3m")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+size_flags_horizontal = 0
+
+[node name="SettingsMenu" parent="Pause/PauseMenu" instance=ExtResource("6_583gp")]
+layout_mode = 1
+
+[connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/SettingsMenu" method="_on_pause_menu_entered_settings"]
+[connection signal="aiming_arch_toggled" from="Pause/PauseMenu/SettingsMenu" to="PlayerCharacter" method="_on_settings_menu_aiming_arch_toggled"]
+[connection signal="back_pressed" from="Pause/PauseMenu/SettingsMenu" to="Pause/PauseMenu" method="_on_settings_menu_back_pressed"]

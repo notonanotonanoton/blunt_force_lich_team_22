@@ -7,11 +7,10 @@ extends Node
 
 #this has to be replaced or altered with something
 #that works even after replacing the tilemap 
-@export var tilemap : interactive_tilemap
 
 @onready var heart_rect := preload("res://hud/HeartRect.tscn")
 
-var character : PlayerCharacter
+@export var character : PlayerCharacter
 var health_module : HealthComponent
 
 enum HealthLevel {
@@ -25,15 +24,7 @@ var current_heart_index : int
 var current_heart : TextureRect
 
 func _ready() -> void:
-	#tilemap.loaded_children.connect(_on_children_entered)
 	current_heart_index = heart_containers.get_child_count() - 1
-
-func _on_children_entered() -> void:
-	print("called hud") 
-	await get_tree().create_timer(0.1).timeout
-	for node in get_parent().get_children():
-		if node is PlayerCharacter:
-			character = node
 	health_module = character.get_node("Health")
 	current_max_health = health_module.get_max_health()
 	character.health_changed.connect(_on_character_health_changed)
@@ -41,6 +32,7 @@ func _on_children_entered() -> void:
 	_load_hearts()
 	
 func _load_hearts() -> void:
+	print("load hearts??")
 	for child : TextureRect in heart_containers.get_children():
 			if child != null:
 				child.queue_free()
