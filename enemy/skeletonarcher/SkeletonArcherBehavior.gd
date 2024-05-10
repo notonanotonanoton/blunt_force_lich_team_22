@@ -51,7 +51,7 @@ func attack(delta : float) -> void:
 	await animation_timer.timeout
 	
 	var current_arrow : Arrow = arrow.instantiate()
-	get_parent().add_child(current_arrow)
+	get_parent().get_parent().add_child(current_arrow)
 	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
 	 enemy.looking_direction), rot)
 	#counts on the initial rotation being -90.
