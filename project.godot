@@ -33,7 +33,6 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
-window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -104,7 +103,7 @@ pause={
 [physics]
 
 2d/run_on_separate_thread=true
-2d/default_gravity=1350.0
+2d/default_gravity=1500.0
 2d/solver/contact_max_allowed_penetration=0.1
 
 [rendering]
