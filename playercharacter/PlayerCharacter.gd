@@ -121,12 +121,12 @@ func _unhandled_input(event : InputEvent) -> void:
 			picked_up_box.pick_up(self)
 			apply_carrying_sprites(true)
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_SPACE:
+		if event.is_action_pressed("ui_up"):
 			if jump_is_available and not player_jumped:
 				jump()
 			else:
 				pass
-		if event.is_released() and event.keycode == KEY_SPACE:
+		if event.is_action_released("ui_up"):
 			jump_cut()
 	
 
