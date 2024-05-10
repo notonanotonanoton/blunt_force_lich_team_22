@@ -4,12 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b62oymkvrptsx" path="res://asepritefiles/arrow.png" id="2_yjp1g"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="3_lc0ge"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vi4ei"]
-resource_local_to_scene = true
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0xb"]
 size = Vector2(3, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gk53"]
-resource_local_to_scene = true
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioc0h"]
 size = Vector2(13, 3)
 
 [node name="Arrow" type="Area2D" node_paths=PackedStringArray("ground_collider", "gravity_timer")]
@@ -24,7 +22,7 @@ texture = ExtResource("2_yjp1g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6.5, 0.5)
-shape = SubResource("RectangleShape2D_vi4ei")
+shape = SubResource("RectangleShape2D_1k0xb")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("3_lc0ge")]
 collision_layer = 0
@@ -32,7 +30,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(1.5, 0.5)
-shape = SubResource("RectangleShape2D_2gk53")
+shape = SubResource("RectangleShape2D_ioc0h")
 
 [node name="GravityTimer" type="Timer" parent="."]
 process_callback = 0

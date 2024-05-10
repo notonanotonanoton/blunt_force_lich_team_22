@@ -7,7 +7,7 @@ class_name Arrow
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 var can_deal_damage : bool = true
 
-@export var movement : Vector2 = Vector2.ZERO
+var movement : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	#change wait time in GravityTimer node if desired.
