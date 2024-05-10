@@ -165,7 +165,7 @@ shape = SubResource("RectangleShape2D_c0lg1")
 script = ExtResource("10_cndyi")
 skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 animation_timer = NodePath("AnimationTimer")
-backdash_strength = 360
+backdash_strength = 380
 arrow_speed = 190
 enemy = NodePath("..")
 
