@@ -52,10 +52,7 @@ func attack(delta : float) -> void:
 	animation_timer.start(0.1)
 	await animation_timer.timeout
 	
-	if not enemy.target_player:
-		return
-	else:
-		var current_arrow : Arrow = arrow.instantiate()
+	var current_arrow : Arrow = arrow.instantiate()
 		get_parent().get_parent().add_child(current_arrow)
 		current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
 		enemy.looking_direction), rot)
