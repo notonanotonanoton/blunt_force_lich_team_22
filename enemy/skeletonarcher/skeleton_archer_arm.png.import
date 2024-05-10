@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqaflvu68csdr"
-path="res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"
+uid="uid://qk0vff2crwht"
+path="res://.godot/imported/skeleton_archer_arm.png-19d96b7a353bb934689b7579b914f981.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/heart_container_full.png"
-dest_files=["res://.godot/imported/heart_container_full.png-b9994bd8790d5d4a6badafbc0047a838.ctex"]
+source_file="res://enemy/skeletonarcher/skeleton_archer_arm.png"
+dest_files=["res://.godot/imported/skeleton_archer_arm.png-19d96b7a353bb934689b7579b914f981.ctex"]
 
 [params]
 

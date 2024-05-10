@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7q4457rxoogt"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_2g7k8"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="2_sy31t"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="3_phnc0"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="2_sy31t"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="3_phnc0"]
 
 [node name="Node2D" type="Node2D"]
 

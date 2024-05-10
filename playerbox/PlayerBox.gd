@@ -30,8 +30,8 @@ func _physics_process(delta : float) -> void:
 		can_deal_damage = false
 	
 	if holder:
-		position.x = holder.position.x
-		position.y = holder.position.y - 6
+		global_position.x = holder.global_position.x
+		global_position.y = holder.global_position.y - 6
 		
 	elif !is_on_floor():
 		velocity.y += default_gravity * delta

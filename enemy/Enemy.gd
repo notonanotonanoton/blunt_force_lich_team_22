@@ -28,6 +28,10 @@ var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_grav
 var fast_fall_gravity : int = default_gravity * 1.5
 var collision_offset : int
 
+#used to prevent pathfinding getting stuck on walls 
+#when there's a tile 1 tile above
+var was_on_wall : bool = false
+
 #is -1 for left or 1 for right. starts as right.
 #has to have the same variable name as PlayerCharacter
 var looking_direction : int = 1:
@@ -94,11 +98,14 @@ func handle_wall_or_gap(delta : float) -> void:
 	elif(is_on_wall()):
 		#this check is dependent on EnemyAggro temporarily changing the radius
 		if(jump_block_detector.has_overlapping_bodies() and aggro_radius.shape.radius == aggro_range):
-			looking_direction *= -1
+			if not was_on_wall:
+				looking_direction *= -1
+				was_on_wall = true
 		else:
 			jump(delta, 1.0, false)
+	else:
+		was_on_wall = false
 
-#CURRENTLY BUGS OUT ABILITY TO TAKE DAMAGE
 func flip_gravity(flip : bool) -> void:
 	if flip:
 		up_direction.y = 1

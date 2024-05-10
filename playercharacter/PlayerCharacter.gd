@@ -22,11 +22,11 @@ class_name PlayerCharacter
 @export_range(0, 1, 0.1) var friction : float = 0.5
 @export_range(0, 1000, 10) var max_fall_speed : float = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
-@export_range(0, 0.1, 0.01) var velocity_time : float = 0.05
 @export_range(350, 750, 25) var throw_force_x : int = 375
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
-
+@export var stop_resseting_jump_status_time = 0.1
+@export var resseting_jump_timer : Timer
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = false
 
@@ -45,6 +45,9 @@ var max_throw_force : Vector2i = Vector2i(throw_force_x, throw_force_y)
 var interact_released : bool = false
 var throw_tween : Tween
 
+
+var allow_jump_variable_resets : bool = true 
+
 signal player_death
 signal step_taken
 signal jumped
@@ -60,7 +63,7 @@ var available_box : PlayerBox
 
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_time
-	velocity_timer.wait_time = velocity_time
+	resseting_jump_timer.wait_time = stop_resseting_jump_status_time
 	health_node.health_changed.connect(_on_health_changed)
 	health_node.max_health_changed.connect(_on_max_health_changed)
 
@@ -70,7 +73,7 @@ func _physics_process(delta : float) -> void:
 
 	_process_jump_availability()
 	
-	_process_jump()
+	#_process_jump()
 		
 	_process_movement(delta)
 	
@@ -82,38 +85,33 @@ func _physics_process(delta : float) -> void:
 
 ## jump functions
 func jump() -> void:
-	print("jump")
+	allow_jump_variable_resets = false
+	resseting_jump_timer.start()
 	velocity.y = jump_velocity
 	emit_signal("jumped")
+	player_jumped = true
+
+	
 
 func jump_cut() -> void:
-	print("jump cut")
+	#print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
 
-func _process_jump() -> void:
-		# Handle jump. i couldn't figure out how to move this out
-	if Input.is_action_just_pressed("ui_up") and jump_is_available and not player_jumped:
-		jump()
-		player_jumped = true
-		
-	if Input.is_action_just_released("ui_up"):
-		jump_cut()
-		
-
 func _process_jump_availability() -> void:
-	if not player_jumped and not velocity_timer.is_stopped():
-		velocity.y = 0
+	
+	
+	
+	if is_on_floor() and allow_jump_variable_resets:
+		jump_is_available = true
+		player_jumped = false;
+		#print("player is on the floor, resetting jump status")
 		
 	if not is_on_floor():
 		if jump_is_available:
 			if coyote_timer.is_stopped():
-				velocity_timer.start()
 				coyote_timer.start()
-	else:
-		jump_is_available = true
-		player_jumped = false;
 
 ##box functions
 func _unhandled_input(event : InputEvent) -> void:
@@ -122,7 +120,14 @@ func _unhandled_input(event : InputEvent) -> void:
 			picked_up_box = available_box
 			picked_up_box.pick_up(self)
 			apply_carrying_sprites(true)
-	
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_SPACE:
+			if jump_is_available and not player_jumped:
+				jump()
+			else:
+				pass
+		if event.is_released() and event.keycode == KEY_SPACE:
+			jump_cut()
 	
 
 func _process_throw(delta : float) -> void:
@@ -183,13 +188,19 @@ func apply_carrying_sprites(apply : bool) -> void:
 
 func _apply_gravity(delta : float) -> void:
 	if not is_on_floor():
-		if velocity.y < 0:
-			velocity.y += default_gravity * delta
-		elif velocity.y < max_fall_speed:
-			velocity.y += fast_fall_gravity * delta
-		# Ensure fall speed past max_fall_speed is consistent
+		if not coyote_timer.is_stopped() and not player_jumped:
+			velocity.y = 0
 		else:
-			velocity.y = max_fall_speed
+			if velocity.y < 0:
+				velocity.y += default_gravity * delta
+			elif velocity.y < max_fall_speed:
+				velocity.y += fast_fall_gravity * delta
+			# Ensure fall speed past max_fall_speed is consistent
+			else:
+				velocity.y = max_fall_speed
+			
+
+
 
 
 func _process_movement(delta : float) -> void:
@@ -240,9 +251,6 @@ func _on_health_death(_pos : Vector2i) -> void:
 func _on_coyote_timer_timeout() -> void:
 	jump_is_available = false;
 
-func _on_velocity_freeze_timer_timeout() -> void:
-	player_jumped = false;
-
 func _on_box_detector_body_entered(body : CharacterBody2D) -> void:
 	if body is PlayerBox:
 		available_box = body
@@ -257,3 +265,7 @@ func _on_health_changed(health_change : int) -> void:
 
 func _on_max_health_changed(max_health_change : int) -> void:
 	emit_signal("max_health_changed", max_health_change)
+
+
+func _on_jump_reset_freeze_timer_timeout():
+	allow_jump_variable_resets = true

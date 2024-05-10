@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwjg68tpt5o8f"
-path="res://.godot/imported/skeleton_archer_arm_and_crossbow.png-4087c434bd54797197cbe9d08b05b9cc.ctex"
+uid="uid://crxer282u38xc"
+path="res://.godot/imported/skeleton_archer_arm_and_crossbow.png-4974213da99c989dafa12afca920f406.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/skeleton_archer_arm_and_crossbow.png"
-dest_files=["res://.godot/imported/skeleton_archer_arm_and_crossbow.png-4087c434bd54797197cbe9d08b05b9cc.ctex"]
+source_file="res://enemy/skeletonarcher/skeleton_archer_arm_and_crossbow.png"
+dest_files=["res://.godot/imported/skeleton_archer_arm_and_crossbow.png-4974213da99c989dafa12afca920f406.ctex"]
 
 [params]
 

@@ -82,13 +82,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_player", "coyote_timer", "velocity_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "resseting_jump_timer")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 player_sprites = NodePath("DirectionFlip")
 animation_player = NodePath("AnimationPlayer")
 coyote_timer = NodePath("CoyoteTimer")
-velocity_timer = NodePath("velocityFreezeTimer")
+velocity_timer = NodePath("")
 left_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/LeftArm")
 right_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/RightArm")
 box_sprite = NodePath("DirectionFlip/GenericAnimationTarget/Lich/Box")
@@ -99,6 +99,7 @@ aiming_arc = NodePath("AimingArc")
 speed = 155.0
 acceleration = 0.4
 friction = 0.6
+resseting_jump_timer = NodePath("jumpResetFreezeTimer")
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -175,8 +176,7 @@ shape = SubResource("RectangleShape2D_dl0fu")
 [node name="CoyoteTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="velocityFreezeTimer" type="Timer" parent="."]
-one_shot = true
+[node name="jumpResetFreezeTimer" type="Timer" parent="."]
 
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
 
@@ -185,4 +185,4 @@ one_shot = true
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="velocityFreezeTimer" to="." method="_on_velocity_freeze_timer_timeout"]
+[connection signal="timeout" from="jumpResetFreezeTimer" to="." method="_on_jump_reset_freeze_timer_timeout"]
