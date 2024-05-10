@@ -105,7 +105,8 @@ enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
 max_player_proximity = 80
-attack_range = 100
+attack_range = 200
+aggro_range_increase = 70
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
@@ -160,12 +161,13 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_c0lg1")
 
-[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer")]
+[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer", "enemy")]
 script = ExtResource("10_cndyi")
 skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 animation_timer = NodePath("AnimationTimer")
-backdash_strength = 380
-arrow_speed = 190
+backdash_strength = 370
+arrow_speed = 170
+enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]
 process_callback = 0
