@@ -9,15 +9,18 @@
 
 [node name="MapManager" type="Node2D"]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("game_over_screen") instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
+game_over_screen = NodePath("../Game_Over_Screen")
 
 [node name="level1" parent="." instance=ExtResource("2_0jt4g")]
 position = Vector2(-214, 45)
 
-[node name="HUDCanvas" parent="." instance=ExtResource("4_1ojgl")]
+[node name="HUDCanvas" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_1ojgl")]
+character = NodePath("../PlayerCharacter")
 
-[node name="Game_Over_Screen" parent="." instance=ExtResource("5_nmudn")]
+[node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("5_nmudn")]
+player_character = NodePath("../PlayerCharacter")
 
 [node name="Pause" type="CanvasLayer" parent="."]
 

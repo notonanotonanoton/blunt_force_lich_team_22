@@ -11,6 +11,7 @@ class_name PlayerCharacter
 @export var right_arm : Sprite2D
 @export var box_sprite : Sprite2D
 @export var health_node : HealthComponent
+@export var game_over_screen : CanvasLayer
 @export var collision : CollisionShape2D
 @export var hurtbox_collision : CollisionShape2D
 @export var aiming_arc : Aiming_Arc

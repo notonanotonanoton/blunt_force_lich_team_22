@@ -35,7 +35,6 @@ func _on_window_mode_item_selected(index) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 
-
 func _on_pause_menu_entered_settings() -> void:
 	show()
 
