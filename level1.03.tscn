@@ -1,16 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ww2ckq6b6xod"]
+[gd_scene load_steps=2 format=3 uid="uid://ww2ckq6b6xod"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_yalxd"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="2_ago5y"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="3_s6fol"]
 
-[node name="Node2D" type="Node2D"]
-
-[node name="HUDCanvas" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("2_ago5y")]
-tilemap = NodePath("../GraveyardTileMap")
-
-[node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("3_s6fol")]
-tilemap = NodePath("../GraveyardTileMap")
+[node name="Level1_03" type="Node2D"]
 
 [node name="GraveyardTileMap" parent="." instance=ExtResource("1_yalxd")]
 light_mask = 0
