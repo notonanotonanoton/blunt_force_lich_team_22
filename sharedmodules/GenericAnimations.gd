@@ -13,6 +13,8 @@ class_name GenericAnimations
 @export_range(0, 10, 1) var walk_rotation_degree : int = 5
 @export_range(-10, 0, 1) var walk_step_height : int = -3
 
+var not_actor : bool = false
+
 var damage_tween_flash : Tween
 var damage_tween_shake : Tween
 
@@ -23,9 +25,12 @@ var jump_squish : Tween
 
 func _ready() -> void:
 	health_node.damage_taken.connect(_on_damage_taken)
-	character.step_taken.connect(_on_step_taken)
-	character.jumped.connect(_on_jumped)
 	health_node.death.connect(_on_death)
+	if character is Enemy or character is PlayerCharacter:
+		character.step_taken.connect(_on_step_taken)
+		character.jumped.connect(_on_jumped)
+	else:
+		not_actor = true
 
 #will have issues if called a second time before finishing,
 #therefore the tweens are saved outside of the function and
@@ -81,6 +86,9 @@ func take_damage_animation() -> void:
 			shake_duration += 0.05
 		sprite_offset *= -1
 		damage_tween_shake.tween_property(animation_target, "position:x", sprite_offset, shake_duration)
+	
+	if not_actor:
+		character.damaged()
 
 func jump_animation() -> void:
 	if (walk_step or walk_rotation):
@@ -103,6 +111,10 @@ func jump_animation() -> void:
 #queue_free is handled here instead
 func death_animation(pos : Vector2i) -> void:
 	var parent : CharacterBody2D = get_parent()
+	#if not_actor:
+		#parent.queue_free()
+		#return
+	
 	var root : Node2D = parent.get_parent()
 	var fg_instance : DustCloudAnimation = death_dust_cloud_fg.instantiate()
 	var bg_instance : DustCloudAnimation = death_dust_cloud_bg.instantiate()

@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://djt88xrgadfcl"]
+
+[ext_resource type="Script" path="res://graveyardtiles/breakableblocks/BreakableBlock.gd" id="1_fgtmi"]
+[ext_resource type="Texture2D" uid="uid://d1d21gy88k7s5" path="res://graveyardtiles/breakableblocks/breakable_block_rock.png" id="1_m2kwp"]
+[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="2_phle8"]
+[ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="4_efj5s"]
+[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="4_nkc2l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68fxy"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivhur"]
+resource_local_to_scene = true
+size = Vector2(34, 34)
+
+[node name="BreakableBlockRock" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_fgtmi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m2kwp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_68fxy")
+
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("4_efj5s")]
+animation_target = NodePath("../Sprite2D")
+health_node = NodePath("../HealthComponent")
+character = NodePath("..")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("2_phle8")]
+generic_animations = NodePath("../GenericAnimations")
+knockback_strength = 0
+knockback_up_strength = 0
+health = 2
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_nkc2l")]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("RectangleShape2D_ivhur")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bctcdnbx10ami"
-path="res://.godot/imported/stone_brick_tileset.png-e8fddfee0a1d7b09430d3c6c70aa08af.ctex"
+uid="uid://bekvvdnifun0l"
+path="res://.godot/imported/stone_pebble.png-9b5c739f913ad0aaf72500ac745f43cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://castletiles/stone_brick_tileset.png"
-dest_files=["res://.godot/imported/stone_brick_tileset.png-e8fddfee0a1d7b09430d3c6c70aa08af.ctex"]
+source_file="res://graveyardtiles/breakableblocks/stone_pebble.png"
+dest_files=["res://.godot/imported/stone_pebble.png-9b5c739f913ad0aaf72500ac745f43cd.ctex"]
 
 [params]
 

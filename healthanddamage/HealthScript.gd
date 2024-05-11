@@ -31,15 +31,15 @@ signal damage_taken
 func _ready() -> void:
 	parent = get_parent()
 	
+	if parent is PlayerCharacter or parent is Enemy:
+		max_parent_acceleration = parent.acceleration
+		stun_timer.connect("timeout", _on_stun_timer_timeout)
+		stun_timer.wait_time = knockback_stun
+		stun_timer.one_shot = true
+		add_child(stun_timer)
+		
+	
 	max_health = health
-	max_parent_acceleration = parent.acceleration
-	
-	
-	stun_timer.connect("timeout", _on_stun_timer_timeout)
-
-	stun_timer.wait_time = knockback_stun
-	stun_timer.one_shot = true
-	add_child(stun_timer)
 	
 	invincibility_timer.connect("timeout", on_invincibility_timer_timeout)
 
@@ -80,21 +80,23 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 	if invincibility_timer.is_stopped() == true:
 		health -= damage
 		
-		var knockback : int = knockback_strength
-		if parent is PlayerCharacter:
-			knockback *= 2
-		
-		#saves direction
-		if(enemy_position.direction_to(parent.global_position).x < 0):
-			knockback *= -1
-		
-		parent.velocity = Vector2i(knockback, knockback_up_strength)
-		
-		parent.acceleration = 0
-		stun_timer.start()
+		if parent is PlayerCharacter or parent is Enemy:
+			var knockback : int = knockback_strength
+			if parent is PlayerCharacter:
+				knockback *= 2
+	
+			#saves direction
+			if(enemy_position.direction_to(parent.global_position).x < 0):
+				knockback *= -1
+	
+			parent.velocity = Vector2i(knockback, knockback_up_strength)
+	
+			parent.acceleration = 0
+			stun_timer.start()
+			emit_signal("health_changed", damage)  
 		invincibility_timer.start()
-		emit_signal("health_changed", damage)  
 		emit_signal("damage_taken")
+		
 		if(health<=0):
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
