@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkn6ypladv7b"
-path="res://.godot/imported/graveyard_decoration.png-512cf676c18cb5fa5964fd5ed7f600c5.ctex"
+uid="uid://jiuc8b8gxsb8"
+path="res://.godot/imported/skeleton_archer.png-7b269303acd2502c69303dbd7d5a4dc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graveyardtiles/graveyard_decoration.png"
-dest_files=["res://.godot/imported/graveyard_decoration.png-512cf676c18cb5fa5964fd5ed7f600c5.ctex"]
+source_file="res://asepritefiles/skeleton_archer.png"
+dest_files=["res://.godot/imported/skeleton_archer.png-7b269303acd2502c69303dbd7d5a4dc8.ctex"]
 
 [params]
 

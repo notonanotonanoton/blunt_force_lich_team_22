@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d1cr20fqut5e8" path="res://asepritefiles/player_and_enemy_spawn_icons.png" id="1_hmuug"]
 [ext_resource type="Texture2D" uid="uid://dkt0wbbgy3hne" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
 [ext_resource type="Texture2D" uid="uid://bqorjvflbb4kt" path="res://castletiles/stone_brick_tileset.png" id="3_b2805"]
-[ext_resource type="Texture2D" uid="uid://bmu7mmrn4pjpc" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
+[ext_resource type="Texture2D" uid="uid://bkn6ypladv7b" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
 [ext_resource type="Script" path="res://graveyardtiles/SpawnScript.gd" id="4_spift"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ew0"]
@@ -206,6 +206,18 @@ texture_region_size = Vector2i(32, 32)
 3:2/0 = 0
 3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+3:3/0 = 0
+3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:3/0/physics_layer_0/angular_velocity = 0.0
+4:3/0 = 0
+4:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:3/0/physics_layer_0/angular_velocity = 0.0
+4:4/0 = 0
+4:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:4/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_cw68q"]
 tile_size = Vector2i(32, 32)
