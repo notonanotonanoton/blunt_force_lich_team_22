@@ -16,7 +16,7 @@ class_name PlayerCharacter
 @export var hurtbox_collision : CollisionShape2D
 @export var aiming_arc : Aiming_Arc
 @export var camera : Camera2D
-@export var resseting_jump_timer : Timer
+@export var resetting_jump_timer : Timer
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 165
@@ -28,7 +28,7 @@ class_name PlayerCharacter
 @export_range(350, 750, 25) var throw_force_x : int = 375
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
-@export_range(0.05, 0.5, 0.05) var stop_resseting_jump_status_time = 0.1
+@export_range(0.05, 0.5, 0.05) var stop_resetting_jump_status_time = 0.1
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = false
 
@@ -70,7 +70,7 @@ var available_box : PlayerBox
 
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_time
-	resseting_jump_timer.wait_time = stop_resseting_jump_status_time
+	resetting_jump_timer.wait_time = stop_resetting_jump_status_time
 	health_node.health_changed.connect(_on_health_changed)
 	health_node.max_health_changed.connect(_on_max_health_changed)
 	get_parent().add_child.call_deferred(box_ref)
@@ -91,7 +91,7 @@ func _physics_process(delta : float) -> void:
 ## jump functions
 func jump() -> void:
 	allow_jump_variable_resets = false
-	resseting_jump_timer.start()
+	resetting_jump_timer.start()
 	velocity.y = jump_velocity
 	emit_signal("jumped")
 	player_jumped = true

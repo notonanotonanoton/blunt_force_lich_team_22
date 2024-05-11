@@ -21,7 +21,7 @@ size = Vector2(24, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resseting_jump_timer")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 player_sprites = NodePath("DirectionFlip")
@@ -35,7 +35,7 @@ collision = NodePath("CollisionShape2D")
 hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 camera = NodePath("Camera2D")
-resseting_jump_timer = NodePath("jumpResetFreezeTimer")
+resetting_jump_timer = NodePath("jumpResetFreezeTimer")
 acceleration = 0.4
 friction = 0.6
 
@@ -76,7 +76,7 @@ generic_animations = NodePath("../GenericAnimations")
 health = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -25)
+offset = Vector2(0, -24)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0

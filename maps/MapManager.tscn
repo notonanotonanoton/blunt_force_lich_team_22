@@ -1,20 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_1ojgl"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="4_1ojgl"]
 [ext_resource type="PackedScene" uid="uid://b7hwrgdchtxiy" path="res://level2.01.tscn" id="4_pfs1p"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="5_nmudn"]
 
 [node name="MapManager" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
 
+[node name="Level2_01" parent="." instance=ExtResource("4_pfs1p")]
+position = Vector2(2128.75, -270.5)
+
 [node name="HUDCanvas" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_1ojgl")]
 character = NodePath("../PlayerCharacter")
 
 [node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("5_nmudn")]
 player_character = NodePath("../PlayerCharacter")
-
-[node name="Level2_01" parent="." instance=ExtResource("4_pfs1p")]
-position = Vector2(2128.75, -270.5)
