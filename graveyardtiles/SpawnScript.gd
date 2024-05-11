@@ -3,13 +3,11 @@ extends TileMap
 class_name interactive_tilemap
 
 @export var enemy : String 
-signal loaded_children
 
 @export var TILE_SCENES: Dictionary = {
 	#insert the atlas coordinate of the spawner and the filepath to the object it should spawn
 	#Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	Vector2i(1,0): preload("res://enemy/slime/Slime.tscn"),
-	Vector2i(2,0): preload("res://playerbox/PlayerBox.tscn"),
 	Vector2i(3,0): preload("res://enemy/damageobstacle/Spikes.tscn")
 }
 
@@ -38,7 +36,6 @@ func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES) -> vo
 			get_parent().add_child.call_deferred(object)
 			#adjust scene position to match the tile location instead of default spawn location
 			object.global_position = map_to_local(tile_pos)
-	emit_signal("loaded_children")
 	
 
 func teleport_player_to_spawn():
@@ -48,7 +45,7 @@ func teleport_player_to_spawn():
 		for child in get_parent().get_parent().get_children():
 			if child is PlayerCharacter:
 
-				child.global_position = to_global(map_to_local(tile_pos))
+				child.teleport_player(to_global(map_to_local(tile_pos)))
 				
 				#print("moved player to spawn")
 	

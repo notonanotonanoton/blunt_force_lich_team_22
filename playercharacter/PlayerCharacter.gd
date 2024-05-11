@@ -3,33 +3,36 @@ extends CharacterBody2D
 class_name PlayerCharacter
 
 @export_category("Nodes")
+#scale.x used for direction, among other things
 @export var player_sprites : Node2D
-@export var animation_player : AnimationPlayer
+#has to be used over player_sprites when manipulating scale.x outside of direction change
+@export var animation_target : Node2D
 @export var coyote_timer : Timer
-@export var velocity_timer : Timer
 @export var left_arm : Sprite2D
 @export var right_arm : Sprite2D
 @export var box_sprite : Sprite2D
 @export var health_node : HealthComponent
-@export var game_over_screen : CanvasLayer
 @export var collision : CollisionShape2D
 @export var hurtbox_collision : CollisionShape2D
 @export var aiming_arc : Aiming_Arc
+@export var camera : Camera2D
+@export var resseting_jump_timer : Timer
 
 @export_category("Values")
-@export_range(0, 400, 5) var speed : float = 165.0
-@export_range(0, 1, 0.1) var acceleration : float = 0.5
-@export_range(-1000, 0, 10) var jump_velocity : float = -430.0
+@export_range(0, 400, 5) var speed : int = 165
+@export_range(0, 1, 0.1) var acceleration : float = 0.7
+@export_range(-1000, 0, 10) var jump_velocity : int = -430
 @export_range(0, 1, 0.1) var friction : float = 0.5
-@export_range(0, 1000, 10) var max_fall_speed : float = 400
+@export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
 @export_range(350, 750, 25) var throw_force_x : int = 375
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
-@export var stop_resseting_jump_status_time = 0.1
-@export var resseting_jump_timer : Timer
+@export_range(0.05, 0.5, 0.05) var stop_resseting_jump_status_time = 0.1
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = false
+
+@onready var spark_animation := preload("res://playercharacter/Spark.tscn")
 
 #coyote timer logic
 var player_jumped : bool = false
@@ -46,6 +49,7 @@ const max_throw_anim_rot_deg : float = -20
 var max_throw_force : Vector2i = Vector2i(throw_force_x, throw_force_y)
 var interact_released : bool = false
 var throw_tween : Tween
+var channeling_recall : bool = false
 
 
 var allow_jump_variable_resets : bool = true 
@@ -60,7 +64,8 @@ signal max_health_changed
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 
-var picked_up_box : PlayerBox
+@onready var box_ref : PlayerBox = preload("res://playerbox/PlayerBox.tscn").instantiate()
+var picked_up_box : bool = false
 var available_box : PlayerBox
 
 func _ready() -> void:
@@ -68,17 +73,16 @@ func _ready() -> void:
 	resseting_jump_timer.wait_time = stop_resseting_jump_status_time
 	health_node.health_changed.connect(_on_health_changed)
 	health_node.max_health_changed.connect(_on_max_health_changed)
+	get_parent().add_child.call_deferred(box_ref)
 
 func _physics_process(delta : float) -> void:
-	_apply_gravity(delta)
+	apply_gravity(delta)
 
-	_process_jump_availability()
+	process_jump_availability()
 	
-	#_process_jump()
-		
-	_process_movement(delta)
+	process_movement(delta)
 	
-	_process_throw(delta)
+	process_throw(delta)
 	
 	move_and_slide()
 
@@ -100,7 +104,7 @@ func jump_cut() -> void:
 		velocity.y = velocity.y / 2
 
 
-func _process_jump_availability() -> void:
+func process_jump_availability() -> void:
 	if is_on_floor() and allow_jump_variable_resets:
 		jump_is_available = true
 		player_jumped = false;
@@ -113,24 +117,8 @@ func _process_jump_availability() -> void:
 
 ##box functions
 func _unhandled_input(event : InputEvent) -> void:
-	if event.is_action_pressed("interact_or_throw"):
-		if not picked_up_box and available_box and available_box.is_on_floor():
-			picked_up_box = available_box
-			picked_up_box.pick_up(self)
-			apply_carrying_sprites(true)
-	if event is InputEventKey:
-		if event.is_action_pressed("ui_up"):
-			if jump_is_available and not player_jumped:
-				jump()
-			else:
-				pass
-		if event.is_action_released("ui_up"):
-			jump_cut()
-	
-
-func _process_throw(delta : float) -> void:
 	if picked_up_box:
-		if Input.is_action_just_released("interact_or_throw"):
+		if event.is_action_released("interact_or_throw"):
 			interact_released = true
 			if charge_time > 0.0:
 				
@@ -139,12 +127,12 @@ func _process_throw(delta : float) -> void:
 				if velocity.y < 0:
 					jump_vel = Vector2(0, velocity.y) / 2
 				var direction : int = player_sprites.scale.x
-				picked_up_box.throw((Vector2(throw_force_x * direction, 
+				box_ref.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)
 				aiming_arc.clear_points()
 				
 				interact_released = false
-				picked_up_box = null
+				picked_up_box = false
 				charge_time = 0.0
 				
 				if throw_tween:
@@ -153,20 +141,69 @@ func _process_throw(delta : float) -> void:
 				
 				throw_tween.tween_property(player_sprites, "rotation_degrees",
 				(-max_throw_anim_rot_deg) * direction, 0.1)
-				throw_tween.tween_property(player_sprites, "rotation_degrees", 0, 0.5)
-		
-		elif Input.is_action_pressed("interact_or_throw") and interact_released:
+				throw_tween.tween_property(player_sprites, "rotation_degrees", 0, 0.4)
+				throw_tween.tween_property(camera, "position:x", 0, 0.1)
+	
+	elif event.is_action_pressed("interact_or_throw"):
+		if available_box and available_box.is_on_floor():
+			picked_up_box = true
+			available_box.pick_up(self)
+			apply_carrying_sprites(true)
+	
+	elif event.is_action_released("interact_or_throw"):
+		reset_recall_animation()
+	
+	if event.is_action_released("ui_up"):
+		jump_cut()
+	elif event.is_action_pressed("ui_up"):
+		if jump_is_available and not player_jumped:
+			jump()
+
+
+func process_throw(delta : float) -> void:
+	if picked_up_box:
+		if Input.is_action_pressed("interact_or_throw") and interact_released:
+			var direction : int = player_sprites.scale.x
 			charge_time += throw_charge_rate * delta
 			charge_time = clampf(charge_time, charge_minimum, 1.0)
 			if (aiming_arc_enabled):
-				aiming_arc.display_trajectory((Vector2(throw_force_x * player_sprites.scale.x, throw_force_y)*charge_time), delta)
+				aiming_arc.display_trajectory((Vector2(throw_force_x * direction, throw_force_y)*charge_time), delta)
 			player_sprites.rotation_degrees = lerpf(0.0,
-			max_throw_anim_rot_deg * player_sprites.scale.x, charge_time)
+			max_throw_anim_rot_deg * direction, charge_time)
+			camera.position.x = lerp(0, 45 * direction, charge_time)
 			if Input.is_action_just_pressed("cancel_throw"):
 				aiming_arc.clear_points()
 				charge_time = 0
 				player_sprites.rotation_degrees = 0
+				camera.position.x = 0
 				interact_released = false
+
+	#handles box recall feature
+	elif not available_box and Input.is_action_pressed("interact_or_throw"):
+		jump_is_available = false
+		channeling_recall = true
+		if is_on_floor():
+			stop_move(delta)
+		charge_time += throw_charge_rate * delta
+		charge_time = clampf(charge_time, 0, 2.0)
+		animation_target.scale.x = 1.2 - (charge_time / 9)
+		animation_target.scale.y = 0.9
+		player_sprites.position.y = 2
+		if charge_time >= 2.0:
+			var pos : Vector2 = global_position
+			box_ref.global_position = pos
+			reset_recall_animation()
+			var spark : SparkAnimation = spark_animation.instantiate()
+			get_parent().add_child(spark)
+			spark.start(pos)
+
+func reset_recall_animation() -> void:
+	charge_time = 0.0
+	animation_target.scale = Vector2i(1, 1)
+	player_sprites.position.y = 0
+	channeling_recall = false
+	if is_on_floor():
+		jump_is_available = true
 
 func apply_carrying_sprites(apply : bool) -> void:
 	if apply:
@@ -174,7 +211,7 @@ func apply_carrying_sprites(apply : bool) -> void:
 		left_arm.rotation_degrees = 30
 		left_arm.position.x += 1
 		left_arm.position.y -= 1
-		box_sprite.texture = picked_up_box.sprite.texture
+		box_sprite.texture = available_box.sprite.texture
 	else:
 		right_arm.rotation_degrees = 0
 		left_arm.rotation_degrees = 0
@@ -185,7 +222,7 @@ func apply_carrying_sprites(apply : bool) -> void:
 
 ##Movement functions 
 
-func _apply_gravity(delta : float) -> void:
+func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
 		if not coyote_timer.is_stopped() and not player_jumped:
 			velocity.y = 0
@@ -202,7 +239,7 @@ func _apply_gravity(delta : float) -> void:
 
 
 
-func _process_movement(delta : float) -> void:
+func process_movement(delta : float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : int = Input.get_axis("ui_left", "ui_right")
@@ -211,7 +248,7 @@ func _process_movement(delta : float) -> void:
 		#this value is used by other code to get the player's direction
 		if charge_time == 0:
 			player_sprites.scale.x = direction
-		if is_on_floor():
+		if is_on_floor() and not channeling_recall:
 			emit_signal("step_taken")
 
 	# Check to make sure player doesn't slide more when running opposite way
@@ -219,8 +256,15 @@ func _process_movement(delta : float) -> void:
 	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
 		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
+		stop_move(delta)
 		
+
+func stop_move(delta : float) -> void:
+	velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
+
+func teleport_player(pos : Vector2) -> void:
+	global_position = pos + Vector2(-8, 0)
+	box_ref.global_position = pos + Vector2(+8, 0)
 
 
 ##signal functions
@@ -234,8 +278,8 @@ func _on_health_death(_pos : Vector2i) -> void:
 	hurtbox_collision.set_deferred("disabled", true)
 	
 	if picked_up_box:
-		picked_up_box.throw(Vector2i(0, 0))
-		picked_up_box = null
+		box_ref.throw(Vector2i(0, 0))
+		picked_up_box = false
 		interact_released = false
 	
 	player_died = true;

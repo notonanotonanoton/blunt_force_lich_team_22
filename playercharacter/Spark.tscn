@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjk0l52b12jbe"]
+
+[ext_resource type="Script" path="res://playercharacter/Spark.gd" id="1_ehdeo"]
+[ext_resource type="Texture2D" uid="uid://b3wkimuhc6ah7" path="res://playercharacter/spark.png" id="1_v27wf"]
+
+[node name="Spark" type="Sprite2D"]
+top_level = true
+texture = ExtResource("1_v27wf")
+script = ExtResource("1_ehdeo")
