@@ -24,13 +24,13 @@ func _ready() -> void:
 	max_player_proximity += offset
 
 func enter() -> void:
-	enemy.aggro_radius.shape.radius += aggro_range_increase
+	enemy.aggro_radius.shape.radius = enemy.default_aggro_range + aggro_range_increase
 	enemy.flip_gravity(false)
 
 func exit() -> void:
 	enemy.target_player = null
 	distance_to_player = 0.0
-	enemy.aggro_radius.shape.radius -= aggro_range_increase
+	enemy.aggro_radius.shape.radius = enemy.default_aggro_range - aggro_range_increase
 
 func update(delta : float) -> void:
 	pass

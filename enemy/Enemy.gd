@@ -10,6 +10,7 @@ class_name Enemy
 @export var jump_block_detector : Area2D
 @export var collision : CollisionShape2D
 @export var behavior_extension : EnemyBehaviorExtension
+@export var aggro_range_increase_timer : Timer
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
@@ -27,6 +28,7 @@ class_name Enemy
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 var collision_offset : int
+var default_aggro_range : int
 
 #used to prevent pathfinding getting stuck on walls 
 #when there's a tile 1 tile above
@@ -45,11 +47,10 @@ var target_player : PlayerCharacter = null
 signal step_taken
 signal jumped
 
-signal cant_chase
-
 #many functions are called in states inside the state machine
 
 func _ready() -> void:
+	default_aggro_range = aggro_range
 	aggro_radius.shape.radius = aggro_range
 	collision_offset = (collision.shape.get_rect().size.x + 1) / 2 
 
@@ -105,6 +106,12 @@ func handle_wall_or_gap(delta : float) -> void:
 			jump(delta, 1.0, false)
 	else:
 		was_on_wall = false
+
+func damage_aggro_range_increase() -> void:
+	aggro_radius.shape.radius *= 2
+	aggro_range_increase_timer.start()
+	await aggro_range_increase_timer.timeout
+	aggro_radius.shape.radius = default_aggro_range
 
 func flip_gravity(flip : bool) -> void:
 	if flip:
