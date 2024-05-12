@@ -3,6 +3,7 @@ extends Control
 signal back_pressed
 signal aiming_arch_toggled 
 @onready var window_button : OptionButton = $VBoxContainer/HBoxContainer/WindowMode
+var vsync_enabled : bool = false
 
 const WINDOW_MODE_ARRAY : Array[String] = [
 	"Full-Screen",
@@ -44,3 +45,11 @@ func _on_back_pressed() -> void:
 	
 func _on_check_box_pressed():
 	emit_signal("aiming_arch_toggled")
+
+func _on_v_sync_pressed():
+	if (!vsync_enabled):
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		vsync_enabled = true
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		vsync_enabled = false
