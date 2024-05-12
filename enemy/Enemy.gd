@@ -108,7 +108,7 @@ func handle_wall_or_gap(delta : float) -> void:
 		was_on_wall = false
 
 func damage_aggro_range_increase() -> void:
-	aggro_radius.shape.radius *= 2
+	aggro_radius.shape.radius *= 3
 	aggro_range_increase_timer.start()
 	await aggro_range_increase_timer.timeout
 	aggro_radius.shape.radius = default_aggro_range
