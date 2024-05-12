@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://5ettome7hf5x"]
+
+[ext_resource type="Texture2D" uid="uid://cias00f8qedm0" path="res://pickups/health_pickup/temporary_heart.png" id="1_amuol"]
+[ext_resource type="Script" path="res://pickups/health_pickup/health_pickup.gd" id="1_p5mvk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o100d"]
+radius = 9.0
+
+[node name="HealthPickup" type="Node2D"]
+script = ExtResource("1_p5mvk")
+
+[node name="HealthPickupBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthPickupBox"]
+shape = SubResource("CircleShape2D_o100d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_amuol")
+
+[connection signal="body_entered" from="HealthPickupBox" to="." method="_on_health_pickup_box_body_entered"]
