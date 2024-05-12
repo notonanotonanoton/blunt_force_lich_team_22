@@ -75,17 +75,20 @@ func _on_character_max_health_changed(new_max_health : int) -> void:
 	
 func _refresh_healthbar() -> void:
 	current_heart_index = 0
-	var health : int = health_module.get_health() 
+	var health : int = health_module.get_health()
 	var i : int = 0
 	while i < heart_containers.get_child_count():
 		current_heart = heart_containers.get_child(i)
 		if health >= 2:
 			current_heart.texture = full_heart
+			current_health_level = HealthLevel.FULL
 		elif health == 1:
 			current_heart.texture = half_heart
+			current_health_level = HealthLevel.HALF
 		else:
 			current_heart.texture = empty_heart
 		health -= 2
 		i += 1
 		if (health > 0):
 			current_heart_index += 1
+	
