@@ -100,6 +100,7 @@ pause={
 2d_physics/layer_2="PlayerLayer"
 2d_physics/layer_3="EnemyLayer"
 2d_physics/layer_4="BoxLayer"
+2d_physics/layer_5="Pickups"
 
 [physics]
 
