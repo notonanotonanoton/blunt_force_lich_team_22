@@ -88,7 +88,7 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			if parent is PlayerCharacter:
 				knockback *= 2
 			else:
-				
+				parent.damage_aggro_range_increase()
 	
 			#saves direction
 			if(enemy_position.direction_to(parent.global_position).x < 0):

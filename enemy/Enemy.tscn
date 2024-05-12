@@ -130,11 +130,6 @@ shape = SubResource("CircleShape2D_168vn")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
 generic_animations = NodePath("../GenericAnimations")
-knockback_stun = null
-invincibility_time = null
-knockback_strength = null
-knockback_up_strength = null
-health = null
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("7_8em8b")]
 collision_layer = 0
