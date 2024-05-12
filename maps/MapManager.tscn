@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyfvjgfn7gwj5"]
+[gd_scene load_steps=7 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="4_1ojgl"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_1ojgl"]
 [ext_resource type="PackedScene" uid="uid://b7hwrgdchtxiy" path="res://level2.01.tscn" id="4_pfs1p"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_qnnu7"]
+[ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
 
 [node name="MapManager" type="Node2D"]
+position = Vector2(944, -94)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
@@ -18,3 +21,27 @@ character = NodePath("../PlayerCharacter")
 
 [node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("5_nmudn")]
 player_character = NodePath("../PlayerCharacter")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Pause" instance=ExtResource("5_qnnu7")]
+offset_left = 161.0
+offset_top = 91.0
+offset_right = -159.0
+offset_bottom = -89.0
+
+[node name="Settings" parent="Pause/PauseMenu" instance=ExtResource("6_3bh5e")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -7.0
+offset_top = -18.0
+offset_right = -7.0
+offset_bottom = -18.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/Settings" method="_on_pause_menu_entered_settings"]
+[connection signal="aiming_arch_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arch_toggled"]
+[connection signal="back_pressed" from="Pause/PauseMenu/Settings" to="Pause/PauseMenu" method="_on_settings_menu_back_pressed"]
