@@ -31,7 +31,7 @@ signal damage_taken
 func _ready() -> void:
 	parent = get_parent()
 	
-	if parent is PlayerCharacter or parent is Enemy:
+	if not parent is BreakableBlock:
 		max_parent_acceleration = parent.acceleration
 		stun_timer.connect("timeout", _on_stun_timer_timeout)
 		stun_timer.wait_time = knockback_stun
@@ -80,10 +80,12 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 	if invincibility_timer.is_stopped() == true:
 		health -= damage
 		
-		if parent is PlayerCharacter or parent is Enemy:
+		if not parent is BreakableBlock:
 			var knockback : int = knockback_strength
 			if parent is PlayerCharacter:
 				knockback *= 2
+			else:
+				
 	
 			#saves direction
 			if(enemy_position.direction_to(parent.global_position).x < 0):

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name BreakableBlock
+
 @export var is_rock : bool = true
 
 @onready var pebble = preload("res://graveyardtiles/breakableblocks/FlyingPebble.tscn")

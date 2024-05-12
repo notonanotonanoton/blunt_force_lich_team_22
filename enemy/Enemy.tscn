@@ -37,7 +37,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -47,6 +47,7 @@ ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
+aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -129,6 +130,11 @@ shape = SubResource("CircleShape2D_168vn")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
 generic_animations = NodePath("../GenericAnimations")
+knockback_stun = null
+invincibility_time = null
+knockback_strength = null
+knockback_up_strength = null
+health = null
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("7_8em8b")]
 collision_layer = 0
@@ -146,6 +152,10 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_c0lg1")
+
+[node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
