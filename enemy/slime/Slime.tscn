@@ -52,7 +52,6 @@ collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SlimeBehavior")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 speed = 55
-aggro_range = 70
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 

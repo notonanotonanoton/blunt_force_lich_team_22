@@ -30,7 +30,7 @@ func enter() -> void:
 func exit() -> void:
 	enemy.target_player = null
 	distance_to_player = 0.0
-	enemy.aggro_radius.shape.radius = enemy.default_aggro_range - aggro_range_increase
+	enemy.aggro_radius.shape.radius = enemy.default_aggro_range
 
 func update(delta : float) -> void:
 	pass

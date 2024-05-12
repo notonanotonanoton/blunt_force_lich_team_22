@@ -25,7 +25,7 @@ class_name PlayerCharacter
 @export_range(0, 1, 0.1) var friction : float = 0.5
 @export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
-@export_range(350, 750, 25) var throw_force_x : int = 375
+@export_range(350, 750, 25) var throw_force_x : int = 300
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
 @export_range(0.05, 0.5, 0.05) var stop_resetting_jump_status_time = 0.1

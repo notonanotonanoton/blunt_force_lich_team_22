@@ -48,6 +48,7 @@ low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
+aggro_range = 140
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 

@@ -20,7 +20,7 @@ class_name Enemy
 @export_range(0, 1, 0.1) var friction : float = 0.8
 @export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 2, 0.1) var gravity_scale : float = 1.0
-@export_range(0, 200, 10) var aggro_range : int = 100
+@export_range(0, 300, 10) var aggro_range : int = 120
 @export var is_ranged : bool = false
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = true
