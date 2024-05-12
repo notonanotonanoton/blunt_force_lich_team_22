@@ -125,7 +125,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				apply_carrying_sprites(false)
 				var jump_vel : Vector2 = Vector2(0, 0)
 				if velocity.y < 0:
-					jump_vel = Vector2(0, velocity.y) / 2
+					jump_vel = Vector2(0, velocity.y) / 4
 				var direction : int = player_sprites.scale.x
 				box_ref.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)
