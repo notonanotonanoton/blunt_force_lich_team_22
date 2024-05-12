@@ -228,7 +228,6 @@ sources/0 = SubResource("TileSetAtlasSource_g1ew0")
 sources/2 = SubResource("TileSetAtlasSource_yga00")
 
 [node name="DefaultTileMap" type="TileMap"]
-skew = 0.750492
 tile_set = SubResource("TileSet_cw68q")
 format = 2
 layer_0/name = "GroundLayer"

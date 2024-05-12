@@ -1,5 +1,12 @@
 extends Node
 
+signal level_transition 
+var map_manager : Node
+ 
+func _ready():
+	map_manager = 	get_parent().get_parent() 
+
 func _on_area_2d_body_entered(body):
-	get_tree().change_scene_to_file("res://level2.01.tscn") #update to choose randomly from array when there  are more levels available 
+	map_manager.change_scene()	
+
 
