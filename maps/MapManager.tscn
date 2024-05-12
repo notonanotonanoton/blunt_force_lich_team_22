@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
 
 [node name="MapManager" type="Node2D"]
+position = Vector2(944, -94)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)

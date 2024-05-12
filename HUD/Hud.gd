@@ -29,10 +29,10 @@ func _ready() -> void:
 	current_max_health = health_module.get_max_health()
 	character.health_changed.connect(_on_character_health_changed)
 	character.max_health_changed.connect(_on_character_max_health_changed)
+	health_module.heart_picked_up.connect(_on_heart_picked_up)
 	_load_hearts()
 	
 func _load_hearts() -> void:
-	print("load hearts??")
 	for child : TextureRect in heart_containers.get_children():
 			if child != null:
 				child.queue_free()
@@ -53,6 +53,9 @@ func _on_character_health_changed(damage : int) -> void:
 			current_health_level = HealthLevel.FULL
 			current_heart.texture = empty_heart
 			current_heart_index -= 1
+
+func _on_heart_picked_up() -> void:
+	_refresh_healthbar()
 
 func _on_character_max_health_changed(new_max_health : int) -> void:
 	#assumes health level is always even

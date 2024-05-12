@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7hwrgdchtxiy"]
+[gd_scene load_steps=5 format=3 uid="uid://b7hwrgdchtxiy"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_gb74l"]
 [ext_resource type="PackedScene" uid="uid://7ppe4bc3oiv3" path="res://enemy/skeletonarcher/SkeletonArcher.tscn" id="2_edb6l"]
 [ext_resource type="PackedScene" uid="uid://yyan0x7aj3p0" path="res://enemy/damageobstacle/Spikes.tscn" id="3_d7qmb"]
+[ext_resource type="PackedScene" uid="uid://5ettome7hf5x" path="res://pickups/health_pickup/health_pickup.tscn" id="4_b31no"]
 
 [node name="Level2_01" type="Node2D"]
 
@@ -53,3 +54,6 @@ rotation = -4.71239
 [node name="Spikes9" parent="." instance=ExtResource("3_d7qmb")]
 position = Vector2(2160, -305)
 rotation = -4.71239
+
+[node name="HealthPickup" parent="." instance=ExtResource("4_b31no")]
+position = Vector2(38, 24)

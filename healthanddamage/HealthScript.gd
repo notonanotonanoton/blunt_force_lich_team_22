@@ -27,6 +27,7 @@ signal death
 signal health_changed
 signal max_health_changed
 signal damage_taken
+signal heart_picked_up
 
 func _ready() -> void:
 	parent = get_parent()
@@ -59,7 +60,8 @@ func heal(hp : int) -> void:
 	health = health+hp
 	if(health>max_health):
 		health = max_health
-
+	emit_signal("heart_picked_up")  
+	
 func get_health() -> int:
 	return health
 
