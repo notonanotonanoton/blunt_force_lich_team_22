@@ -6,13 +6,20 @@ class_name interactive_tilemap
 
 @export var TILE_SCENES: Dictionary = {
 	#insert the atlas coordinate of the spawner and the filepath to the object it should spawn
+	#player is commented out so we know the spot is reserved. It should not be handled with the other tile scenes
+	#since its being handled by its own script 
 	#Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
-	Vector2i(1,0): preload("res://enemy/slime/Slime.tscn"),
-	Vector2i(3,0): preload("res://enemy/damageobstacle/Spikes.tscn")
+	
+	#Vector2i(1, 0): preload()
+	
+	Vector2i(0,1): preload("res://enemy/slime/Slime.tscn"),
+	Vector2i(1,1): preload("res://enemy/skeletonarcher/SkeletonArcher.tscn"),
+	#Vector2i(2,1): preload()
+	Vector2i(0,2): preload("res://enemy/damageobstacle/Spikes.tscn"),
+	Vector2i(1,2): preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
 }
 
 #decrement global pos with this if you want to start in the corner of the tile
-#i dont know what data type this is
 @onready var half_cell_size : Vector2 = tile_set.tile_size * 0.5
 
 var search_layer : int = 0
