@@ -57,6 +57,7 @@ func set_health(hp : int) -> void:
 	health = hp
 
 func heal(hp : int) -> void:
+	#TODO: fix bug with picking up heart when have 2.5 hearts
 	health = health+hp
 	if(health>max_health):
 		health = max_health
