@@ -1,35 +1,29 @@
 [gd_scene load_steps=11 format=3 uid="uid://c1o2ymh2bg2j2"]
 
-[ext_resource type="Texture2D" uid="uid://dnwy8dg4smc8u" path="res://asepritefiles/spawn_icons.png" id="1_x5y82"]
+[ext_resource type="Texture2D" uid="uid://d1cr20fqut5e8" path="res://asepritefiles/player_and_enemy_spawn_icons.png" id="1_hmuug"]
 [ext_resource type="Texture2D" uid="uid://dkt0wbbgy3hne" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
 [ext_resource type="Texture2D" uid="uid://bctcdnbx10ami" path="res://castletiles/stone_brick_tileset.png" id="3_b2805"]
 [ext_resource type="Texture2D" uid="uid://bkn6ypladv7b" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
 [ext_resource type="Script" path="res://graveyardtiles/SpawnScript.gd" id="4_spift"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wqsem"]
-texture = ExtResource("1_x5y82")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ew0"]
+texture = ExtResource("1_hmuug")
 texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-0:2/0 = 0
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
+1:0/next_alternative_id = 2
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
+2:0/next_alternative_id = 2
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn16e"]
 texture = ExtResource("2_s8b55")
@@ -229,8 +223,8 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_nn16e")
 sources/3 = SubResource("TileSetAtlasSource_08sqm")
+sources/0 = SubResource("TileSetAtlasSource_g1ew0")
 sources/2 = SubResource("TileSetAtlasSource_yga00")
-sources/0 = SubResource("TileSetAtlasSource_wqsem")
 
 [node name="DefaultTileMap" type="TileMap"]
 tile_set = SubResource("TileSet_cw68q")
