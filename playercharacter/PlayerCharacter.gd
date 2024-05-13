@@ -64,7 +64,7 @@ signal max_health_changed
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 
-@onready var box_ref : PlayerBox = preload("res://playerbox/PlayerBox.tscn").instantiate()
+@onready var box_ref : PlayerBox = load("res://playerbox/PlayerBox.tscn").instantiate()
 var picked_up_box : bool = false
 var available_box : PlayerBox
 
