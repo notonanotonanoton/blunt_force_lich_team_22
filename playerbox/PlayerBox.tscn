@@ -1,45 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://cupv7wvlaedxn"]
+[gd_scene load_steps=7 format=3 uid="uid://b53jfiw0luh3x"]
 
-[ext_resource type="Texture2D" uid="uid://cxgro3ipcb" path="res://playerbox/character_phylactery.png" id="1_ifsfx"]
-[ext_resource type="Script" path="res://playerbox/PlayerBox.gd" id="1_w7fsv"]
-[ext_resource type="Texture2D" uid="uid://cfc6hq0nfe0pg" path="res://playerbox/box_outline.png" id="3_5effe"]
-[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="3_bl2yy"]
+[ext_resource type="Script" path="res://playerbox/PlayerBox.gd" id="1_52j6o"]
+[ext_resource type="Texture2D" uid="uid://cxgro3ipcb" path="res://playerbox/character_phylactery.png" id="2_b20dl"]
+[ext_resource type="Texture2D" uid="uid://cfc6hq0nfe0pg" path="res://playerbox/box_outline.png" id="3_07ums"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="4_7gyl8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gahia"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqhbf"]
+resource_local_to_scene = true
 size = Vector2(14, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7i6a"]
-size = Vector2(14, 14)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygn50"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
 
 [node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer", "sprite", "collision_shape", "hitbox")]
 top_level = true
 collision_layer = 8
-script = ExtResource("1_w7fsv")
+script = ExtResource("1_52j6o")
 arming_timer = NodePath("ArmingTimer")
 sprite = NodePath("Sprite2D")
 collision_shape = NodePath("CollisionShape2D")
 hitbox = NodePath("HitBoxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 5.36442e-07)
-texture = ExtResource("1_ifsfx")
+texture = ExtResource("2_b20dl")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
-z_index = 5
-texture = ExtResource("3_5effe")
+texture = ExtResource("3_07ums")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_gahia")
+shape = SubResource("RectangleShape2D_fqhbf")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("3_bl2yy")]
+[node name="HitBoxComponent" parent="." instance=ExtResource("4_7gyl8")]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-shape = SubResource("RectangleShape2D_b7i6a")
+shape = SubResource("RectangleShape2D_ygn50")
 
 [node name="ArmingTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
-
-[connection signal="dealt_damage" from="HitBoxComponent" to="." method="_on_hit_box_component_dealt_damage"]
