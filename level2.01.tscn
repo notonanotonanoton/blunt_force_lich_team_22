@@ -64,7 +64,7 @@ rotation = -4.71239
 position = Vector2(38, 24)
 
 [node name="LevelTransition" parent="." instance=ExtResource("5_2ljgl")]
-position = Vector2(-96, -17)
+position = Vector2(-112, 16)
 
 [node name="Spikes10" parent="." instance=ExtResource("3_d7qmb")]
 position = Vector2(2416, -944)

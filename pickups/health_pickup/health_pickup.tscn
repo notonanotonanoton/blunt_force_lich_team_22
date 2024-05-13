@@ -1,22 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://5ettome7hf5x"]
 
-[ext_resource type="Texture2D" uid="uid://cias00f8qedm0" path="res://pickups/health_pickup/temporary_heart.png" id="1_amuol"]
 [ext_resource type="Script" path="res://pickups/health_pickup/health_pickup.gd" id="1_p5mvk"]
+[ext_resource type="Texture2D" uid="uid://bsld5vdqvmyy5" path="res://pickups/health_pickup/heart_pickup.png" id="2_3sat7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o100d"]
-radius = 9.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxeyf"]
+size = Vector2(14, 14)
 
-[node name="HealthPickup" type="Node2D"]
+[node name="HealthPickup" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 script = ExtResource("1_p5mvk")
 
-[node name="HealthPickupBox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthPickupBox"]
-shape = SubResource("CircleShape2D_o100d")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_amuol")
+texture = ExtResource("2_3sat7")
 
-[connection signal="body_entered" from="HealthPickupBox" to="." method="_on_health_pickup_box_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cxeyf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cias00f8qedm0"
-path="res://.godot/imported/temporary_heart.png-a1dc22b047deeee785e50b98bcd27eaf.ctex"
+uid="uid://xfmdvytiyu0k"
+path="res://.godot/imported/exit_portal_tail.png-a0a82794f4066574ae92110263633397.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pickups/health_pickup/temporary_heart.png"
-dest_files=["res://.godot/imported/temporary_heart.png-a1dc22b047deeee785e50b98bcd27eaf.ctex"]
+source_file="res://leveltransition/exit_portal_tail.png"
+dest_files=["res://.godot/imported/exit_portal_tail.png-a0a82794f4066574ae92110263633397.ctex"]
 
 [params]
 

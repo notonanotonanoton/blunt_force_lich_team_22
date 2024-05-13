@@ -1,9 +1,8 @@
-extends Node
+extends Area2D
 
-@export var player_character : CharacterBody2D
 const HEALTH_INCREASE : int = 2
 
-func _on_health_pickup_box_body_entered(body):
+func _on_body_entered(body : PhysicsBody2D) -> void:
 	if body is PlayerCharacter:
 		body.get_node("Health").heal(HEALTH_INCREASE)
 	queue_free()
