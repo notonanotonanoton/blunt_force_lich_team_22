@@ -106,9 +106,7 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			emit_signal("damage_taken")
 		
 		else:
-			parent.set_physics_process(false)
-			parent.collision.set_deferred("disabled", true)
-			parent.hurtbox_collision.set_deferred("disabled", true)
+			parent.activate_death_state()
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
 	

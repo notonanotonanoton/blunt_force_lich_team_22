@@ -266,6 +266,11 @@ func teleport_player(pos : Vector2) -> void:
 	global_position = pos + Vector2(-8, 0)
 	box_ref.global_position = pos + Vector2(+8, 0)
 
+func activate_death_state() -> void:
+	set_physics_process(false)
+	collision.set_deferred("disabled", true)
+	hurtbox_collision.set_deferred("disabled", true)
+
 
 ##signal functions
 
@@ -301,7 +306,6 @@ func _on_health_changed(health_change : int) -> void:
 
 func _on_max_health_changed(max_health_change : int) -> void:
 	emit_signal("max_health_changed", max_health_change)
-
 
 func _on_jump_reset_freeze_timer_timeout():
 	allow_jump_variable_resets = true

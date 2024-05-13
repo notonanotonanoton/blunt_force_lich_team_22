@@ -26,7 +26,7 @@ var jump_squish : Tween
 func _ready() -> void:
 	health_node.damage_taken.connect(_on_damage_taken)
 	health_node.death.connect(_on_death)
-	if character is Enemy or character is PlayerCharacter:
+	if not character is BreakableBlock:
 		character.step_taken.connect(_on_step_taken)
 		character.jumped.connect(_on_jumped)
 	else:

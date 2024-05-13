@@ -12,6 +12,8 @@ class_name Enemy
 @export var behavior_extension : EnemyBehaviorExtension
 @export var aggro_range_increase_timer : Timer
 @export var hurtbox_collision : hurt_box_component
+#leave empty for non-skeleton
+@export var skeleton_animation_timer : Timer
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
@@ -114,6 +116,14 @@ func damage_aggro_range_increase() -> void:
 	await aggro_range_increase_timer.timeout
 	aggro_radius.shape.radius = default_aggro_range
 
+func activate_death_state() -> void:
+	set_physics_process(false)
+	collision.set_deferred("disabled", true)
+	hurtbox_collision.set_deferred("disabled", true)
+	if skeleton_animation_timer:
+		skeleton_animation_timer.paused = true
+
+#unused
 func flip_gravity(flip : bool) -> void:
 	if flip:
 		up_direction.y = 1

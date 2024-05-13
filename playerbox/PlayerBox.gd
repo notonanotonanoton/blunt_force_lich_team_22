@@ -19,6 +19,7 @@ var holder : PlayerCharacter
 var can_deal_damage : bool = false
 
 func _ready() -> void:
+	hitbox.dealt_damage.connect(_on_hit_box_component_dealt_damage)
 	arming_timer.wait_time = minimum_arming_time
 
 func _physics_process(delta : float) -> void:

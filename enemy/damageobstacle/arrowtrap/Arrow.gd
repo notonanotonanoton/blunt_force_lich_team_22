@@ -22,7 +22,6 @@ func _physics_process(delta : float) -> void:
 		position.y -= default_gravity
 
 func add_movement(mov : Vector2, pos : Vector2, rot : Vector2) -> void:
-	print("called")
 	movement = mov
 	global_position = pos
 	rotation = rot.angle()
