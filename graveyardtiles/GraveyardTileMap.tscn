@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d1cr20fqut5e8" path="res://asepritefiles/player_and_enemy_spawn_icons.png" id="1_hmuug"]
 [ext_resource type="Texture2D" uid="uid://dkt0wbbgy3hne" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
 [ext_resource type="Texture2D" uid="uid://bctcdnbx10ami" path="res://castletiles/stone_brick_tileset.png" id="3_b2805"]
-[ext_resource type="Texture2D" uid="uid://d2bsclnmy2w6h" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
+[ext_resource type="Texture2D" uid="uid://efxnbyguagbk" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
 [ext_resource type="Script" path="res://graveyardtiles/SpawnScript.gd" id="4_spift"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ew0"]
