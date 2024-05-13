@@ -15,8 +15,6 @@ class_name GenericAnimations
 
 var not_actor : bool = false
 
-signal damage_animation_finished
-
 var damage_tween_flash : Tween
 var damage_tween_shake : Tween
 
