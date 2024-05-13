@@ -24,8 +24,6 @@ size = Vector2(8, 20)
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer")]
 collision_layer = 2
 script = ExtResource("1_iplij")
-acceleration = 0.4
-friction = 0.6
 sprite = NodePath("DirectionFlip")
 animation_target = NodePath("DirectionFlip/GenericAnimationTarget")
 coyote_timer = NodePath("CoyoteTimer")
@@ -38,6 +36,8 @@ hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 camera = NodePath("Camera2D")
 resetting_jump_timer = NodePath("jumpResetFreezeTimer")
+acceleration = 0.4
+friction = 0.6
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
