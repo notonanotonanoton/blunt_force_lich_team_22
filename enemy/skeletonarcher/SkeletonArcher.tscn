@@ -108,7 +108,7 @@ attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
 max_player_proximity = 80
 attack_range = 200
-aggro_range_increase = 70
+aggro_range_increase = 30
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
