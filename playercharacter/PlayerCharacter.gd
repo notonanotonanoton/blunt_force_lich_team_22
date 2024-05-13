@@ -4,7 +4,7 @@ class_name PlayerCharacter
 
 @export_category("Nodes")
 #scale.x used for direction, among other things
-@export var player_sprites : Node2D
+@export var sprite : Node2D
 #has to be used over player_sprites when manipulating scale.x outside of direction change
 @export var animation_target : Node2D
 @export var coyote_timer : Timer
@@ -126,7 +126,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				var jump_vel : Vector2 = Vector2(0, 0)
 				if velocity.y < 0:
 					jump_vel = Vector2(0, velocity.y) / 4
-				var direction : int = player_sprites.scale.x
+				var direction : int = sprite.scale.x
 				box_ref.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)
 				aiming_arc.clear_points()
@@ -139,9 +139,9 @@ func _unhandled_input(event : InputEvent) -> void:
 					throw_tween.kill()
 				throw_tween = self.create_tween()
 				
-				throw_tween.tween_property(player_sprites, "rotation_degrees",
+				throw_tween.tween_property(sprite, "rotation_degrees",
 				(-max_throw_anim_rot_deg) * direction, 0.1)
-				throw_tween.tween_property(player_sprites, "rotation_degrees", 0, 0.4)
+				throw_tween.tween_property(sprite, "rotation_degrees", 0, 0.4)
 				throw_tween.tween_property(camera, "position:x", 0, 0.1)
 	
 	elif event.is_action_pressed("interact_or_throw"):
@@ -163,18 +163,18 @@ func _unhandled_input(event : InputEvent) -> void:
 func process_throw(delta : float) -> void:
 	if picked_up_box:
 		if Input.is_action_pressed("interact_or_throw") and interact_released:
-			var direction : int = player_sprites.scale.x
+			var direction : int = sprite.scale.x
 			charge_time += throw_charge_rate * delta
 			charge_time = clampf(charge_time, charge_minimum, 1.0)
 			if (aiming_arc_enabled):
 				aiming_arc.display_trajectory((Vector2(throw_force_x * direction, throw_force_y)*charge_time), delta)
-			player_sprites.rotation_degrees = lerpf(0.0,
+			sprite.rotation_degrees = lerpf(0.0,
 			max_throw_anim_rot_deg * direction, charge_time)
 			camera.position.x = lerp(0, 45 * direction, charge_time)
 			if Input.is_action_just_pressed("cancel_throw"):
 				aiming_arc.clear_points()
 				charge_time = 0
-				player_sprites.rotation_degrees = 0
+				sprite.rotation_degrees = 0
 				camera.position.x = 0
 				interact_released = false
 
@@ -188,7 +188,7 @@ func process_throw(delta : float) -> void:
 		charge_time = clampf(charge_time, 0, 2.0)
 		animation_target.scale.x = 1.2 - (charge_time / 9)
 		animation_target.scale.y = 0.9
-		player_sprites.position.y = 2
+		sprite.position.y = 2
 		if charge_time >= 2.0:
 			var pos : Vector2 = global_position
 			box_ref.global_position = pos
@@ -200,7 +200,7 @@ func process_throw(delta : float) -> void:
 func reset_recall_animation() -> void:
 	charge_time = 0.0
 	animation_target.scale = Vector2i(1, 1)
-	player_sprites.position.y = 0
+	sprite.position.y = 0
 	channeling_recall = false
 	if is_on_floor():
 		jump_is_available = true
@@ -247,7 +247,7 @@ func process_movement(delta : float) -> void:
 	if (direction > 0 or direction < 0):
 		#this value is used by other code to get the player's direction
 		if charge_time == 0:
-			player_sprites.scale.x = direction
+			sprite.scale.x = direction
 		if is_on_floor() and not channeling_recall:
 			emit_signal("step_taken")
 
@@ -272,10 +272,7 @@ func teleport_player(pos : Vector2) -> void:
 #takes in a redundant Vector2i. maybe separate signal?
 func _on_health_death(_pos : Vector2i) -> void:
 	#freeze the physics process since the game is finished. If we move movement mechanics out of physics process, consider using the player_died variable
-	set_physics_process(false)
-	#removes player detection from game. use better solution like export
-	collision.set_deferred("disabled", true)
-	hurtbox_collision.set_deferred("disabled", true)
+	#set_physics_process(false)
 	
 	if picked_up_box:
 		box_ref.throw(Vector2i(0, 0))
@@ -283,10 +280,6 @@ func _on_health_death(_pos : Vector2i) -> void:
 		interact_released = false
 	
 	player_died = true;
-	
-	#make player invisible
-	player_sprites.visible = false
-	#scale = Vector2(0, 0);
 	
 	#signal the death screen to becomme visible
 	emit_signal("player_death");

@@ -37,7 +37,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer", "hurtbox_collision")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -48,6 +48,7 @@ low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
+hurtbox_collision = NodePath("HurtBoxComponent")
 aggro_range = 140
 
 [node name="DirectionFlip" type="Node2D" parent="."]

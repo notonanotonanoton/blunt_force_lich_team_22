@@ -15,6 +15,8 @@ class_name GenericAnimations
 
 var not_actor : bool = false
 
+signal damage_animation_finished
+
 var damage_tween_flash : Tween
 var damage_tween_shake : Tween
 
@@ -110,11 +112,10 @@ func jump_animation() -> void:
 
 #queue_free is handled here instead
 func death_animation(pos : Vector2i) -> void:
-	var parent : CharacterBody2D = get_parent()
-	#if not_actor:
-		#parent.queue_free()
-		#return
+	take_damage_animation()
+	await damage_tween_shake.finished
 	
+	var parent : CharacterBody2D = get_parent()
 	var root : Node2D = parent.get_parent()
 	var fg_instance : DustCloudAnimation = death_dust_cloud_fg.instantiate()
 	var bg_instance : DustCloudAnimation = death_dust_cloud_bg.instantiate()
@@ -125,7 +126,9 @@ func death_animation(pos : Vector2i) -> void:
 	fg_instance.start(pos, -30, pos.y - 40)
 	bg_instance.start(pos, 45, pos.y - 40)
 	
-	if not parent is PlayerCharacter:
+	if parent is PlayerCharacter:
+		parent.sprite.visible = false
+	else:
 		parent.queue_free()
 
 func _on_damage_taken() -> void:

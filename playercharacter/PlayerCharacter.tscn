@@ -21,10 +21,10 @@ size = Vector2(24, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("player_sprites", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer")]
 collision_layer = 2
 script = ExtResource("1_iplij")
-player_sprites = NodePath("DirectionFlip")
+sprite = NodePath("DirectionFlip")
 animation_target = NodePath("DirectionFlip/GenericAnimationTarget")
 coyote_timer = NodePath("CoyoteTimer")
 left_arm = NodePath("DirectionFlip/GenericAnimationTarget/Lich/LeftArm")

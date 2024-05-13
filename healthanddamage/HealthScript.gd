@@ -87,6 +87,7 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			var knockback : int = knockback_strength
 			if parent is PlayerCharacter:
 				knockback *= 2
+				emit_signal("health_changed", damage)
 			else:
 				parent.damage_aggro_range_increase()
 	
@@ -98,11 +99,16 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 	
 			parent.acceleration = 0
 			stun_timer.start()
-			emit_signal("health_changed", damage)  
+			
 		invincibility_timer.start()
-		emit_signal("damage_taken")
 		
-		if(health<=0):
+		if health > 0:
+			emit_signal("damage_taken")
+		
+		else:
+			parent.set_physics_process(false)
+			parent.collision.set_deferred("disabled", true)
+			parent.hurtbox_collision.set_deferred("disabled", true)
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
 	

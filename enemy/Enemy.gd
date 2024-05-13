@@ -11,6 +11,7 @@ class_name Enemy
 @export var collision : CollisionShape2D
 @export var behavior_extension : EnemyBehaviorExtension
 @export var aggro_range_increase_timer : Timer
+@export var hurtbox_collision : hurt_box_component
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")

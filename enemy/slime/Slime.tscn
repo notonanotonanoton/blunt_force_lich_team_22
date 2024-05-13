@@ -39,7 +39,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(22, 15)
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision")]
 collision_layer = 4
 script = ExtResource("1_qdmu2")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -51,6 +51,7 @@ jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SlimeBehavior")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
+hurtbox_collision = NodePath("HurtBoxComponent")
 speed = 55
 
 [node name="DirectionFlip" type="Node2D" parent="."]
