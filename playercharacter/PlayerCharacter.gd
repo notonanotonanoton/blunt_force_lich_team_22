@@ -21,7 +21,7 @@ class_name PlayerCharacter
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 165
 @export_range(0, 1, 0.1) var acceleration : float = 0.7
-@export_range(-1000, 0, 10) var jump_velocity : int = -430
+@export_range(-1000, 0, 10) var jump_velocity : int = -450
 @export_range(0, 1, 0.1) var friction : float = 0.5
 @export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
@@ -125,7 +125,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				apply_carrying_sprites(false)
 				var jump_vel : Vector2 = Vector2(0, 0)
 				if velocity.y < 0:
-					jump_vel = Vector2(0, velocity.y) / 4
+					jump_vel = Vector2(0, velocity.y) / 3
 				var direction : int = sprite.scale.x
 				box_ref.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
 
 [node name="MapManager" type="Node2D"]
+top_level = true
 position = Vector2(944, -94)
 script = ExtResource("1_vicmv")
 
