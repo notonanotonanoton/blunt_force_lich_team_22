@@ -99,9 +99,10 @@ func jump() -> void:
 	
 
 func jump_cut() -> void:
-	#print("jump cut")
+	print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
+
 
 
 func process_jump_availability() -> void:
