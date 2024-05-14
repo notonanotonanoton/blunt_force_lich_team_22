@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://c16nu57r7jjug" path="res://asepritefiles/spike_trap.png" id="1_tubur"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="2_otglk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wwdb"]
-size = Vector2(29, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nikw"]
+resource_local_to_scene = true
+size = Vector2(25, 5)
 
 [node name="Spikes" type="Node2D"]
 script = ExtResource("1_syton")
@@ -18,5 +19,5 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0.5, 12)
-shape = SubResource("RectangleShape2D_7wwdb")
+position = Vector2(0.5, 13.5)
+shape = SubResource("RectangleShape2D_4nikw")

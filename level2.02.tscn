@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cglss63h5bko1"]
+[gd_scene load_steps=4 format=3 uid="uid://cglss63h5bko1"]
 
 [ext_resource type="PackedScene" uid="uid://c1o2ymh2bg2j2" path="res://graveyardtiles/GraveyardTileMap.tscn" id="1_oiqim"]
 [ext_resource type="PackedScene" uid="uid://yyan0x7aj3p0" path="res://enemy/damageobstacle/Spikes.tscn" id="2_ad218"]
+[ext_resource type="PackedScene" uid="uid://5ettome7hf5x" path="res://pickups/health_pickup/health_pickup.tscn" id="3_pli6s"]
 
 [node name="level2_02" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-799.0]
@@ -69,3 +70,6 @@ rotation = 4.71239
 [node name="Spikes14" parent="." instance=ExtResource("2_ad218")]
 position = Vector2(2417, -879)
 rotation = 4.71239
+
+[node name="HealthPickup" parent="." instance=ExtResource("3_pli6s")]
+position = Vector2(111, 18)
