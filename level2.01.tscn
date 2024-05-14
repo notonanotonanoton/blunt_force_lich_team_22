@@ -51,7 +51,7 @@ position = Vector2(2160, -305)
 rotation = -4.71239
 
 [node name="HealthPickup" parent="." instance=ExtResource("4_b31no")]
-position = Vector2(38, 24)
+position = Vector2(112, 21)
 
 [node name="LevelTransition" parent="." instance=ExtResource("5_2ljgl")]
 position = Vector2(-112, 16)
