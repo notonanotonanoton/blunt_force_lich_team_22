@@ -1,7 +1,7 @@
 extends Node
 
-var level1_levels : Array = ["res://Level1.01.tscn", "res://level1.02.tscn", "res://level1.03.tscn"]
-var level2_levels : Array = ["res://level2.01.tscn"]
+var level1_levels : Array = ["res://Level1/Version1.tscn", "res://Level1/Version2.tscn", "res://Level1/Version3.tscn"]
+var level2_levels : Array = ["res://Level2/Version1.tscn", "res://Level2/Version2.tscn", "res://Level2/Version3.tscn"]
 var current_scene_instance : Node
 
 # Called when the node enters the scene tree for the first time.
