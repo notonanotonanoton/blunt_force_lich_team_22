@@ -68,7 +68,7 @@ func _physics_process(delta : float) -> void:
 func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
 		if up_direction.y == -1 and velocity.y < 0:
-			velocity.y += (default_gravity * gravity_scale) * delta
+			velocity.y += (default_gravity * gravity_scale) * delta 
 		elif up_direction.y == 1 and velocity.y > 0:
 			velocity.y -= (default_gravity * gravity_scale) * delta
 		elif velocity.y < max_fall_speed:

@@ -1,25 +1,26 @@
 [gd_scene load_steps=5 format=3 uid="uid://8i7co26j7v2l"]
 
-[ext_resource type="Texture2D" uid="uid://dods0drhoxk2n" path="res://icon.svg" id="1_dsfpn"]
 [ext_resource type="Script" path="res://enemy/damageobstacle/arrowtrap/arrow_trap.gd" id="1_t4v11"]
 [ext_resource type="PackedScene" uid="uid://cm0upf1ctfep6" path="res://enemy/damageobstacle/arrowtrap/Arrow.tscn" id="3_powwd"]
+[ext_resource type="Texture2D" uid="uid://c2uj4pugkeeyp" path="res://asepritefiles/arrow_trap.png" id="3_xy54t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1pvxy"]
-size = Vector2(18, 16)
+size = Vector2(32, 32)
 
 [node name="arrowSpawner" type="RigidBody2D" node_paths=PackedStringArray("timer")]
+freeze = true
 script = ExtResource("1_t4v11")
 projectile_to_spawn = ExtResource("3_powwd")
 timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2.38419e-07)
-scale = Vector2(0.140625, 0.125)
-texture = ExtResource("1_dsfpn")
+scale = Vector2(-1, 1)
+texture = ExtResource("3_xy54t")
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(81, 15)
 shape = SubResource("RectangleShape2D_1pvxy")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -11,12 +11,14 @@ class_name interactive_tilemap
 	#Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	
 	#Vector2i(1, 0): preload()
-	
+	#Vector2i(1,0): preload("res://leveltransition/LevelTransition.tscn"),
 	Vector2i(0,1): preload("res://enemy/slime/Slime.tscn"),
 	Vector2i(1,1): preload("res://enemy/skeletonarcher/SkeletonArcher.tscn"),
 	#Vector2i(2,1): preload()
 	Vector2i(0,2): preload("res://enemy/damageobstacle/Spikes.tscn"),
-	Vector2i(1,2): preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
+	Vector2i(1,2): preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn"),
+	Vector2i(0,3): preload("res://graveyardtiles/breakableblocks/BreakableBlockRock.tscn"),
+	Vector2i(1,3): preload("res://graveyardtiles/breakableblocks/BreakableBlockStone.tscn")
 }
 
 #decrement global pos with this if you want to start in the corner of the tile
