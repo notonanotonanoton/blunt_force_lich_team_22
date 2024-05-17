@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://djt88xrgadfcl"]
 
 [ext_resource type="Script" path="res://graveyardtiles/breakableblocks/BreakableBlock.gd" id="1_fgtmi"]
-[ext_resource type="Texture2D" uid="uid://d1d21gy88k7s5" path="res://graveyardtiles/breakableblocks/breakable_block_rock.png" id="1_m2kwp"]
+[ext_resource type="Texture2D" uid="uid://ce5pmkyhctikt" path="res://graveyardtiles/breakableblocks/breakable_block_rock.png" id="1_m2kwp"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="2_phle8"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="4_efj5s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="4_nkc2l"]
