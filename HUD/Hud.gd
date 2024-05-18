@@ -92,3 +92,6 @@ func _refresh_healthbar() -> void:
 		if (health > 0):
 			current_heart_index += 1
 	
+func _on_player_character_reset_hp():
+	print("yes")
+	_refresh_healthbar()

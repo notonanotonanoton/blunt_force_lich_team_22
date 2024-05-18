@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyfvjgfn7gwj5"]
+[gd_scene load_steps=8 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
 [ext_resource type="Script" path="res://maps/map_manager.gd" id="1_vicmv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
 [ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_qnnu7"]
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
+[ext_resource type="PackedScene" uid="uid://csq8sct202e43" path="res://mainmenu/MainMenu.tscn" id="7_xksoi"]
 
 [node name="MapManager" type="Node2D"]
 top_level = true
@@ -41,6 +42,11 @@ offset_bottom = -18.0
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="MainMenu" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="MainMenu" instance=ExtResource("7_xksoi")]
+
+[connection signal="reset_hp" from="PlayerCharacter" to="HUDCanvas" method="_on_player_character_reset_hp"]
 [connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/Settings" method="_on_pause_menu_entered_settings"]
 [connection signal="aiming_arch_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arch_toggled"]
 [connection signal="back_pressed" from="Pause/PauseMenu/Settings" to="Pause/PauseMenu" method="_on_settings_menu_back_pressed"]

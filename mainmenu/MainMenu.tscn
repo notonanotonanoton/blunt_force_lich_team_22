@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://csq8sct202e43"]
+
+[ext_resource type="Texture2D" uid="uid://dkdyvvxunqc5g" path="res://mainmenu/image.png" id="1_32ri2"]
+[ext_resource type="Script" path="res://mainmenu/MainMenu.gd" id="1_dlg8d"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dlg8d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 179.0
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(131, 77)
+scale = Vector2(0.292308, 0.293371)
+texture = ExtResource("1_32ri2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play tutorial"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
