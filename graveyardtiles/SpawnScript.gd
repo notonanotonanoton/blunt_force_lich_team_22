@@ -36,6 +36,7 @@ func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES) -> vo
 	#for every atlas coordinate in the dictionary
 	
 	for key : Vector2i in scene_dictionary.keys():
+		
 		#for all the cell IDs found matching the atlas coordinate
 		for tile_pos : Vector2i in get_used_cells_by_id(search_layer, 0, key):
 			set_cell(search_layer, tile_pos, -1)

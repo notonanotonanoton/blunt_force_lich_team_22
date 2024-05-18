@@ -4,34 +4,69 @@ class_name spawner
 @export var projectile_to_spawn : PackedScene
 @export var timer : Timer
 @export var time_to_spawn_projectile : int = 4
+@export var arrow_Speed : int = 200
 
-var South = [89, 91]
+var South = [89, 91] #
 var West = [179, 181]
 var North = [269, 271]
+var East = [-1, 1]
+#google bitwise operations
+var RotationDirection = 0
+
 
 func _ready():
 	timer.one_shot = true
 	timer.autostart = false
 	timer.wait_time = time_to_spawn_projectile
-	#print(global_position)
-	
-	#if you want to implement a custom condition do it here
-	timer.start()
-	
+
+
+
 	print("arrow trap rotation: ", rotation_degrees)
 	if rotation_degrees > South[0] and rotation_degrees < South[1]:
-		print("facing south")
-	if rotation_degrees > West[0] and rotation_degrees < West[1]:
-		print("facing West")
-	if rotation_degrees > North[0] and rotation_degrees < North[1]:
-		print("facing North")
+		RotationDirection = 1 << 0
+	elif rotation_degrees > West[0] and rotation_degrees < West[1]:
+		RotationDirection = 1 << 1
+	elif rotation_degrees > North[0] and rotation_degrees < North[1]:
+		RotationDirection = 1 << 2
+	elif rotation_degrees > East[0] and rotation_degrees < East[1]:
+		RotationDirection = 1 << 3
+	else:
+		#since we are handling rotation and arrow spawning manually per "direction" its next to impossible to handle every direction. 
+		#Thus we throw this error if the arrow trap does not fall within an acceptable range of that cardinal direction.
+		assert(false, "ARROW TRAP IS INCORRECTLY ROTATED, PLEASE ONLY ROTATE IN 90 DEGREE INCREMENTS. Arrows can only spawn in cardinal directions")
+	
+	#no need to keep them in memory anymore
+	South = null
+	West = null
+	North = null
+	East = null
+	
+	timer.start()
 
 
 func _on_timer_timeout():
-	#print("attempting to spawn arrow")
+
 	var object : Node2D = projectile_to_spawn.instantiate()
 	get_parent().add_child.call(object)
-	#object.monoDirectional_movement(Vector2(0, -20), global_position+Vector2(-20,0))
-	object.add_movement(Vector2(200, 0), global_position+Vector2(10,0))
+
+
+
+	
+	if RotationDirection & (1<<1):
+		print("facing west")
+		object.add_movement(Vector2(-arrow_Speed, 0), global_position+Vector2(-10,0))
+	elif RotationDirection & (1<<3):
+		object.add_movement(Vector2(arrow_Speed, 0), global_position+Vector2(10,0))
+		print("facing east")
+	elif RotationDirection & (1<<2):
+		object.add_movement(Vector2(0, -arrow_Speed), global_position+Vector2(0,-10))
+		print("facing north")
+	elif RotationDirection & (1<<0):
+		object.add_movement(Vector2(0, arrow_Speed), global_position+Vector2(0,10))
+		print("facing south")
+
+
+
+		
 	timer.start()
 	

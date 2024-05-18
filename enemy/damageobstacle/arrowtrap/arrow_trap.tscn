@@ -14,13 +14,11 @@ projectile_to_spawn = ExtResource("3_powwd")
 timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(-1, 1)
 texture = ExtResource("3_xy54t")
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(81, 15)
 shape = SubResource("RectangleShape2D_1pvxy")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
