@@ -21,7 +21,7 @@ class_name PlayerCharacter
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 165
 @export_range(0, 1, 0.1) var acceleration : float = 0.7
-@export_range(-1000, 0, 10) var jump_velocity : int = -450
+@export_range(-1000, 0, 10) var jump_velocity : int = -430
 @export_range(0, 1, 0.1) var friction : float = 0.5
 @export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
@@ -76,15 +76,15 @@ func _ready() -> void:
 	get_parent().add_child.call_deferred(box_ref)
 
 func _physics_process(delta : float) -> void:
-	apply_gravity(delta)
-
+	move_and_slide()
+	
 	process_jump_availability()
+	
+	apply_gravity(delta)
 	
 	process_movement(delta)
 	
 	process_throw(delta)
-	
-	move_and_slide()
 
 
 
@@ -106,14 +106,15 @@ func jump_cut() -> void:
 
 
 func process_jump_availability() -> void:
-	if is_on_floor() and allow_jump_variable_resets:
-		jump_is_available = true
-		player_jumped = false;
-		#print("player is on the floor, resetting jump status")
-		
-	if not is_on_floor():
+	if is_on_floor():
+		if allow_jump_variable_resets:
+			jump_is_available = true
+			player_jumped = false;
+			#print("player is on the floor, resetting jump status")
+	else:
 		if jump_is_available:
 			if coyote_timer.is_stopped():
+				print("Started coyote")
 				coyote_timer.start()
 
 ##box functions
@@ -226,7 +227,7 @@ func apply_carrying_sprites(apply : bool) -> void:
 func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
 		if not coyote_timer.is_stopped() and not player_jumped:
-			velocity.y = 0
+			pass
 		else:
 			if velocity.y < 0:
 				velocity.y += default_gravity * delta
