@@ -36,8 +36,8 @@ hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 camera = NodePath("Camera2D")
 resetting_jump_timer = NodePath("jumpResetFreezeTimer")
-acceleration = 0.4
-friction = 0.6
+throw_force_x = 325
+throw_force_y = -250
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 

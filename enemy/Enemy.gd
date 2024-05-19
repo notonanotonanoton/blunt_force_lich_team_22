@@ -58,12 +58,12 @@ func _ready() -> void:
 	collision_offset = (collision.shape.get_rect().size.x + 1) / 2 
 
 func _physics_process(delta : float) -> void:
+	move_and_slide()
+	
 	apply_gravity(delta)
 	if ((looking_direction == 1 and velocity.x < 0) or
 	 (looking_direction == -1 and velocity.x > 0)):
 		stop_move(delta)
-			
-	move_and_slide()
 
 func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
