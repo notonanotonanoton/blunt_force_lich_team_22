@@ -19,14 +19,11 @@ func _ready() -> void:
 	
 	#iterates through all folders specified in level_directories
 	for directory : String in level_directories:
-		print(directory)
-		print(maps_directory + directory)
 		var level_variants_paths : PackedStringArray = DirAccess.open(maps_directory + directory).get_files()
-		var level_variants : Array
+		var level_variants : Array[PackedScene]
 		for file_name : String in level_variants_paths:
-			print(file_name)
-			print(maps_directory + directory + "/" + file_name)
-			level_variants.append(load(maps_directory + directory + "/" + file_name))
+			var level : PackedScene = load(maps_directory + directory + "/" + file_name)
+			level_variants.append(level)
 		levels.append(level_variants)
 	
 	var first_scene : PackedScene
@@ -44,6 +41,7 @@ func change_scene() -> void:
 		remove_child.call_deferred(current_scene_instance)
 		current_scene_instance.queue_free()
 		
-		current_scene_instance = levels[level_counter].pick_random().instantiate()
+		var new_scene : PackedScene = levels[level_counter].pick_random()
+		current_scene_instance = new_scene.instantiate()
 		add_child(current_scene_instance)
 	
