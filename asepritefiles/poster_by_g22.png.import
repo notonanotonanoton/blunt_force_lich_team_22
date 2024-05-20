@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qk0vff2crwht"
-path="res://.godot/imported/skeleton_archer_arm.png-19d96b7a353bb934689b7579b914f981.ctex"
+uid="uid://dqep2wjwu4ocs"
+path="res://.godot/imported/poster_by_g22.png-38628f747b3c8e5b6776b339d724b21c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy/skeletonarcher/skeleton_archer_arm.png"
-dest_files=["res://.godot/imported/skeleton_archer_arm.png-19d96b7a353bb934689b7579b914f981.ctex"]
+source_file="res://asepritefiles/poster_by_g22.png"
+dest_files=["res://.godot/imported/poster_by_g22.png-38628f747b3c8e5b6776b339d724b21c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvyb4cuokansw"
-path="res://.godot/imported/Sprite-0003POSTEsky.png-84f95b5b64b00caab4bd92235a57fd9b.ctex"
+uid="uid://de616gx7aq1yw"
+path="res://.godot/imported/poster2.png-5f02f45af8bef377f434050d37b927bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/Sprite-0003POSTEsky.png"
-dest_files=["res://.godot/imported/Sprite-0003POSTEsky.png-84f95b5b64b00caab4bd92235a57fd9b.ctex"]
+source_file="res://asepritefiles/poster2.png"
+dest_files=["res://.godot/imported/poster2.png-5f02f45af8bef377f434050d37b927bb.ctex"]
 
 [params]
 
