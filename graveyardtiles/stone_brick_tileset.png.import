@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bctcdnbx10ami"
-path="res://.godot/imported/stone_brick_tileset.png-e8fddfee0a1d7b09430d3c6c70aa08af.ctex"
+uid="uid://twyb0eqtvf08"
+path="res://.godot/imported/stone_brick_tileset.png-e74c69d14eb011e98c4f4272bd7dd9be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://castletiles/stone_brick_tileset.png"
-dest_files=["res://.godot/imported/stone_brick_tileset.png-e8fddfee0a1d7b09430d3c6c70aa08af.ctex"]
+source_file="res://graveyardtiles/stone_brick_tileset.png"
+dest_files=["res://.godot/imported/stone_brick_tileset.png-e74c69d14eb011e98c4f4272bd7dd9be.ctex"]
 
 [params]
 

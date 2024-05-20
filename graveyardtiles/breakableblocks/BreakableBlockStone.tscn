@@ -14,9 +14,11 @@ size = Vector2(32, 32)
 resource_local_to_scene = true
 size = Vector2(34, 34)
 
-[node name="BreakableBlockRock" type="CharacterBody2D"]
+[node name="BreakableBlockRock" type="CharacterBody2D" node_paths=PackedStringArray("collision", "hurtbox_collision")]
 collision_mask = 0
 script = ExtResource("1_88hch")
+collision = NodePath("CollisionShape2D")
+hurtbox_collision = NodePath("HurtBoxComponent/CollisionShape2D")
 is_rock = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
