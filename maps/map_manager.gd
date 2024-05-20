@@ -1,31 +1,35 @@
 extends Node
 
+#assumes the "maps" folder exists and only contains level directories
+#with scene files of level variants
+var maps_directory : String = "res://maps/"
+
 #this will make the map manager ignore the random first level selection.
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 var testing_scene = null
 
 var levels : Array
-#add more directories whenever needed
-var level_directories : PackedStringArray = ["res://maps/Level1/", "res://maps/Level2/", "res://maps/Level3/"]
 
 var current_scene_instance : Node
 var level_counter : int = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var first_scene : PackedScene
+	var level_directories : PackedStringArray = DirAccess.open(maps_directory).get_directories()
 	
 	#iterates through all folders specified in level_directories
 	for directory : String in level_directories:
-		var level_variants_paths : PackedStringArray = DirAccess.open(directory).get_files()
+		print(directory)
+		print(maps_directory + directory)
+		var level_variants_paths : PackedStringArray = DirAccess.open(maps_directory + directory).get_files()
 		var level_variants : Array
 		for file_name : String in level_variants_paths:
-			#var level_variant : PackedScene = load(directory + file_name)
-			#level_variants.append(level_variant)
-			level_variants.append(load(directory + file_name))
+			print(file_name)
+			print(maps_directory + directory + "/" + file_name)
+			level_variants.append(load(maps_directory + directory + "/" + file_name))
 		levels.append(level_variants)
 	
+	var first_scene : PackedScene
 	if testing_scene == null:
 		first_scene = levels.front().pick_random()
 	else:
