@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 class_name BreakableBlock
 
+@export_category("Nodes")
+@export var collision : CollisionShape2D
+@export var hurtbox_collision : CollisionShape2D
+@export_category("Values")
 @export var is_rock : bool = true
 
 @onready var pebble = preload("res://graveyardtiles/breakableblocks/FlyingPebble.tscn")
@@ -21,4 +25,10 @@ func damaged() -> void:
 		if dir == 0:
 			dir = -1
 		new_pebble.start(Vector2(pos.x - 16 + (count * 8), pos.y - (count * 8)), dir, 0.25 * count)
+		
+	
+func activate_death_state() -> void:
+	set_physics_process(false)
+	collision.set_deferred("disabled", true)
+	hurtbox_collision.set_deferred("disabled", true)
 
