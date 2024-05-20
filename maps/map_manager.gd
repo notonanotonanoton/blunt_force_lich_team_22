@@ -22,9 +22,8 @@ func _ready() -> void:
 		var level_variants_paths : PackedStringArray = DirAccess.open(maps_directory + directory).get_files()
 		var level_variants : Array[PackedScene]
 		for file_name : String in level_variants_paths:
-			if '.tscn.remap' in file_name:
-				file_name = file_name.trim_suffix('.remap')
 			var full_path : String = maps_directory + directory + "/" + file_name
+			full_path = full_path.trim_suffix(".remap")
 			var level : PackedScene = load(full_path)
 			level_variants.append(level)
 		levels.append(level_variants)
