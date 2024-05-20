@@ -1,11 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
 
-[ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
 [ext_resource type="Texture2D" uid="uid://bmgrntby46fub" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Texture2D" uid="uid://bdb384u6xa052" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
-[ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
-[ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
 [ext_resource type="Texture2D" uid="uid://8phli6y1qnxt" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
@@ -81,15 +78,6 @@ process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("1_d0byc")
-
-[node name="PlayerInAir" type="Node" parent="StateMachine"]
-script = ExtResource("4_5vqem")
-
-[node name="PlayerOnGround" type="Node" parent="StateMachine"]
-script = ExtResource("3_wxpwy")
-
 [node name="BoxDetector" type="Area2D" parent="."]
 position = Vector2(0, 4)
 collision_layer = 0
@@ -117,7 +105,6 @@ one_shot = true
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
 
 [connection signal="death" from="Health" to="." method="_on_health_death"]
-[connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
