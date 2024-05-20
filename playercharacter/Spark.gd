@@ -5,7 +5,7 @@ class_name SparkAnimation
 func start(pos : Vector2i) -> void:
 	global_position = pos
 	
-	var tween = self.create_tween()
+	var tween : Tween = self.create_tween()
 	tween.set_parallel(true)
 	
 	#tween.tween_property(self, "rotation_degrees", 90, 0.2)

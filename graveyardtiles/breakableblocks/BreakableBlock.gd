@@ -8,7 +8,7 @@ class_name BreakableBlock
 @export_category("Values")
 @export var is_rock : bool = true
 
-@onready var pebble = preload("res://graveyardtiles/breakableblocks/FlyingPebble.tscn")
+@onready var pebble : PackedScene = preload("res://graveyardtiles/breakableblocks/FlyingPebble.tscn")
 
 func _ready() -> void:
 	pass

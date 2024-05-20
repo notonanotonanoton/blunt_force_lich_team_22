@@ -22,7 +22,9 @@ func _ready() -> void:
 		var level_variants_paths : PackedStringArray = DirAccess.open(maps_directory + directory).get_files()
 		var level_variants : Array[PackedScene]
 		for file_name : String in level_variants_paths:
-			var level : PackedScene = load(maps_directory + directory + "/" + file_name)
+			var full_path : String = maps_directory + directory + "/" + file_name
+			print(full_path)
+			var level : PackedScene = load(full_path)
 			level_variants.append(level)
 		levels.append(level_variants)
 	

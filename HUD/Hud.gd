@@ -8,7 +8,7 @@ extends Node
 #this has to be replaced or altered with something
 #that works even after replacing the tilemap 
 
-@onready var heart_rect := preload("res://hud/HeartRect.tscn")
+@onready var heart_rect : PackedScene = preload("res://hud/HeartRect.tscn")
 
 @export var character : PlayerCharacter
 var health_module : HealthComponent

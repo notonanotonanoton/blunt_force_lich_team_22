@@ -28,11 +28,11 @@ class_name PlayerCharacter
 @export_range(250, 750, 25) var throw_force_x : int = 300
 @export_range(-500, -250, 25) var throw_force_y : int = -275
 @export_range(0.5, 3, 0.5) var throw_charge_rate : float = 1.5
-@export_range(0.05, 0.5, 0.05) var stop_resetting_jump_status_time = 0.1
+@export_range(0.05, 0.5, 0.05) var stop_resetting_jump_status_time : float = 0.1
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = false
 
-@onready var spark_animation := preload("res://playercharacter/Spark.tscn")
+@onready var spark_animation : PackedScene = preload("res://playercharacter/Spark.tscn")
 
 #coyote timer logic
 var player_jumped : bool = false
@@ -309,10 +309,10 @@ func _on_health_changed(health_change : int) -> void:
 func _on_max_health_changed(max_health_change : int) -> void:
 	emit_signal("max_health_changed", max_health_change)
 
-func _on_jump_reset_freeze_timer_timeout():
+func _on_jump_reset_freeze_timer_timeout() -> void:
 	allow_jump_variable_resets = true
 
-func _on_settings_menu_aiming_arch_toggled():
+func _on_settings_menu_aiming_arch_toggled() -> void:
 	if (aiming_arc_enabled == true):
 		aiming_arc_enabled = false
 	else: 

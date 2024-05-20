@@ -6,21 +6,21 @@ signal aiming_arch_toggled
 var vsync_enabled : bool = false
 
 const WINDOW_MODE_ARRAY : Array[String] = [
-	"Full-Screen",
+	"Fullscreen",
 	"Window Mode",
 	"Borderless Window",
 	"Borderless Fullscreen"
 ]
 
-func _ready():
+func _ready() -> void:
 	add_window_mode_items()
 	hide()
 
 func add_window_mode_items() -> void:
-	for window_mode in WINDOW_MODE_ARRAY:
+	for window_mode : String in WINDOW_MODE_ARRAY:
 		window_button.add_item(window_mode)
 
-func _on_window_mode_item_selected(index) -> void:
+func _on_window_mode_item_selected(index : int) -> void:
 	match index:
 		0: #Fullscreen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -43,10 +43,10 @@ func _on_back_pressed() -> void:
 	hide()
 	emit_signal("back_pressed")
 	
-func _on_check_box_pressed():
+func _on_check_box_pressed() -> void:
 	emit_signal("aiming_arch_toggled")
 
-func _on_v_sync_pressed():
+func _on_v_sync_pressed() -> void:
 	if (!vsync_enabled):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		vsync_enabled = true
