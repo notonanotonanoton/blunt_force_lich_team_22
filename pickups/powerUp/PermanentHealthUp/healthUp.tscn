@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db2aqt0tie4hi"]
+
+[ext_resource type="Script" path="res://pickups/powerUp/PermanentHealthUp/healthUp.gd" id="1_gp2ba"]
+
+[node name="HealthUp" type="Node2D"]
+script = ExtResource("1_gp2ba")

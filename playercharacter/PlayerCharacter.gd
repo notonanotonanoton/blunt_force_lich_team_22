@@ -54,6 +54,9 @@ var channeling_recall : bool = false
 
 var allow_jump_variable_resets : bool = true 
 
+var items : Array
+
+
 signal player_death
 signal step_taken
 signal jumped
@@ -274,6 +277,11 @@ func activate_death_state() -> void:
 	hurtbox_collision.set_deferred("disabled", true)
 
 
+func addItem(item) -> void:
+	print(item)
+	items.append(item)
+
+
 ##signal functions
 
 #takes in a redundant Vector2i. maybe separate signal?
@@ -318,3 +326,5 @@ func _on_settings_menu_aiming_arch_toggled() -> void:
 	else: 
 		aiming_arc_enabled = true
 	print(aiming_arc_enabled)
+	
+
