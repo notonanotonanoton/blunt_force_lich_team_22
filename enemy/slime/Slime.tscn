@@ -135,7 +135,7 @@ shape = SubResource("CircleShape2D_28gfj")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_go46b")]
 generic_animations = NodePath("../GenericAnimations")
-health = 2
+health = 1
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("8_qmwvd")]
 collision_layer = 0

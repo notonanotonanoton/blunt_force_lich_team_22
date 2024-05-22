@@ -7,11 +7,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1pvxy"]
 size = Vector2(32, 32)
 
-[node name="arrowSpawner" type="RigidBody2D" node_paths=PackedStringArray("timer")]
-freeze = true
+[node name="arrowSpawner" type="StaticBody2D" node_paths=PackedStringArray("timer", "sprite")]
+z_index = 1
+position = Vector2(35, 25)
 script = ExtResource("1_t4v11")
 projectile_to_spawn = ExtResource("3_powwd")
 timer = NodePath("Timer")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_xy54t")

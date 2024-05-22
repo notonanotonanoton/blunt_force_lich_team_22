@@ -114,7 +114,6 @@ func process_jump_availability() -> void:
 	else:
 		if jump_is_available:
 			if coyote_timer.is_stopped():
-				print("Started coyote")
 				coyote_timer.start()
 
 ##box functions
@@ -265,7 +264,9 @@ func stop_move(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
 
 func teleport_player(pos : Vector2) -> void:
+	velocity = Vector2.ZERO
 	global_position = pos + Vector2(-8, 0)
+	box_ref.velocity = Vector2.ZERO
 	box_ref.global_position = pos + Vector2(+8, 0)
 
 func activate_death_state() -> void:
