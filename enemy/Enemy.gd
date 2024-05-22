@@ -13,6 +13,7 @@ class_name Enemy
 @export var aggro_range_increase_timer : Timer
 @export var hurtbox_collision : hurt_box_component
 @export var slow_timer : Timer
+@export var state_machine : StateMachine
 #leave empty for non-skeleton
 @export var skeleton_animation_timer : Timer
 
@@ -21,7 +22,7 @@ class_name Enemy
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 80
 @export_range(0, 1, 0.1) var acceleration : float = 0.8
-@export_range(0, 1000, 10) var jump_velocity : int = 430
+@export_range(-1000, 0, 10) var jump_velocity : int = -430
 @export_range(0, 1, 0.1) var friction : float = 0.8
 @export_range(0, 1000, 10) var max_fall_speed : int = 400
 @export_range(0, 2, 0.1) var gravity_scale : float = 1.0
@@ -66,33 +67,32 @@ func _ready() -> void:
 	slow_timer.wait_time = slow_time
 
 func _physics_process(delta : float) -> void:
-	move_and_slide()
-	
 	apply_gravity(delta)
 	if ((looking_direction == 1 and velocity.x < 0) or
 	 (looking_direction == -1 and velocity.x > 0)):
 		stop_move(delta)
+	state_machine.physics_update(delta)
+	move_and_slide()
+	
 
 func apply_gravity(delta : float) -> void:
 	if not is_on_floor():
-		if up_direction.y == -1 and velocity.y < 0:
+		if velocity.y < 0:
 			velocity.y += (default_gravity * gravity_scale) * delta 
-		elif up_direction.y == 1 and velocity.y > 0:
-			velocity.y -= (default_gravity * gravity_scale) * delta
 		elif velocity.y < max_fall_speed:
-			velocity.y += ((fast_fall_gravity * gravity_scale) * (up_direction.y * -1)) * delta
+			velocity.y += (fast_fall_gravity * gravity_scale) * delta
 		# Ensure fall speed past max is consistent
 		else:
-			velocity.y = max_fall_speed * (up_direction.y * -1)
+			velocity.y = max_fall_speed
 
 func jump(delta : float, jump_mult : float, jump_action : bool) -> void:
-	velocity.y = (jump_velocity * up_direction.y) * jump_mult
+	velocity.y = jump_velocity * jump_mult
 	if jump_action and behavior_extension:
 		behavior_extension.jump_action(delta)
 
 func move(delta : float, move_mult : float) -> void:
 	velocity.x = move_toward(velocity.x, looking_direction * speed * move_mult, (speed * 2) * acceleration * delta)
-	if(is_on_floor()):
+	if is_on_floor():
 		emit_signal("step_taken")
 		handle_wall_or_gap(delta)
 
@@ -100,21 +100,28 @@ func stop_move(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, 0, (speed * 8) * friction * delta)
 
 func handle_wall_or_gap(delta : float) -> void:
-	if(not ground_detector.has_overlapping_bodies()):
-		#this check is dependent on EnemyAggro temporarily changing the radius
-		if(not low_ground_detector.has_overlapping_bodies() and aggro_radius.shape.radius == aggro_range):
-				looking_direction *= -1
-	
+	if not ground_detector.has_overlapping_bodies():
+		#acts as extension of aggro behavior
+		if target_player != null:
+			if global_position.y + 24 > target_player.global_position.y:
+				print("hello???")
+				jump(delta, 1.0, false)
+				velocity.x = 160 * looking_direction
+		
+		elif not low_ground_detector.has_overlapping_bodies():
+			looking_direction *= -1
+			
+			
 	#currently this makes the enemy jump when it's against a wall and
-	#lookinig_direction *= -1 is called. this may be left as is or fixed in the future
+	#looking_direction *= -1 is called. this may be left as is or fixed in the future
 	elif(is_on_wall()):
-		#this check is dependent on EnemyAggro temporarily changing the radius
-		if(jump_block_detector.has_overlapping_bodies() and aggro_radius.shape.radius == aggro_range):
-			if not was_on_wall:
-				looking_direction *= -1
-				was_on_wall = true
-		else:
-			jump(delta, 1.0, false)
+		if jump_block_detector.has_overlapping_bodies():
+			if target_player == null: 
+				if not was_on_wall:
+					looking_direction *= -1
+					was_on_wall = true
+			else:
+				jump(delta, 1.0, false)
 	else:
 		was_on_wall = false
 
@@ -130,14 +137,3 @@ func activate_death_state() -> void:
 	hurtbox_collision.set_deferred("disabled", true)
 	if skeleton_animation_timer:
 		skeleton_animation_timer.paused = true
-
-#unused
-func flip_gravity(flip : bool) -> void:
-	if flip:
-		up_direction.y = 1
-		direction_flip.scale.y = -1
-		direction_flip.position.y = (sprite.texture.get_height() * 2) / 3 - 1
-	else:
-		up_direction.y = -1
-		direction_flip.scale.y = 1
-		direction_flip.position.y = 0
