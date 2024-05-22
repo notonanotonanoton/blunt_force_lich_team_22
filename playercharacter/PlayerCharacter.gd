@@ -117,7 +117,7 @@ func process_jump_availability() -> void:
 	else:
 		if jump_is_available:
 			if coyote_timer.is_stopped():
-				print("Started coyote")
+				#print("Started coyote")
 				coyote_timer.start()
 
 ##box functions
@@ -239,7 +239,7 @@ func apply_gravity(delta : float) -> void:
 			# Ensure fall speed past max_fall_speed is consistent
 			else:
 				velocity.y = max_fall_speed
-			
+
 
 
 
@@ -279,6 +279,16 @@ func activate_death_state() -> void:
 
 func addItem(item) -> void:
 	print(item)
+	if item is PermanentHealthPickup:
+		for child in get_children():
+			if child is HealthComponent:
+				child.add_max_health(item.amount_of_plus_health)
+	if item is spikeImmunity:
+		for child in get_children():
+			if child is hurt_box_component:
+				child.set_collision_layer_value(8, false)
+
+				
 	items.append(item)
 
 

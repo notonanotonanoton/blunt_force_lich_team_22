@@ -12,8 +12,10 @@ class_name Enemy
 @export var behavior_extension : EnemyBehaviorExtension
 @export var aggro_range_increase_timer : Timer
 @export var hurtbox_collision : hurt_box_component
+@export var slow_timer : Timer
 #leave empty for non-skeleton
 @export var skeleton_animation_timer : Timer
+
 
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
@@ -27,11 +29,14 @@ class_name Enemy
 @export var is_ranged : bool = false
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = true
+@export var slow_time : int = 3
 
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 var collision_offset : int
 var default_aggro_range : int
+var is_slowed : bool = false;
+
 
 #used to prevent pathfinding getting stuck on walls 
 #when there's a tile 1 tile above
@@ -56,6 +61,9 @@ func _ready() -> void:
 	default_aggro_range = aggro_range
 	aggro_radius.shape.radius = aggro_range
 	collision_offset = (collision.shape.get_rect().size.x + 1) / 2 
+	slow_timer.autostart = false;
+	slow_timer.one_shot = true;
+	slow_timer.wait_time = slow_time
 
 func _physics_process(delta : float) -> void:
 	move_and_slide()

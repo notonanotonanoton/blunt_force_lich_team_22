@@ -7,7 +7,7 @@ var maps_directory : String = "res://maps/"
 #this will make the map manager ignore the random first level selection.
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
-var testing_scene = "res://maps/Level1/Version1.tscn"
+var testing_scene = "res://maps/Level1/Version2.tscn"
 
 var levels : Array
 

@@ -37,7 +37,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer", "hurtbox_collision")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -49,6 +49,7 @@ jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
+slow_timer = NodePath("slowTimer")
 aggro_range = 140
 
 [node name="DirectionFlip" type="Node2D" parent="."]
@@ -153,6 +154,8 @@ shape = SubResource("RectangleShape2D_c0lg1")
 [node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
+
+[node name="slowTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]

@@ -69,15 +69,27 @@ func get_health() -> int:
 func get_max_health() -> int:
 	return max_health
 	
+func add_max_health(health_to_be_added : int) -> void:
+	
+		max_health += health_to_be_added
+		heal(health_to_be_added)
+		emit_signal("max_health_changed", max_health)
+
 func set_max_health(new_max_health : int) -> void:
-	if (new_max_health < max_health):
-		health -= 2
+	
+	if new_max_health>=max_health:
+		max_health = new_max_health
+		heal(new_max_health-max_health)
+	
 	else:
-		health += 2
-	max_health = new_max_health
+		if health<new_max_health:
+			max_health = new_max_health
+			set_health(new_max_health)
+	
+
 	emit_signal("max_health_changed", new_max_health)
 
-func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_box_component) -> void:
+func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_box_component, should_slow : bool) -> void:
 	player_left_hitbox = false;
 	latest_enemy_hit_pos = enemy_position
 	if invincibility_timer.is_stopped() == true:
@@ -90,7 +102,7 @@ func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_bo
 				for item in parent.items:
 					if item is ThornsItem:
 						if enemy_hurtbox != null:
-							enemy_hurtbox.damage(item.thornsDamage, parent.global_position)
+							enemy_hurtbox.damage(item.thornsDamage, parent.global_position, false)
 				
 				emit_signal("health_changed", damage)
 			else:
@@ -121,7 +133,7 @@ func _on_stun_timer_timeout() -> void:
 		
 func on_invincibility_timer_timeout() -> void:
 	if(player_left_hitbox == false and get_parent() is PlayerCharacter):
-		take_damage(1, latest_enemy_hit_pos, null)
+		take_damage(1, latest_enemy_hit_pos, null, false)
 
 func update_player_left_hitbox() -> void:
 	player_left_hitbox = true

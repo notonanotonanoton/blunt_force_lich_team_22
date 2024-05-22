@@ -15,14 +15,15 @@ func _ready() -> void:
 func _on_hit_box_entered(area : Area2D) -> void:
 	if area is hurt_box_component:
 		if get_parent().can_deal_damage:
+
 			emit_signal("dealt_damage", area.global_position)
 			
 			for child in get_parent().get_children():
 				if child is hurt_box_component:
-					area.damage_with_return_possible(damage, global_position, child)
+					area.damage_with_return_possible(damage, global_position, child, false)
 					return
 			
-			area.damage(damage, global_position)
+			area.damage(damage, global_position, false)
 
 
 func _on_area_exited(area : Area2D) -> void:
