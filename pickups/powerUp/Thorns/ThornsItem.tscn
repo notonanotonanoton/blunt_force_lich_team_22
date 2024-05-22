@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf2y1ric0ryf7"]
+
+[ext_resource type="Script" path="res://pickups/powerUp/Thorns/ThornsItem.gd" id="1_lxwua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3s0e"]
+size = Vector2(80, 68)
+
+[node name="ThornsItem" type="Node2D"]
+script = ExtResource("1_lxwua")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u3s0e")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

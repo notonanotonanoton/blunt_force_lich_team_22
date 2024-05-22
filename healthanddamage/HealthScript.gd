@@ -77,7 +77,7 @@ func set_max_health(new_max_health : int) -> void:
 	max_health = new_max_health
 	emit_signal("max_health_changed", new_max_health)
 
-func take_damage(damage : int, enemy_position : Vector2) -> void:
+func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_box_component) -> void:
 	player_left_hitbox = false;
 	latest_enemy_hit_pos = enemy_position
 	if invincibility_timer.is_stopped() == true:
@@ -87,6 +87,11 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			var knockback : int = knockback_strength
 			if parent is PlayerCharacter:
 				knockback *= 2
+				for item in parent.items:
+					if item is ThornsItem:
+						if enemy_hurtbox != null:
+							enemy_hurtbox.damage(item.thornsDamage, parent.global_position)
+				
 				emit_signal("health_changed", damage)
 			else:
 				parent.damage_aggro_range_increase()
@@ -109,14 +114,14 @@ func take_damage(damage : int, enemy_position : Vector2) -> void:
 			parent.activate_death_state()
 			#queue_free handled in genericanimations
 			emit_signal("death", parent.global_position)
-	
+
 func _on_stun_timer_timeout() -> void:
 	parent.acceleration = max_parent_acceleration
 
 		
 func on_invincibility_timer_timeout() -> void:
-	if(player_left_hitbox == false):
-		take_damage(1, latest_enemy_hit_pos)
+	if(player_left_hitbox == false and get_parent() is PlayerCharacter):
+		take_damage(1, latest_enemy_hit_pos, null)
 
 func update_player_left_hitbox() -> void:
 	player_left_hitbox = true
