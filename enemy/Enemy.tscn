@@ -61,7 +61,7 @@ texture = ExtResource("2_jeryg")
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_cc5tl")
 
@@ -75,7 +75,7 @@ shape = SubResource("RectangleShape2D_f880n")
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
 shape = SubResource("RectangleShape2D_h4xav")
 
