@@ -35,7 +35,7 @@ func _ready() -> void:
 	if testing_scene == null:
 		first_scene = levels[level_counter].pick_random()
 	else:
-		first_scene = load(testing_scene)
+		first_scene = load(testing_scene as String)
 	
 	current_scene_instance = first_scene.instantiate()
 	add_child(current_scene_instance)

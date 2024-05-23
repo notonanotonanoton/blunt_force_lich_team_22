@@ -18,7 +18,7 @@ func _on_hit_box_entered(area : Area2D) -> void:
 
 			emit_signal("dealt_damage", area.global_position)
 			
-			for child in get_parent().get_children():
+			for child : Node in get_parent().get_children():
 				if child is hurt_box_component:
 					area.damage_with_return_possible(damage, global_position, child, false)
 					return

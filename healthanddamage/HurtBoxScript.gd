@@ -12,7 +12,7 @@ func damage(damage_value : int, enemy_position : Vector2, slow_enemy : bool) -> 
 		health_component.take_damage(damage_value, enemy_position, null, slow_enemy)
 
 
-func damage_with_return_possible(damage_value : int, enemy_position : Vector2, hurtcomponent : hurt_box_component, slow_enemy : bool):
+func damage_with_return_possible(damage_value : int, enemy_position : Vector2, hurtcomponent : hurt_box_component, slow_enemy : bool) -> void:
 	if health_component:
 		health_component.take_damage(damage_value, enemy_position, hurtcomponent, slow_enemy)
 

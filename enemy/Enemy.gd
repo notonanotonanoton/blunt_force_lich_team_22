@@ -70,7 +70,8 @@ func _physics_process(delta : float) -> void:
 	if ((looking_direction == 1 and velocity.x < 0) or
 	 (looking_direction == -1 and velocity.x > 0)):
 		stop_move(delta)
-	state_machine.physics_update(delta)
+	if state_machine:
+		state_machine.physics_update(delta)
 	move_and_slide()
 	
 

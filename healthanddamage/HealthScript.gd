@@ -99,7 +99,7 @@ func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_bo
 			var knockback : int = knockback_strength
 			if parent is PlayerCharacter:
 				knockback *= 2
-				for item in parent.items:
+				for item : Node in parent.items:
 					if item is ThornsItem:
 						if enemy_hurtbox != null:
 							enemy_hurtbox.damage(item.thornsDamage, parent.global_position, false)

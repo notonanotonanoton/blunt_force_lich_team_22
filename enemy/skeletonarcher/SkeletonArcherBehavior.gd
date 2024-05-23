@@ -8,7 +8,7 @@ extends EnemyBehaviorExtension
 @export_range(0, 500, 10) var backdash_strength : int = 300
 @export_range(100, 1000, 10) var arrow_speed : int = 300
 
-@onready var arrow = preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
+@onready var arrow : PackedScene = preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
 
 var crossbow_tween : Tween
 const crossbow_offset : Vector2 = Vector2(24, 0)

@@ -7,7 +7,7 @@ var current_state : State
 var states : Dictionary = {}
 
 func _ready() -> void:
-	for child in get_children(): #returns an array to the nodes children
+	for child : Node in get_children(): #returns an array to the nodes children
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_transition.connect(change_state)

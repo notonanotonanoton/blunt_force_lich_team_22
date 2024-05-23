@@ -277,14 +277,14 @@ func activate_death_state() -> void:
 	hurtbox_collision.set_deferred("disabled", true)
 
 
-func addItem(item) -> void:
+func addItem(item : Node) -> void:
 	print(item)
 	if item is PermanentHealthPickup:
-		for child in get_children():
+		for child : Node in get_children():
 			if child is HealthComponent:
 				child.add_max_health(item.amount_of_plus_health)
 	if item is spikeImmunity:
-		for child in get_children():
+		for child : Node in get_children():
 			if child is hurt_box_component:
 				child.set_collision_layer_value(8, false)
 

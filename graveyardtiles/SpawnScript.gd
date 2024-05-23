@@ -48,11 +48,11 @@ func _replace_tiles_with_scene(scene_dictionary: Dictionary = TILE_SCENES) -> vo
 			object.global_position = map_to_local(tile_pos)
 	
 
-func teleport_player_to_spawn():
+func teleport_player_to_spawn() -> void:
 	#this should not return more than 1, but the default return is an array so we do this as a workaround
 	for tile_pos : Vector2i in get_used_cells_by_id(search_layer, 0, Vector2i(0,0)):
 		set_cell(search_layer, tile_pos, -1)
-		for child in get_parent().get_parent().get_children():
+		for child : Node in get_parent().get_parent().get_children():
 			if child is PlayerCharacter:
 
 				child.teleport_player(to_global(map_to_local(tile_pos)))

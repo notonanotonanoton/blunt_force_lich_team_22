@@ -5,7 +5,7 @@ signal entered_settings
 func _ready() -> void:
 	hide()
 
-func _process(delta : float):
+func _process(delta : float) -> void:
 	pass
 
 func resume() -> void:

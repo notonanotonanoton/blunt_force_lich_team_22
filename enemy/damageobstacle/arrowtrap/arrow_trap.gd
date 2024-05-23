@@ -9,17 +9,17 @@ class_name spawner
 @export_category("Values")
 @export var time_to_spawn_projectile : int = 4
 @export var arrow_Speed : int = 200
-@export_range(-1, 1, 2) var horizontal_direction = 1
+@export_range(-1, 1, 2) var horizontal_direction : int = 1
 
-var South = [89, 91] #
-var West = [179, 181]
-var North = [269, 271]
-var East = [-1, 1]
+var South : PackedInt32Array = [89, 91] #
+var West : PackedInt32Array = [179, 181]
+var North : PackedInt32Array = [269, 271]
+var East : PackedInt32Array = [-1, 1]
 #google bitwise operations
 var RotationDirection = 0
 
 
-func _ready():
+func _ready() -> void:
 	timer.one_shot = true
 	timer.autostart = false
 	timer.wait_time = time_to_spawn_projectile
@@ -42,16 +42,10 @@ func _ready():
 		#Thus we throw this error if the arrow trap does not fall within an acceptable range of that cardinal direction.
 		assert(false, "ARROW TRAP IS INCORRECTLY ROTATED, PLEASE ONLY ROTATE IN 90 DEGREE INCREMENTS. Arrows can only spawn in cardinal directions")
 	
-	#no need to keep them in memory anymore
-	South = null
-	West = null
-	North = null
-	East = null
-	
 	timer.start()
 
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 
 	var object : Node2D = projectile_to_spawn.instantiate()
 	get_parent().add_child.call(object)

@@ -1,10 +1,10 @@
 extends Node2D
 class_name ThornsItem
 
-@export var thornsDamage = 1
+@export var thornsDamage : int = 1
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body : Node2D):
 	print(body)
 	if body is PlayerCharacter:
 		body.addItem(self)
