@@ -189,7 +189,7 @@ func process_throw(delta : float) -> void:
 		channeling_recall = true
 		stop_move(delta)
 		charge_time += throw_charge_rate * delta
-		charge_time = clampf(charge_time, 0, 2.0)
+		charge_time = clampf(charge_time, 0, 1.8)
 		animation_target.scale.x = 1.2 - (charge_time / 9)
 		animation_target.scale.y = 0.9
 		sprite.position.y = 2
