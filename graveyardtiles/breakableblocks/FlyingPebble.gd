@@ -6,12 +6,11 @@ class_name FlyingPebble
 @export var pebble_texture_rock : CompressedTexture2D
 @export var pebble_texture_stone : CompressedTexture2D
 
-
-func _ready() -> void:
-	texture = pebble_texture_rock
-
-func swap_texture() -> void:
-	texture = pebble_texture_stone
+func swap_texture(swap : bool) -> void:
+	if swap:
+		texture = pebble_texture_stone
+	else:
+		texture = pebble_texture_rock
 
 func start(pos : Vector2, direction : int, speed : float) -> void:
 	global_position = pos
