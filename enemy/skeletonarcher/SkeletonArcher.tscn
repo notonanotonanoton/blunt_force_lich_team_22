@@ -43,7 +43,7 @@ size = Vector2(10, 26)
 resource_local_to_scene = true
 size = Vector2(12, 28)
 
-[node name="SkeletonArcher" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "skeleton_animation_timer")]
+[node name="SkeletonArcher" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "state_machine", "skeleton_animation_timer")]
 collision_layer = 4
 script = ExtResource("1_a6705")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -58,6 +58,7 @@ behavior_extension = NodePath("SkeletonArcherBehaviour")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("slowTimer")
+state_machine = NodePath("StateMachine")
 skeleton_animation_timer = NodePath("SkeletonArcherBehaviour/AnimationTimer")
 aggro_range = 200
 is_ranged = true
