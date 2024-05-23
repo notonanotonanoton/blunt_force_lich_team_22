@@ -7,17 +7,14 @@ var maps_directory : String = "res://maps/"
 #this will make the map manager ignore the random first level selection.
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
-var testing_scene = "res://maps/TestLevel.tscn"
+var testing_scene = "res://maps/Level1/Version2.tscn"
 
 var levels : Array
 
 var current_scene_instance : Node
-#make sure not to exceed the amount of available levels (directories)
-@export_range(1, 10, 1) var starting_level_number : int = 1
-var level_counter : int
+var level_counter : int = 0
 
 func _ready() -> void:
-	level_counter = starting_level_number - 1
 	var level_directories : PackedStringArray = DirAccess.open(maps_directory).get_directories()
 	
 	#iterates through all folders specified in level_directories
@@ -33,7 +30,7 @@ func _ready() -> void:
 	
 	var first_scene : PackedScene
 	if testing_scene == null:
-		first_scene = levels[level_counter].pick_random()
+		first_scene = levels.front().pick_random()
 	else:
 		first_scene = load(testing_scene)
 	

@@ -15,13 +15,12 @@ func _ready() -> void:
 	if inital_state:
 		inital_state.enter()
 		current_state = inital_state
-
-#unused
-func update(delta : float) -> void:
+		
+func _process(delta : float) -> void:
 	if current_state:
 		current_state.update(delta)
 	
-func physics_update(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 		

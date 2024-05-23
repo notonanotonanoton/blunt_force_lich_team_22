@@ -1,15 +1,10 @@
 extends Node2D
 class_name spawner
 
-@export_category("Nodes")
 @export var projectile_to_spawn : PackedScene
 @export var timer : Timer
-@export var sprite : Sprite2D
-
-@export_category("Values")
 @export var time_to_spawn_projectile : int = 4
 @export var arrow_Speed : int = 200
-@export_range(-1, 1, 2) var horizontal_direction = 1
 
 var South = [89, 91] #
 var West = [179, 181]
@@ -23,15 +18,13 @@ func _ready():
 	timer.one_shot = true
 	timer.autostart = false
 	timer.wait_time = time_to_spawn_projectile
-	sprite.scale.x = horizontal_direction
 
 
 
 	print("arrow trap rotation: ", rotation_degrees)
 	if rotation_degrees > South[0] and rotation_degrees < South[1]:
 		RotationDirection = 1 << 0
-	elif (rotation_degrees > West[0] and rotation_degrees < West[1]) or (
-		horizontal_direction == -1 and !abs(rotation_degrees) > 0):
+	elif rotation_degrees > West[0] and rotation_degrees < West[1]:
 		RotationDirection = 1 << 1
 	elif rotation_degrees > North[0] and rotation_degrees < North[1]:
 		RotationDirection = 1 << 2

@@ -4,8 +4,6 @@ extends State
 @export var enemy : Enemy
 @export var attack_timer : Timer
 @export var proximity_timer : Timer
-@export var ground_detector : Area2D
-@export var low_ground_detector : Area2D
 
 @export_category("Values")
 #stops moving once within this range. unimplemented for base enemy
@@ -15,7 +13,7 @@ extends State
 @export_range(0, 300, 10) var aggro_range_increase : int = 80
 
 var offset : int
-var distance_x_to_player : float = 0.0
+var distance_to_player : float = 0.0
 
 func _ready() -> void:
 	attack_timer.wait_time = attack_rate
@@ -27,10 +25,11 @@ func _ready() -> void:
 
 func enter() -> void:
 	enemy.aggro_radius.shape.radius = enemy.default_aggro_range + aggro_range_increase
+	enemy.flip_gravity(false)
 
 func exit() -> void:
 	enemy.target_player = null
-	distance_x_to_player = 0.0
+	distance_to_player = 0.0
 	enemy.aggro_radius.shape.radius = enemy.default_aggro_range
 
 func update(delta : float) -> void:
@@ -39,18 +38,17 @@ func update(delta : float) -> void:
 func physics_update(delta : float) -> void:
 	get_distance()
 	
-	if enemy.is_ranged and distance_x_to_player <= attack_range:
+	if enemy.is_ranged and distance_to_player <= attack_range:
 		enemy.stop_move(delta)
 	else:
 		enemy.move(delta, 1.0)
 	
 	#condition may have to be changed for enemies that want to move and attack at the same time
-	if enemy.is_on_floor():
-		if distance_x_to_player <= attack_range and attack_timer.is_stopped():
-			attack(delta)
+	if distance_to_player <= attack_range and attack_timer.is_stopped():
+		attack(delta)
 	
-		if distance_x_to_player <= max_player_proximity and proximity_timer.is_stopped():
-			proximity_action(delta)
+	if distance_to_player <= max_player_proximity and proximity_timer.is_stopped():
+		proximity_action(delta)
 
 #enemies should all implement their own attacks.
 func attack(delta : float) -> void:
@@ -73,10 +71,10 @@ func get_distance() -> void:
 	var enemy_target_pos : Vector2 = enemy.target_player.global_position
 	var direction : float = enemy_pos.direction_to(enemy_target_pos).x
 	
-	distance_x_to_player = abs(enemy_pos.x - enemy_target_pos.x)
-	if direction < 0.0 and distance_x_to_player >= offset:
+	distance_to_player = Vector2(enemy_pos.x, 0).distance_to(Vector2(enemy_target_pos.x, 0))
+	if direction < 0.0 and distance_to_player >= offset:
 		enemy.looking_direction = -1
-	elif direction > 0.0 and distance_x_to_player >= offset:
+	elif direction > 0.0 and distance_to_player >= offset:
 		enemy.looking_direction = 1
 	
 	
