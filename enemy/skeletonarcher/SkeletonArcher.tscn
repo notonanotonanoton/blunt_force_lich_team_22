@@ -12,30 +12,30 @@
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_dmps7"]
 [ext_resource type="Script" path="res://enemy/skeletonarcher/SkeletonArcherBehavior.gd" id="10_cndyi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cc5tl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo8np"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ag0ys"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kusbm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4tsn"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4xav"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx6bq"]
 resource_local_to_scene = true
 size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(8, 24)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_168vn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qyhx"]
 resource_local_to_scene = true
 radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c58vq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oclns"]
 resource_local_to_scene = true
 size = Vector2(10, 26)
 
@@ -77,17 +77,19 @@ offset = Vector2(2, 4)
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_cc5tl")
+shape = SubResource("RectangleShape2D_yo8np")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
-shape = SubResource("RectangleShape2D_f880n")
+shape = SubResource("RectangleShape2D_ag0ys")
 
 [node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
@@ -95,14 +97,15 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
 position = Vector2(16, -52)
-shape = SubResource("RectangleShape2D_kusbm")
+shape = SubResource("RectangleShape2D_r4tsn")
 
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
-shape = SubResource("RectangleShape2D_h4xav")
+shape = SubResource("RectangleShape2D_kx6bq")
 
 [node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_psxeh")]
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
@@ -157,7 +160,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_168vn")
+shape = SubResource("CircleShape2D_5qyhx")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_4dxvc")]
 generic_animations = NodePath("../GenericAnimations")
@@ -169,7 +172,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_c58vq")
+shape = SubResource("RectangleShape2D_oclns")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_dmps7")]
 collision_layer = 4

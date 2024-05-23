@@ -29,15 +29,15 @@ size = Vector2(8, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
 size = Vector2(20, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_168vn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bsoe"]
 resource_local_to_scene = true
 radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c58vq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frxcs"]
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0lg1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wrtk"]
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
@@ -146,7 +146,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_168vn")
+shape = SubResource("CircleShape2D_5bsoe")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
 generic_animations = NodePath("../GenericAnimations")
@@ -157,7 +157,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_c58vq")
+shape = SubResource("RectangleShape2D_frxcs")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_qu88o")]
 collision_layer = 4
@@ -166,7 +166,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_c0lg1")
+shape = SubResource("RectangleShape2D_6wrtk")
 
 [node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
 process_callback = 0

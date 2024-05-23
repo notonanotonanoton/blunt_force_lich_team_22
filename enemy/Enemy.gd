@@ -88,7 +88,7 @@ func apply_gravity(delta : float) -> void:
 func jump(delta : float, jump_mult : float, jump_action : bool) -> void:
 	velocity.y = jump_velocity * jump_mult
 	emit_signal("jumped")
-	if jump_action and behavior_extension:
+	if behavior_extension and jump_action:
 		behavior_extension.jump_action(delta)
 
 func move(delta : float, move_mult : float) -> void:
