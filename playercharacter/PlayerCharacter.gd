@@ -187,8 +187,7 @@ func process_throw(delta : float) -> void:
 	elif not available_box and Input.is_action_pressed("interact_or_throw"):
 		jump_is_available = false
 		channeling_recall = true
-		if is_on_floor():
-			stop_move(delta)
+		stop_move(delta)
 		charge_time += throw_charge_rate * delta
 		charge_time = clampf(charge_time, 0, 2.0)
 		animation_target.scale.x = 1.2 - (charge_time / 9)
