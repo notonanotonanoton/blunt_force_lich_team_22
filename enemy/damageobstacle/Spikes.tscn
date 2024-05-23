@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://yyan0x7aj3p0"]
 
 [ext_resource type="Script" path="res://enemy/damageobstacle/Spikes.gd" id="1_syton"]
-[ext_resource type="Texture2D" uid="uid://c16nu57r7jjug" path="res://enemy/damageobstacle/spike_trap.png" id="2_fqm4m"]
+[ext_resource type="Texture2D" uid="uid://c244blagrx3kd" path="res://enemy/damageobstacle/spike_trap.png" id="2_fqm4m"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="2_otglk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nikw"]
 resource_local_to_scene = true
-size = Vector2(25, 5)
+size = Vector2(32, 4)
 
 [node name="Spikes" type="Node2D"]
 process_thread_group = 2
@@ -22,5 +22,5 @@ collision_layer = 4
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(-0.5, 13.5)
+position = Vector2(-0.5, 14)
 shape = SubResource("RectangleShape2D_4nikw")
