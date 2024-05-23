@@ -20,7 +20,7 @@ func _ready() -> void:
 	hitbox.dealt_damage.connect(_on_hit_box_component_dealt_damage)
 
 func _physics_process(delta : float) -> void:
-	if abs(velocity.x) > minimum_damage_speed:
+	if abs(velocity.x) > minimum_damage_speed or abs(velocity.y) > minimum_damage_speed:
 		sprite.modulate = Color(1.8, 1.8, 2.0)
 		can_deal_damage = true
 	else:
