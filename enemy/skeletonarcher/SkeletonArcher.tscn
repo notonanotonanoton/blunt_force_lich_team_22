@@ -77,7 +77,6 @@ offset = Vector2(2, 4)
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
@@ -85,7 +84,6 @@ shape = SubResource("RectangleShape2D_yo8np")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
@@ -93,7 +91,6 @@ shape = SubResource("RectangleShape2D_ag0ys")
 
 [node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
 position = Vector2(16, -52)
@@ -101,7 +98,6 @@ shape = SubResource("RectangleShape2D_r4tsn")
 
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
