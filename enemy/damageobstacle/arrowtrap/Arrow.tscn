@@ -11,6 +11,9 @@ size = Vector2(3.5, 3)
 size = Vector2(13, 3)
 
 [node name="Arrow" type="Area2D" node_paths=PackedStringArray("ground_collider", "gravity_timer")]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 position = Vector2(-7, 0)
 collision_layer = 0
 script = ExtResource("1_s74v0")

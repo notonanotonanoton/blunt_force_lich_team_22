@@ -261,6 +261,9 @@ sources/0 = SubResource("TileSetAtlasSource_g1ew0")
 sources/2 = SubResource("TileSetAtlasSource_yga00")
 
 [node name="DefaultTileMap" type="TileMap"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 tile_set = SubResource("TileSet_cw68q")
 format = 2
 layer_0/name = "GroundLayer"

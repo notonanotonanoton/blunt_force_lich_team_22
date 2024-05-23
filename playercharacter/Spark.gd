@@ -9,8 +9,8 @@ func start(pos : Vector2i) -> void:
 	tween.set_parallel(true)
 	
 	#tween.tween_property(self, "rotation_degrees", 90, 0.2)
-	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.1)
+	tween.tween_property(self, "scale", Vector2(1.4, 1.1), 0.15)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.15)
 	
 	await tween.finished
 	queue_free()

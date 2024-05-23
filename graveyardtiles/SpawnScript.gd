@@ -11,7 +11,7 @@ class_name interactive_tilemap
 	#Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	
 	#Vector2i(1, 0): preload()
-	#Vector2i(1,0): preload("res://leveltransition/LevelTransition.tscn"),
+	Vector2i(1,0): preload("res://leveltransition/LevelTransition.tscn"),
 	Vector2i(0,1): preload("res://enemy/slime/Slime.tscn"),
 	Vector2i(1,1): preload("res://enemy/skeletonarcher/SkeletonArcher.tscn"),
 	#Vector2i(2,1): preload()

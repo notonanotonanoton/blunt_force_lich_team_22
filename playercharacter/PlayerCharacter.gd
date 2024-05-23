@@ -20,10 +20,10 @@ class_name PlayerCharacter
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 145
-@export_range(0, 1, 0.1) var acceleration : float = 0.7
+@export_range(0, 1, 0.1) var acceleration : float = 0.8
 @export_range(-1000, 0, 10) var jump_velocity : int = -430
-@export_range(0, 1, 0.1) var friction : float = 0.7
-@export_range(0, 1000, 10) var max_fall_speed : int = 400
+@export_range(0, 1, 0.1) var friction : float = 0.8
+@export_range(0, 1000, 10) var max_fall_speed : int = 350
 @export_range(0, 0.5, 0.1) var coyote_time : float = 0.1
 @export_range(250, 750, 25) var throw_force_x : int = 300
 @export_range(-500, -250, 25) var throw_force_y : int = -275

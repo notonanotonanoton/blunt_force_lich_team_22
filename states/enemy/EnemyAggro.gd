@@ -11,7 +11,8 @@ extends State
 @export_range(1, 100, 1) var max_player_proximity : int = 30
 @export_range(10, 200, 10) var attack_range : int = 40
 @export_range(0.2, 10, 0.1) var attack_rate : float = 2.0
-@export_range(0, 300, 10) var aggro_range_increase : int = 80
+#keep fairly high for intended behavior
+@export_range(0, 300, 10) var aggro_range_increase : int = 130
 
 var offset : int
 var distance_x_to_player : float = 0.0
@@ -25,12 +26,12 @@ func _ready() -> void:
 	max_player_proximity += offset
 
 func enter() -> void:
-	enemy.aggro_radius.shape.radius = enemy.default_aggro_range + aggro_range_increase
+	enemy.aggro_radius.shape.radius = enemy.aggro_range + aggro_range_increase
 
 func exit() -> void:
 	enemy.target_player = null
 	distance_x_to_player = 0.0
-	enemy.aggro_radius.shape.radius = enemy.default_aggro_range
+	enemy.aggro_radius.shape.radius = enemy.aggro_range
 
 func update(delta : float) -> void:
 	pass

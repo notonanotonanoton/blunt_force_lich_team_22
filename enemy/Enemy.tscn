@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bvdm34jbnkrr4"]
+[gd_scene load_steps=18 format=3 uid="uid://bvdm34jbnkrr4"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_q5kje"]
 [ext_resource type="Texture2D" uid="uid://c2cf2ur2113pm" path="res://enemy/slime/slime.png" id="2_jeryg"]
@@ -15,6 +15,10 @@ resource_local_to_scene = true
 size = Vector2(8, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+resource_local_to_scene = true
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a74ig"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
@@ -37,7 +41,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "state_machine")]
 collision_layer = 4
 script = ExtResource("1_q5kje")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -46,10 +50,12 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("slowTimer")
+state_machine = NodePath("StateMachine")
 aggro_range = 140
 
 [node name="DirectionFlip" type="Node2D" parent="."]
@@ -61,6 +67,7 @@ texture = ExtResource("2_jeryg")
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
@@ -68,13 +75,23 @@ shape = SubResource("RectangleShape2D_cc5tl")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
 shape = SubResource("RectangleShape2D_f880n")
 
+[node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
+position = Vector2(16, -52)
+shape = SubResource("RectangleShape2D_a74ig")
+
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)

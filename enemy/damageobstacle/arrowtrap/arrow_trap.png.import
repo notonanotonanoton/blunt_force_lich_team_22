@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c16nu57r7jjug"
-path="res://.godot/imported/spike_trap.png-c6dbf51fa470ad4494e53bc2ef5335a7.ctex"
+uid="uid://c2uj4pugkeeyp"
+path="res://.godot/imported/arrow_trap.png-5f05cf3414a68a4d59b76be24e9bf0ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/spike_trap.png"
-dest_files=["res://.godot/imported/spike_trap.png-c6dbf51fa470ad4494e53bc2ef5335a7.ctex"]
+source_file="res://enemy/damageobstacle/arrowtrap/arrow_trap.png"
+dest_files=["res://.godot/imported/arrow_trap.png-5f05cf3414a68a4d59b76be24e9bf0ff.ctex"]
 
 [params]
 

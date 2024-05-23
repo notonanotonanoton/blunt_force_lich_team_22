@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7ppe4bc3oiv3"]
+[gd_scene load_steps=20 format=3 uid="uid://7ppe4bc3oiv3"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_a6705"]
 [ext_resource type="Texture2D" uid="uid://d2exrtavte7gm" path="res://enemy/skeletonarcher/skeleton_archer.png" id="2_hcmn2"]
@@ -17,6 +17,10 @@ resource_local_to_scene = true
 size = Vector2(8, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+resource_local_to_scene = true
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kusbm"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
@@ -39,7 +43,7 @@ size = Vector2(10, 26)
 resource_local_to_scene = true
 size = Vector2(12, 28)
 
-[node name="SkeletonArcher" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "skeleton_animation_timer")]
+[node name="SkeletonArcher" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "skeleton_animation_timer")]
 collision_layer = 4
 script = ExtResource("1_a6705")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -48,6 +52,7 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SkeletonArcherBehaviour")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
@@ -83,6 +88,14 @@ collision_layer = 0
 position = Vector2(16, -20)
 shape = SubResource("RectangleShape2D_f880n")
 
+[node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
+position = Vector2(16, -52)
+shape = SubResource("RectangleShape2D_kusbm")
+
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
@@ -103,11 +116,12 @@ shape = SubResource("RectangleShape2D_fsb11")
 script = ExtResource("4_qvt12")
 inital_state = NodePath("EnemyIdle")
 
-[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer", "ground_detector")]
 script = ExtResource("5_5njcn")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
+ground_detector = NodePath("../../DirectionFlip/GroundDetector")
 max_player_proximity = 80
 attack_range = 200
 aggro_range_increase = 30
@@ -167,10 +181,10 @@ shape = SubResource("RectangleShape2D_c0lg1")
 
 [node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer", "enemy")]
 script = ExtResource("10_cndyi")
-backdash_strength = 370
-arrow_speed = 170
 skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 animation_timer = NodePath("AnimationTimer")
+backdash_strength = 370
+arrow_speed = 170
 enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]

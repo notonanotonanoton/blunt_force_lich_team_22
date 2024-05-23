@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://yyan0x7aj3p0"]
 
 [ext_resource type="Script" path="res://enemy/damageobstacle/Spikes.gd" id="1_syton"]
-[ext_resource type="Texture2D" uid="uid://c16nu57r7jjug" path="res://asepritefiles/spike_trap.png" id="1_tubur"]
+[ext_resource type="Texture2D" uid="uid://c16nu57r7jjug" path="res://enemy/damageobstacle/spike_trap.png" id="2_fqm4m"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="2_otglk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nikw"]
@@ -9,10 +9,13 @@ resource_local_to_scene = true
 size = Vector2(25, 5)
 
 [node name="Spikes" type="Node2D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 script = ExtResource("1_syton")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tubur")
+texture = ExtResource("2_fqm4m")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("2_otglk")]
 collision_layer = 4

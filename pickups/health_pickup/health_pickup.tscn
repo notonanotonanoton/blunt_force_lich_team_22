@@ -65,13 +65,17 @@ _data = {
 "idle": SubResource("Animation_ykih4")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxeyf"]
-size = Vector2(14, 14)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnj62"]
+resource_local_to_scene = true
+size = Vector2(14, 18)
 
 [node name="HealthPickup" type="Area2D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+z_index = 2
 collision_layer = 0
-collision_mask = 2
-monitorable = false
+collision_mask = 3
 script = ExtResource("1_p5mvk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -84,6 +88,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cxeyf")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_dnj62")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
