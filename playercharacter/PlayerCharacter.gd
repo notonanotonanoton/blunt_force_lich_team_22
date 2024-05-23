@@ -330,7 +330,7 @@ func _on_max_health_changed(max_health_change : int) -> void:
 func _on_jump_reset_freeze_timer_timeout() -> void:
 	allow_jump_variable_resets = true
 
-func _on_settings_menu_aiming_arch_toggled() -> void:
+func _on_settings_menu_aiming_arc_toggled() -> void:
 	if (aiming_arc_enabled == true):
 		aiming_arc_enabled = false
 	else: 

@@ -1,7 +1,7 @@
 extends Control
 
 signal back_pressed
-signal aiming_arc_toggled 
+signal aiming_arc_toggled
 var vsync_enabled : bool = true
 
 func _ready() -> void:
