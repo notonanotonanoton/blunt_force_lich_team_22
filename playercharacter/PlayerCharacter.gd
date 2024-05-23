@@ -150,10 +150,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				throw_tween.tween_property(camera, "position:x", 0, 0.1)
 	
 	elif event.is_action_pressed("interact_or_throw"):
-		if available_box and available_box.is_on_floor():
-			picked_up_box = true
-			available_box.pick_up(self)
-			apply_carrying_sprites(true)
+		pick_up_nearby_box(false)
 	
 	elif event.is_action_released("interact_or_throw"):
 		reset_recall_animation()
@@ -193,13 +190,14 @@ func process_throw(delta : float) -> void:
 		animation_target.scale.x = 1.2 - (charge_time / 9)
 		animation_target.scale.y = 0.9
 		sprite.position.y = 2
-		if charge_time >= 2.0:
+		if charge_time >= 1.8: 
 			var pos : Vector2 = global_position
 			box_ref.global_position = pos
 			reset_recall_animation()
 			var spark : SparkAnimation = spark_animation.instantiate()
 			get_parent().add_child(spark)
 			spark.start(pos)
+			pick_up_nearby_box(true)
 
 func reset_recall_animation() -> void:
 	charge_time = 0.0
@@ -238,9 +236,6 @@ func apply_gravity(delta : float) -> void:
 			# Ensure fall speed past max_fall_speed is consistent
 			else:
 				velocity.y = max_fall_speed
-
-
-
 
 
 func process_movement(delta : float) -> void:
@@ -335,5 +330,13 @@ func _on_settings_menu_aiming_arc_toggled() -> void:
 	else: 
 		aiming_arc_enabled = true
 	print(aiming_arc_enabled)
+
+func pick_up_nearby_box(summoned : bool) -> void:
+	if summoned:
+		available_box = box_ref
+	if available_box and available_box.is_on_floor():
+		picked_up_box = true
+		available_box.pick_up(self)
+		apply_carrying_sprites(true)
 	
 
