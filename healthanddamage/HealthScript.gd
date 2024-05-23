@@ -6,7 +6,7 @@ class_name HealthComponent
 
 @export_category("Values")
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.4
-@export_range(0.5, 2, 0.25) var invincibility_time : float = 1.0
+@export_range(0.5, 2, 0.25) var invincibility_time : float = 0.75
 
 @export_range(0, 200, 10) var knockback_strength : int = 100
 @export_range(-200, 0, 10) var knockback_up_strength : int = -60
