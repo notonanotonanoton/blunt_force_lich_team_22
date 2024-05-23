@@ -8,7 +8,7 @@ class_name PlayerBox
 
 @export_category("Values")
 @export_range(0, 1, 0.1) var friction : float = 0.8
-@export_range(0, 300, 1) var minimum_damage_speed : int = 80
+@export_range(0, 300, 1) var minimum_damage_speed : int = 100
 @export_range(0, 300, 10) var hit_bounce_strength : int = 150
 
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,7 +20,7 @@ func _ready() -> void:
 	hitbox.dealt_damage.connect(_on_hit_box_component_dealt_damage)
 
 func _physics_process(delta : float) -> void:
-	if abs(velocity.x) > minimum_damage_speed or abs(velocity.y) > minimum_damage_speed:
+	if abs(velocity.x) + abs(velocity.y) > minimum_damage_speed:
 		sprite.modulate = Color(1.8, 1.8, 2.0)
 		can_deal_damage = true
 	else:
