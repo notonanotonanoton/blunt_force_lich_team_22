@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://bmgrntby46fub" path="res://playercharacter/character_lich.png" id="1_x272j"]
-[ext_resource type="Texture2D" uid="uid://bdb384u6xa052" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
-[ext_resource type="Texture2D" uid="uid://8phli6y1qnxt" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
+[ext_resource type="Texture2D" uid="uid://bin88kymwl3ov" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Texture2D" uid="uid://dok5nq2n2tnbd" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
+[ext_resource type="Texture2D" uid="uid://bi0hcdpv6s3mh" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
