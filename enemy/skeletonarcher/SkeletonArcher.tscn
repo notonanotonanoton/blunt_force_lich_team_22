@@ -180,13 +180,12 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_c0lg1")
 
-[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer", "animation_timer", "enemy")]
+[node name="SkeletonArcherBehaviour" type="Node" parent="." node_paths=PackedStringArray("skeleton_arm", "animation_timer", "enemy")]
 script = ExtResource("10_cndyi")
 skeleton_arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 animation_timer = NodePath("AnimationTimer")
 backdash_strength = 370
 arrow_speed = 170
-animation_timer = NodePath("AnimationTimer")
 enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]
