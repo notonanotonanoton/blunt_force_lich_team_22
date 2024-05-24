@@ -7,5 +7,6 @@ class_name ThornsItem
 func _on_area_2d_body_entered(body : Node2D):
 	print(body)
 	if body is PlayerCharacter:
-		body.addItem(self)
+		body.addItem(self.duplicate())
+		queue_free()
 		

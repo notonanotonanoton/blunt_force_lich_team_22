@@ -17,9 +17,10 @@ script = ExtResource("1_syton")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_fqm4m")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("2_otglk")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_otglk")]
 collision_layer = 4
 collision_mask = 128
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 14.5)

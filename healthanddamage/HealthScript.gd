@@ -93,6 +93,7 @@ func set_max_health(new_max_health : int) -> void:
 func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_box_component, should_slow : bool) -> void:
 	player_left_hitbox = false;
 	latest_enemy_hit_pos = enemy_position
+	print("invincibility timer is_stopped : ", invincibility_timer.is_stopped())
 	if invincibility_timer.is_stopped() == true:
 		health -= damage
 		
@@ -143,3 +144,12 @@ func on_invincibility_timer_timeout() -> void:
 func update_player_left_hitbox() -> void:
 	player_left_hitbox = true
 	
+
+
+func _on_player_character_new_item(new_item):
+	if new_item is InvincibilityExtender:
+		print("previous invincibility time: ", invincibility_time)
+		invincibility_time += new_item.extensionDuration
+		invincibility_timer.wait_time = invincibility_time
+		print("new invincibility time: ", invincibility_time)
+

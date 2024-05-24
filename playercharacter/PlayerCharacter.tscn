@@ -104,6 +104,7 @@ one_shot = true
 
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
 
+[connection signal="new_item" from="." to="Health" method="_on_player_character_new_item"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]

@@ -10,7 +10,6 @@
 [node name="MapManager" type="Node2D"]
 top_level = true
 script = ExtResource("1_vicmv")
-starting_level_number = 2
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)

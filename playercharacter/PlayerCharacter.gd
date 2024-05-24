@@ -62,6 +62,7 @@ signal step_taken
 signal jumped
 signal health_changed
 signal max_health_changed
+signal new_item
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -273,6 +274,7 @@ func activate_death_state() -> void:
 
 func addItem(item : Node) -> void:
 	print(item)
+	emit_signal("new_item", item)
 	if item is PermanentHealthPickup:
 		for child : Node in get_children():
 			if child is HealthComponent:

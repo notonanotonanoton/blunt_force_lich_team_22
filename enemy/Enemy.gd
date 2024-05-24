@@ -151,15 +151,6 @@ func drop_health_pickup() -> void:
 		drop.dropped(global_position)
 
 func chase_jump(delta : float) -> void:
-	if (global_position.y + 34 > target_player.global_position.y):
-		if abs(global_position.x - target_player.global_position.x) > 54:
-				jump(delta, 1.1, false)
-				velocity.x = 150 * looking_direction
-				if slow_timer.is_stopped():
-					#apply slow with slow timer
-					pass
-		else:
-			jump(delta, 1.0, false)
 
 	if not is_attacking:
 		if (global_position.y + 36 > target_player.global_position.y):
@@ -170,7 +161,6 @@ func chase_jump(delta : float) -> void:
 						#apply slow with slow timer
 						pass
 			else:
-				print("chase jumped")
 				jump(delta, 1.0, false)
 
 

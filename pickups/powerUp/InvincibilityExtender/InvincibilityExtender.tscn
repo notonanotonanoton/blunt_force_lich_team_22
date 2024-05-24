@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://burxugu4gty5o"]
+
+[ext_resource type="Script" path="res://pickups/powerUp/InvincibilityExtender/InvincibilityExtender.gd" id="1_2lve3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31tqy"]
+
+[node name="InvincibilityExtender" type="Node2D"]
+script = ExtResource("1_2lve3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_31tqy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
