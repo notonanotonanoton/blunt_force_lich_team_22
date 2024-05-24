@@ -61,8 +61,6 @@ signal jumped
 func _ready() -> void:
 	aggro_radius.shape.radius = aggro_range
 	collision_offset = (collision.shape.get_rect().size.x + 1) / 2 
-	slow_timer.autostart = false;
-	slow_timer.one_shot = true;
 	slow_timer.wait_time = slow_time
 
 func _physics_process(delta : float) -> void:
@@ -104,10 +102,7 @@ func handle_wall_or_gap(delta : float) -> void:
 	if not ground_detector.has_overlapping_bodies():
 		#acts as extension of aggro behavior
 		if target_player != null:
-			if (global_position.y + 34 > target_player.global_position.y) and abs(
-				global_position.x - target_player.global_position.x) > 32:
-				jump(delta, 1.1, false)
-				velocity.x = 150 * looking_direction
+			chase_jump(delta)
 		
 		elif not low_ground_detector.has_overlapping_bodies():
 			looking_direction *= -1
@@ -149,3 +144,14 @@ func drop_health_pickup() -> void:
 		var drop : HealthPickup = health_pickup.instantiate()
 		get_parent().add_child.call_deferred(drop)
 		drop.dropped(global_position)
+
+func chase_jump(delta : float) -> void:
+	if (global_position.y + 34 > target_player.global_position.y):
+		if abs(global_position.x - target_player.global_position.x) > 54:
+				jump(delta, 1.1, false)
+				velocity.x = 150 * looking_direction
+				if slow_timer.is_stopped():
+					#apply slow with slow timer
+					pass
+		else:
+			jump(delta, 1.0, false)

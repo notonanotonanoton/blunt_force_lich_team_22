@@ -54,7 +54,7 @@ high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
-slow_timer = NodePath("slowTimer")
+slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
 aggro_range = 140
 
@@ -168,7 +168,8 @@ shape = SubResource("RectangleShape2D_6wrtk")
 process_callback = 0
 one_shot = true
 
-[node name="slowTimer" type="Timer" parent="."]
+[node name="SlowTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
