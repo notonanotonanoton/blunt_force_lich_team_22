@@ -28,9 +28,10 @@ texture = ExtResource("2_yjp1g")
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_1k0xb")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("3_lc0ge")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_lc0ge")]
 collision_layer = 0
 collision_mask = 2
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(-2, 0)

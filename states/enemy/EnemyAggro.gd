@@ -4,7 +4,6 @@ extends State
 @export var enemy : Enemy
 @export var attack_timer : Timer
 @export var proximity_timer : Timer
-@export var ground_detector : Area2D
 
 @export_category("Values")
 #stops moving once within this range. unimplemented for base enemy
@@ -41,7 +40,7 @@ func physics_update(delta : float) -> void:
 	
 	if enemy.is_ranged and distance_x_to_player <= attack_range:
 		enemy.stop_move(delta)
-	else:
+	elif not enemy.is_attacking:
 		enemy.move(delta, 1.0)
 	
 	#condition may have to be changed for enemies that want to move and attack at the same time
@@ -63,10 +62,7 @@ func proximity_action(delta : float) -> void:
 	if enemy.behavior_extension:
 		enemy.behavior_extension.proximity_action(delta)
 	
-	if attack_rate > 0.5:
-		proximity_timer.start(randf_range(attack_rate-0.4, attack_rate-0.2))
-	else:
-		proximity_timer.start(randf_range(attack_rate-0.1, attack_rate+0.1))
+	proximity_timer.start(randf_range(attack_rate-0.1, attack_rate+0.1))
 
 func get_distance() -> void:
 	var enemy_pos : Vector2 = enemy.global_position
@@ -74,10 +70,11 @@ func get_distance() -> void:
 	var direction : float = enemy_pos.direction_to(enemy_target_pos).x
 	
 	distance_x_to_player = abs(enemy_pos.x - enemy_target_pos.x)
-	if direction < 0.0 and distance_x_to_player >= offset:
-		enemy.looking_direction = -1
-	elif direction > 0.0 and distance_x_to_player >= offset:
-		enemy.looking_direction = 1
+	if not enemy.is_attacking:
+		if direction < 0.0 and distance_x_to_player >= offset:
+			enemy.looking_direction = -1
+		elif direction > 0.0 and distance_x_to_player >= offset:
+			enemy.looking_direction = 1
 	
 	
 

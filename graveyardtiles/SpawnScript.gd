@@ -8,13 +8,11 @@ class_name interactive_tilemap
 	#insert the atlas coordinate of the spawner and the filepath to the object it should spawn
 	#player is commented out so we know the spot is reserved. It should not be handled with the other tile scenes
 	#since its being handled by its own script 
-	#Vector2i(0,0): preload("res://playercharacter/PlayerCharacter.tscn"),
 	
-	#Vector2i(1, 0): preload()
 	Vector2i(1,0): preload("res://leveltransition/LevelTransition.tscn"),
 	Vector2i(0,1): preload("res://enemy/slime/Slime.tscn"),
 	Vector2i(1,1): preload("res://enemy/skeletonarcher/SkeletonArcher.tscn"),
-	#Vector2i(2,1): preload()
+	Vector2i(2,1): preload("res://enemy/skeletonwarrior/SkeletonWarrior.tscn"),
 	Vector2i(0,2): preload("res://enemy/damageobstacle/Spikes.tscn"),
 	Vector2i(1,2): preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn"),
 	Vector2i(0,3): preload("res://graveyardtiles/breakableblocks/BreakableBlockRock.tscn"),

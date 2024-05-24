@@ -37,6 +37,7 @@ var fast_fall_gravity : int = default_gravity * 1.5
 var collision_offset : int
 var is_slowed : bool = false;
 var health_pickup : PackedScene = preload("res://pickups/health_pickup/health_pickup.tscn")
+var is_attacking : bool = false
 
 
 #used to prevent pathfinding getting stuck on walls 
@@ -47,7 +48,7 @@ var was_on_wall : bool = false
 #has to have the same variable name as PlayerCharacter
 var looking_direction : int = 1:
 	set(new_direction):
-		if(new_direction == 1 or new_direction == -1 and looking_direction != new_direction):
+		if looking_direction != new_direction and (new_direction == 1 or new_direction == -1):
 			looking_direction = new_direction
 			direction_flip.scale.x = new_direction
 
@@ -122,7 +123,8 @@ func handle_wall_or_gap(delta : float) -> void:
 
 func damage_aggro_range_increase() -> void:
 	#this should get immediately overwritten by EnemyAggro's enter()
-	aggro_radius.shape.radius *= 10
+	if target_player == null:
+		aggro_radius.shape.radius *= 10
 
 func has_all_jump_overlap() -> bool:
 	if jump_block_detector.has_overlapping_bodies() and high_jump_block_detector.has_overlapping_bodies():
@@ -146,12 +148,14 @@ func drop_health_pickup() -> void:
 		drop.dropped(global_position)
 
 func chase_jump(delta : float) -> void:
-	if (global_position.y + 34 > target_player.global_position.y):
-		if abs(global_position.x - target_player.global_position.x) > 54:
-				jump(delta, 1.1, false)
-				velocity.x = 150 * looking_direction
-				if slow_timer.is_stopped():
-					#apply slow with slow timer
-					pass
-		else:
-			jump(delta, 1.0, false)
+	if not is_attacking:
+		if (global_position.y + 36 > target_player.global_position.y):
+			if abs(global_position.x - target_player.global_position.x) > 54:
+					jump(delta, 1.1, false)
+					velocity.x = 165 * looking_direction
+					if slow_timer.is_stopped():
+						#apply slow with slow timer
+						pass
+			else:
+				print("chase jumped")
+				jump(delta, 1.0, false)

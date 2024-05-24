@@ -57,16 +57,8 @@ func attack(delta : float) -> void:
 	print(rot * arrow_speed)
 	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
 	enemy.looking_direction))
-	#counts on the initial rotation being -90.
-	#have to use this instead of tween, as waiting is involved; leads to
-	#synchronization issues otherwise
-	for frame : int in range(0, 9):
-		if frame > 0:
-			animation_timer.start(0.01)
-		else:
-			animation_timer.start(0.1)
-		await animation_timer.timeout
-		skeleton_arm.rotation_degrees += 10
+	crossbow_tween = self.create_tween()
+	crossbow_tween.tween_property(skeleton_arm, "rotation_degrees", 0, 0.1)
 	
 	
 
