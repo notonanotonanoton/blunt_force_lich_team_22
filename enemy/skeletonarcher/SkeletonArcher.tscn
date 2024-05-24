@@ -116,12 +116,11 @@ shape = SubResource("RectangleShape2D_fsb11")
 script = ExtResource("4_qvt12")
 inital_state = NodePath("EnemyIdle")
 
-[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer", "ground_detector")]
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
 script = ExtResource("5_5njcn")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
-ground_detector = NodePath("../../DirectionFlip/GroundDetector")
 max_player_proximity = 80
 attack_range = 200
 aggro_range_increase = 30
@@ -163,9 +162,10 @@ generic_animations = NodePath("../GenericAnimations")
 knockback_strength = 60
 health = 2
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("8_425km")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_425km")]
 collision_layer = 0
 collision_mask = 2
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 4)
@@ -190,7 +190,7 @@ enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="SkeletonArcherBehaviour"]
 process_callback = 0
-wait_time = 0.01
+wait_time = 0.1
 
 [node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
 process_callback = 0

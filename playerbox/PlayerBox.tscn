@@ -31,9 +31,10 @@ texture = ExtResource("3_0g40l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fqhbf")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("4_x7rle")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_x7rle")]
 collision_layer = 8
 collision_mask = 4
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("RectangleShape2D_ygn50")

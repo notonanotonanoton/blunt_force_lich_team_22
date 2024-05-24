@@ -111,12 +111,11 @@ shape = SubResource("RectangleShape2D_cyalf")
 script = ExtResource("4_25h2n")
 inital_state = NodePath("EnemyIdle")
 
-[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer", "ground_detector")]
+[node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
 script = ExtResource("5_qxqf4")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
-ground_detector = NodePath("../../DirectionFlip/GroundDetector")
 attack_rate = 3.0
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
@@ -155,10 +154,11 @@ shape = SubResource("CircleShape2D_ks2m4")
 generic_animations = NodePath("../GenericAnimations")
 health = 1
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("8_qmwvd")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_qmwvd")]
 collision_layer = 0
 collision_mask = 2
 monitorable = true
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 10)

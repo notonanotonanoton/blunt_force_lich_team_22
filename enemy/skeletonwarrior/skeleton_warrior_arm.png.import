@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bin88kymwl3ov"
-path="res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"
+uid="uid://cr68gleemejy4"
+path="res://.godot/imported/skeleton_warrior_arm.png-d411ae4efc13c27e30c4f285b37cc780.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://playercharacter/character_lich.png"
-dest_files=["res://.godot/imported/character_lich.png-6ec340da95b547fe3c3300715a87589e.ctex"]
+source_file="res://enemy/skeletonwarrior/skeleton_warrior_arm.png"
+dest_files=["res://.godot/imported/skeleton_warrior_arm.png-d411ae4efc13c27e30c4f285b37cc780.ctex"]
 
 [params]
 
