@@ -28,6 +28,7 @@ signal health_changed
 signal max_health_changed
 signal damage_taken
 signal heart_picked_up
+signal slowed
 
 func _ready() -> void:
 	parent = get_parent()
@@ -111,7 +112,11 @@ func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_bo
 			#saves direction
 			if(enemy_position.direction_to(parent.global_position).x < 0):
 				knockback *= -1
-	
+			
+			if should_slow:
+				emit_signal("slowed")
+			
+			
 			parent.velocity = Vector2i(knockback, knockback_up_strength)
 	
 			parent.acceleration = 0

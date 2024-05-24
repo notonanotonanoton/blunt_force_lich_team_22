@@ -286,6 +286,14 @@ func addItem(item : Node) -> void:
 	items.append(item)
 
 
+func does_player_have_slowing_item():
+	for item in items:
+		if item is Slow_Enemies:
+			return true
+	return false;
+
+
+
 ##signal functions
 
 #takes in a redundant Vector2i. maybe separate signal?

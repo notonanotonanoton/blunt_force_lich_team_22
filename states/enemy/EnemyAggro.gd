@@ -1,5 +1,5 @@
 extends State
-
+class_name enemy_aggro
 @export_category("Nodes")
 @export var enemy : Enemy
 @export var attack_timer : Timer
@@ -16,10 +16,13 @@ extends State
 
 var offset : int
 var distance_x_to_player : float = 0.0
+var max_attack_rate : float
 
 func _ready() -> void:
 	attack_timer.wait_time = attack_rate
 	proximity_timer.wait_time = attack_rate
+	
+	max_attack_rate = attack_rate
 	
 	await enemy.ready
 	offset = enemy.collision_offset

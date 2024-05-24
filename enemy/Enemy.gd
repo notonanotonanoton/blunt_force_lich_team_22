@@ -21,6 +21,7 @@ class_name Enemy
 #some changes have been made here that should also be reflected in the player variables
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 80
+
 @export_range(0, 1, 0.1) var acceleration : float = 0.8
 @export_range(-1000, 0, 10) var jump_velocity : int = -430
 @export_range(0, 1, 0.1) var friction : float = 0.8
@@ -32,6 +33,7 @@ class_name Enemy
 @export var can_deal_damage : bool = true
 @export var slow_time : int = 3
 
+var max_speed : int
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var fast_fall_gravity : int = default_gravity * 1.5
 var collision_offset : int
@@ -59,6 +61,7 @@ signal jumped
 #many functions are called in states inside the state machine
 
 func _ready() -> void:
+	max_speed = speed;
 	aggro_radius.shape.radius = aggro_range
 	collision_offset = (collision.shape.get_rect().size.x + 1) / 2 
 	slow_timer.wait_time = slow_time
@@ -155,3 +158,31 @@ func chase_jump(delta : float) -> void:
 					pass
 		else:
 			jump(delta, 1.0, false)
+
+
+
+
+
+
+
+
+func _on_slow_timer_timeout():
+	for child in get_children():
+		if child is StateMachine:
+			for subchild in child.get_children():
+				if subchild is enemy_aggro:
+					subchild.attack_rate = subchild.max_attack_rate
+
+
+
+
+func _on_slowed():
+	is_slowed = true;
+	print("slowing: ")
+	for child in get_children():
+		if child is StateMachine:
+			for subchild in child.get_children():
+				if subchild is enemy_aggro:
+					subchild.attack_rate = subchild.attack_rate*1.5
+					
+	slow_timer.start()

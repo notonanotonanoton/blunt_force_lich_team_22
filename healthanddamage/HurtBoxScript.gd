@@ -7,7 +7,6 @@ class_name  hurt_box_component
 
 
 func damage(damage_value : int, enemy_position : Vector2, slow_enemy : bool) -> void:
-	#print("takes damage")
 	if health_component:
 		health_component.take_damage(damage_value, enemy_position, null, slow_enemy)
 

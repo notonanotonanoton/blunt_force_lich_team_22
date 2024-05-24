@@ -188,3 +188,5 @@ one_shot = true
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
 [connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
 [connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]
+[connection signal="slowed" from="HealthComponent" to="." method="_on_slowed"]
+[connection signal="timeout" from="slowTimer" to="." method="_on_slow_timer_timeout"]
