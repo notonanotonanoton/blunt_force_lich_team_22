@@ -11,7 +11,7 @@ extends EnemyBehaviorExtension
 @onready var arrow : PackedScene = preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
 
 var crossbow_tween : Tween
-const crossbow_offset : Vector2 = Vector2(24, 0)
+const crossbow_offset : Vector2 = Vector2(28, 0)
 
 
 #has access to Enemy.gd functions through extending EnemyBehaviorExtension.gd.
