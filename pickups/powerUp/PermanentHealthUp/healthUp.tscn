@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://db2aqt0tie4hi"]
+[gd_scene load_steps=4 format=3 uid="uid://db2aqt0tie4hi"]
 
-[ext_resource type="Script" path="res://pickups/powerUp/PermanentHealthUp/version1/healthUp.gd" id="1_gp2ba"]
+[ext_resource type="Script" path="res://pickups/powerUp/PermanentHealthUp/healthUp.gd" id="1_gp2ba"]
+[ext_resource type="Texture2D" uid="uid://b7nvte5o8sag3" path="res://asepritefiles/health_item.png" id="2_7qfjl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2pmm"]
 
@@ -15,5 +16,6 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_y2pmm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7qfjl")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

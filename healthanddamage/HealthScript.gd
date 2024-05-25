@@ -148,6 +148,7 @@ func update_player_left_hitbox() -> void:
 
 func _on_player_character_new_item(new_item : Node) -> void:
 	if new_item is InvincibilityExtender:
+		print(new_item.extensionDuration)
 		print("previous invincibility time: ", invincibility_time)
 		invincibility_time += new_item.extensionDuration
 		invincibility_timer.wait_time = invincibility_time

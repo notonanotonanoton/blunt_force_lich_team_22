@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://lo04q303xc5x"]
+[gd_scene load_steps=4 format=3 uid="uid://lo04q303xc5x"]
 
 [ext_resource type="Script" path="res://pickups/powerUp/spikeImmunity/spikeImmunity.gd" id="1_1yx2x"]
+[ext_resource type="Texture2D" uid="uid://d0axwtm6uvv3o" path="res://asepritefiles/anti_spike_item.png" id="2_pbhp7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6idi7"]
 
@@ -15,5 +16,6 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_6idi7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pbhp7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
