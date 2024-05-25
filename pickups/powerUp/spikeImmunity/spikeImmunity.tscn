@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://lo04q303xc5x"]
+[gd_scene load_steps=5 format=3 uid="uid://lo04q303xc5x"]
 
-[ext_resource type="Script" path="res://pickups/powerUp/spikeImmunity/spikeImmunity.gd" id="1_1yx2x"]
-[ext_resource type="Texture2D" uid="uid://d0axwtm6uvv3o" path="res://asepritefiles/anti_spike_item.png" id="2_pbhp7"]
+[ext_resource type="Script" path="res://pickups/powerUp/spikeImmunity/SpikeImmunity.gd" id="1_1yx2x"]
+[ext_resource type="Texture2D" uid="uid://d0axwtm6uvv3o" path="res://pickups/powerUp/spikeImmunity/anti_spike_item.png" id="2_pbhp7"]
+[ext_resource type="PackedScene" uid="uid://bpe05qwhkerjp" path="res://pickups/ItemFloatAnimation.tscn" id="3_gu75i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6idi7"]
 
@@ -11,11 +12,14 @@ script = ExtResource("1_1yx2x")
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_6idi7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pbhp7")
+
+[node name="ItemFloatAnimation" parent="Sprite2D" instance=ExtResource("3_gu75i")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3bt73mnkujaq"
-path="res://.godot/imported/thorns_item.png-c088441e220cbae8908d78d8e74dc587.ctex"
+path="res://.godot/imported/thorns_item.png-48392fdca9ae8548438d4d03a1abdedf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/thorns_item.png"
-dest_files=["res://.godot/imported/thorns_item.png-c088441e220cbae8908d78d8e74dc587.ctex"]
+source_file="res://pickups/powerUp/Thorns/thorns_item.png"
+dest_files=["res://.godot/imported/thorns_item.png-48392fdca9ae8548438d4d03a1abdedf.ctex"]
 
 [params]
 

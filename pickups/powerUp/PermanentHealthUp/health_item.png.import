@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdjsmm5uei28x"
-path="res://.godot/imported/slow_enemy_item.png-3d14ca9f9108411b01326103514426d0.ctex"
+uid="uid://b7nvte5o8sag3"
+path="res://.godot/imported/health_item.png-dd5656c4197f921ee4a04a1d7aefb17c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/slow_enemy_item.png"
-dest_files=["res://.godot/imported/slow_enemy_item.png-3d14ca9f9108411b01326103514426d0.ctex"]
+source_file="res://pickups/powerUp/PermanentHealthUp/health_item.png"
+dest_files=["res://.godot/imported/health_item.png-dd5656c4197f921ee4a04a1d7aefb17c.ctex"]
 
 [params]
 

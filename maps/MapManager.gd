@@ -8,7 +8,7 @@ var maps_directory : String = "res://maps/"
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 #"res://maps/TestLevel.tscn"
-var testing_scene = null
+var testing_scene = "res://maps/TestLevel.tscn"
 
 var levels : Array
 

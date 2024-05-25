@@ -7,8 +7,6 @@ var movement_y : int = 0
 var was_dropped : bool = false
 const HEALTH_INCREASE : int = 2
 
-#drop functionality untested
-
 func _physics_process(delta : float) -> void:
 	if was_dropped:
 		movement_y += default_gravity * delta

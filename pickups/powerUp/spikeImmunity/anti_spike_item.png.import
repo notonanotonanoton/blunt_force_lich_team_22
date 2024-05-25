@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clhpguhnvkvnq"
-path="res://.godot/imported/item_pedestal.png-c0f05273d656855a4ffe44e4d71c62a9.ctex"
+uid="uid://d0axwtm6uvv3o"
+path="res://.godot/imported/anti_spike_item.png-c7450579fd4535669866467a490927a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/item_pedestal.png"
-dest_files=["res://.godot/imported/item_pedestal.png-c0f05273d656855a4ffe44e4d71c62a9.ctex"]
+source_file="res://pickups/powerUp/spikeImmunity/anti_spike_item.png"
+dest_files=["res://.godot/imported/anti_spike_item.png-c7450579fd4535669866467a490927a2.ctex"]
 
 [params]
 

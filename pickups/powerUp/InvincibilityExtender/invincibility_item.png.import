@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc6fpsm2wfas5"
-path="res://.godot/imported/invincibility_item.png-87edf7c130a70436035c7e8b0cc8f9e5.ctex"
+path="res://.godot/imported/invincibility_item.png-72a8137546fd0fa4afb865b91c865557.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/invincibility_item.png"
-dest_files=["res://.godot/imported/invincibility_item.png-87edf7c130a70436035c7e8b0cc8f9e5.ctex"]
+source_file="res://pickups/powerUp/InvincibilityExtender/invincibility_item.png"
+dest_files=["res://.godot/imported/invincibility_item.png-72a8137546fd0fa4afb865b91c865557.ctex"]
 
 [params]
 

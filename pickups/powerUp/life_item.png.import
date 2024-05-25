@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0axwtm6uvv3o"
-path="res://.godot/imported/anti_spike_item.png-bc58313cba5097d51351ee5c91ceaa2b.ctex"
+uid="uid://bqxitrw1qmcoy"
+path="res://.godot/imported/life_item.png-41004123a42070d7a9c64faf39e7b96e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asepritefiles/anti_spike_item.png"
-dest_files=["res://.godot/imported/anti_spike_item.png-bc58313cba5097d51351ee5c91ceaa2b.ctex"]
+source_file="res://pickups/powerUp/life_item.png"
+dest_files=["res://.godot/imported/life_item.png-41004123a42070d7a9c64faf39e7b96e.ctex"]
 
 [params]
 
