@@ -15,7 +15,7 @@ var first_time_player_entered : bool = true
 var amount_of_player_health_pickUps : int = 0;
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body) -> void:
 	print("PLAYER DETECTED SPAWNING ITEM")
 	if body is PlayerCharacter and first_time_player_entered:
 		
@@ -28,14 +28,14 @@ func _on_area_2d_body_entered(body):
 		spawn_random_item()
 
 
-func spawn_random_item():
-	var item_to_spawn = available_items.pick_random()
+func spawn_random_item() -> void:
+	var item_to_spawn : PackedScene= available_items.pick_random()
 	var scene = item_to_spawn.instantiate()
 	add_sibling(scene)
 	
 	scene.global_position = self.global_position+Vector2(0, -20)
 	
-func add_allowed_items_to_spawn_pool():
+func add_allowed_items_to_spawn_pool() -> void:
 	if allow_invincibility == true:
 		available_items.append(preload("res://pickups/powerUp/InvincibilityExtender/InvincibilityExtender.tscn"))
 	if allow_PermanentHealthUp == true:
@@ -47,7 +47,7 @@ func add_allowed_items_to_spawn_pool():
 	if allow_Thorns:
 		available_items.append(preload("res://pickups/powerUp/Thorns/ThornsItem.tscn"))
 
-func check_for_duplicates(player_char : PlayerCharacter):
+func check_for_duplicates(player_char : PlayerCharacter) -> void:
 	for item in player_char.items:
 		if item is Slow_Enemies:
 			allow_SlowEnemies = false;
