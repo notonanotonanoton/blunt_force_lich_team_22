@@ -10,6 +10,7 @@ class_name enemy_aggro
 @export_range(1, 100, 1) var max_player_proximity : int = 30
 @export_range(10, 200, 10) var attack_range : int = 40
 @export_range(0.2, 10, 0.1) var attack_rate : float = 2.0
+@export_range(0.2, 10, 0.1) var proximity_action_rate : float = 2.0
 #keep fairly high for intended behavior
 @export_range(0, 300, 10) var aggro_range_increase : int = 130
 
@@ -48,11 +49,12 @@ func physics_update(delta : float) -> void:
 	
 	#condition may have to be changed for enemies that want to move and attack at the same time
 	if enemy.is_on_floor():
-		if distance_x_to_player <= attack_range and attack_timer.is_stopped():
-			attack(delta)
-	
-		if distance_x_to_player <= max_player_proximity and proximity_timer.is_stopped():
-			proximity_action(delta)
+		if not enemy.is_attacking:
+			if distance_x_to_player <= attack_range and attack_timer.is_stopped():
+				attack(delta)
+		
+			elif distance_x_to_player <= max_player_proximity and proximity_timer.is_stopped():
+				proximity_action(delta)
 
 #enemies should all implement their own attacks.
 func attack(delta : float) -> void:
@@ -65,7 +67,7 @@ func proximity_action(delta : float) -> void:
 	if enemy.behavior_extension:
 		enemy.behavior_extension.proximity_action(delta)
 	
-	proximity_timer.start(randf_range(attack_rate-0.1, attack_rate+0.1))
+	proximity_timer.start(randf_range(proximity_action_rate-0.1, proximity_action_rate+0.1))
 
 func get_distance() -> void:
 	var enemy_pos : Vector2 = enemy.global_position

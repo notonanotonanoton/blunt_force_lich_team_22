@@ -13,6 +13,7 @@ class_name interactive_tilemap
 	Vector2i(0,1): preload("res://enemy/slime/Slime.tscn"),
 	Vector2i(1,1): preload("res://enemy/skeletonarcher/SkeletonArcher.tscn"),
 	Vector2i(2,1): preload("res://enemy/skeletonwarrior/SkeletonWarrior.tscn"),
+	Vector2i(3,1): preload("res://enemy/spider/Spider.tscn"),
 	Vector2i(0,2): preload("res://enemy/damageobstacle/Spikes.tscn"),
 	Vector2i(1,2): preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn"),
 	Vector2i(0,3): preload("res://graveyardtiles/breakableblocks/BreakableBlockRock.tscn"),

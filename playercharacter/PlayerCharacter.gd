@@ -43,18 +43,17 @@ var aiming_arc_enabled : bool = true
 #box throwing logic
 #charge_time has to start at 0.0 for code logic
 var charge_time : float = 0.0
-const charge_minimum : float = 0.3
+const charge_minimum : float = 0.4
 var charging_throw : bool = false
 const max_throw_anim_rot_deg : float = -20
 var max_throw_force : Vector2i = Vector2i(throw_force_x, throw_force_y)
 var interact_released : bool = false
 var throw_tween : Tween
-var channeling_recall : bool = false
-
+var is_channeling : bool = false
 
 var allow_jump_variable_resets : bool = true 
 
-var items : Array
+var items : Array[Node]
 
 
 signal player_death
@@ -139,7 +138,6 @@ func _unhandled_input(event : InputEvent) -> void:
 				
 				interact_released = false
 				picked_up_box = false
-				charge_time = 0.0
 				
 				if throw_tween:
 					throw_tween.kill()
@@ -147,8 +145,9 @@ func _unhandled_input(event : InputEvent) -> void:
 				
 				throw_tween.tween_property(sprite, "rotation_degrees",
 				(-max_throw_anim_rot_deg) * direction, 0.1)
-				throw_tween.tween_property(sprite, "rotation_degrees", 0, 0.4)
+				throw_tween.tween_property(sprite, "rotation_degrees", 0, charge_time / 4)
 				throw_tween.tween_property(camera, "position:x", 0, 0.1)
+				charge_time = 0.0
 	
 	elif event.is_action_pressed("interact_or_throw"):
 		pick_up_nearby_box(false)
@@ -182,29 +181,41 @@ func process_throw(delta : float) -> void:
 				interact_released = false
 
 	#handles box recall feature
-	elif not available_box and Input.is_action_pressed("interact_or_throw"):
-		jump_is_available = false
-		channeling_recall = true
-		stop_move(delta)
-		charge_time += throw_charge_rate * delta
-		charge_time = clampf(charge_time, 0, 1.8)
-		animation_target.scale.x = 1.2 - (charge_time / 9)
-		animation_target.scale.y = 0.9
-		sprite.position.y = 2
-		if charge_time >= 1.8: 
-			var pos : Vector2 = global_position
-			box_ref.global_position = pos
+	elif Input.is_action_pressed("interact_or_throw"):
+		if not available_box:
+			jump_is_available = false
+			charge_time += throw_charge_rate * delta
+			charge_time = clampf(charge_time, 0, 1.8)
+			
+			if charge_time >= charge_minimum + 0.1:
+				is_channeling = true
+			
+			var charge_animation_modifier : float = charge_time / 9
+			animation_target.scale.x = 1.2 - charge_animation_modifier
+			animation_target.scale.y = 0.9
+			sprite.modulate = Color(1 + charge_time, 1 + charge_time, 1 + charge_time)
+			sprite.position.y = 2
+			if available_box:
+				reset_recall_animation()
+				pick_up_nearby_box(false)
+			if charge_time >= 1.8: 
+				var pos : Vector2 = global_position
+				reset_recall_animation()
+				var spark : SparkAnimation = spark_animation.instantiate()
+				get_parent().add_child(spark)
+				spark.start(pos)
+				pick_up_nearby_box(true)
+		elif charge_time != 0:
 			reset_recall_animation()
-			var spark : SparkAnimation = spark_animation.instantiate()
-			get_parent().add_child(spark)
-			spark.start(pos)
-			pick_up_nearby_box(true)
+			pick_up_nearby_box(false)
 
 func reset_recall_animation() -> void:
+	is_channeling = false
 	charge_time = 0.0
 	animation_target.scale = Vector2i(1, 1)
 	sprite.position.y = 0
-	channeling_recall = false
+	var tween : Tween = self.create_tween()
+	tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)
 	if is_on_floor():
 		jump_is_available = true
 
@@ -241,23 +252,19 @@ func apply_gravity(delta : float) -> void:
 
 func process_movement(delta : float) -> void:
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction : int = Input.get_axis("ui_left", "ui_right")
 
-	if (direction > 0 or direction < 0):
-		#this value is used by other code to get the player's direction
-		if charge_time == 0:
-			sprite.scale.x = direction
-		if is_on_floor() and not channeling_recall:
+	if direction != 0 and charge_time == 0.0:
+		sprite.scale.x = direction
+		if is_on_floor():
 			emit_signal("step_taken")
-
+	
 	# Check to make sure player doesn't slide more when running opposite way
 	# There may be a better solution
-	if (direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0):
+	if ((direction == 1 and velocity.x >= 0) or (direction == -1 and velocity.x <= 0)) and not is_channeling:
 		velocity.x = move_toward(velocity.x, direction * speed, (speed * 5) * acceleration * delta)
 	else:
 		stop_move(delta)
-		
 
 func stop_move(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, 0, (speed * 10) * friction * delta)
@@ -288,8 +295,8 @@ func addItem(item : Node) -> void:
 	items.append(item)
 
 
-func does_player_have_slowing_item():
-	for item in items:
+func does_player_have_slowing_item() -> bool:
+	for item : Node in items:
 		if item is Slow_Enemies:
 			return true
 	return false;

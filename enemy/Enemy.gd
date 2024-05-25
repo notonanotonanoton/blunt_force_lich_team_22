@@ -11,7 +11,6 @@ class_name Enemy
 @export var high_jump_block_detector : Area2D
 @export var collision : CollisionShape2D
 @export var behavior_extension : EnemyBehaviorExtension
-@export var aggro_range_increase_timer : Timer
 @export var hurtbox_collision : hurt_box_component
 @export var slow_timer : Timer
 @export var state_machine : StateMachine
@@ -31,6 +30,7 @@ class_name Enemy
 @export var is_ranged : bool = false
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = true
+@export var can_drop_health : bool = true
 @export var slow_time : int = 3
 
 var max_speed : int
@@ -157,31 +157,29 @@ func chase_jump(delta : float) -> void:
 			if abs(global_position.x - target_player.global_position.x) > 54:
 					jump(delta, 1.1, false)
 					velocity.x = 165 * looking_direction
-					if slow_timer.is_stopped():
-						#apply slow with slow timer
-						pass
+					var timer : SceneTreeTimer = get_tree().create_timer(0.2)
+					await timer.timeout
+					stop_move(delta)
+					stop_move(delta)
 			else:
 				jump(delta, 1.0, false)
 
 
 
-func _on_slow_timer_timeout():
-	for child in get_children():
-		if child is StateMachine:
-			for subchild in child.get_children():
-				if subchild is enemy_aggro:
-					subchild.attack_rate = subchild.max_attack_rate
+func _on_slow_timer_timeout() -> void:
+	is_slowed = false
+	for child : Node in state_machine.get_children():
+		if child is enemy_aggro:
+			child.attack_rate = child.max_attack_rate
 
 
 
 
-func _on_slowed():
-	is_slowed = true;
+func _on_slowed() -> void:
+	is_slowed = true
 	print("slowing: ")
-	for child in get_children():
-		if child is StateMachine:
-			for subchild in child.get_children():
-				if subchild is enemy_aggro:
-					subchild.attack_rate = subchild.attack_rate*1.5
+	for child : Node in state_machine.get_children():
+		if child is enemy_aggro:
+			child.attack_rate = child.attack_rate*1.5
 					
 	slow_timer.start()

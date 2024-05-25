@@ -8,7 +8,7 @@ class_name HealthComponent
 @export_range(0, 0.5, 0.1) var knockback_stun : float = 0.4
 @export_range(0.5, 2, 0.25) var invincibility_time : float = 0.75
 
-@export_range(0, 200, 10) var knockback_strength : int = 100
+@export_range(0, 200, 10) var knockback_strength : int = 80
 @export_range(-200, 0, 10) var knockback_up_strength : int = -60
 @export_range(1, 50, 1) var health : int = 3
 
@@ -146,7 +146,7 @@ func update_player_left_hitbox() -> void:
 	
 
 
-func _on_player_character_new_item(new_item):
+func _on_player_character_new_item(new_item : Node) -> void:
 	if new_item is InvincibilityExtender:
 		print("previous invincibility time: ", invincibility_time)
 		invincibility_time += new_item.extensionDuration

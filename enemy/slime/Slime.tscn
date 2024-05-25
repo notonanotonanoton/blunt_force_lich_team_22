@@ -43,7 +43,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(22, 15)
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "state_machine")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "hurtbox_collision", "slow_timer", "state_machine")]
 collision_layer = 4
 script = ExtResource("1_qdmu2")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -55,7 +55,6 @@ jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SlimeBehavior")
-aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("slowTimer")
 state_machine = NodePath("StateMachine")
@@ -176,11 +175,6 @@ shape = SubResource("RectangleShape2D_r57kf")
 [node name="SlimeBehavior" type="Node" parent="." node_paths=PackedStringArray("enemy")]
 script = ExtResource("10_cgpk1")
 enemy = NodePath("..")
-
-[node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 3.0
-one_shot = true
 
 [node name="slowTimer" type="Timer" parent="."]
 

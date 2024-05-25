@@ -7,10 +7,9 @@ extends EnemyBehaviorExtension
 @export var animation_timer : Timer
 
 @export_category("Values")
-
+@export_range(0, 500, 10) var smash_dash_speed : int = 200
 
 var smash_tween : Tween
-
 
 #use carefully, can interfere with Enemy.gd
 func _ready() -> void:
@@ -50,7 +49,7 @@ func attack(delta : float) -> void:
 	
 	await smash_tween.finished
 	
-	enemy.velocity = Vector2i(200 * enemy.looking_direction, -200)
+	enemy.velocity = Vector2i(smash_dash_speed * enemy.looking_direction, -200)
 	smash_tween = self.create_tween()
 	
 	smash_tween.tween_property(arm, "scale:y", 1, 0.1).set_delay(0.1)
@@ -71,9 +70,7 @@ func attack(delta : float) -> void:
 	enemy.stop_move(delta)
 	
 	await smash_tween.finished
-	
 	enemy.is_attacking = false
-	
 
 func proximity_action(delta : float) -> void:
 	#write action here

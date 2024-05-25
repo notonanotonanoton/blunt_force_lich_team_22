@@ -1,18 +1,17 @@
 extends EnemyBehaviorExtension
 
 @export_category("Nodes")
-@export var skeleton_arm : Sprite2D
+@export var animation_target : Node2D
+@export var sprite : Sprite2D
 @export var animation_timer : Timer
 
 @export_category("Values")
 @export_range(0, 500, 10) var backdash_strength : int = 300
-@export_range(100, 1000, 10) var arrow_speed : int = 300
+@export_range(0.5, 5, 0.5) var summon_speed : float = 1.0
 
-@onready var arrow : PackedScene = preload("res://enemy/damageobstacle/arrowtrap/Arrow.tscn")
+@onready var small_spider : PackedScene = preload("res://enemy/smallspider/SmallSpider.tscn")
 
-var crossbow_tween : Tween
-const crossbow_offset : Vector2 = Vector2(24, 0)
-
+var summon_spider_tween : Tween
 
 #has access to Enemy.gd functions through extending EnemyBehaviorExtension.gd.
 #not all functions are not suitable for extension use.
@@ -35,36 +34,32 @@ func _physics_process(delta : float) -> void:
 func attack(delta : float) -> void:
 	enemy.is_attacking = true
 	
-	if crossbow_tween:
-		crossbow_tween.kill()
-	crossbow_tween = self.create_tween()
+	if summon_spider_tween:
+		summon_spider_tween.kill()
+	summon_spider_tween = self.create_tween()
 	
-	crossbow_tween.tween_property(skeleton_arm, "rotation_degrees", -90, 0.1)
+	animation_target.scale.x = 1.2
+	animation_target.scale.y = 0.9
+	sprite.position.y = 2
 	
-	animation_timer.start(0.2)
+	summon_spider_tween.tween_property(animation_target, "scale:x", 0.9, summon_speed)
+	summon_spider_tween.parallel().tween_property(sprite, "modulate", Color(2.5, 2.5, 2.5), summon_speed)
+	
+	animation_timer.start(summon_speed)
 	await animation_timer.timeout
 	
-	var rot : Vector2
-	if not enemy.target_player:
-		return
-	else:
-		rot = (skeleton_arm.global_position + crossbow_offset *
-		enemy.looking_direction).direction_to(enemy.target_player.global_position + Vector2(0, -4))
+	animation_target.scale = Vector2i(1, 1)
+	sprite.position.y = 0
 	
-	animation_timer.start(0.1)
-	await animation_timer.timeout
+	var current_spider : Enemy = small_spider.instantiate()
+	current_spider.global_position = enemy.global_position
+	enemy.get_parent().add_child(current_spider)
 	
-	var current_arrow : Arrow = arrow.instantiate()
-	enemy.get_parent().add_child(current_arrow)	
-	#print(rot * arrow_speed)
-	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
-	enemy.looking_direction))
-	crossbow_tween = self.create_tween()
-	crossbow_tween.tween_property(skeleton_arm, "rotation_degrees", 0, 0.1)
+	summon_spider_tween = self.create_tween()
+	summon_spider_tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.1)
 	
-	await crossbow_tween.finished
+	await summon_spider_tween.finished
 	enemy.is_attacking = false
-	
 
 func proximity_action(delta : float) -> void:
 	var timer : SceneTreeTimer = get_tree().create_timer(0.2)
@@ -72,7 +67,6 @@ func proximity_action(delta : float) -> void:
 	await timer.timeout
 	enemy.stop_move(delta)
 	enemy.stop_move(delta)
-	
 
 func jump_action(delta : float) -> void:
 	#write action here

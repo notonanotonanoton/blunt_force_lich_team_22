@@ -20,7 +20,7 @@ func _on_hit_box_entered(area : Area2D) -> void:
 		if parent.can_deal_damage:
 			
 			if parent is PlayerBox:
-				for child in parent.get_parent().get_children():
+				for child : Node in parent.get_parent().get_children():
 					if child is PlayerCharacter:
 						should_attack_slow = child.does_player_have_slowing_item()
 						

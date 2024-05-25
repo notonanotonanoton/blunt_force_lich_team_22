@@ -1,49 +1,49 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvdm34jbnkrr4"]
+[gd_scene load_steps=18 format=3 uid="uid://bu332v5k3y1yt"]
 
-[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_q5kje"]
-[ext_resource type="Texture2D" uid="uid://c2cf2ur2113pm" path="res://enemy/slime/slime.png" id="2_jeryg"]
-[ext_resource type="Script" path="res://states/StateMachine.gd" id="3_ba1bg"]
-[ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_erwrf"]
-[ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="4_yeqss"]
-[ext_resource type="Script" path="res://states/enemy/EnemyIdle.gd" id="5_tmifh"]
-[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="6_f1jtg"]
-[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="7_8em8b"]
-[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="7_qu88o"]
+[ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_alpca"]
+[ext_resource type="Texture2D" uid="uid://btxnsahu5idvl" path="res://enemy/smallspider/small_spider.png" id="2_udcbr"]
+[ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_clpt2"]
+[ext_resource type="Script" path="res://states/StateMachine.gd" id="4_i21dc"]
+[ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="5_hdi7j"]
+[ext_resource type="Script" path="res://states/enemy/EnemyIdle.gd" id="6_f16ja"]
+[ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="7_wijaa"]
+[ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="8_hruud"]
+[ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_smekv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cc5tl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo8np"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f880n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ag0ys"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a74ig"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4tsn"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4xav"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx6bq"]
 resource_local_to_scene = true
 size = Vector2(8, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsb11"]
-size = Vector2(20, 12)
+size = Vector2(14, 10)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5bsoe"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qyhx"]
 resource_local_to_scene = true
 radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_frxcs"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oclns"]
 resource_local_to_scene = true
-size = Vector2(20, 12)
+size = Vector2(16, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wrtk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0lg1"]
 resource_local_to_scene = true
-size = Vector2(20, 12)
+size = Vector2(18, 14)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "hurtbox_collision", "slow_timer", "state_machine")]
+[node name="SmallSpider" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "hurtbox_collision", "slow_timer", "state_machine")]
 collision_layer = 4
-script = ExtResource("1_q5kje")
+script = ExtResource("1_alpca")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
 direction_flip = NodePath("DirectionFlip")
 sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
@@ -55,58 +55,59 @@ collision = NodePath("CollisionShape2D")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
-aggro_range = 140
+aggro_range = 200
+can_drop_health = false
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
 [node name="GenericAnimationTarget" type="Node2D" parent="DirectionFlip"]
 
 [node name="Sprite2D" type="Sprite2D" parent="DirectionFlip/GenericAnimationTarget"]
-texture = ExtResource("2_jeryg")
+texture = ExtResource("2_udcbr")
 
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_cc5tl")
+shape = SubResource("RectangleShape2D_yo8np")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
-shape = SubResource("RectangleShape2D_f880n")
+shape = SubResource("RectangleShape2D_ag0ys")
 
 [node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
 position = Vector2(16, -52)
-shape = SubResource("RectangleShape2D_a74ig")
+shape = SubResource("RectangleShape2D_r4tsn")
 
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
-shape = SubResource("RectangleShape2D_h4xav")
+shape = SubResource("RectangleShape2D_kx6bq")
 
-[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_erwrf")]
+[node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_clpt2")]
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
 health_node = NodePath("../HealthComponent")
 character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_fsb11")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
-script = ExtResource("3_ba1bg")
+script = ExtResource("4_i21dc")
 inital_state = NodePath("EnemyIdle")
 
 [node name="EnemyAggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_timer", "proximity_timer")]
-script = ExtResource("4_yeqss")
+script = ExtResource("5_hdi7j")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
@@ -120,7 +121,7 @@ process_callback = 0
 one_shot = true
 
 [node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "timer", "timer_move")]
-script = ExtResource("5_tmifh")
+script = ExtResource("6_f16ja")
 enemy = NodePath("../..")
 timer = NodePath("IdleTimer")
 timer_move = NodePath("IdleTimerMove")
@@ -141,33 +142,35 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_5bsoe")
+shape = SubResource("CircleShape2D_5qyhx")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("6_f1jtg")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_wijaa")]
 generic_animations = NodePath("../GenericAnimations")
+health = 1
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("7_8em8b")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_hruud")]
 collision_layer = 0
 collision_mask = 2
 parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_frxcs")
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_oclns")
 
-[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_qu88o")]
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_smekv")]
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_6wrtk")
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_c0lg1")
 
 [node name="SlowTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
 [connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
 [connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]
+[connection signal="slowed" from="HealthComponent" to="." method="_on_slowed"]
+[connection signal="timeout" from="SlowTimer" to="." method="_on_slow_timer_timeout"]

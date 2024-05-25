@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="7_4klm5"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="8_y6mvc"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_wdr8t"]
-[ext_resource type="Script" path="res://enemy/skeletonwarrior/SkeletonWarriorBehaviorExtension.gd" id="12_hnowj"]
+[ext_resource type="Script" path="res://enemy/skeletonwarrior/SkeletonWarriorBehavior.gd" id="11_m0vhp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfswu"]
 resource_local_to_scene = true
@@ -48,7 +48,7 @@ size = Vector2(12, 28)
 resource_local_to_scene = true
 size = Vector2(14, 30)
 
-[node name="SkeletonWarrior" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision", "slow_timer", "state_machine", "skeleton_animation_timer")]
+[node name="SkeletonWarrior" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "hurtbox_collision", "slow_timer", "state_machine", "skeleton_animation_timer")]
 collision_layer = 4
 script = ExtResource("1_mdafa")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -59,8 +59,7 @@ low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
 high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
-behavior_extension = NodePath("SkeletonWarriorBehaviorExtension")
-aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
+behavior_extension = NodePath("SkeletonWarriorBehavior")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
@@ -193,16 +192,12 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_6wrtk")
 
-[node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-
 [node name="SlowTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
 
-[node name="SkeletonWarriorBehaviorExtension" type="Node" parent="." node_paths=PackedStringArray("sprites", "arm", "arm_collision", "animation_timer", "enemy")]
-script = ExtResource("12_hnowj")
+[node name="SkeletonWarriorBehavior" type="Node" parent="." node_paths=PackedStringArray("sprites", "arm", "arm_collision", "animation_timer", "enemy")]
+script = ExtResource("11_m0vhp")
 sprites = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D")
 arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 arm_collision = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2/HitBoxComponent/CollisionShape2D")
