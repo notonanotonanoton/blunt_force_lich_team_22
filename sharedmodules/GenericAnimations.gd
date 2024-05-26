@@ -101,7 +101,7 @@ func jump_animation() -> void:
 		jump_squish.kill()
 	jump_squish = self.create_tween()
 	
-	animation_target.scale.x = 1.4
+	animation_target.scale.x = 1.2
 	animation_target.scale.y = 0.8
 	animation_target.position.y = 2
 	jump_squish.tween_property(animation_target, "position:y", 0, 0.2)

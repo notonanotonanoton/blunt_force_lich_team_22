@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgl7ch46tjgrw"]
+[gd_scene load_steps=6 format=3 uid="uid://cgl7ch46tjgrw"]
 
 [ext_resource type="Script" path="res://pausemenu/Settings.gd" id="1_e8hlo"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0wnk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pc8r4"]
+bg_color = Color(0.415686, 0.415686, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0sq1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjdrd"]
+bg_color = Color(0.415686, 0.415686, 0.415686, 1)
+
 [node name="Settings" type="Control"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,10 +26,17 @@ script = ExtResource("1_e8hlo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_left = -103.0
-offset_top = -50.0
-offset_right = 62.0
-offset_bottom = 8.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.5
+offset_top = -61.0
+offset_right = 121.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -29,6 +49,12 @@ text = "Window Mode"
 
 [node name="WindowMode" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -39,6 +65,9 @@ text = "Disable aiming arc"
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_t0wnk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pc8r4")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -49,6 +78,10 @@ text = "Enable VSync"
 
 [node name="VSync" type="CheckBox" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_e0sq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mjdrd")
+button_pressed = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

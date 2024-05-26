@@ -11,6 +11,9 @@ size = Vector2(3.5, 3)
 size = Vector2(13, 3)
 
 [node name="Arrow" type="Area2D" node_paths=PackedStringArray("ground_collider", "gravity_timer")]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 position = Vector2(-7, 0)
 collision_layer = 0
 script = ExtResource("1_s74v0")
@@ -25,9 +28,10 @@ texture = ExtResource("2_yjp1g")
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_1k0xb")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("3_lc0ge")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_lc0ge")]
 collision_layer = 0
 collision_mask = 2
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(-2, 0)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqooojhrbria4"]
+
+[ext_resource type="Script" path="res://pickups/powerUp/PermanentHealthUp/healthUp.gd" id="1_gp2ba"]
+[ext_resource type="Texture2D" uid="uid://b7nvte5o8sag3" path="res://pickups/powerUp/PermanentHealthUp/health_item.png" id="2_7qfjl"]
+[ext_resource type="PackedScene" uid="uid://bpe05qwhkerjp" path="res://pickups/ItemFloatAnimation.tscn" id="3_305vv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2pmm"]
+size = Vector2(16, 16)
+
+[node name="HealthUp" type="Node2D"]
+script = ExtResource("1_gp2ba")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_y2pmm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7qfjl")
+
+[node name="ItemFloatAnimation" parent="Sprite2D" instance=ExtResource("3_305vv")]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

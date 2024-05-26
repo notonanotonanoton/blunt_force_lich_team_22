@@ -17,15 +17,17 @@ func _physics_process(delta : float) -> void:
 	pass
 
 func attack(delta : float) -> void:
+	enemy.is_attacking = true
+	var timer : SceneTreeTimer = get_tree().create_timer(0.2)
 	#write action here
-	enemy.jump(delta,0.5,true)
-	enemy.velocity.x = delta*150*enemy.speed*enemy.looking_direction
-	pass
+	enemy.jump(delta, 0.5, true)
+	
+	await timer.timeout
+	enemy.is_attacking = false
 
 func proximity_action(delta : float) -> void:
 	#write action here
 	pass 
 
 func jump_action(delta : float) -> void:
-	#write action here
-	pass
+	enemy.velocity.x = 200 * enemy.looking_direction

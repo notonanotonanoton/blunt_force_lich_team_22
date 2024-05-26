@@ -1,16 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
-[ext_resource type="Script" path="res://maps/map_manager.gd" id="1_vicmv"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="4_1ojgl"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="Script" path="res://maps/MapManager.gd" id="1_vicmv"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="4_1ojgl"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="5_nmudn"]
 [ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_qnnu7"]
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
 [ext_resource type="PackedScene" uid="uid://csq8sct202e43" path="res://mainmenu/MainMenu.tscn" id="7_xksoi"]
 
 [node name="MapManager" type="Node2D"]
 top_level = true
-position = Vector2(944, -94)
 script = ExtResource("1_vicmv")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
@@ -48,5 +47,5 @@ grow_vertical = 1
 
 [connection signal="reset_hp" from="PlayerCharacter" to="HUDCanvas" method="_on_player_character_reset_hp"]
 [connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/Settings" method="_on_pause_menu_entered_settings"]
-[connection signal="aiming_arch_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arch_toggled"]
+[connection signal="aiming_arc_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arc_toggled"]
 [connection signal="back_pressed" from="Pause/PauseMenu/Settings" to="Pause/PauseMenu" method="_on_settings_menu_back_pressed"]

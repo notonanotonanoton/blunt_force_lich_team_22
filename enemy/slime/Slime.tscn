@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcvp2cmkmvptm"]
+[gd_scene load_steps=19 format=3 uid="uid://dcvp2cmkmvptm"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_qdmu2"]
-[ext_resource type="Texture2D" uid="uid://chjkg7wkx6mks" path="res://enemy/slime/slime.png" id="2_cxvn0"]
+[ext_resource type="Texture2D" uid="uid://c2cf2ur2113pm" path="res://enemy/slime/slime.png" id="2_cxvn0"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="3_umadh"]
 [ext_resource type="Script" path="res://states/StateMachine.gd" id="4_25h2n"]
 [ext_resource type="Script" path="res://states/enemy/EnemyAggro.gd" id="5_qxqf4"]
@@ -11,15 +11,19 @@
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_eua0n"]
 [ext_resource type="Script" path="res://enemy/slime/SlimeBehavior.gd" id="10_cgpk1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t82ya"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2pfe"]
 resource_local_to_scene = true
 size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbj8x"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mpb"]
 resource_local_to_scene = true
-size = Vector2(6, 4)
+size = Vector2(8, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2w52"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv4ve"]
+resource_local_to_scene = true
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj037"]
 resource_local_to_scene = true
 size = Vector2(8, 38)
 
@@ -27,7 +31,7 @@ size = Vector2(8, 38)
 resource_local_to_scene = true
 size = Vector2(20, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_28gfj"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ks2m4"]
 resource_local_to_scene = true
 radius = 50.0
 
@@ -39,7 +43,7 @@ size = Vector2(20, 12)
 resource_local_to_scene = true
 size = Vector2(22, 15)
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "collision", "behavior_extension", "aggro_range_increase_timer", "hurtbox_collision")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("aggro_radius", "direction_flip", "sprite", "ground_detector", "low_ground_detector", "jump_block_detector", "high_jump_block_detector", "collision", "behavior_extension", "hurtbox_collision", "slow_timer", "state_machine")]
 collision_layer = 4
 script = ExtResource("1_qdmu2")
 aggro_radius = NodePath("AggroRadius/CollisionShape2D")
@@ -48,11 +52,13 @@ sprite = NodePath("DirectionFlip/GenericAnimationTarget/Sprite2D")
 ground_detector = NodePath("DirectionFlip/GroundDetector")
 low_ground_detector = NodePath("DirectionFlip/LowGroundDetector")
 jump_block_detector = NodePath("DirectionFlip/JumpBlockDetector")
+high_jump_block_detector = NodePath("DirectionFlip/HighJumpBlockDetector")
 collision = NodePath("CollisionShape2D")
 behavior_extension = NodePath("SlimeBehavior")
-aggro_range_increase_timer = NodePath("AggroRangeIncreaseTimer")
 hurtbox_collision = NodePath("HurtBoxComponent")
-speed = 55
+slow_timer = NodePath("slowTimer")
+state_machine = NodePath("StateMachine")
+speed = 60
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -64,28 +70,37 @@ texture = ExtResource("2_cxvn0")
 [node name="GroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/GroundDetector"]
 position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_t82ya")
+shape = SubResource("RectangleShape2D_u2pfe")
 
 [node name="JumpBlockDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/JumpBlockDetector"]
 position = Vector2(16, -20)
-shape = SubResource("RectangleShape2D_xbj8x")
+shape = SubResource("RectangleShape2D_q3mpb")
+
+[node name="HighJumpBlockDetector" type="Area2D" parent="DirectionFlip"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/HighJumpBlockDetector"]
+position = Vector2(16, -52)
+shape = SubResource("RectangleShape2D_yv4ve")
 
 [node name="LowGroundDetector" type="Area2D" parent="DirectionFlip"]
 collision_layer = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionFlip/LowGroundDetector"]
 position = Vector2(16, 64)
-shape = SubResource("RectangleShape2D_t2w52")
+shape = SubResource("RectangleShape2D_pj037")
 
 [node name="GenericAnimations" parent="." node_paths=PackedStringArray("animation_target", "health_node", "character") instance=ExtResource("3_umadh")]
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
 health_node = NodePath("../HealthComponent")
 character = NodePath("..")
+walk_rotation_degree = 1
+walk_step_height = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
@@ -100,6 +115,7 @@ script = ExtResource("5_qxqf4")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
+attack_rate = 3.0
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
@@ -131,16 +147,17 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_28gfj")
+shape = SubResource("CircleShape2D_ks2m4")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_go46b")]
 generic_animations = NodePath("../GenericAnimations")
-health = 2
+health = 1
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("8_qmwvd")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_qmwvd")]
 collision_layer = 0
 collision_mask = 2
 monitorable = true
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(0, 10)
@@ -159,11 +176,11 @@ shape = SubResource("RectangleShape2D_r57kf")
 script = ExtResource("10_cgpk1")
 enemy = NodePath("..")
 
-[node name="AggroRangeIncreaseTimer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
+[node name="slowTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]
 [connection signal="body_entered" from="AggroRadius" to="StateMachine/EnemyIdle" method="_on_aggro_radius_body_entered"]
 [connection signal="body_exited" from="AggroRadius" to="StateMachine/EnemyAggro" method="_on_aggro_radius_body_exited"]
+[connection signal="slowed" from="HealthComponent" to="." method="_on_slowed"]
+[connection signal="timeout" from="slowTimer" to="." method="_on_slow_timer_timeout"]

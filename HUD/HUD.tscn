@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfhtp1jp0gogq"]
 
-[ext_resource type="Script" path="res://HUD/Hud.gd" id="1_afw2d"]
-[ext_resource type="Texture2D" uid="uid://cw1ovxqg0w4vq" path="res://HUD/bar_accent.png" id="1_hoynb"]
-[ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://HUD/health_bar_texture.tres" id="2_qc45e"]
-[ext_resource type="Texture2D" uid="uid://cng2bshf0lse0" path="res://HUD/heart_container_half.png" id="3_knw06"]
-[ext_resource type="Texture2D" uid="uid://bqaflvu68csdr" path="res://HUD/heart_container_full.png" id="3_ytumy"]
-[ext_resource type="Texture2D" uid="uid://dmd5romwwdo8e" path="res://HUD/heart_container_empty.png" id="4_6dmhe"]
+[ext_resource type="Script" path="res://hud/Hud.gd" id="1_afw2d"]
+[ext_resource type="Texture2D" uid="uid://vij4yxupl7r2" path="res://hud/bar_accent.png" id="1_hoynb"]
+[ext_resource type="Texture2D" uid="uid://dm3x7fnbw5rvp" path="res://hud/heart_container_half.png" id="3_knw06"]
+[ext_resource type="Texture2D" uid="uid://c8hfd8nih25fb" path="res://hud/heart_container_full.png" id="3_ytumy"]
+[ext_resource type="Texture2D" uid="uid://bj2g2y8n45fel" path="res://hud/heart_container_empty.png" id="4_6dmhe"]
+[ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://hud/HealthBarTexture.tres" id="6_8kips"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_32p8h"]
 
@@ -41,25 +41,7 @@ texture = ExtResource("1_hoynb")
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2_qc45e")
+theme_override_styles/panel = ExtResource("6_8kips")
 
 [node name="HeartContainers" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
-visible = false
-layout_mode = 2
-texture = ExtResource("3_ytumy")
-stretch_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
-visible = false
-layout_mode = 2
-texture = ExtResource("3_ytumy")
-stretch_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer/HealthBarContainer/HBoxContainer/PanelContainer/HeartContainers"]
-visible = false
-layout_mode = 2
-texture = ExtResource("3_ytumy")
-stretch_mode = 5

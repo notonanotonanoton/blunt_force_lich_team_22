@@ -5,7 +5,7 @@ class_name DustCloudAnimation
 func start(pos : Vector2i, rot_deg : int, height : int) -> void:
 	global_position = pos
 	
-	var tween = self.create_tween()
+	var tween : Tween = self.create_tween()
 	tween.set_parallel(true)
 	
 	tween.tween_property(self, "rotation_degrees", rot_deg, 1)

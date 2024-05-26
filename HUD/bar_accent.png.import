@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw1ovxqg0w4vq"
-path="res://.godot/imported/bar_accent.png-f76b36cf8f17aae79d1532e3948c5e23.ctex"
+uid="uid://vij4yxupl7r2"
+path="res://.godot/imported/bar_accent.png-bdb7254ebe4f7c0ae79fb3b55c459ce5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/bar_accent.png"
-dest_files=["res://.godot/imported/bar_accent.png-f76b36cf8f17aae79d1532e3948c5e23.ctex"]
+source_file="res://hud/bar_accent.png"
+dest_files=["res://.godot/imported/bar_accent.png-bdb7254ebe4f7c0ae79fb3b55c459ce5.ctex"]
 
 [params]
 

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://burxugu4gty5o"]
+
+[ext_resource type="Script" path="res://pickups/powerUp/InvincibilityExtender/InvincibilityExtender.gd" id="1_2lve3"]
+[ext_resource type="Texture2D" uid="uid://bc6fpsm2wfas5" path="res://pickups/powerUp/InvincibilityExtender/invincibility_item.png" id="2_d6kpa"]
+[ext_resource type="PackedScene" uid="uid://bpe05qwhkerjp" path="res://pickups/ItemFloatAnimation.tscn" id="3_d1uqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31tqy"]
+size = Vector2(16, 16)
+
+[node name="InvincibilityExtender" type="Node2D"]
+script = ExtResource("1_2lve3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d6kpa")
+
+[node name="ItemFloatAnimation" parent="Sprite2D" instance=ExtResource("3_d1uqr")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_31tqy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

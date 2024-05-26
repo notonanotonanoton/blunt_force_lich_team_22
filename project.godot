@@ -33,7 +33,6 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
-window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -101,6 +100,7 @@ pause={
 2d_physics/layer_3="EnemyLayer"
 2d_physics/layer_4="BoxLayer"
 2d_physics/layer_5="Pickups"
+2d_physics/layer_8="spikeLayer"
 
 [physics]
 

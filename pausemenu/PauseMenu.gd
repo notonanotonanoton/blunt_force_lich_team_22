@@ -3,11 +3,10 @@ extends Control
 signal entered_settings
 var map_manager : Node
 
-func _ready():
-	map_manager = get_parent().get_parent()
+func _ready() -> void:
 	hide()
 
-func _process(delta):
+func _process(delta : float) -> void:
 	pass
 
 func resume() -> void:
@@ -18,10 +17,10 @@ func pause() -> void:
 	show()
 	get_tree().paused = true 
 	
-func _input(event):
-	if Input.is_action_just_pressed("pause") and !get_tree().paused:
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("pause") and !get_tree().paused:
 		pause()
-	elif Input.is_action_just_pressed("pause") and get_tree().paused:
+	elif event.is_action_pressed("pause") and get_tree().paused:
 		resume()
 
 func _on_resume_pressed() -> void:

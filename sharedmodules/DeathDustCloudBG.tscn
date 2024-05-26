@@ -4,5 +4,10 @@
 [ext_resource type="Script" path="res://sharedmodules/DeathDustCloud.gd" id="2_jpn3i"]
 
 [node name="DeathDustCloudBG" type="Sprite2D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+top_level = true
+z_index = 2
 texture = ExtResource("1_jyqqf")
 script = ExtResource("2_jpn3i")

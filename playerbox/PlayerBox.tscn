@@ -13,11 +13,11 @@ size = Vector2(14, 14)
 resource_local_to_scene = true
 size = Vector2(16, 16)
 
-[node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("arming_timer", "sprite", "collision_shape", "hitbox")]
+[node name="PlayerBox" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision_shape", "hitbox")]
 top_level = true
+z_index = 2
 collision_layer = 8
 script = ExtResource("1_68mta")
-arming_timer = NodePath("ArmingTimer")
 sprite = NodePath("Sprite2D")
 collision_shape = NodePath("CollisionShape2D")
 hitbox = NodePath("HitBoxComponent")
@@ -31,13 +31,10 @@ texture = ExtResource("3_0g40l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fqhbf")
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("4_x7rle")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_x7rle")]
 collision_layer = 8
 collision_mask = 4
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("RectangleShape2D_ygn50")
-
-[node name="ArmingTimer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true

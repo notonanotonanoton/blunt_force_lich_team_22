@@ -1,12 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
 
-[ext_resource type="Script" path="res://states/StateMachine.gd" id="1_d0byc"]
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://blltrdtx0mptp" path="res://playercharacter/character_lich.png" id="1_x272j"]
-[ext_resource type="Texture2D" uid="uid://bdb384u6xa052" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
-[ext_resource type="Script" path="res://states/player/PlayerOnGround.gd" id="3_wxpwy"]
-[ext_resource type="Script" path="res://states/player/PlayerInAir.gd" id="4_5vqem"]
-[ext_resource type="Texture2D" uid="uid://8phli6y1qnxt" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
+[ext_resource type="Texture2D" uid="uid://bin88kymwl3ov" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Texture2D" uid="uid://dok5nq2n2tnbd" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
+[ext_resource type="Texture2D" uid="uid://bi0hcdpv6s3mh" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
@@ -36,8 +33,8 @@ hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 camera = NodePath("Camera2D")
 resetting_jump_timer = NodePath("jumpResetFreezeTimer")
-acceleration = 0.4
-friction = 0.6
+throw_force_x = 325
+throw_force_y = -250
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -76,19 +73,10 @@ generic_animations = NodePath("../GenericAnimations")
 health = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -24)
+offset = Vector2(0, -8)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("1_d0byc")
-
-[node name="PlayerInAir" type="Node" parent="StateMachine"]
-script = ExtResource("4_5vqem")
-
-[node name="PlayerOnGround" type="Node" parent="StateMachine"]
-script = ExtResource("3_wxpwy")
 
 [node name="BoxDetector" type="Area2D" parent="."]
 position = Vector2(0, 4)
@@ -101,8 +89,8 @@ monitorable = false
 shape = SubResource("RectangleShape2D_n5w6f")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_4pe4k")]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 130
+collision_mask = 0
 health_component = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -116,8 +104,8 @@ one_shot = true
 
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
 
+[connection signal="new_item" from="." to="Health" method="_on_player_character_new_item"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
-[connection signal="request_box_status" from="StateMachine/PlayerOnGround" to="BoxDetector" method="_on_player_character_request_box_status"]
 [connection signal="body_entered" from="BoxDetector" to="." method="_on_box_detector_body_entered"]
 [connection signal="body_exited" from="BoxDetector" to="." method="_on_box_detector_body_exited"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

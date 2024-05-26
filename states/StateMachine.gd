@@ -1,13 +1,13 @@
 extends Node
 class_name StateMachine
-@export var inital_state : Node
 
+@export var inital_state : Node
 
 var current_state : State
 var states : Dictionary = {}
 
 func _ready() -> void:
-	for child in get_children(): #returns an array to the nodes children
+	for child : Node in get_children(): #returns an array to the nodes children
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_transition.connect(change_state)
@@ -15,12 +15,13 @@ func _ready() -> void:
 	if inital_state:
 		inital_state.enter()
 		current_state = inital_state
-		
-func _process(delta : float) -> void:
+
+#unused
+func update(delta : float) -> void:
 	if current_state:
 		current_state.update(delta)
 	
-func _physics_process(delta : float) -> void:
+func physics_update(delta : float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 		
