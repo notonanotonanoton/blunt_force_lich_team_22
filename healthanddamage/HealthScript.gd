@@ -104,7 +104,7 @@ func take_damage(damage : int, enemy_position : Vector2, enemy_hurtbox : hurt_bo
 				for item : Node in parent.items:
 					if item is ThornsItem:
 						if enemy_hurtbox != null:
-							enemy_hurtbox.damage(item.thornsDamage, parent.global_position, false)
+							enemy_hurtbox.damage(item.thornsDamage as int, parent.global_position, false)
 				
 				emit_signal("health_changed", damage)
 			else:
