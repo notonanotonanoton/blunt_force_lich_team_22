@@ -21,7 +21,7 @@ func _on_body_entered(body : Node2D) -> void:
 	if body is PlayerCharacter:
 		body.health_node.heal(HEALTH_INCREASE)
 		queue_free()
-	elif not was_dropped or (body is TileMap and movement_y > 95):
+	elif not was_dropped or (body is TileMap and movement_y > 64):
 		set_physics_process(false)
 
 
