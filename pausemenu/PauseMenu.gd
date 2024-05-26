@@ -2,8 +2,10 @@ extends Control
 
 signal entered_settings
 var map_manager : Node
+@export var player_character : CharacterBody2D
 
 func _ready() -> void:
+	map_manager = get_parent().get_parent()
 	hide()
 
 func _process(delta : float) -> void:
@@ -29,6 +31,7 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	resume()
+	player_character.on_restart()
 	map_manager.restart()
 
 func _on_exit_pressed() -> void:
@@ -44,4 +47,4 @@ func _on_settings_menu_back_pressed() -> void:
 
 func _on_exit_to_main_menu_pressed():
 	resume()
-	get_tree().reload_current_scene() #runs the ready method in mapmanager loading the mainmenu
+	get_tree().reload_current_scene() 
