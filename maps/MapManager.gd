@@ -9,7 +9,7 @@ var treasure_levels_directory : String = "res://maps/TreasureLevels"
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 #"res://maps/TestLevel.tscn"
-var testing_scene = "res://maps/TestLevel.tscn"
+var testing_scene = null
 
 var levels : Array
 var treasure_levels : Array[PackedScene] 
@@ -31,7 +31,6 @@ func _ready() -> void:
 	
 	#iterates through all folders specified in level_directories
 	for directory : String in DirAccess.open(maps_directory).get_directories():
-		print(directory)
 		if not directory == "TreasureLevels":
 			var level_variants : Array[PackedScene]
 			for file_name : String in DirAccess.open(maps_directory + directory).get_files():
@@ -56,8 +55,8 @@ func change_scene() -> void:
 		treasure_check = true
 	else:
 		level_counter += 1
-		if level_counter < levels.size():
-			change_map(levels[level_counter - 1])
+		if level_counter <= levels.size():
+			change_map(levels[level_counter - 1] as Array[PackedScene])
 			treasure_check = false
 
 func change_map(level_array : Array[PackedScene]) -> void:

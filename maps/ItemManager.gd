@@ -2,7 +2,7 @@ extends Node2D
 
 class_name ItemManager
 
-var default_item = preload("res://pickups/powerUp/PermanentHealthUp/healthUp.tscn")
+var default_item : PackedScene = preload("res://pickups/powerUp/PermanentHealthUp/healthUp.tscn")
 
 var items : Array[PackedScene] = [default_item,
 preload("res://pickups/powerUp/InvincibilityExtender/InvincibilityExtender.tscn"),
