@@ -254,9 +254,10 @@ func process_movement(delta : float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction : int = Input.get_axis("ui_left", "ui_right")
 
-	if direction != 0 and charge_time == 0.0:
-		sprite.scale.x = direction
-		if is_on_floor():
+	if direction != 0:
+		if charge_time == 0.0:
+			sprite.scale.x = direction
+		if is_on_floor() and not is_channeling:
 			emit_signal("step_taken")
 	
 	# Check to make sure player doesn't slide more when running opposite way
