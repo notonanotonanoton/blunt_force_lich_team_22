@@ -62,11 +62,15 @@ func attack(delta : float) -> void:
 	enemy.is_attacking = false
 
 func proximity_action(delta : float) -> void:
+	enemy.is_in_proximity_action = true
+	
 	var timer : SceneTreeTimer = get_tree().create_timer(0.2)
 	enemy.velocity -= Vector2(backdash_strength*enemy.looking_direction, 150)
 	await timer.timeout
 	enemy.stop_move(delta)
 	enemy.stop_move(delta)
+	
+	enemy.is_in_proximity_action = false
 
 func jump_action(delta : float) -> void:
 	#write action here

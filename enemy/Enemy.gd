@@ -40,6 +40,7 @@ var collision_offset : int
 var is_slowed : bool = false;
 var health_pickup : PackedScene = preload("res://pickups/health_pickup/health_pickup.tscn")
 var is_attacking : bool = false
+var is_in_proximity_action : bool = false
 
 
 #used to prevent pathfinding getting stuck on walls 
@@ -119,7 +120,7 @@ func handle_wall_or_gap(delta : float) -> void:
 			if not was_on_wall:
 				looking_direction *= -1
 				was_on_wall = true
-		else:
+		elif (not is_attacking) and (not is_in_proximity_action):
 			jump(delta, 1.0, false)
 	else:
 		was_on_wall = false
@@ -152,7 +153,7 @@ func drop_health_pickup() -> void:
 
 func chase_jump(delta : float) -> void:
 
-	if not is_attacking:
+	if (not is_attacking) and (not is_in_proximity_action):
 		if (global_position.y + 36 > target_player.global_position.y):
 			if abs(global_position.x - target_player.global_position.x) > 54:
 					jump(delta, 1.1, false)
