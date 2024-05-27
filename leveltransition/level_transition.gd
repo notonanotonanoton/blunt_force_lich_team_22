@@ -10,3 +10,4 @@ func _on_area_2d_body_entered(_body : Node2D) -> void:
 	map_manager.change_scene()	
 
 
+

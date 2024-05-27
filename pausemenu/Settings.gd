@@ -5,6 +5,7 @@ signal aiming_arc_toggled
 var vsync_enabled : bool = true
 
 func _ready() -> void:
+	print("ready in settings menu")
 	hide()
 
 func _on_window_mode_item_selected(index : int) -> void:
@@ -33,3 +34,6 @@ func _on_v_sync_pressed() -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		vsync_enabled = false
+
+func _on_main_menu_entered_settings_from_menu() -> void:
+	show()

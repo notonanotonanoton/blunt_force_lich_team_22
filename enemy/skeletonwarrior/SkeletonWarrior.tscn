@@ -64,8 +64,10 @@ hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
 skeleton_animation_timer = NodePath("AnimationTimer")
-speed = 60
-aggro_range = 140
+speed = 50
+aggro_range = 130
+chase_jump_speed = 100
+can_drop_health = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -121,6 +123,8 @@ shape = SubResource("RectangleShape2D_h4xav")
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
 health_node = NodePath("../HealthComponent")
 character = NodePath("..")
+walk_rotation_degree = 3
+walk_step_height = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -135,8 +139,7 @@ script = ExtResource("5_cte5w")
 enemy = NodePath("../..")
 attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
-attack_range = 90
-attack_rate = 4.5
+attack_range = 80
 aggro_range_increase = 150
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
@@ -173,6 +176,9 @@ shape = SubResource("CircleShape2D_5bsoe")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_4klm5")]
 generic_animations = NodePath("../GenericAnimations")
+knockback_stun = 0.3
+knockback_strength = 0
+health = 4
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_y6mvc")]
 collision_layer = 0
@@ -202,6 +208,7 @@ sprites = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D")
 arm = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2")
 arm_collision = NodePath("../DirectionFlip/GenericAnimationTarget/Sprite2D2/HitBoxComponent/CollisionShape2D")
 animation_timer = NodePath("../AnimationTimer")
+smash_dash_speed = 130
 enemy = NodePath("..")
 
 [node name="AnimationTimer" type="Timer" parent="."]

@@ -48,7 +48,6 @@ func _ready() -> void:
 	invincibility_timer.wait_time = invincibility_time
 	invincibility_timer.one_shot = true
 	add_child(invincibility_timer)
-	
 	#For test purposes
 	#await get_tree().create_timer(25).timeout
 	#set_max_health(8)
@@ -143,8 +142,6 @@ func on_invincibility_timer_timeout() -> void:
 
 func update_player_left_hitbox() -> void:
 	player_left_hitbox = true
-	
-
 
 func _on_player_character_new_item(new_item : Node) -> void:
 	if new_item is InvincibilityExtender:

@@ -27,10 +27,11 @@ class_name Enemy
 @export_range(0, 1000, 10) var max_fall_speed : int = 350
 @export_range(0, 2, 0.1) var gravity_scale : float = 1.0
 @export_range(0, 300, 10) var aggro_range : int = 120
+@export_range (0, 300, 10) var chase_jump_speed : int = 130
 @export var is_ranged : bool = false
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = true
-@export var can_drop_health : bool = true
+@export var can_drop_health : bool = false
 @export var slow_time : int = 3
 
 var max_speed : int
@@ -140,7 +141,9 @@ func activate_death_state() -> void:
 	set_physics_process(false)
 	collision.set_deferred("disabled", true)
 	hurtbox_collision.set_deferred("disabled", true)
-	drop_health_pickup()
+	
+	if(can_drop_health):
+		drop_health_pickup()
 	if skeleton_animation_timer:
 		skeleton_animation_timer.paused = true
 
@@ -157,7 +160,7 @@ func chase_jump(delta : float) -> void:
 		if (global_position.y + 36 > target_player.global_position.y):
 			if abs(global_position.x - target_player.global_position.x) > 54:
 					jump(delta, 1.1, false)
-					velocity.x = 165 * looking_direction
+					velocity.x = chase_jump_speed * looking_direction
 					var timer : SceneTreeTimer = get_tree().create_timer(0.2)
 					await timer.timeout
 					stop_move(delta)

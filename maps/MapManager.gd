@@ -62,8 +62,22 @@ func change_scene() -> void:
 func change_map(level_array : Array[PackedScene]) -> void:
 	remove_child.call_deferred(current_scene_instance)
 	current_scene_instance.queue_free()
-	
 	var new_scene : PackedScene = level_array.pick_random()
 	current_scene_instance = new_scene.instantiate()
 	add_child(current_scene_instance)
+	
+func play_tutorial() -> void:
+	remove_child(current_scene_instance)
+	current_scene_instance.queue_free()
+	var next_scene : PackedScene = load("res://maps/TutorialWorld.tscn")
+	current_scene_instance = next_scene.instantiate()
+	add_child(current_scene_instance)
+	
+func restart() -> void: 
+	level_counter = 1
+	treasure_check = false
+	if (current_scene_instance.name == 'TutorialWorld'):
+		play_tutorial()
+	else:
+		change_map(treasure_levels)
 	
