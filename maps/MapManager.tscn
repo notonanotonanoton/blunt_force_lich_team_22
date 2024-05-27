@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyfvjgfn7gwj5"]
+[gd_scene load_steps=10 format=3 uid="uid://dyfvjgfn7gwj5"]
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
 [ext_resource type="Script" path="res://maps/MapManager.gd" id="1_vicmv"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="5_nmudn"]
 [ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_qnnu7"]
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
+[ext_resource type="Texture2D" uid="uid://cxan2dp8l6o87" path="res://asepritefiles/background_sky.png" id="7_k5lrc"]
+[ext_resource type="Texture2D" uid="uid://77jgddipqjvt" path="res://asepritefiles/background_mountains.png" id="8_behil"]
+[ext_resource type="Texture2D" uid="uid://dfbwlc444dy3q" path="res://asepritefiles/background_foreground.png" id="10_ayaih"]
 
 [node name="MapManager" type="Node2D"]
 top_level = true
@@ -39,6 +42,57 @@ offset_right = -7.0
 offset_bottom = -18.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -20
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -19
+
+[node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+motion_mirroring = Vector2(2560, 0)
+
+[node name="Right" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
+texture = ExtResource("7_k5lrc")
+centered = false
+offset = Vector2(0, -70)
+
+[node name="Left" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
+position = Vector2(-1280, 0)
+texture = ExtResource("7_k5lrc")
+centered = false
+offset = Vector2(0, -70)
+
+[node name="Mountains" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+motion_mirroring = Vector2(1988, 0)
+
+[node name="Right" type="Sprite2D" parent="Background/ParallaxBackground/Mountains"]
+texture = ExtResource("8_behil")
+centered = false
+offset = Vector2(0, -70)
+
+[node name="Left" type="Sprite2D" parent="Background/ParallaxBackground/Mountains"]
+position = Vector2(-994, 0)
+texture = ExtResource("8_behil")
+centered = false
+offset = Vector2(0, -70)
+
+[node name="Foreground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(2560, 0)
+
+[node name="Left" type="Sprite2D" parent="Background/ParallaxBackground/Foreground"]
+position = Vector2(-1280, 0)
+texture = ExtResource("10_ayaih")
+centered = false
+offset = Vector2(0, -60)
+
+[node name="Right" type="Sprite2D" parent="Background/ParallaxBackground/Foreground"]
+texture = ExtResource("10_ayaih")
+centered = false
+offset = Vector2(0, -60)
 
 [connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/Settings" method="_on_pause_menu_entered_settings"]
 [connection signal="aiming_arc_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arc_toggled"]
