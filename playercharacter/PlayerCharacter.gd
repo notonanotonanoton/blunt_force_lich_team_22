@@ -61,7 +61,9 @@ signal step_taken
 signal jumped
 signal health_changed
 signal max_health_changed
+signal reset_hp
 signal new_item
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -349,6 +351,10 @@ func _on_settings_menu_aiming_arc_toggled() -> void:
 		aiming_arc_enabled = true
 	print(aiming_arc_enabled)
 
+func on_restart():
+	health_node.set_health(6)
+	emit_signal("reset_hp")
+
 func pick_up_nearby_box(summoned : bool) -> void:
 	if summoned:
 		available_box = box_ref
@@ -357,4 +363,3 @@ func pick_up_nearby_box(summoned : bool) -> void:
 		available_box.pick_up(self)
 		apply_carrying_sprites(true)
 	
-

@@ -49,7 +49,12 @@ text = "Settings"
 layout_mode = 2
 text = "Exit"
 
+[node name="ExitToMainMenu" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit to main menu"
+
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/ExitToMainMenu" to="." method="_on_exit_to_main_menu_pressed"]
