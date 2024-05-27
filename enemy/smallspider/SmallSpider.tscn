@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bu332v5k3y1yt"]
+[gd_scene load_steps=19 format=3 uid="uid://bu332v5k3y1yt"]
 
 [ext_resource type="Script" path="res://enemy/Enemy.gd" id="1_alpca"]
 [ext_resource type="Texture2D" uid="uid://btxnsahu5idvl" path="res://enemy/smallspider/small_spider.png" id="2_udcbr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="7_wijaa"]
 [ext_resource type="PackedScene" uid="uid://k3yqlrjr838v" path="res://healthanddamage/HitBoxComponent.tscn" id="8_hruud"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="9_smekv"]
+[ext_resource type="Script" path="res://enemy/smallspider/SmallSpiderBehaviorExtention.gd" id="10_tki0p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo8np"]
 resource_local_to_scene = true
@@ -56,7 +57,6 @@ hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
 aggro_range = 200
-can_drop_health = false
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -167,6 +167,10 @@ position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_c0lg1")
 
 [node name="SlowTimer" type="Timer" parent="."]
+
+[node name="SmallSpiderBehaviorExtention" type="Node" parent="." node_paths=PackedStringArray("enemy")]
+script = ExtResource("10_tki0p")
+enemy = NodePath("..")
 
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimer" to="StateMachine/EnemyIdle" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyIdle/IdleTimerMove" to="StateMachine/EnemyIdle" method="_on_idle_timer_move_timeout"]

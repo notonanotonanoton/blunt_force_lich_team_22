@@ -1,11 +1,12 @@
 extends EnemyBehaviorExtension
 
-#has access to Enemy.gd functions through extending EnemyBehaviorExtension.gd.
-#not all functions are not suitable for extension use.
 #use various export variables (change in editor menu only) to fine-tune behavior
 
 #use carefully, can interfere with Enemy.gd
+
+#This is used so that the spider swarmlings don't get stuck in each other reducing the risk of them to be multi killed
 func _ready() -> void:
+	enemy.speed = randi_range(50,90)
 	pass
 
 #use only for graphical elements
@@ -17,17 +18,13 @@ func _physics_process(delta : float) -> void:
 	pass
 
 func attack(delta : float) -> void:
-	enemy.is_attacking = true
-	var timer : SceneTreeTimer = get_tree().create_timer(0.2)
 	#write action here
-	enemy.jump(delta, 0.5, true)
-	
-	await timer.timeout
-	enemy.is_attacking = false
+	pass
 
 func proximity_action(delta : float) -> void:
 	#write action here
 	pass 
 
 func jump_action(delta : float) -> void:
-	enemy.velocity.x = 150 * enemy.looking_direction
+	#write action here
+	pass

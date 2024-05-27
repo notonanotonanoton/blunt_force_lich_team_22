@@ -58,7 +58,8 @@ behavior_extension = NodePath("SlimeBehavior")
 hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("slowTimer")
 state_machine = NodePath("StateMachine")
-speed = 60
+speed = 70
+can_drop_health = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -100,7 +101,6 @@ animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
 health_node = NodePath("../HealthComponent")
 character = NodePath("..")
 walk_rotation_degree = 1
-walk_step_height = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)

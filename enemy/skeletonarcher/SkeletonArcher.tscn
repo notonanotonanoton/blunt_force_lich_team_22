@@ -61,6 +61,7 @@ state_machine = NodePath("StateMachine")
 skeleton_animation_timer = NodePath("SkeletonArcherBehaviour/AnimationTimer")
 aggro_range = 200
 is_ranged = true
+can_drop_health = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 

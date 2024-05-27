@@ -60,6 +60,7 @@ skeleton_animation_timer = NodePath("SpiderBehavior/AnimationTimer")
 speed = 40
 aggro_range = 200
 is_ranged = true
+can_drop_health = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
 
@@ -100,6 +101,7 @@ shape = SubResource("RectangleShape2D_kx6bq")
 animation_target = NodePath("../DirectionFlip/GenericAnimationTarget")
 health_node = NodePath("../HealthComponent")
 character = NodePath("..")
+walk_step_height = -2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -116,7 +118,7 @@ attack_timer = NodePath("AttackTimer")
 proximity_timer = NodePath("ProximityTimer")
 max_player_proximity = 90
 attack_range = 140
-attack_rate = 8.0
+attack_rate = 4.0
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/EnemyAggro"]
 process_callback = 0
@@ -152,7 +154,6 @@ shape = SubResource("CircleShape2D_5qyhx")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("8_qtmjj")]
 generic_animations = NodePath("../GenericAnimations")
-health = 2
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("9_mhkuy")]
 collision_layer = 0
