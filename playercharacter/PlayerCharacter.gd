@@ -17,6 +17,10 @@ class_name PlayerCharacter
 @export var aiming_arc : Aiming_Arc
 @export var camera : Camera2D
 @export var resetting_jump_timer : Timer
+@export var jump_sound : AudioStreamPlayer
+@export var throw_sound : AudioStreamPlayer
+@export var recall_sound : AudioStreamPlayer
+@export var damage_sound : AudioStreamPlayer
 
 @export_category("Values")
 @export_range(0, 400, 5) var speed : int = 145
@@ -97,6 +101,8 @@ func jump() -> void:
 	resetting_jump_timer.start()
 	velocity.y = jump_velocity
 	emit_signal("jumped")
+	jump_sound.pitch_scale = randf_range(0.6, 0.9)
+	jump_sound.play()
 	player_jumped = true
 
 func jump_cut() -> void:
@@ -130,6 +136,8 @@ func _unhandled_input(event : InputEvent) -> void:
 				var direction : int = sprite.scale.x
 				box_ref.throw((Vector2(throw_force_x * direction, 
 				throw_force_y) * charge_time) + jump_vel)
+				throw_sound.pitch_scale = randf_range(0.9, 1.1)
+				throw_sound.play()
 				aiming_arc.clear_points()
 				
 				interact_released = false
@@ -200,6 +208,8 @@ func process_throw(delta : float) -> void:
 				var spark : SparkAnimation = spark_animation.instantiate()
 				get_parent().add_child(spark)
 				spark.start(pos)
+				recall_sound.pitch_scale = randf_range(0.9, 1.1)
+				recall_sound.play()
 				pick_up_nearby_box(true)
 		elif charge_time != 0:
 			reset_recall_animation()

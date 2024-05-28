@@ -46,6 +46,7 @@ func attack(delta : float) -> void:
 	
 	var rot : Vector2
 	if not enemy.target_player:
+		skeleton_arm.rotation_degrees = 0
 		return
 	else:
 		rot = (skeleton_arm.global_position + crossbow_offset *
@@ -54,8 +55,8 @@ func attack(delta : float) -> void:
 	animation_timer.start(0.1)
 	await animation_timer.timeout
 	
-	var current_arrow : Arrow = arrow.instantiate()
-	enemy.get_parent().add_child(current_arrow)	
+	var current_arrow : Arrow = arrow.instantiate() as Arrow
+	enemy.get_parent().add_child(current_arrow)
 	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
 	enemy.looking_direction))
 	crossbow_tween = self.create_tween()

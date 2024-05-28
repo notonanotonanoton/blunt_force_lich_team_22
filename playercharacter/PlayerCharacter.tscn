@@ -1,13 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
+[gd_scene load_steps=16 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
 [ext_resource type="Texture2D" uid="uid://cbc52x3wnf6es" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Texture2D" uid="uid://dok5nq2n2tnbd" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
 [ext_resource type="Texture2D" uid="uid://bi0hcdpv6s3mh" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]
+[ext_resource type="AudioStream" uid="uid://d4h608g7k4tq8" path="res://playercharacter/PLOP Mouth Drip Dry.wav" id="9_vwnin"]
 [ext_resource type="PackedScene" uid="uid://27gxllly1m4a" path="res://healthanddamage/HealthComponent.tscn" id="9_x7wds"]
 [ext_resource type="PackedScene" uid="uid://bodo0mxlvmgdg" path="res://sharedmodules/GenericAnimations.tscn" id="10_2l7ge"]
+[ext_resource type="AudioStream" uid="uid://cpijnceqbfk7l" path="res://playercharacter/vlc-record-2024-05-28-21h56m01s-SWSH_Woodstick Swish 03_JSE_TW1.wav-.wav" id="10_48sc3"]
+[ext_resource type="AudioStream" uid="uid://cb338jyn1u113" path="res://playercharacter/teleporting-sound 5.wav" id="11_b2y7b"]
 [ext_resource type="PackedScene" uid="uid://4wr5jop7or0" path="res://playerbox/aiming_arc.tscn" id="11_uyfgt"]
+[ext_resource type="AudioStream" uid="uid://becc7jmjschkx" path="res://playercharacter/wooden floor 1 loop.wav" id="12_lb2q4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 20)
@@ -18,7 +22,7 @@ size = Vector2(24, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0fu"]
 size = Vector2(8, 20)
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animation_target", "coyote_timer", "left_arm", "right_arm", "box_sprite", "health_node", "collision", "hurtbox_collision", "aiming_arc", "camera", "resetting_jump_timer", "jump_sound", "throw_sound", "recall_sound", "damage_sound")]
 collision_layer = 2
 script = ExtResource("1_iplij")
 sprite = NodePath("DirectionFlip")
@@ -33,6 +37,10 @@ hurtbox_collision = NodePath("HurtBox/CollisionShape2D")
 aiming_arc = NodePath("AimingArc")
 camera = NodePath("Camera2D")
 resetting_jump_timer = NodePath("jumpResetFreezeTimer")
+jump_sound = NodePath("JumpSoundPlayer")
+throw_sound = NodePath("ThrowSoundPlayer")
+recall_sound = NodePath("RecallSoundPlayer")
+damage_sound = NodePath("DamageSoundPlayer")
 throw_force_x = 325
 throw_force_y = -250
 
@@ -103,6 +111,21 @@ one_shot = true
 [node name="jumpResetFreezeTimer" type="Timer" parent="."]
 
 [node name="AimingArc" parent="." instance=ExtResource("11_uyfgt")]
+
+[node name="JumpSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_vwnin")
+volume_db = -20.0
+
+[node name="ThrowSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_48sc3")
+
+[node name="RecallSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_b2y7b")
+volume_db = -10.0
+
+[node name="DamageSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_lb2q4")
+volume_db = 10.0
 
 [connection signal="new_item" from="." to="Health" method="_on_player_character_new_item"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
