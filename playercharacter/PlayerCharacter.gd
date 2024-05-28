@@ -90,8 +90,7 @@ func _physics_process(delta : float) -> void:
 	process_movement(delta)
 	
 	process_throw(delta)
-
-
+	print(Engine.get_frames_per_second())
 
 ## jump functions
 func jump() -> void:
@@ -101,14 +100,10 @@ func jump() -> void:
 	emit_signal("jumped")
 	player_jumped = true
 
-	
-
 func jump_cut() -> void:
 	#print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
-
-
 
 func process_jump_availability() -> void:
 	if is_on_floor():
@@ -344,12 +339,9 @@ func _on_max_health_changed(max_health_change : int) -> void:
 func _on_jump_reset_freeze_timer_timeout() -> void:
 	allow_jump_variable_resets = true
 
-func _on_settings_menu_aiming_arc_toggled() -> void:
-	if (aiming_arc_enabled == true):
-		aiming_arc_enabled = false
-	else: 
-		aiming_arc_enabled = true
-	print(aiming_arc_enabled)
+func _on_settings_menu_aiming_arc_toggled(enabled : bool) -> void:
+	print(enabled)
+	aiming_arc_enabled = enabled
 
 func on_restart():
 	health_node.set_health(6)
@@ -362,4 +354,3 @@ func pick_up_nearby_box(summoned : bool) -> void:
 		picked_up_box = true
 		available_box.pick_up(self)
 		apply_carrying_sprites(true)
-	

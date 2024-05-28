@@ -23,13 +23,11 @@ func _process(delta):
 	pass
 
 func _on_play_pressed() -> void:
-	print("play pressed")
 	map_manager.change_scene()
 	enable_pause_action()
 	hide()
 
 func _on_tutorial_pressed() -> void:
-	print("play tutorial pressed")
 	map_manager.play_tutorial()
 	enable_pause_action()
 	hide()
