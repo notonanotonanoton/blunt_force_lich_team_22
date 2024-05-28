@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cpijnceqbfk7l" path="res://playercharacter/vlc-record-2024-05-28-21h56m01s-SWSH_Woodstick Swish 03_JSE_TW1.wav-.wav" id="10_48sc3"]
 [ext_resource type="AudioStream" uid="uid://cb338jyn1u113" path="res://playercharacter/teleporting-sound 5.wav" id="11_b2y7b"]
 [ext_resource type="PackedScene" uid="uid://4wr5jop7or0" path="res://playerbox/aiming_arc.tscn" id="11_uyfgt"]
-[ext_resource type="AudioStream" uid="uid://becc7jmjschkx" path="res://playercharacter/wooden floor 1 loop.wav" id="12_lb2q4"]
+[ext_resource type="AudioStream" uid="uid://dpxu5spxi76s8" path="res://playercharacter/EQUIPTech_Steampunk High Tech Gadget 03_DDUMAIS_NONE.wav" id="12_jshcl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uw8h"]
 size = Vector2(8, 20)
@@ -124,8 +124,7 @@ stream = ExtResource("11_b2y7b")
 volume_db = -10.0
 
 [node name="DamageSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_lb2q4")
-volume_db = 10.0
+stream = ExtResource("12_jshcl")
 
 [connection signal="new_item" from="." to="Health" method="_on_player_character_new_item"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
