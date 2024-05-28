@@ -5,6 +5,7 @@ const SETTINGS_FILE_PATH : String = "user://settings.ini"
 
 func _ready():
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
+		config.set_value("aiming_arc", "aiming_arc_toggle", true)
 		config.save(SETTINGS_FILE_PATH)
 	else:
 		config.load(SETTINGS_FILE_PATH)
