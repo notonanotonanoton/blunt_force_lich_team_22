@@ -16,7 +16,7 @@ var treasure_levels : Array[PackedScene]
 
 var current_scene_instance : Node
 #make sure not to exceed the amount of available levels (directories)
-@export_range(0, 10, 1) var starting_level_number : int = 0
+@export_range(1, 10, 1) var starting_level_number : int = 1
 var level_counter : int
 
 var treasure_check : bool = false
