@@ -16,7 +16,6 @@ func display_trajectory(dir : Vector2, delta : float) -> void:
 	clear_points()
 	var pos : Vector2 = Vector2.ZERO
 	for point : int in range(max_points):
-		#print("added point at pos: ", pos)
 		add_point(pos)
 		dir.y += default_gravity * delta
 		pos += dir * delta 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgl7ch46tjgrw"]
+[gd_scene load_steps=7 format=3 uid="uid://cgl7ch46tjgrw"]
 
 [ext_resource type="Script" path="res://pausemenu/Settings.gd" id="1_e8hlo"]
+[ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="2_tdl7r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0wnk"]
 
@@ -45,10 +46,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_tdl7r")
 text = "Window Mode"
 
 [node name="WindowMode" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tdl7r")
 item_count = 2
 selected = 1
 popup/item_0/text = "Fullscreen"
@@ -61,6 +64,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tdl7r")
 text = "Aiming arc"
 
 [node name="Aiming_arc" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
@@ -74,6 +78,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tdl7r")
 text = "Enable VSync"
 
 [node name="VSync" type="CheckBox" parent="VBoxContainer/HBoxContainer4"]
@@ -89,6 +94,7 @@ layout_mode = 2
 [node name="Back" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("2_tdl7r")
 text = "Back"
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/WindowMode" to="." method="_on_window_mode_item_selected"]

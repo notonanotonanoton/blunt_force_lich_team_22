@@ -56,7 +56,6 @@ func attack(delta : float) -> void:
 	
 	var current_arrow : Arrow = arrow.instantiate()
 	enemy.get_parent().add_child(current_arrow)	
-	#print(rot * arrow_speed)
 	current_arrow.add_movement(rot * arrow_speed, (skeleton_arm.global_position + crossbow_offset *
 	enemy.looking_direction))
 	crossbow_tween = self.create_tween()
