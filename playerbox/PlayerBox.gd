@@ -5,6 +5,7 @@ class_name PlayerBox
 @export var sprite : Sprite2D
 @export var collision_shape : CollisionShape2D
 @export var hitbox : hit_box_component
+@export var hit_sound : AudioStreamPlayer
 
 @export_category("Values")
 @export_range(0, 1, 0.1) var friction : float = 0.8
@@ -67,4 +68,6 @@ func _on_hit_box_component_dealt_damage(target_global_position : Vector2) -> voi
 		velocity = Vector2i(-hit_bounce_strength, -hit_bounce_strength)
 	else:
 		velocity = Vector2i(hit_bounce_strength, -hit_bounce_strength)
+	hit_sound.pitch_scale = randf_range(1.4, 1.6)
+	hit_sound.play()
 	

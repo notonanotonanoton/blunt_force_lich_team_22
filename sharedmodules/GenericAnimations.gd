@@ -89,6 +89,9 @@ func take_damage_animation() -> void:
 	
 	if not_actor:
 		character.damaged()
+	elif character is PlayerCharacter:
+		character.damage_sound.pitch_scale = randf_range(1.9, 2.1)
+		character.damage_sound.play()
 
 func jump_animation() -> void:
 	if (walk_step or walk_rotation):
