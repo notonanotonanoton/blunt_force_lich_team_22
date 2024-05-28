@@ -3,6 +3,7 @@ extends Control
 signal entered_settings
 var map_manager : Node
 @export var player_character : CharacterBody2D
+@export var menu_container : PanelContainer
 
 func _ready() -> void:
 	map_manager = get_parent().get_parent()
@@ -34,15 +35,12 @@ func _on_restart_pressed() -> void:
 	player_character.on_restart()
 	map_manager.restart()
 
-func _on_exit_pressed() -> void:
-	get_tree().quit()
-
 func _on_settings_pressed() -> void:
-	$MenuContainer.set_visible(false)
+	menu_container.set_visible(false)
 	emit_signal("entered_settings")
 	
 func _on_settings_menu_back_pressed() -> void:
-	$MenuContainer.set_visible(true)
+	menu_container.set_visible(true)
 	show()
 
 func _on_exit_to_main_menu_pressed():
