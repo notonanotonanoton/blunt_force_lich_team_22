@@ -79,5 +79,5 @@ func restart() -> void:
 	if (current_scene_instance.name == 'TutorialWorld'):
 		play_tutorial()
 	else:
-		change_map(treasure_levels)
+		get_tree().reload_current_scene()
 	

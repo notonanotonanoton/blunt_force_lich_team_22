@@ -351,6 +351,11 @@ func _on_settings_menu_aiming_arc_toggled(enabled : bool) -> void:
 	aiming_arc_enabled = enabled
 
 func on_restart():
+	for child : Node in get_children():
+			if child is spikeImmunity:
+				child.set_collision_layer_value(8, false)
+	
+	items.clear()
 	sprite.visible = true
 	visible = true
 	health_node.set_health(6)
@@ -360,7 +365,6 @@ func on_restart():
 	hurtbox_collision.set_deferred("disabled", false)
 	player_died = false 
 	
-
 func pick_up_nearby_box(summoned : bool) -> void:
 	if summoned:
 		available_box = box_ref

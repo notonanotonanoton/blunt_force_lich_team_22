@@ -52,7 +52,7 @@ text = "Settings"
 [node name="ExitToMainMenu" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8xqfo")
-text = "Exit"
+text = "Exit to main menu"
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

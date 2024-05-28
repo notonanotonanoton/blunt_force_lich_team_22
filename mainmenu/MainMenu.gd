@@ -1,11 +1,11 @@
 extends Control
 
 signal entered_settings_from_menu
-var map_manager : Node
+var MapManagerScene = preload("res://maps/MapManager.tscn")
+
 var pause_action
 # Called when the node enters the scene tree for the first time.
 func _ready(): #TODO: turn off filtering for image or swap it out to some color
-	map_manager = get_parent().get_parent()
 	disable_pause_action()
 	#show()
 		
@@ -23,14 +23,18 @@ func _process(delta):
 	pass
 
 func _on_play_pressed() -> void:
-	map_manager.change_scene()
+	get_tree().change_scene_to_file("res://maps/MapManager.tscn")
 	enable_pause_action()
 	hide()
 
 func _on_tutorial_pressed() -> void:
-	map_manager.play_tutorial()
 	enable_pause_action()
-	hide()
+	var map_manager_instance = MapManagerScene.instantiate()
+	add_child(map_manager_instance)
+	enable_pause_action()
+	$PanelContainer.set_visible(false)
+	#hide()
+	map_manager_instance.play_tutorial()
 
 func _on_settings_pressed() -> void:
 	$PanelContainer/MarginContainer/VBoxContainer.set_visible(false)
