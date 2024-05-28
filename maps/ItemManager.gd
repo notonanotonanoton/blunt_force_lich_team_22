@@ -24,7 +24,6 @@ func _ready() -> void:
 func get_random_item() -> Node2D:
 	var item : Node2D
 	if available_items.is_empty():
-		print("available items empty " and available_items.size())
 		item = default_item.instantiate()
 	else:
 		item = available_items.pick_random()

@@ -90,7 +90,6 @@ func _physics_process(delta : float) -> void:
 	process_movement(delta)
 	
 	process_throw(delta)
-	print(Engine.get_frames_per_second())
 
 ## jump functions
 func jump() -> void:
@@ -276,7 +275,6 @@ func activate_death_state() -> void:
 	collision.set_deferred("disabled", true)
 	hurtbox_collision.set_deferred("disabled", true)
 
-
 func addItem(item : Node) -> void:
 	print(item)
 	emit_signal("new_item", item)
@@ -315,7 +313,7 @@ func _on_health_death(_pos : Vector2i) -> void:
 	
 	player_died = true;
 	
-	#signal the death screen to becomme visible
+	#signal the death screen to become visible
 	emit_signal("player_death");
 
 func _on_coyote_timer_timeout() -> void:
@@ -340,12 +338,18 @@ func _on_jump_reset_freeze_timer_timeout() -> void:
 	allow_jump_variable_resets = true
 
 func _on_settings_menu_aiming_arc_toggled(enabled : bool) -> void:
-	print(enabled)
 	aiming_arc_enabled = enabled
 
 func on_restart():
+	sprite.visible = true
+	visible = true
 	health_node.set_health(6)
 	emit_signal("reset_hp")
+	set_physics_process(true)
+	collision.set_deferred("disabled", false)
+	hurtbox_collision.set_deferred("disabled", false)
+	player_died = false 
+	
 
 func pick_up_nearby_box(summoned : bool) -> void:
 	if summoned:

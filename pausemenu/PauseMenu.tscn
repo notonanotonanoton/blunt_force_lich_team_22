@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctl6iufkr043o"]
+[gd_scene load_steps=3 format=3 uid="uid://ctl6iufkr043o"]
 
 [ext_resource type="Script" path="res://pausemenu/PauseMenu.gd" id="1_mtr2l"]
+[ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="2_8xqfo"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("menu_container")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -13,6 +14,7 @@ offset_bottom = -180.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mtr2l")
+menu_container = NodePath("MenuContainer")
 
 [node name="MenuContainer" type="PanelContainer" parent="."]
 clip_contents = true
@@ -34,27 +36,26 @@ layout_mode = 2
 
 [node name="Resume" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8xqfo")
 text = "Resume
 "
 
 [node name="Restart" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8xqfo")
 text = "Restart"
 
 [node name="Settings" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8xqfo")
 text = "Settings"
-
-[node name="Exit" type="Button" parent="MenuContainer/VBoxContainer"]
-layout_mode = 2
-text = "Exit"
 
 [node name="ExitToMainMenu" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit to main menu"
+theme_override_fonts/font = ExtResource("2_8xqfo")
+text = "Exit"
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/ExitToMainMenu" to="." method="_on_exit_to_main_menu_pressed"]

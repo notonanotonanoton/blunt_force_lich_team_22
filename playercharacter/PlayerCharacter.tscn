@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbpep6x04proy"]
 
 [ext_resource type="Script" path="res://playercharacter/PlayerCharacter.gd" id="1_iplij"]
-[ext_resource type="Texture2D" uid="uid://bin88kymwl3ov" path="res://playercharacter/character_lich.png" id="1_x272j"]
+[ext_resource type="Texture2D" uid="uid://cbc52x3wnf6es" path="res://playercharacter/character_lich.png" id="1_x272j"]
 [ext_resource type="Texture2D" uid="uid://dok5nq2n2tnbd" path="res://playercharacter/character_lich_left_arm.png" id="3_nm4hd"]
 [ext_resource type="Texture2D" uid="uid://bi0hcdpv6s3mh" path="res://playercharacter/character_lich_right_arm.png" id="4_21f1s"]
 [ext_resource type="PackedScene" uid="uid://dftdwc1mtyffk" path="res://healthanddamage/HurtBoxComponent.tscn" id="8_4pe4k"]

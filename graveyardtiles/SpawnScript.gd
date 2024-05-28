@@ -58,7 +58,4 @@ func teleport_player_to_spawn() -> void:
 			if child is PlayerCharacter:
 
 				child.teleport_player(to_global(map_to_local(tile_pos)))
-				
-				#print("moved player to spawn")
-	
 
