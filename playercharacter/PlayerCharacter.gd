@@ -229,14 +229,14 @@ func apply_carrying_sprites(apply : bool) -> void:
 	if apply:
 		right_arm.rotation_degrees = -45
 		left_arm.rotation_degrees = 30
-		left_arm.position.x += 1
-		left_arm.position.y -= 1
+		left_arm.position.x = 5
+		left_arm.position.y = -12
 		box_sprite.texture = available_box.sprite.texture
 	else:
 		right_arm.rotation_degrees = 0
 		left_arm.rotation_degrees = 0
-		left_arm.position.x -= 1
-		left_arm.position.y += 1
+		left_arm.position.x = 4
+		left_arm.position.y = -11
 		box_sprite.texture = null
 
 
