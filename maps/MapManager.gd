@@ -9,14 +9,14 @@ var treasure_levels_directory : String = "res://maps/TreasureLevels"
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 #"res://maps/TestLevel.tscn"
-var testing_scene = null
+var testing_scene = "res://maps/Level2/Version2.tscn"
 
 var levels : Array
 var treasure_levels : Array[PackedScene] 
 
 var current_scene_instance : Node
 #make sure not to exceed the amount of available levels (directories)
-@export_range(1, 10, 1) var starting_level_number : int = 1
+@export_range(0, 10, 1) var starting_level_number : int = 0
 var level_counter : int
 
 var treasure_check : bool = false
