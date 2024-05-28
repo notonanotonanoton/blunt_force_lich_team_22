@@ -46,4 +46,4 @@ func _on_settings_menu_back_pressed() -> void:
 
 func _on_exit_to_main_menu_pressed():
 	resume()
-	get_tree().change_scene_to_file("res://mainmenu/TestMainMenu.tscn")
+	get_tree().change_scene_to_file("res://mainmenu/MainMenu.tscn")

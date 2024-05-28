@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://csq8sct202e43"]
+[gd_scene load_steps=11 format=3 uid="uid://csq8sct202e43"]
 
 [ext_resource type="Script" path="res://mainmenu/MainMenu.gd" id="1_dlg8d"]
 [ext_resource type="Texture2D" uid="uid://dd6dn1yf7g7fn" path="res://asepritefiles/main_menu_background.png" id="2_oyet6"]
 [ext_resource type="Texture2D" uid="uid://dp10ts810hnjo" path="res://asepritefiles/title_low_res.png" id="3_k7p3i"]
 [ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="4_30liu"]
+[ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="5_ldbr5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f3vxc"]
 texture = ExtResource("2_oyet6")
@@ -146,7 +147,16 @@ theme_override_fonts/font = ExtResource("4_30liu")
 theme_override_font_sizes/font_size = 8
 text = "Exit"
 
+[node name="Settings" parent="." instance=ExtResource("5_ldbr5")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+
+[connection signal="entered_settings_from_menu" from="." to="Settings" method="_on_main_menu_entered_settings_from_menu"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="back_pressed" from="Settings" to="." method="_on_settings_back_pressed"]
