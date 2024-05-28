@@ -3,8 +3,10 @@ extends Control
 signal entered_settings_from_menu
 var map_manager : Node
 var pause_action
+@export var panel : PanelContainer
+
 # Called when the node enters the scene tree for the first time.
-func _ready(): #TODO: turn off filtering for image or swap it out to some color
+func _ready() -> void:
 	map_manager = get_parent().get_parent()
 	disable_pause_action()
 	#show()
@@ -33,12 +35,11 @@ func _on_tutorial_pressed() -> void:
 	hide()
 
 func _on_settings_pressed() -> void:
-	$MarginContainer/VBoxContainer.set_visible(false)
+	panel.set_visible(false)
 	emit_signal("entered_settings_from_menu")
 
-func _on_settings_back_pressed():
-	$MarginContainer/VBoxContainer.set_visible(true)
-	print("settings back pressed connected to main menu")
+func _on_settings_back_pressed() -> void:
+	panel.set_visible(true)
 
-func _on_exit_pressed():
+func _on_exit_pressed() -> void:
 	get_tree().quit()

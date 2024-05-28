@@ -90,7 +90,6 @@ func _physics_process(delta : float) -> void:
 	process_movement(delta)
 	
 	process_throw(delta)
-	print(Engine.get_frames_per_second())
 
 ## jump functions
 func jump() -> void:
@@ -101,7 +100,6 @@ func jump() -> void:
 	player_jumped = true
 
 func jump_cut() -> void:
-	#print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
@@ -110,11 +108,9 @@ func process_jump_availability() -> void:
 		if allow_jump_variable_resets:
 			jump_is_available = true
 			player_jumped = false;
-			#print("player is on the floor, resetting jump status")
 	else:
 		if jump_is_available:
 			if coyote_timer.is_stopped():
-				#print("Started coyote")
 				coyote_timer.start()
 
 ##box functions
@@ -278,7 +274,6 @@ func activate_death_state() -> void:
 
 
 func addItem(item : Node) -> void:
-	print(item)
 	emit_signal("new_item", item)
 	if item is PermanentHealthPickup:
 		for child : Node in get_children():
@@ -340,7 +335,6 @@ func _on_jump_reset_freeze_timer_timeout() -> void:
 	allow_jump_variable_resets = true
 
 func _on_settings_menu_aiming_arc_toggled(enabled : bool) -> void:
-	print(enabled)
 	aiming_arc_enabled = enabled
 
 func on_restart():

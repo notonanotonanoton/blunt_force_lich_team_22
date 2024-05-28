@@ -26,7 +26,6 @@ func physics_update(delta : float) -> void:
 		current_state.physics_update(delta)
 		
 func change_state(old_state : State, new_state_name : String) -> void:
-	#print("changed state to: " + new_state_name)
 	if old_state != current_state:
 		return
 		
