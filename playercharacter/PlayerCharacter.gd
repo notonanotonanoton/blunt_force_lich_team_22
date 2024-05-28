@@ -100,6 +100,7 @@ func jump() -> void:
 	player_jumped = true
 
 func jump_cut() -> void:
+	#print("jump cut")
 	if velocity.y < 0:
 		velocity.y = velocity.y / 2
 
@@ -108,9 +109,11 @@ func process_jump_availability() -> void:
 		if allow_jump_variable_resets:
 			jump_is_available = true
 			player_jumped = false;
+			#print("player is on the floor, resetting jump status")
 	else:
 		if jump_is_available:
 			if coyote_timer.is_stopped():
+				#print("Started coyote")
 				coyote_timer.start()
 
 ##box functions
@@ -272,8 +275,8 @@ func activate_death_state() -> void:
 	collision.set_deferred("disabled", true)
 	hurtbox_collision.set_deferred("disabled", true)
 
-
 func addItem(item : Node) -> void:
+	print(item)
 	emit_signal("new_item", item)
 	if item is PermanentHealthPickup:
 		for child : Node in get_children():
@@ -310,7 +313,7 @@ func _on_health_death(_pos : Vector2i) -> void:
 	
 	player_died = true;
 	
-	#signal the death screen to becomme visible
+	#signal the death screen to become visible
 	emit_signal("player_death");
 
 func _on_coyote_timer_timeout() -> void:
@@ -338,8 +341,15 @@ func _on_settings_menu_aiming_arc_toggled(enabled : bool) -> void:
 	aiming_arc_enabled = enabled
 
 func on_restart():
+	sprite.visible = true
+	visible = true
 	health_node.set_health(6)
 	emit_signal("reset_hp")
+	set_physics_process(true)
+	collision.set_deferred("disabled", false)
+	hurtbox_collision.set_deferred("disabled", false)
+	player_died = false 
+	
 
 func pick_up_nearby_box(summoned : bool) -> void:
 	if summoned:

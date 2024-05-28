@@ -59,6 +59,7 @@ func _on_heart_picked_up() -> void:
 
 func _on_character_max_health_changed(new_max_health : int) -> void:
 	#assumes health level is always even
+	print("max health change")
 	if (new_max_health > current_max_health and new_max_health >= health_module.get_health()):
 		var new_heart : TextureRect = heart_rect.instantiate()
 		heart_containers.add_child(new_heart)
@@ -92,4 +93,5 @@ func _refresh_healthbar() -> void:
 			current_heart_index += 1
 	
 func _on_player_character_reset_hp():
+	print("yes")
 	_refresh_healthbar()

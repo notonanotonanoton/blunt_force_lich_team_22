@@ -181,6 +181,7 @@ func _on_slow_timer_timeout() -> void:
 
 func _on_slowed() -> void:
 	is_slowed = true
+	print("slowing: ")
 	for child : Node in state_machine.get_children():
 		if child is enemy_aggro:
 			child.attack_rate = child.attack_rate*1.5
