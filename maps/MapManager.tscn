@@ -53,6 +53,7 @@ grow_vertical = 1
 
 [connection signal="reset_hp" from="PlayerCharacter" to="HUDCanvas" method="_on_player_character_reset_hp"]
 [connection signal="entered_settings_from_menu" from="MainMenu/MainMenu" to="MainMenu/MainMenu/Settings" method="_on_main_menu_entered_settings_from_menu"]
+[connection signal="aiming_arc_toggled" from="MainMenu/MainMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arc_toggled"]
 [connection signal="back_pressed" from="MainMenu/MainMenu/Settings" to="MainMenu/MainMenu" method="_on_settings_back_pressed"]
 [connection signal="entered_settings" from="Pause/PauseMenu" to="Pause/PauseMenu/Settings" method="_on_pause_menu_entered_settings"]
 [connection signal="aiming_arc_toggled" from="Pause/PauseMenu/Settings" to="PlayerCharacter" method="_on_settings_menu_aiming_arc_toggled"]
