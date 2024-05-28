@@ -1,7 +1,76 @@
-[gd_scene load_steps=3 format=3 uid="uid://csq8sct202e43"]
+[gd_scene load_steps=10 format=3 uid="uid://csq8sct202e43"]
 
-[ext_resource type="Texture2D" uid="uid://dkdyvvxunqc5g" path="res://mainmenu/image.png" id="1_32ri2"]
 [ext_resource type="Script" path="res://mainmenu/MainMenu.gd" id="1_dlg8d"]
+[ext_resource type="Texture2D" uid="uid://dd6dn1yf7g7fn" path="res://asepritefiles/main_menu_background.png" id="2_oyet6"]
+[ext_resource type="Texture2D" uid="uid://dp10ts810hnjo" path="res://asepritefiles/title_low_res.png" id="3_k7p3i"]
+[ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="4_30liu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f3vxc"]
+texture = ExtResource("2_oyet6")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mivt5"]
+
+[sub_resource type="Animation" id="Animation_hbp1o"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(160, 36), Vector2(160, 44), Vector2(160, 36)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0349066, 0.0, 0.0349066, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m1ipd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxtyc"]
+_data = {
+"RESET": SubResource("Animation_m1ipd"),
+"idle": SubResource("Animation_hbp1o")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,36 +82,71 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dlg8d")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 179.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_f3vxc")
 
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
-position = Vector2(131, 77)
-scale = Vector2(0.292308, 0.293371)
-texture = ExtResource("1_32ri2")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mivt5")
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+texture = ExtResource("3_k7p3i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_bxtyc")
+}
+autoplay = "idle"
+
+[node name="Play" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_30liu")
+theme_override_font_sizes/font_size = 12
 text = "Play"
 
-[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Tutorial" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "Play tutorial"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_30liu")
+theme_override_font_sizes/font_size = 8
+text = "Tutorial
+"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_30liu")
+theme_override_font_sizes/font_size = 8
 text = "Settings"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_30liu")
+theme_override_font_sizes/font_size = 8
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
