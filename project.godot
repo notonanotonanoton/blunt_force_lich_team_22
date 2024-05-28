@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Blunt_Force_Lich"
-run/main_scene="res://maps/MapManager.tscn"
+run/main_scene="res://mainmenu/TestMainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
