@@ -65,9 +65,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_tdl7r")
-text = "Disable aiming arc"
+text = "Aiming arc"
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
+[node name="Aiming_arc" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_t0wnk")
@@ -98,6 +98,6 @@ theme_override_fonts/font = ExtResource("2_tdl7r")
 text = "Back"
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/WindowMode" to="." method="_on_window_mode_item_selected"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer3/CheckBox" to="." method="_on_check_box_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VSync" to="." method="_on_v_sync_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer3/Aiming_arc" to="." method="_on_aiming_arc_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer4/VSync" to="." method="_on_v_sync_toggled"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Back" to="." method="_on_back_pressed"]
