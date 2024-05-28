@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="2_3of24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys42m"]
-bg_color = Color(0, 0, 0, 0.847059)
+bg_color = Color(0, 0, 0, 0.482353)
 
 [node name="Game_Over_Screen" type="CanvasLayer"]
 script = ExtResource("1_tupn8")
@@ -17,47 +17,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ys42m")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer"]
-light_mask = 0
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3of24")
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="Retry" type="Button" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+[node name="Retry" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_3of24")
 text = "Retry"
 
-[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_3of24")
 text = "Exit"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/Panel/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/Panel/VBoxContainer/Exit" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="." method="_on_retry_button_pressed"]
