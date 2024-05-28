@@ -47,7 +47,7 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 
-	var object : Node2D = projectile_to_spawn.instantiate()
+	var object : Arrow = projectile_to_spawn.instantiate()
 	get_parent().add_child.call(object)
 
 
