@@ -31,7 +31,6 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	resume()
-	player_character.on_restart()
 	map_manager.restart()
 
 func _on_exit_pressed() -> void:

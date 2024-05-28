@@ -12,7 +12,6 @@ func _ready():
 func save_video_setting(key: String, value) -> void:
 	config.set_value("video", key, value)
 	config.save(SETTINGS_FILE_PATH)
-	print(key, value)
 	
 func load_video_settings() -> int:
 	var video_settings : int = 0

@@ -33,12 +33,11 @@ func _on_tutorial_pressed() -> void:
 	hide()
 
 func _on_settings_pressed() -> void:
-	$MarginContainer/VBoxContainer.set_visible(false)
+	$PanelContainer/MarginContainer/VBoxContainer.set_visible(false)
 	emit_signal("entered_settings_from_menu")
 
 func _on_settings_back_pressed():
-	$MarginContainer/VBoxContainer.set_visible(true)
-	print("settings back pressed connected to main menu")
+	$PanelContainer/MarginContainer/VBoxContainer.set_visible(true)
 
 func _on_exit_pressed():
 	get_tree().quit()

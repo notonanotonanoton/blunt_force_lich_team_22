@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://bwthe2t0jlqw2"]
+[gd_scene load_steps=2 format=3 uid="uid://bwthe2t0jlqw2"]
+
+[ext_resource type="Script" path="res://HUD/Game_Over_Screen.gd" id="1_tupn8"]
 
 [node name="Game_Over_Screen" type="CanvasLayer"]
+script = ExtResource("1_tupn8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 light_mask = 0
@@ -32,9 +35,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -93.5
-offset_right = 93.5
-offset_bottom = 23.0
+offset_left = -115.001
+offset_top = 8.0
+offset_right = 108.999
+offset_bottom = 38.0
 grow_horizontal = 2
 text = "GAME OVER"
 horizontal_alignment = 1
@@ -46,27 +50,22 @@ anchor_left = 0.064
 anchor_top = 0.5
 anchor_right = 0.412
 anchor_bottom = 0.764
-offset_left = 0.0319996
-offset_top = -3.0
-offset_right = -0.0440063
-offset_bottom = 0.0159912
+offset_left = -13.0721
+offset_top = -25.5
+offset_right = 39.2233
+offset_bottom = 0.995995
 grow_vertical = 2
 scale = Vector2(1.0585, 1.00962)
 text = "Exit
  to main menu"
 
-[node name="Exit_Button" type="Button" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.599
-anchor_top = 0.462
-anchor_right = 0.92
-anchor_bottom = 0.755
-offset_left = -0.0130081
-offset_top = 0.0279999
-offset_right = -0.0400085
-offset_bottom = -0.0300064
-text = "Exit"
+[node name="Retry" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 71.0
+offset_right = 260.0
+offset_bottom = 102.0
+text = "Retry"
 
 [connection signal="pressed" from="Panel/Exit_to_main_menu_button" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="Panel/Exit_Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/Retry" to="." method="_on_retry_pressed"]
