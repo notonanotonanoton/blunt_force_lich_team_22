@@ -7,7 +7,7 @@ extends EnemyBehaviorExtension
 @export var animation_timer : Timer
 
 @export_category("Values")
-@export_range(0, 500, 10) var smash_dash_speed : int = 200
+@export_range(0, 500, 10) var smash_dash_speed : int = 250
 
 var smash_tween : Tween
 
@@ -65,7 +65,6 @@ func attack(delta : float) -> void:
 	smash_tween.parallel().tween_property(arm, "position:x", -4, 0.1)
 	
 	#every call only gradually slows down. needed to stop from gliding too fast
-	enemy.stop_move(delta)
 	enemy.stop_move(delta)
 	enemy.stop_move(delta)
 	
