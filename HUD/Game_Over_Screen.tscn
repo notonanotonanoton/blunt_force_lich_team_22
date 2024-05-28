@@ -1,71 +1,63 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwthe2t0jlqw2"]
+[gd_scene load_steps=4 format=3 uid="uid://bwthe2t0jlqw2"]
 
 [ext_resource type="Script" path="res://HUD/Game_Over_Screen.gd" id="1_tupn8"]
+[ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="2_3of24"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys42m"]
+bg_color = Color(0, 0, 0, 0.847059)
 
 [node name="Game_Over_Screen" type="CanvasLayer"]
 script = ExtResource("1_tupn8")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-light_mask = 0
-visibility_layer = 0
+[node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.847059)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ys42m")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer"]
 light_mask = 0
-anchors_preset = -1
-anchor_left = -0.175
-anchor_top = 0.372222
-anchor_right = 1.17188
-anchor_bottom = 0.677778
-offset_left = 71.0
-offset_top = -61.0
-offset_right = -62.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Panel"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -115.001
-offset_top = 8.0
-offset_right = 108.999
-offset_bottom = 38.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3of24")
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="Exit_to_main_menu_button" type="Button" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.064
-anchor_top = 0.5
-anchor_right = 0.412
-anchor_bottom = 0.764
-offset_left = -13.0721
-offset_top = -25.5
-offset_right = 39.2233
-offset_bottom = 0.995995
-grow_vertical = 2
-scale = Vector2(1.0585, 1.00962)
-text = "Exit
- to main menu"
-
-[node name="Retry" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 210.0
-offset_top = 71.0
-offset_right = 260.0
-offset_bottom = 102.0
+[node name="Retry" type="Button" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_3of24")
 text = "Retry"
 
-[connection signal="pressed" from="Panel/Exit_to_main_menu_button" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="Panel/Retry" to="." method="_on_retry_pressed"]
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_3of24")
+text = "Exit"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Panel/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Panel/VBoxContainer/Exit" to="." method="_on_retry_button_pressed"]
