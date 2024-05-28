@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dnwy8dg4smc8u" path="res://asepritefiles/spawn_icons.png" id="1_8mm00"]
 [ext_resource type="Texture2D" uid="uid://mlaqeg24yrxl" path="res://graveyardtiles/dirt_and_rock_tileset.png" id="2_s8b55"]
-[ext_resource type="Texture2D" uid="uid://g03r5t8xpiaq" path="res://graveyardtiles/stone_brick_tileset.png" id="3_b2805"]
+[ext_resource type="Texture2D" uid="uid://sbc8aosuuvd4" path="res://graveyardtiles/stone_brick_tileset.png" id="3_b2805"]
 [ext_resource type="Texture2D" uid="uid://dq6kbq31lexld" path="res://graveyardtiles/graveyard_decoration.png" id="3_w5c8x"]
 [ext_resource type="Script" path="res://graveyardtiles/SpawnScript.gd" id="4_spift"]
 [ext_resource type="PackedScene" uid="uid://1wft1ym6yjq" path="res://maps/ItemManager.tscn" id="6_3uux5"]
@@ -207,6 +207,9 @@ texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08sqm"]
 texture = ExtResource("3_w5c8x")
