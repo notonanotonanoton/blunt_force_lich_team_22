@@ -64,9 +64,8 @@ hurtbox_collision = NodePath("HurtBoxComponent")
 slow_timer = NodePath("SlowTimer")
 state_machine = NodePath("StateMachine")
 skeleton_animation_timer = NodePath("AnimationTimer")
-speed = 50
+speed = 60
 aggro_range = 130
-chase_jump_speed = 100
 can_drop_health = true
 
 [node name="DirectionFlip" type="Node2D" parent="."]
@@ -177,8 +176,7 @@ shape = SubResource("CircleShape2D_5bsoe")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("generic_animations") instance=ExtResource("7_4klm5")]
 generic_animations = NodePath("../GenericAnimations")
 knockback_stun = 0.3
-knockback_strength = 0
-health = 4
+knockback_strength = 40
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_y6mvc")]
 collision_layer = 0

@@ -27,7 +27,7 @@ class_name Enemy
 @export_range(0, 1000, 10) var max_fall_speed : int = 350
 @export_range(0, 2, 0.1) var gravity_scale : float = 1.0
 @export_range(0, 300, 10) var aggro_range : int = 120
-@export_range (0, 300, 10) var chase_jump_speed : int = 130
+var chase_jump_speed : int = 165
 @export var is_ranged : bool = false
 #needed for healthmodule implementation
 @export var can_deal_damage : bool = true

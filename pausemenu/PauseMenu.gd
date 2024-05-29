@@ -44,6 +44,6 @@ func _on_settings_menu_back_pressed() -> void:
 	$MenuContainer.set_visible(true)
 	show()
 
-func _on_exit_to_main_menu_pressed():
+func _on_exit_to_main_menu_pressed() -> void:
 	resume()
 	get_tree().change_scene_to_file("res://mainmenu/MainMenu.tscn")

@@ -4,12 +4,13 @@ extends Node
 #with scene files of level variants
 var maps_directory : String = "res://maps/"
 var treasure_levels_directory : String = "res://maps/TreasureLevels"
+@export var pause_menu : Control
 
 #this will make the map manager ignore the random first level selection.
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 #"res://maps/TestLevel.tscn"
-var testing_scene = null
+var testing_scene = "res://maps/TestLevel.tscn"
 
 var levels : Array
 var treasure_levels : Array[PackedScene] 
@@ -81,4 +82,7 @@ func restart() -> void:
 		play_tutorial()
 	else:
 		get_tree().reload_current_scene()
+
+func tutorial_exit() -> void:
+	pause_menu._on_exit_to_main_menu_pressed()
 	

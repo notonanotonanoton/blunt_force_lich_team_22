@@ -1,3 +1,3 @@
 extends TextEdit
 
-@export var id = 0
+@export var id : int = 0

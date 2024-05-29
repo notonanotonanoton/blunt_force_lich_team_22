@@ -10,9 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://77jgddipqjvt" path="res://asepritefiles/background_mountains.png" id="8_behil"]
 [ext_resource type="Texture2D" uid="uid://dfbwlc444dy3q" path="res://asepritefiles/background_foreground.png" id="10_ayaih"]
 
-[node name="MapManager" type="Node2D"]
+[node name="MapManager" type="Node2D" node_paths=PackedStringArray("pause_menu")]
 top_level = true
 script = ExtResource("1_vicmv")
+pause_menu = NodePath("Pause/PauseMenu")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
