@@ -6,9 +6,9 @@ extends Node2D
 # that we solved by having the box be initialised at game-start and then teleporting it
 
 # and now we're gonna get fucked by it again
-# since we decided to *stop* doing that (becouse... ¯\_(ツ)_/¯)
+# since we decided to *stop* doing that
 
-# ( anton called me gay when i commented on it )
+# ( complain about it to anton )
 
 # so until somone figures out a better idea, we are using the retarded timer
 
