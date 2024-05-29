@@ -101,7 +101,7 @@ func jump() -> void:
 	resetting_jump_timer.start()
 	velocity.y = jump_velocity
 	emit_signal("jumped")
-	jump_sound.pitch_scale = randf_range(0.6, 0.9)
+	jump_sound.pitch_scale = randf_range(0.4, 0.6)
 	jump_sound.play()
 	player_jumped = true
 

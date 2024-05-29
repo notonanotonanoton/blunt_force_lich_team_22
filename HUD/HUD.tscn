@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfhtp1jp0gogq"]
 
 [ext_resource type="Script" path="res://HUD/Hud.gd" id="1_fvvfa"]
-[ext_resource type="Texture2D" uid="uid://vij4yxupl7r2" path="res://HUD/bar_accent.png" id="1_hoynb"]
-[ext_resource type="Texture2D" uid="uid://dm3x7fnbw5rvp" path="res://HUD/heart_container_half.png" id="3_knw06"]
-[ext_resource type="Texture2D" uid="uid://c8hfd8nih25fb" path="res://HUD/heart_container_full.png" id="3_ytumy"]
-[ext_resource type="Texture2D" uid="uid://bj2g2y8n45fel" path="res://HUD/heart_container_empty.png" id="4_6dmhe"]
+[ext_resource type="Texture2D" uid="uid://vij4yxupl7r2" path="res://hud/bar_accent.png" id="1_hoynb"]
+[ext_resource type="Texture2D" uid="uid://dm3x7fnbw5rvp" path="res://hud/heart_container_half.png" id="3_knw06"]
+[ext_resource type="Texture2D" uid="uid://c8hfd8nih25fb" path="res://hud/heart_container_full.png" id="3_ytumy"]
+[ext_resource type="Texture2D" uid="uid://bj2g2y8n45fel" path="res://hud/heart_container_empty.png" id="4_6dmhe"]
 [ext_resource type="StyleBox" uid="uid://d4b0f2vk1cgim" path="res://hud/HealthBarTexture.tres" id="6_8kips"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_32p8h"]
