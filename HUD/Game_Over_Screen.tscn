@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwthe2t0jlqw2"]
 
-[ext_resource type="Script" path="res://hud/Game_Over_Screen.gd" id="1_tupn8"]
+[ext_resource type="Script" path="res://HUD/Game_Over_Screen.gd" id="1_tupn8"]
 [ext_resource type="FontFile" uid="uid://cpk7n4dhhqh5c" path="res://fonts/connection_ii/ConnectionII.otf" id="2_3of24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys42m"]
