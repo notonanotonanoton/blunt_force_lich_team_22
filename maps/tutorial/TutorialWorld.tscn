@@ -41,6 +41,7 @@ layer_5/tile_data = PackedInt32Array(16, 196610, 1, -65520, 131074, 2, -131056, 
 position = Vector2(426, -80)
 
 [node name="Slime" parent="." instance=ExtResource("2_k58vo")]
+z_index = -1
 position = Vector2(-18, 17)
 speed = 0
 acceleration = 0.0
