@@ -10,7 +10,7 @@ var treasure_levels_directory : String = "res://maps/TreasureLevels"
 #input full address from project folder, starting with "res://".
 #LEAVE EMPTY IF NORMAL FUNCTION IS DESIRED
 #"res://maps/TestLevel.tscn"
-var testing_scene = "res://maps/TestLevel.tscn"
+var testing_scene = null
 
 var levels : Array
 var treasure_levels : Array[PackedScene] 
