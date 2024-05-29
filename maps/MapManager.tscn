@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cbpep6x04proy" path="res://playercharacter/PlayerCharacter.tscn" id="1_sq36r"]
 [ext_resource type="Script" path="res://maps/MapManager.gd" id="1_vicmv"]
-[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://hud/HUD.tscn" id="4_1ojgl"]
-[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://hud/Game_Over_Screen.tscn" id="5_nmudn"]
+[ext_resource type="PackedScene" uid="uid://dfhtp1jp0gogq" path="res://HUD/HUD.tscn" id="3_ms0uh"]
+[ext_resource type="PackedScene" uid="uid://bwthe2t0jlqw2" path="res://HUD/Game_Over_Screen.tscn" id="4_23u5l"]
 [ext_resource type="PackedScene" uid="uid://ctl6iufkr043o" path="res://pausemenu/PauseMenu.tscn" id="5_qnnu7"]
 [ext_resource type="PackedScene" uid="uid://cgl7ch46tjgrw" path="res://pausemenu/SettingsMenu.tscn" id="6_3bh5e"]
 [ext_resource type="Texture2D" uid="uid://cxan2dp8l6o87" path="res://asepritefiles/background_sky.png" id="7_k5lrc"]
@@ -18,10 +18,10 @@ pause_menu = NodePath("Pause/PauseMenu")
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_sq36r")]
 position = Vector2(-29, 43)
 
-[node name="HUDCanvas" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_1ojgl")]
+[node name="HUDCanvas" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_ms0uh")]
 character = NodePath("../PlayerCharacter")
 
-[node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("5_nmudn")]
+[node name="Game_Over_Screen" parent="." node_paths=PackedStringArray("player_character") instance=ExtResource("4_23u5l")]
 player_character = NodePath("../PlayerCharacter")
 
 [node name="Pause" type="CanvasLayer" parent="."]
