@@ -25,7 +25,7 @@ func save_aiming_arc_setting(key: String, enabled : bool) -> void:
 	config.save(SETTINGS_FILE_PATH)
 
 func load_aiming_arc_setting() -> bool:
-	var aiming_arc : bool = false
+	var aiming_arc : bool = true
 	for key in config.get_section_keys("aiming_arc"):
 		aiming_arc = config.get_value("aiming_arc", key)
 	return aiming_arc
